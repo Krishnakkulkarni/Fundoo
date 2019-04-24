@@ -1,0 +1,12 @@
+<nav class="navbar navbar-dark bg-dark">
+  <a class="navbar-brand text-white">FunDoo</a>
+  <button class="btn btn-danger my-2 my-sm-0" (click)="onLogout()">Logout</button>
+  </nav>
+  <h2>Welcome</h2>
+  <div class="card m-5" style="width:18rem" *ngIf="user">
+    <ul class="list-group">
+      <li class="list-group-item">Username : {{user.UserName}}</li>
+      <li class="list-group-item">FullName : {{user.FullName}}</li>
+      <li class="list-group-item">Email : {{user.Email}}</li>
+    </ul>
+  </div>
