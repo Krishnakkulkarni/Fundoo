@@ -46,7 +46,8 @@ namespace RepositoryLayer.Context
                 UserId = notesModel.UserId,
                 Title = notesModel.Title,
                 Description = notesModel.Description,
-                CreatedDate = notesModel.CreatedDate
+                CreatedDate = notesModel.CreatedDate,
+                ModifiedDate = notesModel.ModifiedDate
             };
             var result = this.authentication.NotesModel.Add(notes);
         }

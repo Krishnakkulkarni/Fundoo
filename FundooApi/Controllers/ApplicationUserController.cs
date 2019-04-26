@@ -65,12 +65,19 @@ namespace FundooApi.Controllers
         /// <returns>return status code</returns>
         [HttpPost]
         [Route("login")]
-        public Task<string> Login(ApplicationLoginModel applicationLoginModel)
+        public async Task<IActionResult> Login(ApplicationLoginModel applicationLoginModel)
         {
             try  
             {
-                var result = this.applicationUser.LoginAsync(applicationLoginModel);
-                return result;
+                var result = await this.applicationUser.LoginAsync(applicationLoginModel);
+                if(result == "invalid user")
+                {
+                    return BadRequest();
+                }
+                else
+                {
+                    return Ok(new { result });
+                }
             }
             catch (Exception e)
             {
@@ -106,17 +113,24 @@ namespace FundooApi.Controllers
         /// <returns>return status code</returns>
         [HttpPost]
         [Route("resetPassword")]
-        public IActionResult Reset(ResetPasswordModel model)
+        public async Task<bool> Reset(ResetPasswordModel model)
         {
             try
             {
-                var result = this.applicationUser.ResetPasswordAsync(model);
-                return this.Ok(result);
+                var result = await this.applicationUser.ResetPasswordAsync(model);
+                if (result)
+                {
+                    return result;
+                }
+                else
+                {
+                    return false;
+                }
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
-                return this.BadRequest();
+                return false;
             }
         }
     }

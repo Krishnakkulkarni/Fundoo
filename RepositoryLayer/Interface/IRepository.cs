@@ -53,7 +53,7 @@ namespace RepositoryLayer.Interface
         /// </summary>
         /// <param name="model">The model.</param>
         /// <returns>return object</returns>
-        Task<object> ResetPasswordAsync(ResetPasswordModel model);
+        Task<bool> ResetPasswordAsync(ResetPasswordModel model);
 
         /// <summary>
         /// Logins the specified model.

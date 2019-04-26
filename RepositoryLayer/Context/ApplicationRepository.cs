@@ -85,20 +85,6 @@ namespace RepositoryLayer.Context
             var result = this.usermanager.CreateAsync(user, applicationUserModel.Password);
             return result;
         }
-
-        /// <summary>
-        /// Generates the password reset token asynchronous.
-        /// </summary>
-        /// <param name="model">The model.</param>
-        /// <returns>
-        /// return string
-        /// </returns>
-        public async Task<string> GeneratePasswordResetTokenAsync(ForgotPasswordModel model)
-        {
-            var result = await this.usermanager.FindByEmailAsync(model.Email);
-            var user = await this.usermanager.GenerateEmailConfirmationTokenAsync(result);
-            return user;
-        }
          
         /// <summary>
         /// Finds the by name asynchronous.
@@ -131,20 +117,16 @@ namespace RepositoryLayer.Context
                     Expires = DateTime.UtcNow.AddDays(1),
                     SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes(this.appSettings.JWT_Secrete)), SecurityAlgorithms.HmacSha256Signature)
                 };
+
                 var tokenHandler = new JwtSecurityTokenHandler();
                 var securityToken = tokenHandler.CreateToken(tokenDescriptor);
                 var token = tokenHandler.WriteToken(securityToken);
                 var cacheKey = token;
                 this.distributedCache.GetString(cacheKey);
                 this.distributedCache.SetString(cacheKey, token);
-
-                string jsonString = Newtonsoft.Json.JsonConvert.SerializeObject(token);
-                return jsonString;
+                return token;
             }
-            else
-            {
-                return null;
-            }
+            return "invalid user";
         }
 
         /// <summary>
@@ -161,18 +143,44 @@ namespace RepositoryLayer.Context
         }
 
         /// <summary>
+        /// Generates the password reset token asynchronous.
+        /// </summary>
+        /// <param name="model">The model.</param>
+        /// <returns>
+        /// return string
+        /// </returns>
+        public async Task<string> GeneratePasswordResetTokenAsync(ForgotPasswordModel model)
+        {
+            var result = await this.usermanager.FindByEmailAsync(model.Email);
+            var user = await this.usermanager.GenerateEmailConfirmationTokenAsync(result);
+            return user;
+        }
+
+        /// <summary>
         /// Resets the password asynchronous.
         /// </summary>
         /// <param name="model">The model.</param>
         /// <returns>
         /// return object
         /// </returns>
-        public async Task<object> ResetPasswordAsync(ResetPasswordModel model)
+        public async Task<bool> ResetPasswordAsync(ResetPasswordModel model)
         {
             var userEmail = await this.usermanager.FindByEmailAsync(model.Email);
-            var token = await this.usermanager.GeneratePasswordResetTokenAsync(userEmail);
-            var result = await this.usermanager.ResetPasswordAsync(userEmail, token, model.Password);
-            return result;
+            if(userEmail == null)
+            {
+                return false;
+            }
+            else
+            { 
+                var token = await this.usermanager.GeneratePasswordResetTokenAsync(userEmail);
+                var result = await this.usermanager.ResetPasswordAsync(userEmail, token, model.Password);
+                if (result.Succeeded)
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
     }
 }

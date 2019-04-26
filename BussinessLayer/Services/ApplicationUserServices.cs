@@ -39,7 +39,7 @@ namespace BussinessLayer.Services
         /// <param name="appSettings">The application settings.</param>
         /// <param name="emailSender">The email sender.</param>
         /// <param name="distributedCache">The distributed cache.</param>
-        public ApplicationUserServices(IRepository applicationRepository, IOptions<AppSetting> appSettings, IEmailSender emailSender, IDistributedCache distributedCache)
+        public ApplicationUserServices(IRepository applicationRepository, IEmailSender emailSender, IDistributedCache distributedCache)
         {
             this.applicationRepository = applicationRepository;
             this.emailSender = emailSender;
@@ -66,8 +66,8 @@ namespace BussinessLayer.Services
         /// <exception cref="NotImplementedException"></exception>
         public async Task<string> LoginAsync(ApplicationLoginModel model)
         {
-            string jsonString = await this.applicationRepository.LoginPage(model);
-            return jsonString;
+            string result = await this.applicationRepository.LoginPage(model);
+            return result;
         }
 
         /// <summary>
@@ -81,8 +81,9 @@ namespace BussinessLayer.Services
             if (result != null)
             {
                 var code = this.applicationRepository.GeneratePasswordResetTokenAsync(model);
-                var callbackUrl = "http://localhost:4200/reset-password?code=" + code;
-                this.emailSender.SendEmailAsync(model.Email, "Reset Password", $"Please reset your password by clicking here: <a href=\"" + callbackUrl + "\">here</a>");
+                var Expires = DateTime.UtcNow.AddMinutes(1);
+                var callbackUrl = "http://localhost:4200/reset-password?code=";
+                this.emailSender.SendEmailAsync(model.Email, "Reset Password", $"Please reset your password by clicking here: <a href='{callbackUrl}'>link</a>");
                 return true;
             }
             else
@@ -96,10 +97,10 @@ namespace BussinessLayer.Services
         /// </summary>
         /// <param name="model">The model.</param>
         /// <returns>return boolean</returns>
-        public bool ResetPasswordAsync(ResetPasswordModel model)
+        public async Task<bool> ResetPasswordAsync(ResetPasswordModel model)
         {
-            this.applicationRepository.ResetPasswordAsync(model);
-            return true;
+           var result = await this.applicationRepository.ResetPasswordAsync(model);
+            return result;
         }
     }
 }

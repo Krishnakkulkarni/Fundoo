@@ -39,6 +39,6 @@ namespace BussinessLayer.Interfaces
         /// </summary>
         /// <param name="model">The model.</param>
         /// <returns>return boolean</returns>
-        bool ResetPasswordAsync(ResetPasswordModel model);
+        Task<bool> ResetPasswordAsync(ResetPasswordModel model);
     }
 }
