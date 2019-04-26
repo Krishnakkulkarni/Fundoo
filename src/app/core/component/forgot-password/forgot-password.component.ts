@@ -36,6 +36,7 @@ export class ForgotPasswordComponent implements OnInit {
   { 
     console.log(data);
     alert("Email Sent successfully");
+    this.resetForm(form);
     // if(data.succeeded == true)
     // {
     //   console.log('successfull');

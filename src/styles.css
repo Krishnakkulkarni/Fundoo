@@ -1,4 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
 div.sm-jumbotron{
     margin: 0px;
     padding: 1rem;

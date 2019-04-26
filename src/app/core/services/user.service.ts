@@ -40,9 +40,9 @@ export class UserService {
     console.log(userforgotpassword);
     const formdata  =
     {
-      Email : userforgotpassword.Email
+      Email : userforgotpassword
     }
-    console.log('data in service0',formdata);
+    console.log('data in service',formdata);
     
     return this.http.post(this.rooturl+ 'ApplicationUser/forgotPassword',formdata);
   }

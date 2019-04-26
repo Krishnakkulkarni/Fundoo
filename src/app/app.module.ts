@@ -13,7 +13,8 @@ import { HomeComponent } from './core/component/home/home.component';
 import { AppMaterial } from './app.material.module';
 import { ForgotPasswordComponent } from './core/component/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './core/component/reset-password/reset-password.component';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import 'hammerjs';
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,7 +30,8 @@ import { ResetPasswordComponent } from './core/component/reset-password/reset-pa
     FormsModule,
     HttpClientModule,
     AppRoutingModule,
-    AppMaterial
+    AppMaterial,
+    BrowserAnimationsModule
     
   ],
   providers: [],
