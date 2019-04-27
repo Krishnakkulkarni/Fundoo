@@ -81,8 +81,7 @@ namespace BussinessLayer.Services
             if (result != null)
             {
                 var code = this.applicationRepository.GeneratePasswordResetTokenAsync(model);
-                var Expires = DateTime.UtcNow.AddMinutes(1);
-                var callbackUrl = "http://localhost:4200/reset-password?code=";
+                var callbackUrl = "http://localhost:4200/reset-password?code=" + code;
                 this.emailSender.SendEmailAsync(model.Email, "Reset Password", $"Please reset your password by clicking here: <a href='{callbackUrl}'>link</a>");
                 return true;
             }
