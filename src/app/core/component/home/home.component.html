@@ -1,7 +1,30 @@
+<div class="example-container" [class.example-is-mobile]="mobileQuery.matches">
+    <mat-toolbar color="" class="example-toolbar">
+      <button mat-icon-button (click)="snav.toggle()"><mat-icon>menu</mat-icon></button>
+      <h1 class="example-app-name">Fundoo Notes</h1>
+      <div><button (click)="onLogout()" class="btn">Logout</button></div>
+      
+    </mat-toolbar>
+    <mat-sidenav-container class="example-sidenav-container">
+      <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'" [fixedInViewport]="mobileQuery.matches"> 
+        <mat-nav-list>
+          <div><button mat-button class="btn1">Note</button></div>
+            <mat-divider></mat-divider>
+            <div><button mat-button class="btn2">Reminder</button></div>
+            <mat-divider></mat-divider>
+            <div><Label>Lables</Label><br>
+              <button mat-button class="btn3">Edit Lables</button>
+              <mat-divider></mat-divider>
+              <div><button mat-button class="btn4">Archive</button><br>
+                <button mat-button class="btn5">Trash</button>
+              </div>
+            </div>
 
-  <mat-toolbar color="primary" class="example-toolbar">
-      <button mat-icon-button (click)="ngOnInit()">
-        <mat-icon>menu</mat-icon></button>
-      <button (click)="onLogout()">Logout</button>
-  </mat-toolbar>
-  
+        </mat-nav-list>
+      </mat-sidenav>
+    <mat-sidenav-content>
+      
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>
+ 

@@ -6,6 +6,7 @@ import { UserComponent } from './core/component/user/user.component';
 import { HomeComponent } from './core/component/home/home.component';
 import { ForgotPasswordComponent } from './core/component/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './core/component/reset-password/reset-password.component';
+import { AuthGuard } from './core/auth/auth.guard';
 
 //This is my case 
 const routes: Routes = [  
@@ -20,7 +21,7 @@ const routes: Routes = [
   },
     { path:'forgot-password',component:ForgotPasswordComponent },
      {path:'reset-password', component:ResetPasswordComponent },
-    { path:'home', component:HomeComponent }
+    { path:'home', component:HomeComponent, canActivate : [AuthGuard] }
 ];
 
 @NgModule({

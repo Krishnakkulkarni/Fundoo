@@ -43,11 +43,8 @@ export class ResetPasswordComponent implements OnInit
       (
         (data:any)=>
         { 
-          console.log(data);
-
           if(data.succeeded == true)
           {
-            console.log('successfull');
             alert("reset successfully");
             this.resetForm(form);
           }

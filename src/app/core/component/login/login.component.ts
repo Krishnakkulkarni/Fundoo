@@ -20,8 +20,9 @@ export class LoginComponent implements OnInit
 
   ngOnInit()
   {
+    if(localStorage.getItem('token')!= null)
+    this.router.navigateByUrl('home');
     this.resetForm();
-
   }
 
   resetForm(form?:NgForm)
@@ -40,9 +41,9 @@ export class LoginComponent implements OnInit
     (
       (data:any)=>
       {
-        console.log(data);
-        alert("successfully login");
+        localStorage.setItem('token',data.token);
         this.router.navigateByUrl('home');
+        alert("successfully login");
       },
       err=>
       {
