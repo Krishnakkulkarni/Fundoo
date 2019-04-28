@@ -1,30 +1,45 @@
 <div class="example-container" [class.example-is-mobile]="mobileQuery.matches">
-    <mat-toolbar color="" class="example-toolbar">
-      <button mat-icon-button (click)="snav.toggle()"><mat-icon>menu</mat-icon></button>
-      <h1 class="example-app-name">Fundoo Notes</h1>
-      <div><button (click)="onLogout()" class="btn">Logout</button></div>
-      
-    </mat-toolbar>
-    <mat-sidenav-container class="example-sidenav-container">
-      <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'" [fixedInViewport]="mobileQuery.matches"> 
-        <mat-nav-list>
-          <div><button mat-button class="btn1">Note</button></div>
-            <mat-divider></mat-divider>
-            <div><button mat-button class="btn2">Reminder</button></div>
-            <mat-divider></mat-divider>
-            <div><Label>Lables</Label><br>
-              <button mat-button class="btn3">Edit Lables</button>
-              <mat-divider></mat-divider>
-              <div><button mat-button class="btn4">Archive</button><br>
-                <button mat-button class="btn5">Trash</button>
-              </div>
-            </div>
+  <mat-toolbar color="" class="example-toolbar">
+    <button mat-icon-button (click)="snav.toggle()">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <img style="width:40px" src="../../assets/images/image.png" />
+    <h1 class="example-app-name">Fundoo Notes</h1>
 
-        </mat-nav-list>
-      </mat-sidenav>
+    <input class="search" type="search" style="padding-left: 20px;outline: none" placeholder="Search..."
+      aria-label="Search">
+
+    <span class="example-spacer"></span>
+
+    <button mat-mini-fab style="background-color: #ecf3f7" [matMenuTriggerFor]="menu" style="outline:none">
+    </button>
+
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item (click)="onLogout()" style="outline:none">Logout</button>
+    </mat-menu>
+
+
+  </mat-toolbar>
+  <mat-sidenav-container class="example-sidenav-container">
+    <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'" [fixedInViewport]="mobileQuery.matches">
+      <mat-nav-list>
+        <div><button mat-button class="btn1" (click)='note()'>Notes</button></div>
+        <div><button mat-button class="btn2" (click)='Reminder()'>Reminder</button></div>
+        <mat-divider></mat-divider>
+        <div><Label>Lables</Label><br>
+          <button mat-button class="btn3">Edit Lables</button>
+          <mat-divider></mat-divider>
+          <div>
+            <button mat-button class="btn4">Archive</button><br>
+            <button mat-button class="btn5">Trash</button>
+          </div>
+        </div>
+
+      </mat-nav-list>
+    </mat-sidenav>
     <mat-sidenav-content>
-      
+      <router-outlet> </router-outlet>
     </mat-sidenav-content>
   </mat-sidenav-container>
+
 </div>
- 

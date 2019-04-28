@@ -1,0 +1,7 @@
+.validate{
+    display: block;
+    position: relative;
+    flex: auto;
+    min-width: 0;
+    width: 500px;
+}

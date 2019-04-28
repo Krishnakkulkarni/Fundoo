@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { Userresettpassword } from '../../Models/user.model';
 import {MatSnackBar} from '@angular/material';
+
 @Component({
   selector: 'app-reset-password',
   templateUrl: './reset-password.component.html',
@@ -34,8 +35,7 @@ export class ResetPasswordComponent implements OnInit
     if(form.value.Password!= form.value.ConfirmPassword)
     {
       this.resetForm();
-
-      this.openSnackBar('Password and ConfirmPassword Missmatch','close');
+      this.snackBar.open('Password and ConfirmPassword Missmatch','close',{duration:2000});
       return;
     }
       console.log('in reset',form.value);
@@ -51,11 +51,5 @@ export class ResetPasswordComponent implements OnInit
         }
       )
     this.resetForm();
-  }
-
-  openSnackBar(message: string, action: string) {
-    this.snackBar.open(message, action, {
-      duration: 2000,
-    });
   }
 }

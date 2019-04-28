@@ -7,21 +7,29 @@ import { HomeComponent } from './core/component/home/home.component';
 import { ForgotPasswordComponent } from './core/component/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './core/component/reset-password/reset-password.component';
 import { AuthGuard } from './core/auth/auth.guard';
+import { MainNotesComponent } from './core/component/main-notes/main-notes.component';
 
 //This is my case 
-const routes: Routes = [  
-  {path:'',redirectTo:'/user/login',pathMatch:'full'},
+const routes: Routes = [
+  { path: '', redirectTo: '/user/login', pathMatch: 'full' },
   {
     path: 'user', component: UserComponent,
-    children: 
-    [
-      { path: 'user-register', component: UserRegisterComponent },
-      { path: 'login', component: LoginComponent },
-    ]
+    children:
+      [
+        { path: 'user-register', component: UserRegisterComponent },
+        { path: 'login', component: LoginComponent },
+      ]
   },
-    { path:'forgot-password',component:ForgotPasswordComponent },
-     {path:'reset-password', component:ResetPasswordComponent },
-    { path:'home', component:HomeComponent, canActivate : [AuthGuard] }
+  { path: 'forgot-password', component: ForgotPasswordComponent },
+  { path: 'reset-password', component: ResetPasswordComponent },
+  {
+    path: 'home', component: HomeComponent, canActivate: [AuthGuard],
+    children: [
+      { path: '', redirectTo: 'MainNotes', pathMatch: 'full' },
+      { path: 'MainNotes', component: MainNotesComponent }
+
+    ]
+  }
 ];
 
 @NgModule({

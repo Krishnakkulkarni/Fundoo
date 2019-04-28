@@ -4,38 +4,42 @@
       <div class="sm-jumbotron center-align">
         <h2>User Registration</h2>
       </div>
-      <form class="col s12 white" #UserRegistrationForm="ngForm" (ngSubmit)="onSubmit(UserRegistrationForm)" autocomplete="off">
-          <div class="row">
-            <div class="input-field col s6">
-              <input type="text" class="validate" name="UserName" #UserName="ngModel" [(ngModel)]="user.UserName" required >
-              <label data-error="required Field">UserName</label>
-            </div>
-            <div class="input-field col s6">
-              <input type="password" class="validate" name="Password" #Password="ngModel" [(ngModel)]="user.Password" required minlength="4">
-              <label [attr.data-error]="Password.errors!=null?(Password.errors.required?'required Field': 'minimum 3 characters required'):''">Password</label>
-            </div>
+      <form class="col s12 white" #UserRegistrationForm="ngForm" (ngSubmit)="onSubmit(UserRegistrationForm)"
+        autocomplete="off">
+        <div class="row">
+          <div class="input-field col s6">
+            <input type="text" class="validate" name="UserName" #UserName="ngModel" [(ngModel)]="user.UserName"
+              required>
+            <label data-error="required Field">UserName</label>
           </div>
-            <div class="row">
-              <div class="input-field col s12">
-                <input type="text" name="Email" #Email="ngModel" [(ngModel)]="user.Email" [pattern]="emailPattern">
-                <label data-error="Invalid email">Email</label>
-              </div>
-            </div>
-            <div class="row">
-                <div class="input-field col s6">
-                  <input type="text" name="FirstName" #FirstName="ngModel" [(ngModel)]="user.FirstName">
-                  <label>First Name</label>
-                </div>
-                <div class="input-field col s6">
-                    <input type="text" name="LastName" #LastName="ngModel" [(ngModel)]="user.LastName">
-                    <label>Last Name</label>
-                </div>
-            </div>
-            <div class="row">
-                <div class="input-field col s6">
-                      <button class="btn-large btn-sumbit" type="submit" >Register</button> 
-                </div>        
-            </div>         
+          <div class="input-field col s6">
+            <input type="password" class="validate" name="Password" #Password="ngModel" [(ngModel)]="user.Password"
+              required minlength="4">
+            <label
+              [attr.data-error]="Password.errors!=null?(Password.errors.required?'required Field': 'minimum 3 characters required'):''">Password</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <input type="text" name="Email" #Email="ngModel" [(ngModel)]="user.Email" [pattern]="emailPattern">
+            <label data-error="Invalid email">Email</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s6">
+            <input type="text" name="FirstName" #FirstName="ngModel" [(ngModel)]="user.FirstName">
+            <label>First Name</label>
+          </div>
+          <div class="input-field col s6">
+            <input type="text" name="LastName" #LastName="ngModel" [(ngModel)]="user.LastName">
+            <label>Last Name</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s6">
+            <button class="btn-large btn-sumbit" type="submit">Register</button>
+          </div>
+        </div>
       </form>
     </div>
   </div>
