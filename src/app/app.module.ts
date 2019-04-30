@@ -14,9 +14,14 @@ import { AppMaterial } from './app.material.module';
 import { ForgotPasswordComponent } from './core/component/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './core/component/reset-password/reset-password.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
 import 'hammerjs';
 import { MainNotesComponent } from './core/component/main-notes/main-notes.component';
+import { ReminderComponent } from './core/component/reminder/reminder.component';
+import { EditLabelsComponent } from './core/component/edit-labels/edit-labels.component';
+import { ArchiveComponent } from './core/component/archive/archive.component';
+import { TrashComponent } from './core/component/trash/trash.component';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,7 +31,11 @@ import { MainNotesComponent } from './core/component/main-notes/main-notes.compo
     HomeComponent,
     ForgotPasswordComponent,
     ResetPasswordComponent,
-    MainNotesComponent
+    MainNotesComponent,
+    ReminderComponent,
+    EditLabelsComponent,
+    ArchiveComponent,
+    TrashComponent
   ],
   imports: [
     BrowserModule,
@@ -36,7 +45,7 @@ import { MainNotesComponent } from './core/component/main-notes/main-notes.compo
     AppMaterial,
     ReactiveFormsModule,
     BrowserAnimationsModule
-    
+
   ],
   providers: [],
   bootstrap: [AppComponent]

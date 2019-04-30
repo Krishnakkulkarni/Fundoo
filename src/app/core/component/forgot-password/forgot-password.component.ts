@@ -30,7 +30,7 @@ export class ForgotPasswordComponent implements OnInit {
       .subscribe
       ((data: any) => {
         console.log(data);
-        this.snackbar.open("Email sent successful", "close", { duration: 1500 });
+        this.snackbar.open("Email sent successful", "close", { duration: 2000 });
         this.resetForm(form);
       })
   }

@@ -17,21 +17,32 @@
     <mat-menu #menu="matMenu">
       <button mat-menu-item (click)="onLogout()" style="outline:none">Logout</button>
     </mat-menu>
-
-
   </mat-toolbar>
+
   <mat-sidenav-container class="example-sidenav-container">
     <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'" [fixedInViewport]="mobileQuery.matches">
       <mat-nav-list>
-        <div><button mat-button class="btn1" (click)='note()'>Notes</button></div>
-        <div><button mat-button class="btn2" (click)='Reminder()'>Reminder</button></div>
+        <div>
+          <button mat-button class="btn1" (click)='Note()'><mat-icon>lightbulb_outline</mat-icon>
+            Notes</button>
+        </div>
+        <div>
+
+          <button mat-button class="btn2" (click)='Reminder()'><mat-icon>notifications_none
+            </mat-icon>
+            Reminder</button>
+        </div>
         <mat-divider></mat-divider>
         <div><Label>Lables</Label><br>
-          <button mat-button class="btn3">Edit Lables</button>
+          <button mat-button class="btn3" (click)='EditLables()'><mat-icon>label_outline</mat-icon>EditLables</button>
           <mat-divider></mat-divider>
           <div>
-            <button mat-button class="btn4">Archive</button><br>
-            <button mat-button class="btn5">Trash</button>
+            
+            <button mat-button class="btn4" (click)='Archive()'>
+              <mat-icon>archive</mat-icon>Archive</button><br>
+
+            <button mat-button class="btn5" (click)='Trash()'>
+              <mat-icon>delete</mat-icon>Trash</button>
           </div>
         </div>
 
@@ -41,5 +52,4 @@
       <router-outlet> </router-outlet>
     </mat-sidenav-content>
   </mat-sidenav-container>
-
 </div>

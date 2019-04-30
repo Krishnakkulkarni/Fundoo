@@ -1,7 +1,6 @@
 import { MediaMatcher } from '@angular/cdk/layout';
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormControl } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
 
 @Component({
@@ -27,11 +26,23 @@ export class HomeComponent implements OnInit {
     this.router.navigate(['user/login']);
     this.snackBar.open("logout successful", "close", { duration: 1500 });
   }
-  note() {
+  Note() {
     this.router.navigate(['home/MainNotes'])
   }
 
   Reminder(){
-    
+    this.router.navigate(['home/Reminder'])
+  }
+
+  EditLables(){
+    this.router.navigate(['home/EditLables'])
+  }
+
+  Archive(){
+    this.router.navigate(['home/Archive'])
+  }
+
+  Trash(){
+    this.router.navigate(['home/Trash'])
   }
 }

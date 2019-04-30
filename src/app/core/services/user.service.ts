@@ -17,45 +17,42 @@ export class UserService {
   rooturl = environment.rooturl;
   constructor(private http: HttpClient) { }
 
-  registerUser(user : User){
+  registerUser(user: User) {
     console.log(user);
-      const body : User = {
-        UserName: user.UserName,
-        Password:user.Password,
-        Email:user.Email,
-        FirstName:user.FirstName,
-        LastName:user.LastName
-      }
-      return this.http.post(this.rooturl+ 'ApplicationUser/register',body);
-  }
-  login(formdata: any)
-  {
-    console.log('in service');
-    
-    return this.http.post(this.rooturl+ 'ApplicationUser/login',formdata);
-  }
-  
-  forgotPassword(userforgotpassword: Userforgotpassword)
-  {
-    console.log(userforgotpassword);
-    const formdata  =
-    {
-      Email : userforgotpassword
+    const body: User = {
+      UserName: user.UserName,
+      Password: user.Password,
+      Email: user.Email,
+      FirstName: user.FirstName,
+      LastName: user.LastName
     }
-    console.log('data in service',formdata);
-    
-    return this.http.post(this.rooturl+ 'ApplicationUser/forgotPassword',formdata);
+    return this.http.post(this.rooturl + 'ApplicationUser/register', body);
+  }
+  login(formdata: any) {
+    console.log('in service');
+
+    return this.http.post(this.rooturl + 'ApplicationUser/login', formdata);
   }
 
-  userresettpassword(userresettpassword : Userresettpassword)
-  {
-    console.log(userresettpassword);
-    const formdata : Userresettpassword =
+  forgotPassword(userforgotpassword: Userforgotpassword) {
+    console.log(userforgotpassword);
+    const formdata =
     {
-      Email : userresettpassword.Email,
-      Password : userresettpassword.Password,
-      ConfirmPassword : userresettpassword.ConfirmPassword
+      Email: userforgotpassword
     }
-     return this.http.post(this.rooturl+ 'ApplicationUser/resetPassword', formdata);
+    console.log('data in service', formdata);
+
+    return this.http.post(this.rooturl + 'ApplicationUser/forgotPassword', formdata);
+  }
+
+  userresettpassword(userresettpassword: Userresettpassword) {
+    console.log(userresettpassword);
+    const formdata: Userresettpassword =
+    {
+      Email: userresettpassword.Email,
+      Password: userresettpassword.Password,
+      ConfirmPassword: userresettpassword.ConfirmPassword
+    }
+    return this.http.post(this.rooturl + 'ApplicationUser/resetPassword', formdata);
   }
 }

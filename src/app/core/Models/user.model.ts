@@ -1,17 +1,15 @@
 export class User {
-    UserName : string;
-    Password : string;
-    Email : string;
+    UserName: string;
+    Password: string;
+    Email: string;
     FirstName: string;
-    LastName : string;
+    LastName: string;
 }
-export class Userresettpassword
-{
-    Email : string;
-    Password : string;
-    ConfirmPassword : string;
+export class Userresettpassword {
+    Email: string;
+    Password: string;
+    ConfirmPassword: string;
 }
-export class Userforgotpassword
-{
-    Email : string;
+export class Userforgotpassword {
+    Email: string;
 }

@@ -42,7 +42,7 @@ export class UserRegisterComponent implements OnInit {
 
           if (data) {
             this.router.navigateByUrl('user/login');
-            this.snackbar.open("register successful", "close", { duration: 1500 });
+            this.snackbar.open("register successful", "close", { duration: 2000 });
             this.resetForm(form);
           }
         }

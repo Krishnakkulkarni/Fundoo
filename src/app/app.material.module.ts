@@ -6,6 +6,7 @@ import {CdkStepperModule} from '@angular/cdk/stepper';
 import {CdkTableModule} from '@angular/cdk/table';
 import {CdkTreeModule} from '@angular/cdk/tree';
 import {NgModule} from '@angular/core';
+import { FlexLayoutModule} from '@angular/flex-layout';
 import {
   MatAutocompleteModule,
   MatBadgeModule,
@@ -43,6 +44,7 @@ import {
   MatTooltipModule,
   MatTreeModule,
 } from '@angular/material';
+import { from } from 'rxjs';
 
 @NgModule({
   exports: [
@@ -51,6 +53,7 @@ import {
     CdkTableModule,
     CdkTreeModule,
     DragDropModule,
+    FlexLayoutModule,
     MatAutocompleteModule,
     MatBadgeModule,
     MatBottomSheetModule,
