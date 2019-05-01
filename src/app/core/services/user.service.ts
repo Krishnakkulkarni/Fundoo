@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { User, Userresettpassword, Userforgotpassword } from '../Models/user.model';
 import { environment } from 'src/environments/environment';
+import { HttpService } from './HttpServices/http.service';
 
 @Injectable({
   providedIn: 'root'
@@ -15,44 +16,35 @@ export class UserService {
   }
 
   rooturl = environment.rooturl;
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, public httpService:HttpService) { }
 
   registerUser(user: User) {
-    console.log(user);
-    const body: User = {
-      UserName: user.UserName,
-      Password: user.Password,
-      Email: user.Email,
-      FirstName: user.FirstName,
-      LastName: user.LastName
-    }
-    return this.http.post(this.rooturl + 'ApplicationUser/register', body);
+    return this.httpService.post('ApplicationUser/register', user);
   }
-  login(formdata: any) {
-    console.log('in service');
 
-    return this.http.post(this.rooturl + 'ApplicationUser/login', formdata);
+  login(data) {
+    return this.httpService.post('ApplicationUser/login', data);
   }
 
   forgotPassword(userforgotpassword: Userforgotpassword) {
     console.log(userforgotpassword);
-    const formdata =
-    {
-      Email: userforgotpassword
-    }
-    console.log('data in service', formdata);
+    // const formdata =
+    // {
+    //   Email: userforgotpassword
+    // }
+    //console.log('data in service', formdata);
 
-    return this.http.post(this.rooturl + 'ApplicationUser/forgotPassword', formdata);
+    return this.httpService.post('ApplicationUser/forgotPassword', userforgotpassword);
   }
 
   userresettpassword(userresettpassword: Userresettpassword) {
     console.log(userresettpassword);
-    const formdata: Userresettpassword =
-    {
-      Email: userresettpassword.Email,
-      Password: userresettpassword.Password,
-      ConfirmPassword: userresettpassword.ConfirmPassword
-    }
-    return this.http.post(this.rooturl + 'ApplicationUser/resetPassword', formdata);
+    // const formdata: Userresettpassword =
+    // {
+    //   Email: userresettpassword.Email,
+    //   Password: userresettpassword.Password,
+    //   ConfirmPassword: userresettpassword.ConfirmPassword
+    // }
+    return this.httpService.post('ApplicationUser/resetPassword', userresettpassword);
   }
 }

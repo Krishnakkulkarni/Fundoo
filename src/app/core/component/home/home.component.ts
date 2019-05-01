@@ -26,23 +26,24 @@ export class HomeComponent implements OnInit {
     this.router.navigate(['user/login']);
     this.snackBar.open("logout successful", "close", { duration: 1500 });
   }
+  
   Note() {
     this.router.navigate(['home/MainNotes'])
   }
 
-  Reminder(){
+  Reminder() {
     this.router.navigate(['home/Reminder'])
   }
 
-  EditLables(){
+  EditLables() {
     this.router.navigate(['home/EditLables'])
   }
 
-  Archive(){
+  Archive() {
     this.router.navigate(['home/Archive'])
   }
 
-  Trash(){
+  Trash() {
     this.router.navigate(['home/Trash'])
   }
 }

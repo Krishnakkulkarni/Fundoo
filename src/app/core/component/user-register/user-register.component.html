@@ -1,8 +1,8 @@
 <div class="row">
-  <div class="col s6 offset-s2">
-    <div class="card">
-      <div class="sm-jumbotron center-align">
-        <h2>User Registration</h2>
+  <div class="col s6 offset-s2" style="margin-left: 30%; padding-top: 5%" >
+    <mat-card fxFlex="70" class="card">
+      <div class="center-align">
+        <h5>Register Here</h5>
       </div>
       <form class="col s12 white" #UserRegistrationForm="ngForm" (ngSubmit)="onSubmit(UserRegistrationForm)"
         autocomplete="off">
@@ -39,9 +39,9 @@
           <div class="input-field col s6">
             <button mat-button class="btn" type="submit">Register</button>
           </div>
-              <a routerLink="/user/login" class="login" routerLinkActive="active">Login</a> 
         </div>
+        <a routerLink="/user/login" class="login" routerLinkActive="active">Login</a>
       </form>
-    </div>
+    </mat-card>
   </div>
 </div>

@@ -3,9 +3,16 @@
     position: relative;
     flex: auto;
     min-width: 0;
-    width: 500px;
+    width: 300px;
+    padding: 0em 0 1em 0;
 }
 .card{
-    width: 300px;
-   
+    width: 100%;
+    
+} 
+.main{
+    height: 90vh;
+}
+.btn{
+    background-color: rgb(240, 240, 176)
 }

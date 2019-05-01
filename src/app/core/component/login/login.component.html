@@ -1,50 +1,51 @@
-<div class='main' fxLayoutAlign='center center'>
+<div class='main' fxLayoutAlign='center center' style="width:55%;position: relative;left: 320px">
   <mat-card fxFlex="70" class="card">
 
-    <div class="row">
-      <div class="col s6 offset-s2">
-
-        <div class="center-align">
-          <h6>User Login</h6>
-        </div>
-
-        <div fxLayout='col'>
-          <form class="col s12 white" #LoginForm="ngForm" (ngSubmit)="onSubmit(LoginForm)" autocomplete="off">
-
-            <div>
-              <mat-form-field appearance="outline">
-                <mat-label>UserName</mat-label>
-                <input matInput type="text" class="validate" name="UserName" #UserName="ngModel"
-                  [(ngModel)]="user.UserName" required>
-              </mat-form-field>
-            </div>
-            <div>
-              <mat-form-field appearance="outline">
-                <mat-label
-                  [attr.data-error]="Password.errors!=null?(Password.errors.required?'required Field': 'minimum 3 characters required'):''">
-                  Password</mat-label>
-                <input matInput type="password" class="validate" name="Password" #Password="ngModel"
-                  [(ngModel)]="user.Password" required minlength="4">
-              </mat-form-field>
-            </div>
-
-            <div class="row">
-              <div class="col">
-                <button mat-button class="btn" type="submit">Login</button>
-                <div style="color:red"> {{message}}</div>
-                <a routerLink="/user/user-register" class="register" routerLinkActive="active">Create Account</a>
-              </div>
-            </div>
-
-            <div class="row">
-              <small>
-                <a routerLink="/forgot-password" class="forgot-password" routerLinkActive="active">forgot-password?</a>
-              </small>
-            </div>
-            
-          </form>
-        </div>
+    <div fxLayout='column' fxLayoutAlign='center center'>
+      <div fxLayoutAlign='center center'>
+        <h6>Login Here</h6>
       </div>
+
+      <div fxLayout='col'>
+        <form class="col s12 white" #LoginForm="ngForm" (ngSubmit)="onSubmit(LoginForm)" autocomplete="off">
+
+          <div>
+            <mat-form-field appearance="outline">
+              <mat-label>UserName</mat-label>
+              <input matInput type="text" name="UserName" #UserName="ngModel" [(ngModel)]="user.UserName" required>
+            </mat-form-field>
+          </div>
+          <div>
+            <mat-form-field appearance="outline">
+              <mat-label
+                [attr.data-error]="Password.errors!=null?(Password.errors.required?'required Field': 'minimum 3 characters required'):''">
+                Password</mat-label>
+              <input matInput type="password" class="validate" name="Password" #Password="ngModel"
+                [(ngModel)]="user.Password" required minlength="4">
+            </mat-form-field>
+          </div>
+
+
+          <div fxLayout="row" fxLayoutAlign='space-around end'>
+            <div>
+              <button mat-button class="btn" type="submit">Login</button> </div>
+            <!-- <div style="color:red"> {{message}}</div> -->
+            <div>
+              <a routerLink="/user/user-register" class="register" routerLinkActive="active">Create Account</a>
+            </div>
+
+          </div>
+
+          <div class="row">
+            <small>
+              <a routerLink="/forgot-password" class="forgot-password" routerLinkActive="active">forgot-password?</a>
+            </small>
+          </div>
+
+        </form>
+      </div>
+
     </div>
+
   </mat-card>
 </div>

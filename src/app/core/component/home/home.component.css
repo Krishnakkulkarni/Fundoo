@@ -34,4 +34,19 @@
        `<body>` to be our scrolling element for mobile layouts. */
     flex: 1 0 auto;
   }
+  .sidenav{
+    width: 300px;
+    height: 98%;
+    background-color: white;
+  }
+  .sidenavlist{
+    border-top-right-radius: 100%;
+    border-bottom-right-radius: 100%;
+    width: 300px;
+    font-size : 15px;
+    padding:  4px;
+    background-color: rgb(238, 205, 144);
+    text-align: center;
+  }
+  
   

@@ -4,7 +4,7 @@
       <mat-icon>menu</mat-icon>
     </button>
     <img style="width:40px" src="../../assets/images/image.png" />
-    <h1 class="example-app-name">Fundoo Notes</h1>
+    <h1 class="example-app-name">{{HeaderName}}</h1>
 
     <input class="search" type="search" style="padding-left: 20px;outline: none" placeholder="Search..."
       aria-label="Search">
@@ -18,33 +18,50 @@
       <button mat-menu-item (click)="onLogout()" style="outline:none">Logout</button>
     </mat-menu>
   </mat-toolbar>
-
+  <!---------------------------------------------         ------------------------------------------------->
   <mat-sidenav-container class="example-sidenav-container">
     <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'" [fixedInViewport]="mobileQuery.matches">
       <mat-nav-list>
         <div>
-          <button mat-button class="btn1" (click)='Note()'><mat-icon>lightbulb_outline</mat-icon>
-            Notes</button>
+          <button mat-button (click)='Note()' (click)="HeaderName= 'Fundoo Notes'"
+            [ngClass]="{'sidenav':HeaderName!= 'Fundoo Notes','sidenavlist':HeaderName=='Fundoo Notes'}">
+            <mat-icon>lightbulb_outline</mat-icon>
+            Notes
+          </button>
         </div>
-        <div>
 
-          <button mat-button class="btn2" (click)='Reminder()'><mat-icon>notifications_none
-            </mat-icon>
-            Reminder</button>
+        <div>
+          <button mat-button class="btn" (click)='Reminder()' (click)="HeaderName= 'Reminder'"
+            [ngClass]="{'sidenav':HeaderName!= 'Reminder','sidenavlist':HeaderName=='Reminder'}">
+            <mat-icon>notifications_none</mat-icon>
+            Reminder
+          </button>
         </div>
         <mat-divider></mat-divider>
-        <div><Label>Lables</Label><br>
-          <button mat-button class="btn3" (click)='EditLables()'><mat-icon>label_outline</mat-icon>EditLables</button>
-          <mat-divider></mat-divider>
-          <div>
-            
-            <button mat-button class="btn4" (click)='Archive()'>
-              <mat-icon>archive</mat-icon>Archive</button><br>
 
-            <button mat-button class="btn5" (click)='Trash()'>
-              <mat-icon>delete</mat-icon>Trash</button>
-          </div>
+        <div>
+          <Label>Lables</Label><br>
+          <button mat-button class="btn" (click)='EditLables()' (click)="HeaderName= 'EditLables'"
+            [ngClass]="{'sidenav':HeaderName!= 'EditLables','sidenavlist':HeaderName=='EditLables'}">
+            <mat-icon>edit</mat-icon>
+            EditLables
+          </button>
+          <mat-divider></mat-divider>
         </div>
+        <div>
+          <button mat-button class="btn" (click)='Archive()' (click)="HeaderName= 'Archive'"
+            [ngClass]="{'sidenav':HeaderName!= 'Archive','sidenavlist':HeaderName=='Archive'}">
+            <mat-icon>archive</mat-icon>
+            Archive
+          </button><br>
+
+          <button mat-button class="btn" (click)='Trash()' (click)="HeaderName= 'Trash'"
+            [ngClass]="{'sidenav':HeaderName!= 'Trash','sidenavlist':HeaderName=='Trash'}">
+            <mat-icon>delete</mat-icon>
+            Trash
+          </button>
+        </div>
+
 
       </mat-nav-list>
     </mat-sidenav>
