@@ -35,18 +35,17 @@
     flex: 1 0 auto;
   }
   .sidenav{
-    width: 300px;
+    width: 230px;
     height: 98%;
     background-color: white;
+    text-align: left;
   }
   .sidenavlist{
     border-top-right-radius: 100%;
     border-bottom-right-radius: 100%;
-    width: 300px;
+    width: 230px;
     font-size : 15px;
-    padding:  4px;
+    padding:  1px;
     background-color: rgb(238, 205, 144);
-    text-align: center;
+    text-align: left;
   }
-  
-  

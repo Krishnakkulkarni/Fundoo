@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NotesService } from '../../services/NotesServices/notes.service';
+import { FormControl, Validators } from '@angular/forms';
+import * as jwt_decode from "jwt-decode";
 
 @Component({
   selector: 'app-notes',
@@ -7,29 +9,35 @@ import { NotesService } from '../../services/NotesServices/notes.service';
   styleUrls: ['./notes.component.css']
 })
 export class NotesComponent implements OnInit {
+  title = new FormControl('', [Validators.required]);
+  take_a_note = new FormControl('', [Validators.required]);
   token_id: any;
-  title: any;
-  take_a_note: any;
-  AferCloseEvent: any;
-
-  constructor(private notesService:NotesService) { }
+  id: any;
+  constructor(private notesService: NotesService) { }
 
   ngOnInit() {
-    this.token_id=localStorage.getItem('token')
+
+    var token = localStorage.getItem('token');
+    var jwt_token = jwt_decode(token);
+    localStorage.setItem("UserID", jwt_token.UserID)
+    this.id = localStorage.getItem("UserID")
   }
 
   AddNotes() {
-    var notes ={
-    UserId :this.token_id,
-    Title:this.title.value,
-    Description:this.take_a_note.value,
+    var notes = {
+      UserId: this.id,
+      Title: this.title.value,
+      Description: this.take_a_note.value,
     }
-    if(this.title.value !="" && this.take_a_note.value!=""){
-    this.notesService.addNotes(notes).subscribe
-    (
-      (data: any) => {
-        this.AferCloseEvent.emit(); 
-    });
+    if (this.title.value != "" && this.take_a_note.value != "") {
+      this.notesService.addNotes(notes).subscribe
+        (data => {
+          console.log(data)
+        },
+          err => {
+            console.log(err)
+          }
+        )
+    }
   }
-}
 }

@@ -29,7 +29,7 @@ const routes: Routes = [
   {
     path: 'home', component: HomeComponent, canActivate: [AuthGuard],
     children: [
-      { path: 'MainNotes', redirectTo: 'MainNotes', pathMatch: 'full' },
+      { path: '', redirectTo: 'MainNotes', pathMatch: 'full' },
       { path: 'MainNotes', component: MainNotesComponent },
       { path: 'Reminder', component: ReminderComponent },
       { path: 'EditLables', component: EditLabelsComponent },

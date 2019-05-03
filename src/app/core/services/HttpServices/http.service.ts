@@ -8,10 +8,13 @@ import { environment } from 'src/environments/environment';
 export class HttpService {
 
   rooturl = environment.rooturl;
-  constructor(public http:HttpClient) { }
 
-post(url:string,data:any){
-return this.http.post(this.rooturl + url,data)
-}
+  constructor(public http: HttpClient) { }
 
+  post(url: string, data: any) {
+    return this.http.post(this.rooturl + url, data)
+  }
+  get(url: String) {
+    return this.http.get(this.rooturl + url)
+  }
 }

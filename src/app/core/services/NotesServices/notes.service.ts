@@ -6,9 +6,12 @@ import { HttpService } from '../HttpServices/http.service';
 })
 export class NotesService {
 
-  constructor(public httpService:HttpService) { }
+  constructor(public httpService: HttpService) { }
 
-  addNotes(data){
-  return this.httpService.post('Notes/addNotes',data);
+  addNotes(data: { UserId: any; Title: string; Description: string; }) {
+    return this.httpService.post('Notes/addNotes', data);
+  }
+  getNotesById(UserId) {
+    return this.httpService.get('notes/viewNotes/'+UserId);
   }
 }

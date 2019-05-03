@@ -45,7 +45,7 @@ export class LoginComponent implements OnInit {
       this.userService.login(form.value).subscribe
         (
           (data: any) => {
-            localStorage.setItem('token', data.token);
+            localStorage.setItem('token', data.result);
             this.router.navigateByUrl('home');
             this.snackbar.open("login successful", "close", { duration: 2000 });
           },

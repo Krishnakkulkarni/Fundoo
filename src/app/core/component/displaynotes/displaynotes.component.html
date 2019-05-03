@@ -1,10 +1,10 @@
-<div [ngClass]="main" fxLayoutGap='2%'>
+<div [ngClass]="main" fxLayoutGap='2%' fxLayout='row' fxLayout='row-wrap'>
   <div class="loop" *ngFor="let note of notes">
     <mat-card class="note" [style.background-color]=note.color>
       <div (click)="openDialog(note)" class="element.style">
-        <div>
+        <!-- <div>
           <img src="{{note.image}}" class="notesImage" />
-        </div>
+        </div> -->
         <div>
           <mat-card-title class="titleinput">{{note.title}}</mat-card-title>
         </div>
@@ -12,7 +12,7 @@
           <mat-card-content class="noteinput ">{{note.description}}</mat-card-content>
         </div>
       </div>
-      <app-iocns-on-note [card]="note"></app-iocns-on-note>
+      <!-- <app-iocns-on-note [card]="note"></app-iocns-on-note> -->
     </mat-card>
   </div>
 </div>

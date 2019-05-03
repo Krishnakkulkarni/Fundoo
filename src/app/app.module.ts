@@ -16,6 +16,8 @@ import { ResetPasswordComponent } from './core/component/reset-password/reset-pa
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import 'hammerjs';
 import { MainNotesComponent } from './core/component/main-notes/main-notes.component';
+import { NotesComponent } from './core/component/notes/notes.component';
+import { DisplaynotesComponent } from './core/component/displaynotes/displaynotes.component';
 import { ReminderComponent } from './core/component/reminder/reminder.component';
 import { EditLabelsComponent } from './core/component/edit-labels/edit-labels.component';
 import { ArchiveComponent } from './core/component/archive/archive.component';
@@ -32,6 +34,8 @@ import { TrashComponent } from './core/component/trash/trash.component';
     ForgotPasswordComponent,
     ResetPasswordComponent,
     MainNotesComponent,
+    NotesComponent,
+    DisplaynotesComponent,
     ReminderComponent,
     EditLabelsComponent,
     ArchiveComponent,
