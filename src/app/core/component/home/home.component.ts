@@ -11,7 +11,7 @@ import { MatSnackBar } from '@angular/material';
 export class HomeComponent implements OnInit {
   mobileQuery: MediaQueryList;
   private _mobileQueryListener: () => void;
-
+  HeaderName = "Fundoo"
   constructor(private router: Router, changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, public snackBar: MatSnackBar) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
@@ -19,15 +19,16 @@ export class HomeComponent implements OnInit {
 
   }
   ngOnInit() {
-
   }
-  
+
   onLogout() {
     localStorage.removeItem('token');
     this.router.navigate(['user/login']);
     this.snackBar.open("logout successful", "close", { duration: 1500 });
   }
-  
+  refresh() {
+    location.reload()
+  }
   Note() {
     this.router.navigate(['home/MainNotes'])
   }

@@ -1,5 +1,5 @@
-<div [ngClass]="main" fxLayoutGap='2%' fxLayout='row' fxLayout='row-wrap'>
-  <div class="loop" *ngFor="let note of notes">
+<div [ngClass]="main" fxLayoutGap='0%' fxLayout='row' fxLayout='row wrap' style="margin-top:10px">
+  <div class="loop" *ngFor="let note of cards">
     <mat-card class="note" [style.background-color]=note.color>
       <div (click)="openDialog(note)" class="element.style">
         <!-- <div>
@@ -12,7 +12,7 @@
           <mat-card-content class="noteinput ">{{note.description}}</mat-card-content>
         </div>
       </div>
-      <!-- <app-iocns-on-note [card]="note"></app-iocns-on-note> -->
+      <app-icons [card]="note"></app-icons>
     </mat-card>
   </div>
 </div>

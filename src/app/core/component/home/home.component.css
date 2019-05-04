@@ -41,11 +41,15 @@
     text-align: left;
   }
   .sidenavlist{
-    border-top-right-radius: 100%;
-    border-bottom-right-radius: 100%;
     width: 230px;
     font-size : 15px;
     padding:  1px;
     background-color: rgb(238, 205, 144);
     text-align: left;
   }
+  .search{
+    margin-left:20px;
+    margin-right: 20px; 
+    border-radius: 20px;
+  }
+ 

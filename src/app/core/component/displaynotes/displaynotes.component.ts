@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { NotesService } from '../../services/NotesServices/notes.service';
 import * as jwt_decode from "jwt-decode";
 
@@ -8,20 +8,12 @@ import * as jwt_decode from "jwt-decode";
   styleUrls: ['./displaynotes.component.css']
 })
 export class DisplaynotesComponent implements OnInit {
-  
-  notes: any;
-  id: string;
 
   constructor(private notesService: NotesService) { }
 
+  @Input() cards;
+
   ngOnInit() {
-    this.id = localStorage.getItem("UserID")
-    this.notesService.getNotesById(this.id).subscribe(
-      data => {
-        this.notes = data;
-      }
-    ), (err: any) => {
-      console.log(err);
-    };
+    
   }
 }

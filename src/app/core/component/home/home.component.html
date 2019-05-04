@@ -6,8 +6,12 @@
     <img style="width:40px" src="../../assets/images/image.png" />
     <h1 class="example-app-name">{{HeaderName}}</h1>
 
-    <input class="search" type="search" style="padding-left: 20px;outline: none" placeholder="Search..."
+    <input class="search" type="text" style="padding-left: 20px;outline: none" placeholder="Search..."
       aria-label="Search">
+
+      <button mat-icon-button> <mat-icon (click)="refresh()">refresh</mat-icon></button>
+
+    <!-- <button mat-button class="btn" (click)="view()" style="padding-right:10%"></button> -->
 
     <span class="example-spacer"></span>
 
@@ -65,8 +69,10 @@
 
       </mat-nav-list>
     </mat-sidenav>
+
     <mat-sidenav-content>
       <router-outlet> </router-outlet>
     </mat-sidenav-content>
+
   </mat-sidenav-container>
 </div>

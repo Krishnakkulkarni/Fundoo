@@ -8,8 +8,8 @@
         <textarea [formControl]="title" [style.background-color]=noteColor placeholder="Title"></textarea><br>
         <textarea [formControl]=" take_a_note" [style.background-color]=noteColor
             placeholder="Take a note..."></textarea>
-        <div>
 
+        <div>
             <button mat-button (click)="isOpen=false" class="closeButton" (click)="AddNotes()">close</button>
             <!-- <app-iocns-on-note (setcolortoNote)="setcolor($event)"></app-iocns-on-note> -->
         </div>

@@ -22,7 +22,7 @@ import { ReminderComponent } from './core/component/reminder/reminder.component'
 import { EditLabelsComponent } from './core/component/edit-labels/edit-labels.component';
 import { ArchiveComponent } from './core/component/archive/archive.component';
 import { TrashComponent } from './core/component/trash/trash.component';
-
+import { IconsComponent } from './core/component/icons/icons.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +39,8 @@ import { TrashComponent } from './core/component/trash/trash.component';
     ReminderComponent,
     EditLabelsComponent,
     ArchiveComponent,
-    TrashComponent
+    TrashComponent,
+    IconsComponent
   ],
   imports: [
     BrowserModule,

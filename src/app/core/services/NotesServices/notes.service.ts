@@ -9,9 +9,9 @@ export class NotesService {
   constructor(public httpService: HttpService) { }
 
   addNotes(data: { UserId: any; Title: string; Description: string; }) {
-    return this.httpService.post('Notes/addNotes', data);
+    return this.httpService.post('Notes/', data);
   }
-  getNotesById(UserId) {
-    return this.httpService.get('notes/viewNotes/'+UserId);
+  getNotesById(UserId: string) {
+    return this.httpService.get('notes/'+UserId);
   }
 }

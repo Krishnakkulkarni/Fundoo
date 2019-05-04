@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NotesService } from '../../services/NotesServices/notes.service';
 
 @Component({
   selector: 'app-main-notes',
@@ -7,9 +8,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MainNotesComponent implements OnInit {
 
-  constructor() { }
+  notes: any;
+  id: string;
+
+  constructor(private notesService : NotesService) { }
 
   ngOnInit() {
+    this.id = localStorage.getItem("UserID")
+    this.notesService.getNotesById(this.id).subscribe(
+      data => {
+        this.notes = data;
+      }
+    ), (err: any) => {
+      console.log(err);
+    };
   }
 
 }
