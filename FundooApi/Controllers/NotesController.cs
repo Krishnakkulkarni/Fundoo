@@ -10,6 +10,7 @@ namespace FundooApi.Controllers
     using System.Threading.Tasks;
     using BussinessLayer.Interfaces;
     using Common.Models;
+    using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
 
     /// <summary>
@@ -43,16 +44,15 @@ namespace FundooApi.Controllers
         [Route("addNotes")]
         public async Task<IActionResult> CreateNotes(NotesModel notesModel)
         {
-            try
-            {
                 var result = await this.notesCreation.Create(notesModel);
-                return this.Ok(result);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-                return this.BadRequest();
-            }
+                if (result == 1)
+                {
+                    return this.Ok();
+                }
+                else
+                {
+                    return this.BadRequest();
+                }
         }
 
         /// <summary>
@@ -61,7 +61,7 @@ namespace FundooApi.Controllers
         /// <param name="id">The identifier.</param>
         /// <returns>return result</returns>
         [HttpDelete]
-        [Route("deleteNotes/{id}")]
+        [Route("{id}")]
         public async Task<IActionResult> DeleteNotes(int id)
         {
             try
@@ -83,7 +83,7 @@ namespace FundooApi.Controllers
         /// <param name="id">The identifier.</param>
         /// <returns>return result</returns>
         [HttpPut]
-        [Route("updateNotes/{id}")]
+        [Route("{id}")]
         public async Task<IActionResult> UpdateNotes(NotesModel notesModel, int id)
         {
             try
@@ -104,7 +104,7 @@ namespace FundooApi.Controllers
         /// <param name="userId">The user identifier.</param>
         /// <returns>return notes</returns>
         [HttpGet]
-        [Route("viewNotes/{UserId}")]
+        [Route("{UserId}")]
         public IActionResult ViewAll(Guid userId)
         {
             try
@@ -117,6 +117,26 @@ namespace FundooApi.Controllers
                 Console.WriteLine(e.Message);
                 return this.BadRequest();
             }
+        }
+
+        /// <summary>
+        /// Images the specified file.
+        /// </summary>
+        /// <param name="file">The file.</param>
+        /// <param name="id">The identifier.</param>
+        /// <returns></returns>
+        [HttpPost]
+        [Route("image/{id}")]
+        public IActionResult Image(IFormFile file, int id)
+        {
+            Console.WriteLine(file);
+            if (file == null)
+            {
+                return this.NotFound("The file couldn't be found");
+            }
+
+            var result = this.notesCreation.BrowseImage(file, id);
+            return this.Ok(new { result });
         }
     }
 }

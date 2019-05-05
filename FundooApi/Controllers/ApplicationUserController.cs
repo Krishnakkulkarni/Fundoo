@@ -70,13 +70,13 @@ namespace FundooApi.Controllers
             try  
             {
                 var result = await this.applicationUser.LoginAsync(applicationLoginModel);
-                if(result == "invalid user")
+                if (result == "invalid user")
                 {
-                    return BadRequest();
+                    return this.BadRequest();
                 }
                 else
                 {
-                    return Ok(new { result });
+                    return this.Ok(new { result });
                 }
             }
             catch (Exception e)

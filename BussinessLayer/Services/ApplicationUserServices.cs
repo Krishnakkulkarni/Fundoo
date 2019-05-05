@@ -31,12 +31,10 @@ namespace BussinessLayer.Services
         /// </summary>
         private readonly IEmailSender emailSender;
 
-
         /// <summary>
         /// Initializes a new instance of the <see cref="ApplicationUserServices"/> class.
         /// </summary>
         /// <param name="applicationRepository">The application repository.</param>
-        /// <param name="appSettings">The application settings.</param>
         /// <param name="emailSender">The email sender.</param>
         /// <param name="distributedCache">The distributed cache.</param>
         public ApplicationUserServices(IRepository applicationRepository, IEmailSender emailSender, IDistributedCache distributedCache)
@@ -63,7 +61,6 @@ namespace BussinessLayer.Services
         /// <returns>
         /// return string
         /// </returns>
-        /// <exception cref="NotImplementedException"></exception>
         public async Task<string> LoginAsync(ApplicationLoginModel model)
         {
             string result = await this.applicationRepository.LoginPage(model);

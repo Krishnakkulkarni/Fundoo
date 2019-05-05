@@ -9,6 +9,7 @@ namespace BussinessLayer.Interfaces
     using System.Collections.Generic;
     using System.Threading.Tasks;
     using Common.Models;
+    using Microsoft.AspNetCore.Http;
 
     /// <summary>
     /// INotes interface
@@ -43,5 +44,7 @@ namespace BussinessLayer.Interfaces
         /// <param name="userId">The user identifier.</param>
         /// <returns>return NotesModel</returns>
         IList<NotesModel> AccessNotes(Guid userId);
+
+        string BrowseImage(IFormFile file, int id);
     }
 }

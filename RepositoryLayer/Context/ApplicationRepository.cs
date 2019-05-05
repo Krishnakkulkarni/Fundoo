@@ -17,7 +17,6 @@ namespace RepositoryLayer.Context
     using Microsoft.IdentityModel.Tokens;
     using RepositoryLayer.Interface;
    
-
     /// <summary>
     /// Application Repository class
     /// </summary>
@@ -126,6 +125,7 @@ namespace RepositoryLayer.Context
                 this.distributedCache.SetString(cacheKey, token);
                 return token;
             }
+
             return "invalid user";
         }
 
@@ -166,7 +166,7 @@ namespace RepositoryLayer.Context
         public async Task<bool> ResetPasswordAsync(ResetPasswordModel model)
         {
             var userEmail = await this.usermanager.FindByEmailAsync(model.Email);
-            if(userEmail == null)
+            if (userEmail == null)
             {
                 return false;
             }

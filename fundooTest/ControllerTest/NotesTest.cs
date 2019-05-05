@@ -3,7 +3,7 @@
 //     Company @ 2019 </copyright>
 // <creator name = "Krishna Kulkarni" />
 //-----------------------------------------------------------------------
-namespace fundooTest.ControllerTest
+namespace FundooTest.ControllerTest
 {
     using System;
     using BussinessLayer.Services;

@@ -9,6 +9,7 @@ namespace RepositoryLayer.Interface
     using System.Collections.Generic;
     using System.Threading.Tasks;
     using Common.Models;
+    using Microsoft.AspNetCore.Http;
 
     /// <summary>
     /// INotes Repository interface
@@ -19,7 +20,8 @@ namespace RepositoryLayer.Interface
         /// Adds the notes.
         /// </summary>
         /// <param name="notesModel">The notes model.</param>
-        void AddNotes(NotesModel notesModel);
+        /// <returns>return string</returns>
+        string AddNotes(NotesModel notesModel);
 
         /// <summary>
         /// Saves the changes asynchronous.
@@ -46,5 +48,7 @@ namespace RepositoryLayer.Interface
         /// <param name="userId">The user identifier.</param>
         /// <returns>return NotesModel</returns>
         IList<NotesModel> GetNotes(Guid userId);
+
+        string Image(IFormFile file, int id);
     }
 }

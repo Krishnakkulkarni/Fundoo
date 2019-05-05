@@ -1,5 +1,5 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="20190423022957_Initial.cs" company="Bridgelabz">
+// <copyright file="20190505005951_Initial.cs" company="Bridgelabz">
 //     Company @ 2019 </copyright>
 // <creator name = "Krishna Kulkarni" />
 //-----------------------------------------------------------------------
@@ -66,8 +66,8 @@ namespace RepositoryLayer.Migrations
                     Discriminator = table.Column<string>(nullable: false),
                     FirstName = table.Column<string>(type: "nvarchar(150)", nullable: true),
                     LastName = table.Column<string>(nullable: true),
-                    CreatedOn = table.Column<DateTime>(nullable: true),
-                    ModifiedOn = table.Column<DateTime>(nullable: true)
+                    CreatedDate = table.Column<DateTime>(nullable: true),
+                    ModifiedDate = table.Column<DateTime>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -81,10 +81,12 @@ namespace RepositoryLayer.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Title = table.Column<string>(nullable: true),
-                    Discription = table.Column<string>(nullable: true),
+                    Description = table.Column<string>(nullable: true),
                     CreatedDate = table.Column<DateTime>(nullable: false),
                     ModifiedDate = table.Column<DateTime>(nullable: false),
-                    UserId = table.Column<Guid>(nullable: false)
+                    UserId = table.Column<Guid>(nullable: false),
+                    Color = table.Column<string>(nullable: true),
+                    Image = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {

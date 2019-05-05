@@ -10,6 +10,7 @@ namespace BussinessLayer.Services
     using System.Threading.Tasks;
     using BussinessLayer.Interfaces;
     using Common.Models;
+    using Microsoft.AspNetCore.Http;
     using RepositoryLayer.Interface;
 
     /// <summary>
@@ -77,6 +78,12 @@ namespace BussinessLayer.Services
         public IList<NotesModel> AccessNotes(Guid userId)
         {
             return this.notesRepository.GetNotes(userId);
+        }
+
+        public string BrowseImage(IFormFile file, int id)
+        {
+            var result = this.notesRepository.Image(file, id);
+            return result;
         }
     }
 }

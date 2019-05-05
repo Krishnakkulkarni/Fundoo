@@ -9,7 +9,10 @@ namespace RepositoryLayer.Context
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+    using CloudinaryDotNet;
+    using CloudinaryDotNet.Actions;
     using Common.Models;
+    using Microsoft.AspNetCore.Http;
     using RepositoryLayer.Interface;
 
     /// <summary>
@@ -39,17 +42,20 @@ namespace RepositoryLayer.Context
         /// Adds the notes.
         /// </summary>
         /// <param name="notesModel">The notes model.</param>
-        public void AddNotes(NotesModel notesModel)
+        /// <returns>return string</returns>
+        public string AddNotes(NotesModel notesModel)
         {
             var notes = new NotesModel()
             {
                 UserId = notesModel.UserId,
                 Title = notesModel.Title,
                 Description = notesModel.Description,
+                Color = notesModel.Color,
                 CreatedDate = notesModel.CreatedDate,
                 ModifiedDate = notesModel.ModifiedDate
             };
             var result = this.authentication.NotesModel.Add(notes);
+            return null;
         }
 
         /// <summary>
@@ -82,6 +88,7 @@ namespace RepositoryLayer.Context
             NotesModel notes = this.authentication.NotesModel.Where<NotesModel>(c => c.Id.Equals(id)).FirstOrDefault();
             notes.Title = model.Title;
             notes.Description = model.Description;
+            notes.Color = model.Color;
         }
 
         /// <summary>
@@ -99,6 +106,37 @@ namespace RepositoryLayer.Context
             }
 
             return note.ToArray();
+        }
+
+        /// <summary>
+        /// Images the specified file.
+        /// </summary>
+        /// <param name="file">The file.</param>
+        /// <param name="id">The identifier.</param>
+        /// <returns>return string</returns>
+        public string Image(IFormFile file, int id)
+        {
+            var stream = file.OpenReadStream();
+            var name = file.FileName;
+            CloudinaryDotNet.Account account = new CloudinaryDotNet.Account("db4wyl94g", "645173152293519", "hBF7yF3HzJGByBvdWnzfR_kegmI");
+            CloudinaryDotNet.Cloudinary cloudinary = new CloudinaryDotNet.Cloudinary(account);
+            var uploadParams = new ImageUploadParams()
+            {
+                File = new FileDescription(name, stream)
+            };
+            var uploadResult = cloudinary.Upload(uploadParams);
+            var data = this.authentication.NotesModel.Where(t => t.Id == id).FirstOrDefault();
+            data.Image = uploadResult.Uri.ToString();
+            int result = 0;
+            try
+            {
+                result = this.authentication.SaveChanges();
+                return data.Image;
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
         }
     }
 }

@@ -16,12 +16,7 @@ namespace FundooNote.Models
     public class ApplicationUser : IdentityUser
     {
         /// <summary>
-        /// The user
-        /// </summary>
-        private readonly ApplicationUser user;
-
-        /// <summary>
-        /// Gets or sets the first name.
+        /// Gets or sets the last name.
         /// </summary>
         /// <value>
         /// The first name.
