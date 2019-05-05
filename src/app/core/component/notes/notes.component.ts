@@ -28,6 +28,7 @@ export class NotesComponent implements OnInit {
       UserId: this.id,
       Title: this.title.value,
       Description: this.take_a_note.value,
+      Color:"#ffffff"
     }
     if (this.title.value != "" && this.take_a_note.value != "") {
       this.notesService.addNotes(notes).subscribe

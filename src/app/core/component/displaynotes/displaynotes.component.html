@@ -1,4 +1,5 @@
-<div [ngClass]="main" fxLayoutGap='0%' fxLayout='row' fxLayout='row wrap' style="margin-top:10px">
+<div [ngClass]="main" fxLayoutGap="2%" fxLayout='row' fxLayout='row wrap'
+  style="margin-top:15px; margin-left: 20%; margin-right: 10%">
   <div class="loop" *ngFor="let note of cards">
     <mat-card class="note" [style.background-color]=note.color>
       <div (click)="openDialog(note)" class="element.style">

@@ -1,6 +1,12 @@
 .example-card{
     flex: 0%;
-    margin-left: 15%;
+    margin-left: 20%;
     margin-right: 30%;
-    margin-top: 2%;
+    margin-top: 5%;
+}
+@media only screen and (max-width: 600px){
+    .example-card{
+        margin-left: 0%;
+        margin-right: 0%;
+    }
 }

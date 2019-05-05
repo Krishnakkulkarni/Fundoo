@@ -1,16 +1,18 @@
 <mat-card class="example-card">
-    <div *ngIf="!isOpen" (click)="isOpen=true">
+    <div *ngIf="!isOpen" (click)="isOpen=true" fxFlex.xs="100" fxFlex="80">
         <input class="take_a_note" [style.background-color]=noteColor [formControl]="title" type="text"
             placeholder="Take a note..." aria-label="Take a note">
     </div>
 
-    <div *ngIf=isOpen [style.background-color]=noteColor>
+    <div *ngIf=isOpen [style.background-color]=noteColor fxFlex.xs="100" fxFlex="80">
         <textarea [formControl]="title" [style.background-color]=noteColor placeholder="Title"></textarea><br>
         <textarea [formControl]=" take_a_note" [style.background-color]=noteColor
             placeholder="Take a note..."></textarea>
-
-        <div>
-            <button mat-button (click)="isOpen=false" class="closeButton" (click)="AddNotes()">close</button>
+        <div class="row" fxLayoutAlign="space-between end">
+            <div fxFlex="85">
+                <app-icons></app-icons>
+            </div>
+            <button mat-button (click)="isOpen=false" class="closeButton" (click)="AddNotes()">Close</button>
             <!-- <app-iocns-on-note (setcolortoNote)="setcolor($event)"></app-iocns-on-note> -->
         </div>
     </div>

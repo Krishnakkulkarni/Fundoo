@@ -11,7 +11,7 @@ export class DisplaynotesComponent implements OnInit {
 
   constructor(private notesService: NotesService) { }
 
-  @Input() cards;
+  @Input() cards: any;
 
   ngOnInit() {
     

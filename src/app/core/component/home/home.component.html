@@ -4,18 +4,21 @@
       <mat-icon>menu</mat-icon>
     </button>
     <img style="width:40px" src="../../assets/images/image.png" />
-    <h1 class="example-app-name">{{HeaderName}}</h1>
+    <h1 class="example-app-name" fxFlexOffset="1%">{{HeaderName}}</h1>
 
     <input class="search" type="text" style="padding-left: 20px;outline: none" placeholder="Search..."
-      aria-label="Search">
+      aria-label="Search" fxFlexOffset="2%">
 
-      <button mat-icon-button> <mat-icon (click)="refresh()">refresh</mat-icon></button>
+    <button mat-icon-button>
+      <mat-icon (click)="refresh()" fxFlexOffset="10%">refresh</mat-icon>
+    </button>
 
     <!-- <button mat-button class="btn" (click)="view()" style="padding-right:10%"></button> -->
 
     <span class="example-spacer"></span>
 
-    <button mat-mini-fab style="background-color: #ecf3f7" [matMenuTriggerFor]="menu" style="outline:none">
+    <button mat-mini-fab style="background-color: #ecf3f7" [matMenuTriggerFor]="menu" style="outline:none"
+      fxFlexOffset="15%">
     </button>
 
     <mat-menu #menu="matMenu">

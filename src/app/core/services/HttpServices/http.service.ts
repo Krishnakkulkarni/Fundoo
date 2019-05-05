@@ -15,6 +15,7 @@ export class HttpService {
     return this.http.post(this.rooturl + url, data)
   }
   get(url: String) {
+  
     return this.http.get(this.rooturl + url)
   }
 }
