@@ -3,9 +3,9 @@
   <div class="loop" *ngFor="let note of cards">
     <mat-card class="note" [style.background-color]=note.color>
       <div (click)="openDialog(note)" class="element.style">
-        <!-- <div>
+        <div>
           <img src="{{note.image}}" class="notesImage" />
-        </div> -->
+        </div>
         <div>
           <mat-card-title class="titleinput">{{note.title}}</mat-card-title>
         </div>

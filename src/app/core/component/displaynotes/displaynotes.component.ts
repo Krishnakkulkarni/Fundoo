@@ -1,6 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { NotesService } from '../../services/NotesServices/notes.service';
-import * as jwt_decode from "jwt-decode";
 
 @Component({
   selector: 'app-displaynotes',

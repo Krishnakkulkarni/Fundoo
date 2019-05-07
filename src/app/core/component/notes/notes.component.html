@@ -12,7 +12,7 @@
             <div fxFlex="85">
                 <app-icons></app-icons>
             </div>
-            <button mat-button (click)="isOpen=false" class="closeButton" (click)="AddNotes()">Close</button>
+            <button mat-button class="closeButton" (click)="AddNotes(); isOpen=false">Close</button>
             <!-- <app-iocns-on-note (setcolortoNote)="setcolor($event)"></app-iocns-on-note> -->
         </div>
     </div>

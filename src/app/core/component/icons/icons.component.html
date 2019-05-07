@@ -10,7 +10,7 @@
 <!---------------------------------Collaborator------------------------------------------->
 <div class="col">
 <div class="img" style=" width: 15px; height: 15px;">
-    <button mat-icon-button (click)='Remind()'>
+    <button mat-icon-button (click)='Collaborator()'>
         <mat-icon>person_add</mat-icon>
       </button>
     </div>
@@ -18,7 +18,7 @@
 <!---------------------------------Change color------------------------------------------->
 <div class="col">
 <div class="img" style=" width: 15px; height: 15px;">
-    <button mat-icon-button (click)='Remind()'>
+    <button mat-icon-button (click)='color()'>
         <mat-icon>color_lens</mat-icon>
       </button>
     </div>
@@ -26,7 +26,8 @@
 <!---------------------------------Add Image------------------------------------------->
 <div class="col">
 <div class="img" style=" width: 15px; height: 15px;">
-<button mat-icon-button (click)='Remind()'>
+  <input type="file" name="file" style="display:none" #file (change)="onFileSelected($event,card)" />
+<button mat-icon-button (click)='file.click()'>
     <mat-icon>crop_original</mat-icon>
   </button>
 </div>
@@ -34,7 +35,7 @@
 <!---------------------------------Archive------------------------------------------->
 <div class="col">
 <div class="img" style=" width: 15px; height: 15px;">
-    <button mat-icon-button (click)='Remind()'>
+    <button mat-icon-button (click)='Archive()'>
         <mat-icon>archive</mat-icon>
       </button>
     </div>
@@ -42,7 +43,7 @@
 <!----------------------------------More--------------------------------------------->
 <div class="col" fxFlexOffset="1%">
 <div class="img" style=" width: 15px; height: 15px;">
-    <button mat-icon-button (click)='Remind()'>
+    <button mat-icon-button (click)='More()'>
         <mat-icon>more_vert</mat-icon>
       </button>
     </div>

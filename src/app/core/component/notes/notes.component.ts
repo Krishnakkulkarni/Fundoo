@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NotesService } from '../../services/NotesServices/notes.service';
 import { FormControl, Validators } from '@angular/forms';
-import * as jwt_decode from "jwt-decode";
 
 @Component({
   selector: 'app-notes',
@@ -11,15 +10,12 @@ import * as jwt_decode from "jwt-decode";
 export class NotesComponent implements OnInit {
   title = new FormControl('', [Validators.required]);
   take_a_note = new FormControl('', [Validators.required]);
-  token_id: any;
   id: any;
   constructor(private notesService: NotesService) { }
 
   ngOnInit() {
 
-    var token = localStorage.getItem('token');
-    var jwt_token = jwt_decode(token);
-    localStorage.setItem("UserID", jwt_token.UserID)
+    localStorage.getItem('token');
     this.id = localStorage.getItem("UserID")
   }
 

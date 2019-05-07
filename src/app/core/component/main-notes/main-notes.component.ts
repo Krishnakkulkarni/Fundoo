@@ -18,10 +18,11 @@ export class MainNotesComponent implements OnInit {
     this.notesService.getNotesById(this.id).subscribe(
       data => {
         this.notes = data;
+        console.log(this.notes);
+        
       }
     ), (err: any) => {
       console.log(err);
     };
   }
-
 }
