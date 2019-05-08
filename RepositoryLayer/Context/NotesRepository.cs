@@ -118,13 +118,13 @@ namespace RepositoryLayer.Context
         {
             var stream = file.OpenReadStream();
             var name = file.FileName;
-            CloudinaryDotNet.Account account = new CloudinaryDotNet.Account("db4wyl94g", "645173152293519", "hBF7yF3HzJGByBvdWnzfR_kegmI");
-            CloudinaryDotNet.Cloudinary cloudinary = new CloudinaryDotNet.Cloudinary(account);
-            var uploadParams = new ImageUploadParams()
+            Account account = new Account("db4wyl94g", "645173152293519", "hBF7yF3HzJGByBvdWnzfR_kegmI");
+            Cloudinary cloudinary = new Cloudinary(account);
+            var imageUploadParams = new ImageUploadParams()
             {
                 File = new FileDescription(name, stream)
             };
-            var uploadResult = cloudinary.Upload(uploadParams);
+            var uploadResult = cloudinary.Upload(imageUploadParams);
             var data = this.authentication.NotesModel.Where(t => t.Id == id).FirstOrDefault();
             data.Image = uploadResult.Uri.ToString();
             int result = 0;
@@ -133,9 +133,9 @@ namespace RepositoryLayer.Context
                 result = this.authentication.SaveChanges();
                 return data.Image;
             }
-            catch (Exception ex)
+            catch (Exception e)
             {
-                return ex.Message;
+                return e.Message;
             }
         }
     }

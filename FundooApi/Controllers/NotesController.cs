@@ -128,14 +128,14 @@ namespace FundooApi.Controllers
         [HttpPost]
         [Route("image/{id}")]
         public IActionResult Image(IFormFile file, int id)
-        {
+         {
             Console.WriteLine(file);
             if (file == null)
             {
                 return this.NotFound("The file couldn't be found");
             }
 
-            var result = this.notesCreation.BrowseImage(file, id);
+            var result = this.notesCreation.BrowseImage(file, id);  
             return this.Ok(new { result });
         }
     }
