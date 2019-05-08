@@ -2,6 +2,7 @@ import { MediaMatcher } from '@angular/cdk/layout';
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material';
+import { DataService } from '../../services/DataServices/data.service';
 
 @Component({
   selector: 'app-home',
@@ -9,10 +10,15 @@ import { MatSnackBar } from '@angular/material';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+  flag: boolean = true;
+
   mobileQuery: MediaQueryList;
   private _mobileQueryListener: () => void;
+
   HeaderName = "Fundoo"
-  constructor(private router: Router, changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, public snackBar: MatSnackBar) {
+  
+  constructor(private router: Router, changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, public snackBar: MatSnackBar
+    ,public dataService:DataService) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
@@ -31,6 +37,10 @@ export class HomeComponent implements OnInit {
   }
   Note() {
     this.router.navigate(['home/MainNotes'])
+  }
+  ReverseFlag(){
+    this.flag = !this.flag
+    this.dataService.changeMessage(this.flag)
   }
 
   Reminder() {

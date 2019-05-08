@@ -1,51 +1,106 @@
 <div class="row">
-<!---------------------------------Remind-Me------------------------------------------->
-<div class="col">
-<div class="img" style=" width: 15px; height: 15px;">
-    <button mat-icon-button (click)='Remind()'>
+  <!---------------------------------Remind-Me------------------------------------------->
+  <div class="col">
+    <div class="img" style=" width: 15px; height: 15px;">
+      <button mat-icon-button (click)='Remind()'>
         <mat-icon>notification_important</mat-icon>
       </button>
     </div>
-</div>
-<!---------------------------------Collaborator------------------------------------------->
-<div class="col">
-<div class="img" style=" width: 15px; height: 15px;">
-    <button mat-icon-button (click)='Collaborator()'>
+  </div>
+  <!---------------------------------Collaborator------------------------------------------->
+  <div class="col">
+    <div class="img" style=" width: 15px; height: 15px;">
+      <button mat-icon-button (click)='Collaborator()'>
         <mat-icon>person_add</mat-icon>
       </button>
     </div>
-    </div>
-<!---------------------------------Change color------------------------------------------->
-<div class="col">
-<div class="img" style=" width: 15px; height: 15px;">
-    <button mat-icon-button (click)='color()'>
+  </div>
+  <!---------------------------------Change-color------------------------------------------->
+  <div class="col">
+    <div class="img" style=" width: 15px; height: 15px;">
+      <button mat-icon-button [matMenuTriggerFor]="MenuColor" style="outline: none">
         <mat-icon>color_lens</mat-icon>
       </button>
     </div>
   </div>
-<!---------------------------------Add Image------------------------------------------->
-<div class="col">
-<div class="img" style=" width: 15px; height: 15px;">
-  <input type="file" name="file" style="display:none" #file (change)="onFileSelected($event,card)" />
-<button mat-icon-button (click)='file.click()'>
-    <mat-icon>crop_original</mat-icon>
-  </button>
-</div>
-</div>
-<!---------------------------------Archive------------------------------------------->
-<div class="col">
-<div class="img" style=" width: 15px; height: 15px;">
-    <button mat-icon-button (click)='Archive()'>
+
+
+  <!---------------------------------Add-Image------------------------------------------->
+  <div class="col">
+    <div class="img" style=" width: 15px; height: 15px;">
+      <input type="file" name="file" style="display:none" #file (change)="onFileSelected($event,card)" />
+      <button mat-icon-button (click)='file.click()'>
+        <mat-icon>crop_original</mat-icon>
+      </button>
+    </div>
+  </div>
+  <!---------------------------------Archive------------------------------------------->
+  <div class="col">
+    <div class="img" style=" width: 15px; height: 15px;">
+      <button mat-icon-button (click)='Archive()'>
         <mat-icon>archive</mat-icon>
       </button>
     </div>
   </div>
-<!----------------------------------More--------------------------------------------->
-<div class="col" fxFlexOffset="1%">
-<div class="img" style=" width: 15px; height: 15px;">
-    <button mat-icon-button (click)='More()'>
+  <!----------------------------------More--------------------------------------------->
+  <div class="col" fxFlexOffset="1%">
+    <div class="img" style=" width: 15px; height: 15px;">
+      <button mat-icon-button [matMenuTriggerFor]="Menu" style="outline:none">
         <mat-icon>more_vert</mat-icon>
       </button>
     </div>
   </div>
 </div>
+<!------------------------------------Menu-Colors------------------------------------------->
+<mat-menu #MenuColor="matMenu">
+  <div fxLayout="row">
+    <button mat-mini-fab (click)="setcolor('rgb(163, 240, 240)',card)" class="color"
+      style="background-color:rgb(163, 240, 240);outline: none">
+    </button>
+
+    <button mat-mini-fab (click)="setcolor('rgb(240, 255, 210)',card)" class="color"
+      style="background-color:rgb(240, 255, 210);outline: none">
+    </button>
+
+    <button mat-mini-fab (click)="setcolor('rgb(240, 251, 255)',card)" class="color"
+      style="background-color:rgb(240, 251, 255);outline: none">
+    </button>
+  </div>
+
+  <div fxLayout="row">
+    <button mat-mini-fab (click)="setcolor('rgb(255, 240, 247)',card)" class="color"
+      style="background-color:rgb(255, 240, 247);outline: none">
+    </button>
+
+    <button mat-mini-fab (click)="setcolor('rgb(164, 145, 224)',card)" class="color"
+      style="background-color:rgb(164, 145, 224);outline: none">
+    </button>
+
+    <button mat-mini-fab (click)="setcolor('rgb(240, 126, 166)',card)" class="color"
+      style="background-color:rgb(240, 126, 166);outline: none">
+    </button>
+  </div>
+
+  <div fxLayout="row">
+    <button mat-mini-fab (click)="setcolor('rgb(216, 138, 138, 0.788)',card)" class="color"
+      style="background-color:rgba(216, 138, 138, 0.788);outline: none">
+    </button>
+
+    <button mat-mini-fab (click)="setcolor('rgb(60, 193, 56)',card)" class="color"
+      style="background-color:rgb(60, 193, 56);outline: none">
+    </button>
+
+    <button mat-mini-fab (click)="setcolor('rgb(200, 200, 200)',card)" class="color"
+      style="background-color:rgb(200, 200, 200);outline: none">
+    </button>
+  </div>
+</mat-menu>
+<!----------------------------------More-Menu------------------------------------------>
+<mat-menu #Menu="matMenu">
+  <div>
+    <button mat-icon-button (click)="DeleteNote(card)">Delete Note</button>
+  </div>
+  <div>
+    <button mat-icon-button>Add Label</button>
+  </div>
+</mat-menu>

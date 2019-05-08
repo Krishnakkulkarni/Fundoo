@@ -20,4 +20,10 @@ export class NotesService {
     // console.log(data,id);
   return this.httpService.post('Notes/image/'+id,data);
   }
+  updateNotes(id,data){
+    return this.httpService.update('Notes/'+id,data)
+  }
+  Delete(id){
+    return this.httpService.deletenote('Notes/'+id,"")
+  }
 }

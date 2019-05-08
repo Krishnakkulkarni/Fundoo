@@ -6,8 +6,10 @@
     <img style="width:40px" src="../../assets/images/image.png" />
     <h1 class="example-app-name" fxFlexOffset="1%">{{HeaderName}}</h1>
 
-    <input class="search" type="text" style="padding-left: 20px;outline: none" placeholder="Search..."
-      aria-label="Search" fxFlexOffset="2%">
+    <mat-icon fxFlexOffset="2%">search</mat-icon>
+    <input class="search" type="text" fxLayoutAlign="center center"
+      style=" border:none; background-color: rgb(230, 230, 230); margin-bottom: 0px; border-radius: 4px;"
+      placeholder="Search..." aria-label="Search">
 
     <button mat-icon-button>
       <mat-icon (click)="refresh()" fxFlexOffset="10%">refresh</mat-icon>
@@ -15,8 +17,18 @@
 
     <!-- <button mat-button class="btn" (click)="view()" style="padding-right:10%"></button> -->
 
-    <span class="example-spacer"></span>
+    <!-------------------------------Grid and List--------------------------------------->
 
+    <button mat-icon-button *ngIf='flag==false' (click)='ReverseFlag()'>
+      <mat-icon>grid_view</mat-icon>
+    </button>
+
+    <button mat-icon-button *ngIf='flag==true' (click)='ReverseFlag()'>
+      <mat-icon>list_view</mat-icon>
+    </button>
+
+    <!----------------------------------LogOut------------------------------------------>
+    <!-- <span class="example-spacer"></span> -->
     <button mat-mini-fab style="background-color: #ecf3f7" [matMenuTriggerFor]="menu" style="outline:none"
       fxFlexOffset="15%">
     </button>
@@ -25,7 +37,7 @@
       <button mat-menu-item (click)="onLogout()" style="outline:none">Logout</button>
     </mat-menu>
   </mat-toolbar>
-  <!---------------------------------------------         ------------------------------------------------->
+  <!---------------------------------------------SideNav------------------------------------------------->
   <mat-sidenav-container class="example-sidenav-container">
     <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'" [fixedInViewport]="mobileQuery.matches">
       <mat-nav-list>

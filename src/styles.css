@@ -1,6 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 @import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
-div.sm-jumbotron{
+/* div.sm-jumbotron{
     margin: 0px;
     padding: 1rem;
     background-color: black;
@@ -13,7 +13,7 @@ button.btn-submit{
 }
 button.btn-submit:focus,button,btn-submit:hover{
     background-color: gray
-}
+} */
 
 
 /* ::ng-deep button:focus{
