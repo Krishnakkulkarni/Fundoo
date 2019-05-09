@@ -14,16 +14,27 @@ export class NotesService {
   }
   getNotesById(UserId: string) {
     console.log(UserId);
-    return this.httpService.get('notes/'+UserId);
+    return this.httpService.Get('Notes/'+UserId);
   }
   ImageUpload(data,id){
-    // console.log(data,id);
   return this.httpService.post('Notes/image/'+id,data);
   }
   updateNotes(id,data){
     return this.httpService.update('Notes/'+id,data)
   }
-  Delete(id){
-    return this.httpService.deletenote('Notes/'+id,"")
+  Trash(id,card){
+    return this.httpService.update('Notes/'+id,card)
+  }
+  ArchiveNote(id,card){
+    return this.httpService.update('Notes/'+id,card)
+  }
+  GetArchiveNotes(UserId){
+    return this.httpService.Get('Notes/archive/'+UserId)
+  }
+  ViewInTrash(UserId){
+    return this.httpService.Get('Notes/trash/'+UserId)
+  }
+  DeleteNote(id,card){
+    return this.httpService.deletenote('Notes/'+id,card)
   }
 }

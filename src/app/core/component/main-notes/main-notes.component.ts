@@ -8,7 +8,8 @@ import { NotesService } from '../../services/NotesServices/notes.service';
 })
 export class MainNotesComponent implements OnInit {
 
-  notes: any;
+  notes=[];
+  CardNotes=[]
   id: string;
 
   constructor(private notesService : NotesService) { }
@@ -16,10 +17,14 @@ export class MainNotesComponent implements OnInit {
   ngOnInit() {
     this.id = localStorage.getItem("UserID")
     this.notesService.getNotesById(this.id).subscribe(
-      data => {
-        this.notes = data;
-        console.log(this.notes);
-        
+      (data:any) => {
+          this.notes=data
+        this.notes.forEach(element => {
+          if(element.isArchive == false && element.isTrash == false){
+            this.CardNotes.push(element)
+            console.log(this.CardNotes,"notes"); 
+          }
+        });
       }
     ), (err: any) => {
       console.log(err);

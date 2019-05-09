@@ -11,7 +11,7 @@ export class NotesComponent implements OnInit {
   title = new FormControl('', [Validators.required]);
   take_a_note = new FormControl('', [Validators.required]);
   id: any;
-  color : string="#ffffff";
+  color: string = "#ffffff";
   constructor(private notesService: NotesService) { }
 
   ngOnInit() {
@@ -27,7 +27,8 @@ export class NotesComponent implements OnInit {
       Description: this.take_a_note.value,
       Color: this.color
     }
-    if (this.title.value != "" && this.take_a_note.value != "") {
+    if (this.title.value != " " && this.title.value != undefined && 
+      this.take_a_note.value != " " && this.take_a_note != undefined) {
       this.notesService.addNotes(notes).subscribe
         (data => {
           console.log(data)
@@ -38,7 +39,7 @@ export class NotesComponent implements OnInit {
         )
     }
   }
-  SetColor($event){
-    this.color=$event
+  SetColor($event: string) {
+    this.color = $event
   }
 }

@@ -14,7 +14,7 @@ export class HttpService {
   post(url: string, data: any) {
     return this.http.post(this.rooturl + url, data)
   }
-  get(url: String) {
+  Get(url: String) {
     return this.http.get(this.rooturl + url)
   }
   update(url: string, data) {

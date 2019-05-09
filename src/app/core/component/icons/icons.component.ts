@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { NotesService } from '../../services/NotesServices/notes.service';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-icons',
@@ -9,6 +10,7 @@ import { NotesService } from '../../services/NotesServices/notes.service';
 })
 export class IconsComponent implements OnInit {
   selectedFile: File = null;
+  
   @Output() setcolortoNote = new EventEmitter();
 
   onFileSelected(Event: any, card: any) {
@@ -18,7 +20,7 @@ export class IconsComponent implements OnInit {
     this.Onupload(card)
 
   }
-  constructor(public httpClient: HttpClient, public notesService: NotesService) { }
+  constructor(public httpClient: HttpClient, public notesService: NotesService, public SnackBar : MatSnackBar ) { }
   @Input() card: any;
 
   ngOnInit() {
@@ -29,7 +31,8 @@ export class IconsComponent implements OnInit {
       const formdata = new FormData();
       formdata.append('file', this.selectedFile);
       this.notesService.ImageUpload(formdata, card.id).subscribe
-        (data => { console.log(data) },
+        (data => { console.log(data)
+          this.SnackBar.open("Image Uploaded", "close", { duration: 2000 }); },
           err => {
             console.log(err);
           }
@@ -44,17 +47,35 @@ export class IconsComponent implements OnInit {
       console.log(card, "card")
       card.color = color;
       this.notesService.updateNotes(card.id, card).subscribe(
-        data => { console.log(data, "color update"); },
+        data => { console.log(data, "color update");},
         err => { console.log(err); }
       )
     }
   }
-  DeleteNote(card) {
+  Archive(card){
+    card.isArchive=true;
+    console.log(card)
+    this.notesService.ArchiveNote(card.id,card).subscribe(
+      data => { console.log(data);
+        this.SnackBar.open("Note Archived", "close", { duration: 2000 }); },
+        err => { console.log(err); }
+    ) 
+  }
+
+  TrashNote(card) {
     console.log(card);
-      this.notesService.Delete(card.id).subscribe(
-        data => { console.log(data); },
+    card.isTrash=true;
+      this.notesService.Trash(card.id,card).subscribe(
+        data => { console.log(data);
+          this.SnackBar.open("Note Trashed", "close", { duration: 2000 }); },
         err => { console.log(err); }
       )
-    
+  }
+  Delete(card){
+    console.log(card);
+    this.notesService.DeleteNote(card.id,card).subscribe(
+      data=>{console.log(data); },
+      err => {console.log(err); }
+      )
   }
 }

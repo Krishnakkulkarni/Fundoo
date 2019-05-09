@@ -1,7 +1,7 @@
 <div class="row">
   <!---------------------------------Remind-Me------------------------------------------->
   <div class="col">
-    <div class="img" style=" width: 15px; height: 15px;">
+    <div class="img" style=" width: 15px; height: 15px;" matTooltip="Remind-Me">
       <button mat-icon-button (click)='Remind()'>
         <mat-icon>notification_important</mat-icon>
       </button>
@@ -9,7 +9,7 @@
   </div>
   <!---------------------------------Collaborator------------------------------------------->
   <div class="col">
-    <div class="img" style=" width: 15px; height: 15px;">
+    <div class="img" style=" width: 15px; height: 15px;" matTooltip="Collaborator">
       <button mat-icon-button (click)='Collaborator()'>
         <mat-icon>person_add</mat-icon>
       </button>
@@ -18,18 +18,17 @@
   <!---------------------------------Change-color------------------------------------------->
   <div class="col">
     <div class="img" style=" width: 15px; height: 15px;">
-      <button mat-icon-button [matMenuTriggerFor]="MenuColor" style="outline: none">
+      <button mat-icon-button [matMenuTriggerFor]="MenuColor" style="outline: none" matTooltip="Change color">
         <mat-icon>color_lens</mat-icon>
       </button>
     </div>
   </div>
 
-
   <!---------------------------------Add-Image------------------------------------------->
   <div class="col">
     <div class="img" style=" width: 15px; height: 15px;">
       <input type="file" name="file" style="display:none" #file (change)="onFileSelected($event,card)" />
-      <button mat-icon-button (click)='file.click()'>
+      <button mat-icon-button (click)='file.click()' matTooltip="Add Image">
         <mat-icon>crop_original</mat-icon>
       </button>
     </div>
@@ -37,7 +36,7 @@
   <!---------------------------------Archive------------------------------------------->
   <div class="col">
     <div class="img" style=" width: 15px; height: 15px;">
-      <button mat-icon-button (click)='Archive()'>
+      <button mat-icon-button (click)='Archive(card)' matTooltip="Archive">
         <mat-icon>archive</mat-icon>
       </button>
     </div>
@@ -45,7 +44,7 @@
   <!----------------------------------More--------------------------------------------->
   <div class="col" fxFlexOffset="1%">
     <div class="img" style=" width: 15px; height: 15px;">
-      <button mat-icon-button [matMenuTriggerFor]="Menu" style="outline:none">
+      <button mat-icon-button [matMenuTriggerFor]="Menu" style="outline:none" matTooltip="More">
         <mat-icon>more_vert</mat-icon>
       </button>
     </div>
@@ -98,9 +97,9 @@
 <!----------------------------------More-Menu------------------------------------------>
 <mat-menu #Menu="matMenu">
   <div>
-    <button mat-icon-button (click)="DeleteNote(card)">Delete Note</button>
+    <button mat-icon-button (click)="TrashNote(card)">Move To Trash</button>
   </div>
   <div>
-    <button mat-icon-button>Add Label</button>
+    <button mat-icon-button (click)="Delete(card)">Delete forever</button>
   </div>
 </mat-menu>

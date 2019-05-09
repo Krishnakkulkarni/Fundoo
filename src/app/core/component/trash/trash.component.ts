@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NotesService } from '../../services/NotesServices/notes.service';
 
 @Component({
   selector: 'app-trash',
@@ -7,9 +8,26 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TrashComponent implements OnInit {
 
-  constructor() { }
+  notes = [];
+  CardNotes = []
+  id: string;
+
+  constructor(public notesService: NotesService) { }
 
   ngOnInit() {
+    this.id = localStorage.getItem("UserID")
+    this.notesService.ViewInTrash(this.id).subscribe(
+      (data: any) => {
+        this.notes = data['result']
+        this.notes.forEach(element => {
+          if (element.isTrash == true) {
+            this.CardNotes.push(element)
+            console.log(this.CardNotes, "notes");
+          }
+        });
+      }
+    ), (err: any) => {
+      console.log(err);
+    };
   }
-
 }
