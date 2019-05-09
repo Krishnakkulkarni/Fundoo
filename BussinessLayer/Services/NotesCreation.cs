@@ -80,10 +80,36 @@ namespace BussinessLayer.Services
             return this.notesRepository.GetNotes(userId);
         }
 
+        /// <summary>
+        /// Browses the image.
+        /// </summary>
+        /// <param name="file">The file.</param>
+        /// <param name="id">The identifier.</param>
+        /// <returns>return string</returns>
         public string BrowseImage(IFormFile file, int id)
         {
             var result = this.notesRepository.Image(file, id);
             return result;
+        }
+
+        /// <summary>
+        /// Archives the specified user identifier.
+        /// </summary>
+        /// <param name="userId">The user identifier.</param>
+        /// <returns>return list</returns>
+        public IList<NotesModel> Archive(Guid userId)
+        {
+            return this.notesRepository.Archive(userId);
+        }
+
+        /// <summary>
+        /// Archives the specified user identifier.
+        /// </summary>
+        /// <param name="userId">The user identifier.</param>
+        /// <returns>return list</returns>
+        public IList<NotesModel> Trash(Guid userId)
+        {
+            return this.notesRepository.TrashNote(userId);
         }
     }
 }

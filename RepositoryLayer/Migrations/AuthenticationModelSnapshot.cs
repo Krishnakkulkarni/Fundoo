@@ -33,6 +33,10 @@ namespace RepositoryLayer.Migrations
 
                     b.Property<string>("Image");
 
+                    b.Property<bool>("IsArchive");
+
+                    b.Property<bool>("IsTrash");
+
                     b.Property<DateTime>("ModifiedDate");
 
                     b.Property<string>("Title");

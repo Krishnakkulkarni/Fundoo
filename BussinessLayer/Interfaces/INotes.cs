@@ -45,6 +45,26 @@ namespace BussinessLayer.Interfaces
         /// <returns>return NotesModel</returns>
         IList<NotesModel> AccessNotes(Guid userId);
 
+        /// <summary>
+        /// Browses the image.
+        /// </summary>
+        /// <param name="file">The file.</param>
+        /// <param name="id">The identifier.</param>
+        /// <returns>return string</returns>
         string BrowseImage(IFormFile file, int id);
+
+        /// <summary>
+        /// Archives the specified user identifier.
+        /// </summary>
+        /// <param name="userId">The user identifier.</param>
+        /// <returns>return list</returns>
+        IList<NotesModel> Archive(Guid userId);
+
+        /// <summary>
+        /// Trashes the specified user identifier.
+        /// </summary>
+        /// <param name="userId">The user identifier.</param>
+        /// <returns>return list</returns>
+        IList<NotesModel> Trash(Guid userId);
     }
 }

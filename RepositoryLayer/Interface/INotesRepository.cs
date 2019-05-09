@@ -49,6 +49,26 @@ namespace RepositoryLayer.Interface
         /// <returns>return NotesModel</returns>
         IList<NotesModel> GetNotes(Guid userId);
 
+        /// <summary>
+        /// Images the specified file.
+        /// </summary>
+        /// <param name="file">The file.</param>
+        /// <param name="id">The identifier.</param>
+        /// <returns>return string</returns>
         string Image(IFormFile file, int id);
+
+        /// <summary>
+        /// Archives the specified user identifier.
+        /// </summary>
+        /// <param name="userId">The user identifier.</param>
+        /// <returns>return list</returns>
+        IList<NotesModel> Archive(Guid userId);
+
+        /// <summary>
+        /// Trashes the note.
+        /// </summary>
+        /// <param name="userId">The user identifier.</param>
+        /// <returns>return list</returns>
+        IList<NotesModel> TrashNote(Guid userId);
     }
 }

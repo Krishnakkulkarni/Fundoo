@@ -138,5 +138,31 @@ namespace FundooApi.Controllers
             var result = this.notesCreation.BrowseImage(file, id);  
             return this.Ok(new { result });
         }
+        
+        [HttpGet]
+        [Route("archive/{userId}")]
+        public IActionResult ArchiveNotes(Guid userId)
+        {
+            IList<NotesModel> result = this.notesCreation.Archive(userId);
+            if (result == null)
+            {
+                return this.NotFound();
+            }
+
+            return this.Ok(new { result });
+        }
+
+        [HttpGet]
+        [Route("trash/{userId}")]
+        public IActionResult TrashNotes(Guid userId)
+        {
+            IList<NotesModel> result = this.notesCreation.Trash(userId);
+            if (result == null)
+            {
+                return this.NotFound();
+            }
+
+            return this.Ok(new { result });
+        }
     }
 }

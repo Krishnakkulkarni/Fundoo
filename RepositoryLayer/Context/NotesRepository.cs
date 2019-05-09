@@ -13,6 +13,7 @@ namespace RepositoryLayer.Context
     using CloudinaryDotNet.Actions;
     using Common.Models;
     using Microsoft.AspNetCore.Http;
+    using Microsoft.AspNetCore.Mvc;
     using RepositoryLayer.Interface;
 
     /// <summary>
@@ -51,6 +52,8 @@ namespace RepositoryLayer.Context
                 Title = notesModel.Title,
                 Description = notesModel.Description,
                 Color = notesModel.Color,
+                IsArchive = notesModel.IsArchive,
+                IsTrash = notesModel.IsTrash,
                 CreatedDate = notesModel.CreatedDate,
                 ModifiedDate = notesModel.ModifiedDate
             };
@@ -89,6 +92,8 @@ namespace RepositoryLayer.Context
             notes.Title = model.Title;
             notes.Description = model.Description;
             notes.Color = model.Color;
+            notes.IsArchive = model.IsArchive;
+            notes.IsTrash = model.IsTrash;
         }
 
         /// <summary>
@@ -105,7 +110,7 @@ namespace RepositoryLayer.Context
                 list.Add(item);
             }
 
-            return note.ToArray();
+            return list;
         }
 
         /// <summary>
@@ -137,6 +142,40 @@ namespace RepositoryLayer.Context
             {
                 return e.Message;
             }
+        }
+
+        /// <summary>
+        /// Archives the specified user identifier.
+        /// </summary>
+        /// <param name="userId">The user identifier.</param>
+        /// <returns>returns list</returns>
+        public IList<NotesModel> Archive(Guid userId)
+        {
+            var list = new List<NotesModel>();
+            var note = from notes in this.authentication.NotesModel where (notes.UserId == userId) && (notes.IsArchive == true) && (notes.IsTrash == false) select notes;
+            foreach (var data in note)
+            {
+                list.Add(data);
+            }
+
+            return list;
+        }
+
+        /// <summary>
+        /// Archives the specified user identifier.
+        /// </summary>
+        /// <param name="userId">The user identifier.</param>
+        /// <returns>returns list</returns>
+        public IList<NotesModel> TrashNote(Guid userId)
+        {
+            var list = new List<NotesModel>();
+            var note = from notes in this.authentication.NotesModel where (notes.UserId == userId) && (notes.IsTrash == true) select notes;
+            foreach (var data in note)
+            {
+                list.Add(data);
+            }
+
+            return list;
         }
     }
 }

@@ -75,5 +75,21 @@ namespace Common.Models
         /// The image.
         /// </value>
         public string Image { get; set; }
+
+        /// <summary>
+        /// Gets or sets the is archive.
+        /// </summary>
+        /// <value>
+        /// The is archive.
+        /// </value>
+        public bool IsArchive { get; set; }
+
+        /// <summary>
+        /// Gets or sets the is trash.
+        /// </summary>
+        /// <value>
+        /// The is trash.
+        /// </value>
+        public bool IsTrash { get; set; }
     }
 }
