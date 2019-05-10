@@ -39,6 +39,8 @@ namespace RepositoryLayer.Migrations
 
                     b.Property<DateTime>("ModifiedDate");
 
+                    b.Property<DateTime>("Reminder");
+
                     b.Property<string>("Title");
 
                     b.Property<Guid>("UserId");

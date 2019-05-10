@@ -91,5 +91,13 @@ namespace Common.Models
         /// The is trash.
         /// </value>
         public bool IsTrash { get; set; }
+
+        /// <summary>
+        /// Gets or sets the reminder.
+        /// </summary>
+        /// <value>
+        /// The reminder.
+        /// </value>
+        public DateTime Reminder { get; set; } 
     }
 }

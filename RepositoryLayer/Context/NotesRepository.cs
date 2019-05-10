@@ -54,6 +54,7 @@ namespace RepositoryLayer.Context
                 Color = notesModel.Color,
                 IsArchive = notesModel.IsArchive,
                 IsTrash = notesModel.IsTrash,
+                Reminder = notesModel.Reminder,
                 CreatedDate = notesModel.CreatedDate,
                 ModifiedDate = notesModel.ModifiedDate
             };
@@ -94,6 +95,7 @@ namespace RepositoryLayer.Context
             notes.Color = model.Color;
             notes.IsArchive = model.IsArchive;
             notes.IsTrash = model.IsTrash;
+            notes.Reminder = model.Reminder;
         }
 
         /// <summary>
