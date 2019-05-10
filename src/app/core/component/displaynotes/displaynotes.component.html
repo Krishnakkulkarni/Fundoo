@@ -2,7 +2,7 @@
   style="margin-top:15px; margin-left: 20%; margin-right: 10%">
   <div class="loop" *ngFor="let note of cards">
     <mat-card [ngClass]="{'note':grid==true,'notes':grid==false }" [style.background-color]=note.color>
-      <div (click)="openDialog(note)" class="element.style">
+      <div *ngIf="note" (click)="openDialog(note)" class="element">
         <div>
           <img src="{{note.image}}" class="notesImage" />
         </div>
@@ -10,7 +10,7 @@
           <mat-card-title class="titleinput">{{note.title}}</mat-card-title>
         </div>
         <div>
-          <mat-card-content class="noteinput ">{{note.description}}</mat-card-content>
+          <mat-card-content class="noteinput">{{note.description}}</mat-card-content>
         </div>
       </div>
       <app-icons [card]="note"></app-icons>

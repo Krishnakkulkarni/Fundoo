@@ -14,27 +14,30 @@ export class NotesService {
   }
   getNotesById(UserId: string) {
     console.log(UserId);
-    return this.httpService.Get('Notes/'+UserId);
+    return this.httpService.Get('Notes/' + UserId);
   }
-  ImageUpload(data,id){
-  return this.httpService.post('Notes/image/'+id,data);
+  ImageUpload(data, id) {
+    return this.httpService.post('Notes/image/' + id, data);
   }
-  updateNotes(id,data){
-    return this.httpService.update('Notes/'+id,data)
+  updateNotes(id, data) {
+    return this.httpService.update('Notes/' + id, data)
   }
-  Trash(id,card){
-    return this.httpService.update('Notes/'+id,card)
+  Trash(id, card) {
+    return this.httpService.update('Notes/' + id, card)
   }
-  ArchiveNote(id,card){
-    return this.httpService.update('Notes/'+id,card)
+  ArchiveNote(id, card) {
+    return this.httpService.update('Notes/' + id, card)
   }
-  GetArchiveNotes(UserId){
-    return this.httpService.Get('Notes/archive/'+UserId)
+  GetArchiveNotes(UserId) {
+    return this.httpService.Get('Notes/archive/' + UserId)
   }
-  ViewInTrash(UserId){
-    return this.httpService.Get('Notes/trash/'+UserId)
+  ViewInTrash(UserId) {
+    return this.httpService.Get('Notes/trash/' + UserId)
   }
-  DeleteNote(id,card){
-    return this.httpService.deletenote('Notes/'+id,card)
+  DeleteNote(id, card) {
+    return this.httpService.deletenote('Notes/' + id, card)
+  }
+  NoteUpdated(id, result) {
+    return this.httpService.update('Notes/' + id, result)
   }
 }

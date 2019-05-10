@@ -17,7 +17,7 @@ export class HttpService {
   Get(url: String) {
     return this.http.get(this.rooturl + url)
   }
-  update(url: string, data) {
+  update(url: string, data: any) {
     return this.http.put(this.rooturl + url, data)
   }
   deletenote(url: string, data) {

@@ -12,6 +12,7 @@ import { ReminderComponent } from './core/component/reminder/reminder.component'
 import { EditLabelsComponent } from './core/component/edit-labels/edit-labels.component';
 import { ArchiveComponent } from './core/component/archive/archive.component';
 import { TrashComponent } from './core/component/trash/trash.component';
+import { EditnoteComponent } from './core/component/editnote/editnote.component';
 
 //This is my case 
 const routes: Routes = [
@@ -36,7 +37,8 @@ const routes: Routes = [
       { path: 'Archive', component: ArchiveComponent },
       { path: 'Trash', component: TrashComponent }
     ]
-  }
+  },
+  { path: 'editnote', component: EditnoteComponent }
 ];
 
 @NgModule({

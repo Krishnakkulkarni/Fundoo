@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NotesService } from '../../services/NotesServices/notes.service';
-
+import { DataService } from '../../services/DataServices/data.service';
 @Component({
   selector: 'app-main-notes',
   templateUrl: './main-notes.component.html',
@@ -8,21 +8,32 @@ import { NotesService } from '../../services/NotesServices/notes.service';
 })
 export class MainNotesComponent implements OnInit {
 
-  notes=[];
-  CardNotes=[]
+  notes = [];
+  CardNotes = []
   id: string;
 
-  constructor(private notesService : NotesService) { }
+  constructor(private notesService: NotesService, private service: DataService) { }
 
   ngOnInit() {
     this.id = localStorage.getItem("UserID")
+    this.getAllCard();
+    this.service.current.subscribe(data => {
+      console.log('data ', data);
+      if (data.type == 'image') {
+        this.getAllCard();
+      }
+
+    })
+  }
+  getAllCard() {
+    this.CardNotes = [];
     this.notesService.getNotesById(this.id).subscribe(
-      (data:any) => {
-          this.notes=data
+      (data: any) => {
+        this.notes = data
         this.notes.forEach(element => {
-          if(element.isArchive == false && element.isTrash == false){
+          if (element.isArchive == false && element.isTrash == false) {
             this.CardNotes.push(element)
-            console.log(this.CardNotes,"notes"); 
+            console.log(this.CardNotes, "notes");
           }
         });
       }
@@ -30,4 +41,5 @@ export class MainNotesComponent implements OnInit {
       console.log(err);
     };
   }
+
 }

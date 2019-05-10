@@ -2,7 +2,7 @@
   <!---------------------------------Remind-Me------------------------------------------->
   <div class="col">
     <div class="img" style=" width: 15px; height: 15px;" matTooltip="Remind-Me">
-      <button mat-icon-button (click)='Remind()'>
+      <button mat-icon-button [matMenuTriggerFor]="MenuRemind">
         <mat-icon>notification_important</mat-icon>
       </button>
     </div>
@@ -100,6 +100,25 @@
     <button mat-icon-button (click)="TrashNote(card)">Move To Trash</button>
   </div>
   <div>
+    <button mat-icon-button (click)="AddLabel()">Add Label</button>
+  </div>
+  <div>
     <button mat-icon-button (click)="Delete(card)">Delete forever</button>
+  </div>
+</mat-menu>
+<!----------------------------------Remind-Menu------------------------------------------>
+<mat-menu #MenuRemind="matMenu">
+  <label>Reminder:</label>
+  <div>
+    <button mat-icon-button (click)="LaterToday()">Later Today</button>
+  </div>
+  <div>
+    <button mat-icon-button (click)="Tomorrow()">Tomorrow</button>
+  </div>
+  <div>
+    <button mat-icon-button (click)="NextWeek()">Next Week</button>
+  </div>
+  <div>
+    <button mat-icon-button (click)="Pick()">Pick Date & Time</button>
   </div>
 </mat-menu>

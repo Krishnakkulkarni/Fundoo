@@ -1,0 +1,13 @@
+<div fxLayout="column">
+
+  <div mat-dialog-content>
+    <input matInput [(ngModel)]="data.note.title">
+    <input matInput [(ngModel)]="data.note.description">
+  </div>
+
+  <div mat-dialog-actions fxLayout="row">
+    <app-icons></app-icons>
+    <button mat-button [mat-dialog-close]="data.note">close</button>
+  </div>
+
+</div>

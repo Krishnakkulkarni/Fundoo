@@ -27,8 +27,8 @@ export class NotesComponent implements OnInit {
       Description: this.take_a_note.value,
       Color: this.color
     }
-    if (this.title.value != " " && this.title.value != undefined && 
-      this.take_a_note.value != " " && this.take_a_note != undefined) {
+    if (this.title.value !=" " && this.title.value != undefined && 
+      this.take_a_note.value !=" " && this.take_a_note != undefined) {
       this.notesService.addNotes(notes).subscribe
         (data => {
           console.log(data)

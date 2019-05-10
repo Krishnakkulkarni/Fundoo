@@ -1,10 +1,10 @@
 <div fxLayoutAlign="center center">
-        <div *ngIf="!isOpen" (click)="isOpen=true" fxFlex.xs="100" fxFlex="60" class="note">
+        <div *ngIf="!isOpen" (click)="isOpen=true" fxFlex.xs="80" fxFlex="50" class="note">
             <input style="border:none" class="take_a_note" [style.background-color]=noteColor [formControl]="title"
                 type="text" placeholder="Take a note..." aria-label="Take a note">
         </div>
     
-        <div *ngIf=isOpen [style.background-color]='color' fxFlex.xs="100" fxFlex="60" 
+        <div *ngIf=isOpen [style.background-color]='color' fxFlex.xs="80" fxFlex="50" 
             fxLayout="column" class="note">
             <input style="border:none" [formControl]="title" [style.background-color]=noteColor placeholder="Title">
             <input style="border:none" [formControl]=" take_a_note" [style.background-color]=noteColor

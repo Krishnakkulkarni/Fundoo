@@ -2,6 +2,7 @@ import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { NotesService } from '../../services/NotesServices/notes.service';
 import { MatSnackBar } from '@angular/material';
+import { DataService } from '../../services/DataServices/data.service';
 
 @Component({
   selector: 'app-icons',
@@ -20,7 +21,7 @@ export class IconsComponent implements OnInit {
     this.Onupload(card)
 
   }
-  constructor(public httpClient: HttpClient, public notesService: NotesService, public SnackBar : MatSnackBar ) { }
+  constructor(public httpClient: HttpClient, public notesService: NotesService, public SnackBar : MatSnackBar,private service:DataService ) { }
   @Input() card: any;
 
   ngOnInit() {
@@ -32,7 +33,10 @@ export class IconsComponent implements OnInit {
       formdata.append('file', this.selectedFile);
       this.notesService.ImageUpload(formdata, card.id).subscribe
         (data => { console.log(data)
-          this.SnackBar.open("Image Uploaded", "close", { duration: 2000 }); },
+          this.service.change({type:'image'})
+          this.SnackBar.open("Image Uploaded", "close", { duration: 2000 }); 
+         
+        },
           err => {
             console.log(err);
           }
