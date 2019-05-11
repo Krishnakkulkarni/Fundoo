@@ -24,7 +24,6 @@ import { ArchiveComponent } from './core/component/archive/archive.component';
 import { TrashComponent } from './core/component/trash/trash.component';
 import { IconsComponent } from './core/component/icons/icons.component';
 import { EditnoteComponent } from './core/component/editnote/editnote.component';
-
 @NgModule({
   declarations: [
     AppComponent,

@@ -1,31 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 @import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
-/* div.sm-jumbotron{
-    margin: 0px;
-    padding: 1rem;
-    background-color: black;
-    color: #fff
+.mat-input-element {
+    border-bottom-style: none !important;
 }
-button.btn-submit{
-    background-color:azure;
-    color: #fff;
-    width: 100%;
-}
-button.btn-submit:focus,button,btn-submit:hover{
-    background-color: gray
-} */
-
-
-/* ::ng-deep button:focus{
-    background-color: transparent !important;
-}
-::ng-deep .mat-button.mat-primary .mat-button-focus-overlay {
-    background-color: transparent;
-  } */
-
-/*input.ng-invalid.ng-dirty{
-    border-bottom-color: red !important;
-    box-shadow: red !important;
-}*/
-
-/* @import "~@angular/material/prebuilt-themes/indigo-pink.css"; */
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

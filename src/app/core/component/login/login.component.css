@@ -7,9 +7,9 @@
     padding: 0em 0 1em 0;
 }
 .card{
-    width: 100%;
-    
+    width: 100%; 
 } 
 .main{
     height: 90vh;
+    width:55%;position: relative;left: 320px
 }

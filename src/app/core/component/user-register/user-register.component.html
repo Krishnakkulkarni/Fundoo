@@ -1,46 +1,60 @@
 <div class="row">
-  <div class="col s6 offset-s2" style="margin-left: 30%; padding-top: 5%" >
-    <mat-card fxFlex="70" class="card">
-      <div class="center-align">
-        <h5>Register Here</h5>
+  <div class="col s6" style="margin-left: 30%; padding-top: 5%">
+    <mat-card fxFlex="80" class="card">
+
+      <div class="row">
+        <div>
+          <h5>Fundoo</h5>
+        </div>
+        <h6>Create Your Fundoo Account</h6>
       </div>
+
       <form class="col s12 white" #UserRegistrationForm="ngForm" (ngSubmit)="onSubmit(UserRegistrationForm)"
         autocomplete="off">
+
         <div class="row">
-          <div class="input-field col s6">
-            <input type="text" class="validate" name="UserName" #UserName="ngModel" [(ngModel)]="user.UserName"
-              required>
-            <label data-error="required Field">UserName</label>
-          </div>
-          <div class="input-field col s6">
-            <input type="password" class="validate" name="Password" #Password="ngModel" [(ngModel)]="user.Password"
-              required minlength="4">
-            <label
-              [attr.data-error]="Password.errors!=null?(Password.errors.required?'required Field': 'minimum 3 characters required'):''">Password</label>
-          </div>
+          <mat-form-field appearance="outline">
+            <mat-label>FirstName</mat-label>
+            <input matInput type="text" class="input" name="FirstName" #FirstName="ngModel" [(ngModel)]="user.FirstName">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>LastName</mat-label>
+            <input matInput type="text" name="LastName" #LastName="ngModel" [(ngModel)]="user.LastName">
+          </mat-form-field>
         </div>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Email</mat-label>
+          <input matInput type="text" name="UserName" #UserName="ngModel" [(ngModel)]="user.UserName"
+            [pattern]="emailPattern" required>
+        </mat-form-field>
+
         <div class="row">
-          <div class="input-field col s12">
-            <input type="text" name="Email" #Email="ngModel" [(ngModel)]="user.Email" [pattern]="emailPattern">
-            <label data-error="Invalid email">Email</label>
-          </div>
+          <mat-form-field appearance="outline">
+            <mat-label>UserName</mat-label>
+            <input matInput type="text" name="Email" #Email="ngModel" [(ngModel)]="user.Email">
+          </mat-form-field>
+
+
+          <mat-form-field appearance="outline">
+            <mat-label
+              [attr.data-error]="Password.errors!=null?(Password.errors.required?'required Field': 'minimum 3 characters required'):''">
+              Password</mat-label>
+            <input matInput type="password" class="validate" name="Password" #Password="ngModel"
+              [(ngModel)]="user.Password" required minlength="4">
+          </mat-form-field>
         </div>
+
         <div class="row">
-          <div class="input-field col s6">
-            <input type="text" name="FirstName" #FirstName="ngModel" [(ngModel)]="user.FirstName">
-            <label>First Name</label>
-          </div>
-          <div class="input-field col s6">
-            <input type="text" name="LastName" #LastName="ngModel" [(ngModel)]="user.LastName">
-            <label>Last Name</label>
-          </div>
-        </div>
-        <div class="row">
-          <div class="input-field col s6">
+          <div>
             <button mat-button class="btn" type="submit">Register</button>
+            <div class="col s6">
+              <a routerLink="/user/login" class="login" routerLinkActive="active">Sign in instead</a>
+            </div>
           </div>
         </div>
-        <a routerLink="/user/login" class="login" routerLinkActive="active">Login</a>
+
       </form>
     </mat-card>
   </div>

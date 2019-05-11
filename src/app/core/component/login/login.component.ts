@@ -1,12 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormControl } from '@angular/forms';
-import { HttpErrorResponse } from '@angular/common/http';
 import { UserService } from '../../services/user.service';
-import { NgForm, Validators } from '@angular/forms';
-import { User } from '../../Models/user.model';
+import { NgForm } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
-
+import { UserLogin } from '../../Models/user.model';
 
 @Component({
   selector: 'app-login',
@@ -15,11 +12,9 @@ import { MatSnackBar } from '@angular/material';
 })
 export class LoginComponent implements OnInit {
 
-  message = '';
-
-  isLoginError: boolean = false;
-  user: { UserName: string; Password: string; };
-
+  user: UserLogin;
+  emailPattern = "^[a-z0-9.%+-]+@[a-z.-]+\.[a-z]{2,4}$";
+  
   constructor(private userService: UserService, private router: Router, public snackbar: MatSnackBar) { }
 
   ngOnInit() {
@@ -38,8 +33,7 @@ export class LoginComponent implements OnInit {
       }
   }
   onSubmit(form: NgForm) {
-    if (form.value.UserName == '' && form.value.Password == '') {
-      this.message = 'Required Fields?';
+    if (form.value.UserName == ' ' && form.value.Password == ' ') {
     }
     else {
       this.userService.login(form.value).subscribe
@@ -49,10 +43,7 @@ export class LoginComponent implements OnInit {
             this.router.navigateByUrl('home');
             this.snackbar.open("login successful", "close", { duration: 2000 });
           },
-          err => {
-            console.log(err);
-            this.isLoginError = true;
-          }
+          err => { console.log(err); }
         );
     }
   }

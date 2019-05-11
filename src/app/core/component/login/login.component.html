@@ -1,9 +1,14 @@
-<div class='main' fxLayoutAlign='center center' style="width:55%;position: relative;left: 320px">
+<div class='main' fxLayoutAlign='center center'>
   <mat-card fxFlex="70" class="card">
 
     <div fxLayout='column' fxLayoutAlign='center center'>
       <div fxLayoutAlign='center center'>
-        <h6>Login Here</h6>
+        <div class="row">
+          <h5>Fundoo</h5>
+          <div class="col">
+            <h6>Sign in</h6>
+          </div>
+        </div>
       </div>
 
       <div fxLayout='col'>
@@ -11,10 +16,12 @@
 
           <div>
             <mat-form-field appearance="outline">
-              <mat-label>UserName</mat-label>
-              <input matInput type="text" name="UserName" #UserName="ngModel" [(ngModel)]="user.UserName" required>
+              <mat-label>Email</mat-label>
+              <input matInput type="text" class="validate" name="UserName" #UserName="ngModel" [(ngModel)]="user.UserName" 
+              [pattern]="emailPattern" required>
             </mat-form-field>
           </div>
+          
           <div>
             <mat-form-field appearance="outline">
               <mat-label
@@ -24,15 +31,14 @@
                 [(ngModel)]="user.Password" required minlength="4">
             </mat-form-field>
           </div>
-
-
+       
           <div fxLayout="row" fxLayoutAlign='space-around end'>
             <div>
-              <button mat-button class="btn" type="submit">Login</button> </div>
+              <button mat-button class="btn" type="submit">Login</button>
+            </div>
             <div>
               <a routerLink="/user/user-register" class="register" routerLinkActive="active">Create Account</a>
             </div>
-
           </div>
 
           <div class="row">
@@ -43,8 +49,6 @@
 
         </form>
       </div>
-
     </div>
-
   </mat-card>
 </div>

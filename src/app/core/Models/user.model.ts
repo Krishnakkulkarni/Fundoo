@@ -5,6 +5,10 @@ export class User {
     FirstName: string;
     LastName: string;
 }
+export class UserLogin {
+    UserName: string;
+    Password: string;
+}
 export class Userresettpassword {
     Email: string;
     Password: string;

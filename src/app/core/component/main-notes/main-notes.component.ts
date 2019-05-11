@@ -12,12 +12,12 @@ export class MainNotesComponent implements OnInit {
   CardNotes = []
   id: string;
 
-  constructor(private notesService: NotesService, private service: DataService) { }
+  constructor(private notesService: NotesService, private dataservice: DataService) { }
 
   ngOnInit() {
     this.id = localStorage.getItem("UserID")
     this.getAllCard();
-    this.service.current.subscribe(data => {
+    this.dataservice.current.subscribe(data => {
       console.log('data ', data);
       if (data.type == 'image') {
         this.getAllCard();
