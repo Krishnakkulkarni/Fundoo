@@ -27,6 +27,7 @@ export class UserRegisterComponent implements OnInit {
       {
         UserName: '',
         Password: '',
+        ConfirmPassword:'',
         Email: '',
         FirstName: '',
         LastName: ''
@@ -34,18 +35,26 @@ export class UserRegisterComponent implements OnInit {
   }
 
   onSubmit(form: NgForm) {
-    console.log('in register', form.value);
-    this.userService.registerUser(form.value).subscribe
-      (
-        (data: any) => {
-          console.log(data);
-
-          if (data) {
-            this.router.navigateByUrl('user/login');
-            this.snackbar.open("register successful", "close", { duration: 2000 });
-            this.resetForm(form);
+    if (form.value.Password != form.value.ConfirmPassword) {
+      this.resetForm();
+      this.snackbar.open('Password and ConfirmPassword Missmatch', 'close', { duration: 2000 });
+      return;
+    }
+    else{
+      console.log('in register', form.value);
+      this.userService.registerUser(form.value).subscribe
+        (
+          (data: any) => {
+            console.log(data);
+  
+            if (data) {
+              this.router.navigateByUrl('user/login');
+              this.snackbar.open("register successful", "close", { duration: 2000 });
+              this.resetForm(form);
+            }
           }
-        }
-      );
+        );
+    }
+    
   }
 }

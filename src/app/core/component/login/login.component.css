@@ -1,15 +1,7 @@
-.validate{
-    display: block;
-    position: relative;
-    flex: auto;
-    min-width: 0;
-    width: 300px;
-    padding: 0em 0 1em 0;
-}
-.card{
-    width: 100%; 
-} 
+
 .main{
-    height: 90vh;
-    width:55%;position: relative;left: 320px
+    height: 100vh;
+    width:50%;
+    position: relative;
+    left: 320px
 }

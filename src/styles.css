@@ -2,6 +2,9 @@
 @import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
 .mat-input-element {
     border-bottom-style: none !important;
+    box-shadow: none !important;
+    height: none !important;
+    margin: none !important;
 }
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

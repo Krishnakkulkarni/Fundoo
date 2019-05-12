@@ -1,5 +1,5 @@
 <div class='main' fxLayoutAlign='center center'>
-  <mat-card fxFlex="70" class="card">
+  <mat-card fxFlex="70">
 
     <div fxLayout='column' fxLayoutAlign='center center'>
       <div fxLayoutAlign='center center'>
@@ -15,36 +15,31 @@
         <form class="col s12 white" #LoginForm="ngForm" (ngSubmit)="onSubmit(LoginForm)" autocomplete="off">
 
           <div>
-            <mat-form-field appearance="outline">
+            <mat-form-field class="field" appearance="outline">
               <mat-label>Email</mat-label>
-              <input matInput type="text" class="validate" name="UserName" #UserName="ngModel" [(ngModel)]="user.UserName" 
-              [pattern]="emailPattern" required>
+              <input matInput type="text" name="UserName" #UserName="ngModel" [(ngModel)]="user.UserName"
+                [pattern]="emailPattern" required>
             </mat-form-field>
           </div>
-          
+
           <div>
-            <mat-form-field appearance="outline">
+            <mat-form-field class="field" appearance="outline">
               <mat-label
                 [attr.data-error]="Password.errors!=null?(Password.errors.required?'required Field': 'minimum 3 characters required'):''">
                 Password</mat-label>
-              <input matInput type="password" class="validate" name="Password" #Password="ngModel"
-                [(ngModel)]="user.Password" required minlength="4">
+              <input matInput type="password" name="Password" #Password="ngModel" [(ngModel)]="user.Password" required
+                minlength="4">
             </mat-form-field>
-          </div>
-       
-          <div fxLayout="row" fxLayoutAlign='space-around end'>
-            <div>
-              <button mat-button class="btn" type="submit">Login</button>
-            </div>
-            <div>
-              <a routerLink="/user/user-register" class="register" routerLinkActive="active">Create Account</a>
+            <div class="row">
+              <a routerLink="/forgot-password" class="forgot-password" routerLinkActive="active">forgot-password?</a>
             </div>
           </div>
 
-          <div class="row">
-            <small>
-              <a routerLink="/forgot-password" class="forgot-password" routerLinkActive="active">forgot-password?</a>
-            </small>
+          <div fxLayout="row" fxLayoutAlign='space-around end'>
+              <a routerLink="/user/user-register" class="register" routerLinkActive="active">Create Account</a>
+              <div class="column">
+              <button mat-button class="btn" type="submit">Login</button>
+            </div>
           </div>
 
         </form>

@@ -19,32 +19,20 @@ export class UserService {
   constructor(private http: HttpClient, public httpService:HttpService) { }
 
   registerUser(user: User) {
-    return this.httpService.post('ApplicationUser/register', user);
+    return this.httpService.post('Account/register', user);
   }
 
   login(data) {
-    return this.httpService.post('ApplicationUser/login', data);
+    return this.httpService.post('Account/login', data);
   }
 
   forgotPassword(userforgotpassword: Userforgotpassword) {
     console.log(userforgotpassword);
-    // const formdata =
-    // {
-    //   Email: userforgotpassword
-    // }
-    //console.log('data in service', formdata);
-
-    return this.httpService.post('ApplicationUser/forgotPassword', userforgotpassword);
+    return this.httpService.post('Account/forgotPassword', userforgotpassword);
   }
 
   userresettpassword(userresettpassword: Userresettpassword) {
     console.log(userresettpassword);
-    // const formdata: Userresettpassword =
-    // {
-    //   Email: userresettpassword.Email,
-    //   Password: userresettpassword.Password,
-    //   ConfirmPassword: userresettpassword.ConfirmPassword
-    // }
-    return this.httpService.post('ApplicationUser/resetPassword', userresettpassword);
+    return this.httpService.post('Account/resetPassword', userresettpassword);
   }
 }

@@ -22,7 +22,7 @@ export class ForgotPasswordComponent implements OnInit {
   resetForm(form?: NgForm) {
     if (form != null)
       form.reset();
-    this.userforgotpassword = { Email: '' }
+    this.userforgotpassword = { UserName: '' }
   }
   onSubmit(form: NgForm) {
     console.log('in forgot', form.value);

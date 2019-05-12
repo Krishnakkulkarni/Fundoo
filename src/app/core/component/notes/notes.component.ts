@@ -8,14 +8,15 @@ import { FormControl, Validators } from '@angular/forms';
   styleUrls: ['./notes.component.css']
 })
 export class NotesComponent implements OnInit {
+
   title = new FormControl('', [Validators.required]);
   take_a_note = new FormControl('', [Validators.required]);
   id: any;
   color: string = "#ffffff";
+  
   constructor(private notesService: NotesService) { }
 
   ngOnInit() {
-
     localStorage.getItem('token');
     this.id = localStorage.getItem("UserID")
   }

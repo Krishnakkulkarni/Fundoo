@@ -12,7 +12,6 @@ export class NotesService {
     return this.httpService.post('Notes/addNotes', data);
   }
   getNotesById(UserId: string) {
-    console.log(UserId);
     return this.httpService.Get('Notes/' + UserId);
   }
   ImageUpload(data, id) {
