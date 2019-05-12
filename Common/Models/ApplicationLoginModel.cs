@@ -18,7 +18,8 @@ namespace FundooNote.Models
         /// <value>
         /// The name of the user.
         /// </value>
-        [Required, MinLength(3), MaxLength(10)]
+        [Required]
+        [EmailAddress]
         public string UserName { get; set; }
 
         /// <summary>

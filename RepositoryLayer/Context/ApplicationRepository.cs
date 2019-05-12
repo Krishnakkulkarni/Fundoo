@@ -16,7 +16,7 @@ namespace RepositoryLayer.Context
     using Microsoft.Extensions.Options;
     using Microsoft.IdentityModel.Tokens;
     using RepositoryLayer.Interface;
-   
+
     /// <summary>
     /// Application Repository class
     /// </summary>
@@ -77,14 +77,14 @@ namespace RepositoryLayer.Context
             ApplicationUser user = new ApplicationUser()
             {
                 UserName = applicationUserModel.UserName,
-                Email = applicationUserModel.Email,
+                //Email = applicationUserModel.Email,
                 FirstName = applicationUserModel.FirstName,
                 LastName = applicationUserModel.LastName
             };
             var result = this.usermanager.CreateAsync(user, applicationUserModel.Password);
             return result;
         }
-         
+
         /// <summary>
         /// Finds the by name asynchronous.
         /// </summary>
@@ -112,7 +112,7 @@ namespace RepositoryLayer.Context
             {
                 var tokenDescriptor = new SecurityTokenDescriptor
                 {
-                    Subject = new ClaimsIdentity(new Claim[] {new Claim ("UserID", user.Id.ToString()) }),
+                    Subject = new ClaimsIdentity(new Claim[] { new Claim("UserID", user.Id.ToString()) }),
                     Expires = DateTime.UtcNow.AddDays(1),
                     SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes(this.appSettings.JWT_Secrete)), SecurityAlgorithms.HmacSha256Signature)
                 };
@@ -138,7 +138,7 @@ namespace RepositoryLayer.Context
         /// </returns>
         public Task FindByEmailAsync(ForgotPasswordModel model)
         {
-            var result = this.usermanager.FindByEmailAsync(model.Email);
+            var result = this.usermanager.FindByEmailAsync(model.Username);
             return result;
         }
 
@@ -151,7 +151,7 @@ namespace RepositoryLayer.Context
         /// </returns>
         public async Task<string> GeneratePasswordResetTokenAsync(ForgotPasswordModel model)
         {
-            var result = await this.usermanager.FindByEmailAsync(model.Email);
+            var result = await this.usermanager.FindByEmailAsync(model.Username);
             var user = await this.usermanager.GenerateEmailConfirmationTokenAsync(result);
             return user;
         }
@@ -171,7 +171,7 @@ namespace RepositoryLayer.Context
                 return false;
             }
             else
-            { 
+            {
                 var token = await this.usermanager.GeneratePasswordResetTokenAsync(userEmail);
                 var result = await this.usermanager.ResetPasswordAsync(userEmail, token, model.Password);
                 if (result.Succeeded)

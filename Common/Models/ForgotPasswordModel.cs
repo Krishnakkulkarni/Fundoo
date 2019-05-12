@@ -22,7 +22,6 @@ namespace FundooNote.Models
         /// </value>
         [Required]
         [EmailAddress]
-        [Display(Name = "Email")]
-        public string Email { get; set; }
+        public string Username { get; set; }
     }
 }

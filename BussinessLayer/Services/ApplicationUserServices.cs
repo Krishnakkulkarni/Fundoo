@@ -19,7 +19,7 @@ namespace BussinessLayer.Services
     /// Application User Service
     /// </summary>
     /// <seealso cref="BussinessLayer.Interfaces.IApplicationControl" />
-    public class ApplicationUserServices : IApplicationControl 
+    public class ApplicationUserServices : IApplicationControl
     {
         /// <summary>
         /// The application repository
@@ -79,7 +79,7 @@ namespace BussinessLayer.Services
             {
                 var code = this.applicationRepository.GeneratePasswordResetTokenAsync(model);
                 var callbackUrl = "http://localhost:4200/reset-password?code=" + code;
-                this.emailSender.SendEmailAsync(model.Email, "Reset Password", $"Please reset your password by clicking here: <a href='{callbackUrl}'>link</a>");
+                this.emailSender.SendEmailAsync(model.Username, "Reset Password", $"Please reset your password by clicking here: <a href='{callbackUrl}'>link</a>");
                 return true;
             }
             else
@@ -87,7 +87,7 @@ namespace BussinessLayer.Services
                 return false;
             }
         }
-        
+
         /// <summary>
         /// Resets the password asynchronous.
         /// </summary>
@@ -95,7 +95,7 @@ namespace BussinessLayer.Services
         /// <returns>return boolean</returns>
         public async Task<bool> ResetPasswordAsync(ResetPasswordModel model)
         {
-           var result = await this.applicationRepository.ResetPasswordAsync(model);
+            var result = await this.applicationRepository.ResetPasswordAsync(model);
             return result;
         }
     }

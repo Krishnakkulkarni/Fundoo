@@ -22,8 +22,9 @@ namespace FundooNote.Models
         /// <value>
         /// The name of the user.
         /// </value>
-        [Required, MinLength(3), MaxLength(10)]
-        [RegularExpression("^((?!UserName)[a-z'])+$", ErrorMessage = "enter proper UserName")]
+        [Required]
+        [EmailAddress]
+        /// [RegularExpression("^((?!UserName)[a-z'])+$", ErrorMessage = "enter proper UserName")]
         public string UserName { get; set; }
 
         /// <summary>
@@ -32,8 +33,8 @@ namespace FundooNote.Models
         /// <value>
         /// The email.
         /// </value>
-        [Required]
-        public string Email { get; set; }
+        //[Required]
+        //public string Email { get; set; }
 
         /// <summary>
         /// Gets or sets the password.

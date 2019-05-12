@@ -21,7 +21,7 @@ namespace RepositoryLayer.Interface
         /// </summary>
         /// <param name="notesModel">The notes model.</param>
         /// <returns>return string</returns>
-        string AddNotes(NotesModel notesModel);
+        void AddNotes(NotesModel notesModel);
 
         /// <summary>
         /// Saves the changes asynchronous.

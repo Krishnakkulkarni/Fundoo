@@ -44,7 +44,7 @@ namespace RepositoryLayer.Context
         /// </summary>
         /// <param name="notesModel">The notes model.</param>
         /// <returns>return string</returns>
-        public string AddNotes(NotesModel notesModel)
+        public void AddNotes(NotesModel notesModel)
         {
             var notes = new NotesModel()
             {
@@ -59,7 +59,6 @@ namespace RepositoryLayer.Context
                 ModifiedDate = notesModel.ModifiedDate
             };
             var result = this.authentication.NotesModel.Add(notes);
-            return null;
         }
 
         /// <summary>
