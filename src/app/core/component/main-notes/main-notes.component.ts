@@ -29,7 +29,6 @@ export class MainNotesComponent implements OnInit {
       if (data.type == 'image') {
         this.getAllCard();
       }
-
     })
   }
   getAllCard() {

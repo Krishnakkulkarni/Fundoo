@@ -32,7 +32,7 @@ export class DisplaynotesComponent implements OnInit {
   openDialog(note: { id: any; }) {
     console.log(note);
     const dialogRef = this.matDialog.open(EditnoteComponent, {
-      width: '250px',
+      width: '400px',
       data: { note }
     });
     dialogRef.afterClosed().subscribe(result => {

@@ -9,14 +9,13 @@
     <mat-icon fxFlexOffset="2%">search</mat-icon>
     <input class="search" type="text" fxLayoutAlign="center center"
       style=" border:none; background-color: rgb(230, 230, 230); margin-bottom: 0px; border-radius: 4px;"
-      placeholder="Search..." aria-label="Search">
+      placeholder="Search" aria-label="Search">
 
-    <button mat-icon-button>
-      <mat-icon (click)="refresh()" fxFlexOffset="10%">refresh</mat-icon>
-    </button>
-
-    <!-- <button mat-button class="btn" (click)="view()" style="padding-right:10%"></button> -->
-
+    <div>
+      <button mat-icon-button>
+        <mat-icon (click)="refresh()" fxFlexOffset="10%">refresh</mat-icon>
+      </button>
+    </div>
     <!-------------------------------Grid and List--------------------------------------->
 
     <button mat-icon-button *ngIf='flag==false' (click)='ReverseFlag()'>
@@ -34,6 +33,18 @@
     </button>
 
     <mat-menu #menu="matMenu">
+
+      <div>
+
+        <button mat-mini-fab (click)="SelectImage.click()" >
+        </button>
+
+        <input  fxHide class="image" type="file" (change)="fileUpload($event)" #SelectImage>
+
+
+      </div><br>
+
+
       <button mat-menu-item (click)="onLogout()" style="outline:none">Logout</button>
     </mat-menu>
   </mat-toolbar>

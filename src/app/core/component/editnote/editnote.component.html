@@ -1,5 +1,7 @@
 <div fxLayout="column">
 
+  <img src="{{data.note.image}}" class="notesImage" />
+
   <div mat-dialog-content>
     <input matInput [(ngModel)]="data.note.title">
     <input matInput [(ngModel)]="data.note.description">

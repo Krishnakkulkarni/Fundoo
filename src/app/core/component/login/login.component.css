@@ -5,3 +5,13 @@
     position: relative;
     left: 320px
 }
+#image{
+width:  80px;
+}
+.name{
+    height: inherit
+}
+
+.mat-form-field{
+    padding: 0px !important
+}

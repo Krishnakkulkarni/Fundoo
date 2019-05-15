@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  rooturl : 'https://localhost:44305/api/'
+  rooturl : 'https://localhost:44305/api/',
+  profileUrl :"http://34.213.106.173/"
 };
 
 /*
