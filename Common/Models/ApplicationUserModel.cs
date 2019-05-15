@@ -28,15 +28,6 @@ namespace FundooNote.Models
         public string UserName { get; set; }
 
         /// <summary>
-        /// Gets or sets the email.
-        /// </summary>
-        /// <value>
-        /// The email.
-        /// </value>
-        //[Required]
-        //public string Email { get; set; }
-
-        /// <summary>
         /// Gets or sets the password.
         /// </summary>
         /// <value>
@@ -78,5 +69,13 @@ namespace FundooNote.Models
         /// The modified date.
         /// </value>
         public DateTime ModifiedDate { get; set; }
+
+        /// <summary>
+        /// Gets or sets the profile.
+        /// </summary>
+        /// <value>
+        /// The profile.
+        /// </value>
+        public string Profile { get; set; }
     }
 }

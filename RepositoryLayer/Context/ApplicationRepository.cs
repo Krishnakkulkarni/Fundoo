@@ -7,10 +7,14 @@ namespace RepositoryLayer.Context
 {
     using System;
     using System.IdentityModel.Tokens.Jwt;
+    using System.Linq;
     using System.Security.Claims;
     using System.Text;
     using System.Threading.Tasks;
+    using CloudinaryDotNet;
+    using CloudinaryDotNet.Actions;
     using FundooNote.Models;
+    using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.Extensions.Caching.Distributed;
     using Microsoft.Extensions.Options;
@@ -39,16 +43,22 @@ namespace RepositoryLayer.Context
         private readonly IDistributedCache distributedCache;
 
         /// <summary>
+        /// The authentication
+        /// </summary>
+        private readonly Authentication authentication;
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="ApplicationRepository"/> class.
         /// </summary>
         /// <param name="userManager">The user manager.</param>
         /// <param name="appSettings">The application settings.</param>
         /// <param name="distributedCache">The distributed cache.</param>
-        public ApplicationRepository(UserManager<ApplicationUser> userManager, IOptions<AppSetting> appSettings, IDistributedCache distributedCache)
+        public ApplicationRepository(UserManager<ApplicationUser> userManager, IOptions<AppSetting> appSettings, IDistributedCache distributedCache, Authentication authentication)
         {
             this.usermanager = userManager;
             this.appSettings = appSettings.Value;
             this.distributedCache = distributedCache;
+            this.authentication = authentication;
         }
 
         /// <summary>
@@ -77,7 +87,6 @@ namespace RepositoryLayer.Context
             ApplicationUser user = new ApplicationUser()
             {
                 UserName = applicationUserModel.UserName,
-                //Email = applicationUserModel.Email,
                 FirstName = applicationUserModel.FirstName,
                 LastName = applicationUserModel.LastName
             };
@@ -181,6 +190,37 @@ namespace RepositoryLayer.Context
             }
 
             return false;
+        }
+
+        /// <summary>
+        /// Images the specified file.
+        /// </summary>
+        /// <param name="file">The file.</param>
+        /// <param name="id">The identifier.</param>
+        /// <returns>return string</returns>
+        public string Image(IFormFile file, string id)
+        {
+            try
+            {
+                var stream = file.OpenReadStream();
+                var name = file.FileName;
+                Account account = new Account("db4wyl94g", "645173152293519", "hBF7yF3HzJGByBvdWnzfR_kegmI");
+                Cloudinary cloudinary = new Cloudinary(account);
+                var imageUploadParams = new ImageUploadParams()
+                {
+                    File = new FileDescription(name, stream)
+                };
+                var uploadResult = cloudinary.Upload(imageUploadParams);
+                var data = this.authentication.ApplicationUsers.Where(t => t.Id == id).FirstOrDefault();
+                data.Profile = uploadResult.Uri.ToString();
+
+                int result = this.authentication.SaveChanges();
+                return data.Profile;
+            }
+            catch (Exception e)
+            {
+                return e.Message;
+            }
         }
     }
 }

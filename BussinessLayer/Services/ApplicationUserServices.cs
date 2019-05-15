@@ -11,6 +11,7 @@ namespace BussinessLayer.Services
     using BussinessLayer.Interfaces;
     using FundooNote.Interfaces;
     using FundooNote.Models;
+    using Microsoft.AspNetCore.Http;
     using Microsoft.Extensions.Caching.Distributed;
     using Microsoft.Extensions.Options;
     using RepositoryLayer.Interface;
@@ -96,6 +97,20 @@ namespace BussinessLayer.Services
         public async Task<bool> ResetPasswordAsync(ResetPasswordModel model)
         {
             var result = await this.applicationRepository.ResetPasswordAsync(model);
+            return result;
+        }
+
+        /// <summary>
+        /// Profiles the picture.
+        /// </summary>
+        /// <param name="file">The file.</param>
+        /// <param name="id">The identifier.</param>
+        /// <returns>
+        /// returns string
+        /// </returns>
+        public string ProfilePicture(IFormFile file, string id)
+        {
+            var result = this.applicationRepository.Image(file, id);
             return result;
         }
     }

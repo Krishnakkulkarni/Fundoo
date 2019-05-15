@@ -10,6 +10,7 @@ namespace RepositoryLayer.Interface
     using System.Threading.Tasks;
     using Common.Models;
     using Microsoft.AspNetCore.Http;
+    using Microsoft.AspNetCore.Mvc;
 
     /// <summary>
     /// INotes Repository interface

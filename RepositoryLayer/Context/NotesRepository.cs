@@ -122,22 +122,22 @@ namespace RepositoryLayer.Context
         /// <returns>return string</returns>
         public string Image(IFormFile file, int id)
         {
-            var stream = file.OpenReadStream();
-            var name = file.FileName;
-            Account account = new Account("db4wyl94g", "645173152293519", "hBF7yF3HzJGByBvdWnzfR_kegmI");
-            Cloudinary cloudinary = new Cloudinary(account);
-            var imageUploadParams = new ImageUploadParams()
-            {
-                File = new FileDescription(name, stream)
-            };
-            var uploadResult = cloudinary.Upload(imageUploadParams);
-            var data = this.authentication.NotesModel.Where(t => t.Id == id).FirstOrDefault();
-            data.Image = uploadResult.Uri.ToString();
-            int result = 0;
             try
             {
-                result = this.authentication.SaveChanges();
-                return data.Image;
+                var stream = file.OpenReadStream();
+                var name = file.FileName;
+                Account account = new Account("db4wyl94g", "645173152293519", "hBF7yF3HzJGByBvdWnzfR_kegmI");
+                Cloudinary cloudinary = new Cloudinary(account);
+                var imageUploadParams = new ImageUploadParams()
+                {
+                    File = new FileDescription(name, stream)
+                };
+                var uploadResult = cloudinary.Upload(imageUploadParams);
+                var data = this.authentication.NotesModel.Where(t => t.Id == id).FirstOrDefault();
+                data.Image = uploadResult.Uri.ToString();
+                
+               int result = this.authentication.SaveChanges();
+               return data.Image;
             }
             catch (Exception e)
             {

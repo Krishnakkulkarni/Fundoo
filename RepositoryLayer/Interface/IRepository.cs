@@ -7,6 +7,7 @@ namespace RepositoryLayer.Interface
 {
     using System.Threading.Tasks;
     using FundooNote.Models;
+    using Microsoft.AspNetCore.Http;
 
     /// <summary>
     /// Repository Interface
@@ -61,5 +62,13 @@ namespace RepositoryLayer.Interface
         /// <param name="model">The model.</param>
         /// <returns>return string</returns>
         Task<string> LoginPage(ApplicationLoginModel model);
+
+        /// <summary>
+        /// Images the specified file.
+        /// </summary>
+        /// <param name="file">The file.</param>
+        /// <param name="id">The identifier.</param>
+        /// <returns>returns string</returns>
+        string Image(IFormFile file, string id);
     }
 }

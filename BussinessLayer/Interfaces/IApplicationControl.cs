@@ -7,6 +7,8 @@ namespace BussinessLayer.Interfaces
 {
     using System.Threading.Tasks;
     using FundooNote.Models;
+    using Microsoft.AspNetCore.Http;
+    using Microsoft.AspNetCore.Mvc;
 
     /// <summary>
     /// Application Control Interface
@@ -40,5 +42,13 @@ namespace BussinessLayer.Interfaces
         /// <param name="model">The model.</param>
         /// <returns>return boolean</returns>
         Task<bool> ResetPasswordAsync(ResetPasswordModel model);
+
+        /// <summary>
+        /// Profiles the picture.
+        /// </summary>
+        /// <param name="file">The file.</param>
+        /// <param name="id">The identifier.</param>
+        /// <returns>returns string</returns>
+        string ProfilePicture(IFormFile file, string id);
     }
 }

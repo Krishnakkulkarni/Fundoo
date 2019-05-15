@@ -47,5 +47,13 @@ namespace FundooNote.Models
         /// The modified date.
         /// </value>
         public DateTime ModifiedDate { get; set; }
+
+        /// <summary>
+        /// Gets or sets the profile.
+        /// </summary>
+        /// <value>
+        /// The profile.
+        /// </value>
+        public string Profile { get; set; }
     }
 }

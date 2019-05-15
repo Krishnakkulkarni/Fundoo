@@ -9,6 +9,7 @@ namespace FundooApi.Controllers
     using System.Threading.Tasks;
     using BussinessLayer.Interfaces;
     using FundooNote.Models;
+    using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
 
     /// <summary>
@@ -125,6 +126,20 @@ namespace FundooApi.Controllers
                 Console.WriteLine(e.Message);
                 return false;
             }
+        }
+
+        [HttpPost]
+        [Route("profile/{id}")]
+        public IActionResult Profile(IFormFile file,string id)
+        {
+            Console.WriteLine(file);
+            if (file == null)
+            {
+                return this.NotFound("The file couldn't be found");
+            }
+
+            var result = this.applicationUser.ProfilePicture(file, id);
+            return this.Ok(new { result });
         }
     }
 }

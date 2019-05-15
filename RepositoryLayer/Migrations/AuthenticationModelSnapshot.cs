@@ -233,6 +233,8 @@ namespace RepositoryLayer.Migrations
 
                     b.Property<DateTime>("ModifiedDate");
 
+                    b.Property<string>("Profile");
+
                     b.ToTable("ApplicationUser");
 
                     b.HasDiscriminator().HasValue("ApplicationUser");
