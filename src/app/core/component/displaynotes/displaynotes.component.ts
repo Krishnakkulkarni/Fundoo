@@ -7,17 +7,15 @@ import { EditnoteComponent } from '../editnote/editnote.component';
 export interface DialogData {
   note: any;
 }
+
 @Component({
   selector: 'app-displaynotes',
   templateUrl: './displaynotes.component.html',
   styleUrls: ['./displaynotes.component.css']
 })
+
 export class DisplaynotesComponent implements OnInit {
   grid: boolean = true
-
-  title: string;
-  take_a_note: string;
-
 
   constructor(private notesService: NotesService, public dataService: DataService, public matDialog: MatDialog) { }
 
@@ -32,7 +30,7 @@ export class DisplaynotesComponent implements OnInit {
   openDialog(note: { id: any; }) {
     console.log(note);
     const dialogRef = this.matDialog.open(EditnoteComponent, {
-      width: '400px',
+      width: '500px',
       data: { note }
     });
     dialogRef.afterClosed().subscribe(result => {

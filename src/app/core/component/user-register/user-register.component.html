@@ -1,69 +1,83 @@
-<div class="row">
-  <div class="col s6" style="margin-left: 20%; padding-top: 2%">
-    <mat-card fxFlex="100" id="card">
+<div fxLayoutAlign='center center' class="outerdiv">
+  <mat-card fxFlex="40" fxFlex.sm="45" fxFlex.gt-sm="45" fxFlex.md="50" fxFlex.xs="100">
 
-      <div class="row">
-        <div>
-          <img id="image" src="../../../../assets/images/Fundoo.png">
-        </div>
-        <h5>Create Your Fundoo Account</h5>
-      </div>
+    <form #UserRegistrationForm="ngForm" (ngSubmit)="onSubmit(UserRegistrationForm)" autocomplete="off">
+      <div fxLayout="column">
 
-      <form class="col s12 white" #UserRegistrationForm="ngForm" (ngSubmit)="onSubmit(UserRegistrationForm)"
-        autocomplete="off">
-
-        <div class="row">
-          <mat-form-field appearance="outline">
-            <mat-label>FirstName</mat-label>
-            <input matInput style="height: 0%" type="text" class="input" name="FirstName" #FirstName="ngModel"
-              [(ngModel)]="user.FirstName">
-          </mat-form-field>
-
-          <mat-form-field appearance="outline">
-            <mat-label>LastName</mat-label>
-            <input matInput style="height: 0%" type="text" name="LastName" #LastName="ngModel"
-              [(ngModel)]="user.LastName">
-          </mat-form-field>
-        </div>
+        <div> <img id="image" src="../../../../assets/images/Fundoo.png"></div>
 
         <div>
-          <mat-form-field appearance="outline">
+          <h3>Create Your Fundoo Account</h3>
+        </div>
+
+        <div fxLayout="row" fxLayoutGap="20px" fxLayoutGap.sm="10px" fxLayoutGap.xs="10px" fxLayout.sm="column"
+          fxLayout.md="row" fxLayout.xs="column">
+
+          <div fxFlex="50">
+            <mat-form-field appearance="outline" class="width">
+              <mat-label>First name</mat-label>
+              <input matInput style="height: 0%" type="text" class="input" name="FirstName" #FirstName="ngModel"
+                [(ngModel)]="user.FirstName">
+            </mat-form-field>
+          </div>
+
+          <div fxFlex="50">
+            <mat-form-field appearance="outline" class="width">
+              <mat-label>Last name</mat-label>
+              <input matInput style="height: 0%" type="text" name="LastName" #LastName="ngModel"
+                [(ngModel)]="user.LastName">
+            </mat-form-field>
+          </div>
+
+        </div>
+
+        <div>
+          <mat-form-field appearance="outline" class="width">
             <mat-label>Email</mat-label>
             <input matInput style="height: 0%" type="text" name="UserName" #UserName="ngModel"
               [(ngModel)]="user.UserName" [pattern]="emailPattern" required>
           </mat-form-field>
         </div>
 
-        <div class="row">
 
-          <mat-form-field appearance="outline">
-            <mat-label
-              [attr.data-error]="Password.errors!=null?(Password.errors.required?'required Field': 'minimum 3 characters required'):''">
-              Password</mat-label>
-            <input matInput style="height: 0%" type="password" class="validate" name="Password" #Password="ngModel"
-              [(ngModel)]="user.Password" required minlength="4">
-          </mat-form-field>
+        <div fxLayout="row" fxLayoutGap="20px" fxLayoutGap.sm="10px" fxLayoutGap.xs="10px" fxLayout.sm="column"
+          fxLayout.md="row" fxLayout.xs="column">
 
-          <mat-form-field appearance="outline">
-            <mat-label
-              [attr.data-error]="Password.errors!=null?(Password.errors.required?'required Field': 'minimum 3 characters required'):''">
-              ConfirmPassword</mat-label>
-            <input matInput style="height: 0%" type="password" class="validate" name="ConfirmPassword"
-              #ConfirmPassword="ngModel" [(ngModel)]="user.ConfirmPassword" required minlength="4">
-          </mat-form-field>
+          <div fxFlex="50">
+            <mat-form-field appearance="outline" class="width">
+              <mat-label
+                [attr.data-error]="Password.errors!=null?(Password.errors.required?'required Field': 'minimum 3 characters required'):''">
+                Password</mat-label>
+              <input matInput style="height: 0%" type="password" class="validate" name="Password" #Password="ngModel"
+                [(ngModel)]="user.Password" required minlength="4">
+            </mat-form-field>
+          </div>
+
+          <div fxFlex="50">
+            <mat-form-field appearance="outline" class="width">
+              <mat-label
+                [attr.data-error]="Password.errors!=null?(Password.errors.required?'required Field': 'minimum 3 characters required'):''">
+                Confirm password</mat-label>
+              <input matInput style="height: 0%" type="password" class="validate" name="ConfirmPassword"
+                #ConfirmPassword="ngModel" [(ngModel)]="user.ConfirmPassword" required minlength="4">
+            </mat-form-field>
+          </div>
 
         </div>
 
-        <div class="row">
-          <div>
-            <button mat-button class="btn" type="submit">Register</button>
-            <div class="col s6">
+        <div fxLayout="row" fxLayoutGap="20px" fxLayoutGap.sm="10px" fxLayoutGap.xs="10px" fxLayout.sm="column"
+        fxLayout.md="row" fxLayout.xs="column">
+
+          <div fxFlex="50">
               <a routerLink="/user/login" class="login" routerLinkActive="active">Sign in instead</a>
-            </div>
+          </div>
+          <div fxFlex="50">
+              <button mat-button class="registerbutton" type="submit">Register</button>
           </div>
         </div>
 
-      </form>
-    </mat-card>
-  </div>
+      </div>
+    </form>
+
+  </mat-card>
 </div>

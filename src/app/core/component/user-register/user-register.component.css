@@ -1,9 +1,17 @@
-.input{
-    border-bottom: none;
+.outerdiv{
+    height:100vh;
 }
 #image{
     width:80px;
 }
-/* #card{
-    width: 500px;
-} */
+.width{
+    width:100%
+}
+.registerbutton{
+    color: azure;
+    background-color:rgb(42, 123, 245)
+}
+.login{
+    text-align: left;
+    color: rgb(42, 123, 245)
+}

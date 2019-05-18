@@ -1,4 +1,11 @@
 .mat-icon-button{
-    border-block-end: 1%;
+    /* border-block-end: 1%; */
     color: gray !important;
+}
+.Hover{
+    opacity:0
+    
+}
+.Hover:hover{
+    opacity: 1
 }

@@ -13,7 +13,7 @@ export class NotesComponent implements OnInit {
   take_a_note = new FormControl('', [Validators.required]);
   id: any;
   color: string = "#ffffff";
-  
+
   constructor(private notesService: NotesService) { }
 
   ngOnInit() {
@@ -22,14 +22,14 @@ export class NotesComponent implements OnInit {
   }
 
   AddNotes() {
-    var notes = {
-      UserId: this.id,
-      Title: this.title.value,
-      Description: this.take_a_note.value,
-      Color: this.color
-    }
-    if (this.title.value !=" " && this.title.value != undefined && 
-      this.take_a_note.value !=" " && this.take_a_note != undefined) {
+    if (this.title.value.trim() != "" && this.title.value != undefined &&
+      this.take_a_note.value.trim() != "" && this.take_a_note != undefined) {
+      var notes = {
+        UserId: this.id,
+        Title: this.title.value,
+        Description: this.take_a_note.value,
+        Color: this.color
+      }
       this.notesService.addNotes(notes).subscribe
         (data => {
           console.log(data)

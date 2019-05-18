@@ -1,102 +1,142 @@
 <div class="example-container" [class.example-is-mobile]="mobileQuery.matches">
   <mat-toolbar color="" class="example-toolbar">
-    <button mat-icon-button (click)="snav.toggle()">
-      <mat-icon>menu</mat-icon>
-    </button>
-    <img style="width:40px" src="../../assets/images/image.png" />
-    <h1 class="example-app-name" fxFlexOffset="1%">{{HeaderName}}</h1>
 
-    <mat-icon fxFlexOffset="2%">search</mat-icon>
-    <input class="search" type="text" fxLayoutAlign="center center"
-      style=" border:none; background-color: rgb(230, 230, 230); margin-bottom: 0px; border-radius: 4px;"
-      placeholder="Search" aria-label="Search">
+    <div fxFlex="100" fxLayout="row">
 
-    <div>
-      <button mat-icon-button>
-        <mat-icon (click)="refresh()" fxFlexOffset="10%">refresh</mat-icon>
-      </button>
-    </div>
-    <!-------------------------------Grid and List--------------------------------------->
+      <div fxFlex="70" fxLayout="row">
 
-    <button mat-icon-button *ngIf='flag==false' (click)='ReverseFlag()'>
-      <mat-icon>grid_view</mat-icon>
-    </button>
-
-    <button mat-icon-button *ngIf='flag==true' (click)='ReverseFlag()'>
-      <mat-icon>list_view</mat-icon>
-    </button>
-
-    <!----------------------------------LogOut------------------------------------------>
-    <!-- <span class="example-spacer"></span> -->
-    <button mat-mini-fab style="background-color: #ecf3f7" [matMenuTriggerFor]="menu" style="outline:none"
-      fxFlexOffset="15%">
-    </button>
-
-    <mat-menu #menu="matMenu">
-
-      <div>
-
-        <button mat-mini-fab (click)="SelectImage.click()" >
+        <button mat-icon-button (click)="snav.toggle()">
+          <mat-icon>menu</mat-icon>
         </button>
 
-        <input  fxHide class="image" type="file" (change)="fileUpload($event)" #SelectImage>
+        <img id="fundoo-image" src="../../assets/images/image.png" />
 
 
-      </div><br>
+        <h1 class="example-app-name">{{HeaderName}}</h1>
+
+        <div fxHide.xs='true' fxFlex fxLayout="row">
+          <mat-form-field fxFlex appearance="outline" [style.fontSize.px]=2 fxFlexOffset="8">
+            <div fxLayout="row">
+              <button mat-icon-button>
+                <mat-icon>search</mat-icon>
+              </button>
+              <input matInput [style.fontSize.px]=14 placeholder="Search">
+            </div>
+          </mat-form-field>
+        </div>
+
+      </div>
 
 
-      <button mat-menu-item (click)="onLogout()" style="outline:none">Logout</button>
-    </mat-menu>
+      <div fxFlex="30" fxLayout="row" fxLayoutAlign="end center">
+
+        <div>
+          <button mat-icon-button fxFlexOffset="15">
+            <mat-icon (click)="refresh()">refresh</mat-icon>
+          </button>
+        </div>
+
+        <!-------------------------------Grid and List--------------------------------------->
+
+        <button mat-icon-button *ngIf='flag==false' (click)='ReverseFlag()'>
+          <mat-icon>grid_view</mat-icon>
+        </button>
+
+        <button mat-icon-button *ngIf='flag==true' (click)='ReverseFlag()'>
+          <mat-icon>list_view</mat-icon>
+        </button>
+
+        <!----------------------------------LogOut------------------------------------------>
+        <div fxLayout="row" fxLayoutAlign="end center">
+
+          <button mat-mini-fab style="background-color: #ecf3f7" [matMenuTriggerFor]="menu" style="outline:none">
+          </button>
+
+          <mat-menu #menu="matMenu">
+
+            <div>
+
+              <button mat-mini-fab (click)="SelectImage.click()">
+              </button>
+
+              <input fxHide class="image" type="file" (change)="fileUpload($event)" #SelectImage>
+
+            </div><br>
+
+            <button mat-menu-item (click)="onLogout()" style="outline:none">Logout</button>
+
+          </mat-menu>
+        </div>
+
+      </div>
+
+    </div>
+
   </mat-toolbar>
+
   <!---------------------------------------------SideNav------------------------------------------------->
-  <mat-sidenav-container class="example-sidenav-container">
-    <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'" [fixedInViewport]="mobileQuery.matches">
+  <mat-sidenav-container class="side-nav-container">
+    <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'" [fixedInViewport]="mobileQuery.matches"
+      class="mat-side-nav-bar">
+
       <mat-nav-list>
-        <div>
-          <button mat-button (click)='Note()' (click)="HeaderName= 'Fundoo Notes'"
-            [ngClass]="{'sidenav':HeaderName!= 'Fundoo Notes','sidenavlist':HeaderName=='Fundoo Notes'}">
-            <mat-icon>lightbulb_outline</mat-icon>
-            Notes
-          </button>
+        <div fxLayout="column" fxLayoutGap="12px">
+
+          <div fxLayout="column">
+            <button mat-button (click)='Note()' (click)="HeaderName= 'Fundoo Notes'"
+              [ngClass]="{'sidenav':HeaderName!= 'Fundoo Notes','sidenavlist':HeaderName=='Fundoo Notes'}">
+              <mat-icon style="margin-right:25px">lightbulb_outline</mat-icon>
+              Notes
+            </button>
+            <button mat-button class="btn" (click)='Reminder()' (click)="HeaderName= 'Reminder'"
+              [ngClass]="{'sidenav':HeaderName!= 'Reminder','sidenavlist':HeaderName=='Reminder'}">
+              <mat-icon style="margin-right:25px">notifications_none</mat-icon>Reminders
+            </button>
+          </div>
+
+          <div>
+            <mat-divider></mat-divider>
+          </div>
+
+
+          <div>
+            <div style="margin-left:25px; font-size: 11px">LABELS</div>
+          </div>
+
+          <div>
+            <button mat-button class="btn" (click)='EditLables()' (click)="HeaderName= 'EditLables'"
+              [ngClass]="{'sidenav':HeaderName!= 'EditLables','sidenavlist':HeaderName=='EditLables'}">
+              <mat-icon style="margin-right:25px">edit</mat-icon>
+              Edit lables
+            </button>
+          </div>
+
+          <div>
+            <mat-divider></mat-divider>
+          </div>
+
+
+          <div fxLayout="column">
+            <button mat-button class="btn" (click)='Archive()' (click)="HeaderName= 'Archive'"
+              [ngClass]="{'sidenav':HeaderName!= 'Archive','sidenavlist':HeaderName=='Archive'}">
+              <mat-icon style="margin-right:25px">archive</mat-icon>
+              Archive
+            </button>
+            <button mat-button class="btn" (click)='Trash()' (click)="HeaderName= 'Trash'"
+              [ngClass]="{'sidenav':HeaderName!= 'Trash','sidenavlist':HeaderName=='Trash'}">
+              <mat-icon style="margin-right:25px">delete</mat-icon>
+              Trash
+            </button>
+          </div>
+
+
         </div>
-
-        <div>
-          <button mat-button class="btn" (click)='Reminder()' (click)="HeaderName= 'Reminder'"
-            [ngClass]="{'sidenav':HeaderName!= 'Reminder','sidenavlist':HeaderName=='Reminder'}">
-            <mat-icon>notifications_none</mat-icon>
-            Reminder
-          </button>
-        </div>
-        <mat-divider></mat-divider>
-
-        <div>
-          <Label>Lables</Label><br>
-          <button mat-button class="btn" (click)='EditLables()' (click)="HeaderName= 'EditLables'"
-            [ngClass]="{'sidenav':HeaderName!= 'EditLables','sidenavlist':HeaderName=='EditLables'}">
-            <mat-icon>edit</mat-icon>
-            EditLables
-          </button>
-          <mat-divider></mat-divider>
-        </div>
-        <div>
-          <button mat-button class="btn" (click)='Archive()' (click)="HeaderName= 'Archive'"
-            [ngClass]="{'sidenav':HeaderName!= 'Archive','sidenavlist':HeaderName=='Archive'}">
-            <mat-icon>archive</mat-icon>
-            Archive
-          </button><br>
-
-          <button mat-button class="btn" (click)='Trash()' (click)="HeaderName= 'Trash'"
-            [ngClass]="{'sidenav':HeaderName!= 'Trash','sidenavlist':HeaderName=='Trash'}">
-            <mat-icon>delete</mat-icon>
-            Trash
-          </button>
-        </div>
-
-
       </mat-nav-list>
+
+
     </mat-sidenav>
 
-    <mat-sidenav-content>
+    <mat-sidenav-content style="background-color:white">
       <router-outlet> </router-outlet>
     </mat-sidenav-content>
 

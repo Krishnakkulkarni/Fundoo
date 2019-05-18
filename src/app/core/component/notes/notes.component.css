@@ -1,5 +1,36 @@
-.note{
-    border-radius: 5px;
-    box-shadow: 5px 10px 18px #888888;
-    margin-top:15px; 
+
+.title-note{
+    border:none; outline: none; resize: none; overflow: hidden
+}
+
+.take-note{
+    border:none; outline: none; resize: none; overflow: hidden
+}
+.notes-add{
+    margin: 9px auto 0 auto;
+    box-shadow: 0px 1px 5px;
+    vertical-align: middle;
+    border-radius: 8px;
+    width: 600px;
+    padding: 3px;
+    opacity: .8;
+    }
+
+.take-a-note{
+    border:none; outline: none; resize: none; overflow: hidden
+}
+.button{
+    padding-left:280px
+}
+@media screen and (max-width: 600px) {
+    .notes-add{
+        margin-top: 85px;
+        width: 400px;
+    }
+}
+@media screen and (max-width: 320px) {
+    .notes-add{
+        margin-top: 85px;
+        width: 250px;
+    }
 }

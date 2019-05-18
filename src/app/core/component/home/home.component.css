@@ -22,10 +22,12 @@
     margin-left: 8px;
   }
   
-  .example-sidenav-container {
+  .side-nav-container {
     /* When the sidenav is not fixed, stretch the sidenav container to fill the available space. This
        causes `<mat-sidenav-content>` to act as our scrolling element for desktop layouts. */
     flex: 1;
+    border-block-end: none;
+    outline: 0px;
     
   }
   
@@ -35,19 +37,32 @@
     flex: 1 0 auto;
   }
   .sidenav{
-    width: 230px;
-    height: 98%;
+    width: 245px;
+    height: 47px;
     background-color: white;
+    border-top-right-radius : 120px;
+    border-bottom-right-radius: 120px;
     text-align: left;
   }
   .sidenavlist{
-    width: 230px;
+    width: 245px;
+    height: 47px;
     font-size : 15px;
-    padding:  1px;
-    background-color: rgb(238, 205, 144);
+    background-color:rgb(250, 229, 189);
+    border-block-end: none;
+    border-top-right-radius : 120px;
+    border-bottom-right-radius: 120px;
     text-align: left;
   }
-  .search{
-    border-radius: 2px;
+  #fundoo-image{
+    height:40px;
+    width:40px;
   }
- 
+  .mat-side-nav-bar{
+   border:0px;
+  }
+   /* @media screen and (min-width: 600px) {
+    mat-side-nav-bar {
+      display: none;
+    }
+  } */

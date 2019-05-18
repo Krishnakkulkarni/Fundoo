@@ -1,8 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Response } from '@angular/http';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 import { User, Userresettpassword, Userforgotpassword } from '../Models/user.model';
 import { environment } from 'src/environments/environment';
 import { HttpService } from './HttpServices/http.service';
@@ -34,5 +31,9 @@ export class UserService {
   userresettpassword(userresettpassword: Userresettpassword) {
     console.log(userresettpassword);
     return this.httpService.post('Account/resetPassword', userresettpassword);
+  }
+
+  uploadImage(data){
+    return this.httpService.post('Account/profile',data)
   }
 }

@@ -5,10 +5,10 @@ import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material';
 import { DataService } from '../../services/DataServices/data.service';
 import { environment } from 'src/environments/environment';
-
+import { ImagecropComponent } from '../imagecrop/imagecrop.component';
 
 export interface DialogData {
-  data:any
+  data: any
 }
 @Component({
   selector: 'app-home',
@@ -16,17 +16,19 @@ export interface DialogData {
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+
   flag: boolean = true;
-  profilePic:boolean;
-  imageprofile:string;
+
+  profilePic: boolean;
+  imageprofile: string;
 
   mobileQuery: MediaQueryList;
   private _mobileQueryListener: () => void;
 
   HeaderName = "Fundoo"
-  
+
   constructor(private router: Router, changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, public snackBar: MatSnackBar
-    ,public dataService:DataService,public dialog: MatDialog) {
+    , public dataService: DataService, public dialog: MatDialog) {
 
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
@@ -50,46 +52,44 @@ export class HomeComponent implements OnInit {
     this.router.navigate(['home/MainNotes'])
   }
 
-  ReverseFlag(){
+  ReverseFlag() {
     this.flag = !this.flag
     this.dataService.changeView(this.flag)
   }
 
 
-  
-  imageFile=null;
-  public imageNew =localStorage.getItem('imageurl')
-  img = environment.profileUrl+this.imageNew;
+  imageFile = null;
+  public imageNew = localStorage.getItem('imageurl')
+  img = environment.profileUrl + this.imageNew;
 
 
-
-  fileUpload($event){
-    console.log($event,"......")
-    console.log($event.path[0].files[0],"upload file ")
-      this.imageFile=$event.path[0].files[0]
-      const uploadImage=new FormData();
-      uploadImage.append('file',this.imageFile,this.imageFile.name);
-      this.ChangePic($event)
+  fileUpload($event) {
+    console.log($event, "......")
+    console.log($event.path[0].files[0], "upload file ")
+    this.imageFile = $event.path[0].files[0]
+    const uploadImage = new FormData();
+    uploadImage.append('file', this.imageFile, this.imageFile.name);
+    this.ChangePic($event)
   }
 
-  ChangePic(data){
+  ChangePic(data) {
     {
       try {
-        // const dialogRef = this.dialog.open(ImagecropComponent, {
-        //   data: data,
-        //   width: '600px'
-        // });
-        // dialogRef.afterClosed().subscribe(result => {
-          this.dataService.currentImage.subscribe(response=>{
+        const dialogRef = this.dialog.open(ImagecropComponent, {
+          data: data,
+          width: '600px'
+        });
+        dialogRef.afterClosed().subscribe(result => {
+          this.dataService.currentImage.subscribe(response => {
           }
           )
-          
-            this.imageprofile=localStorage.getItem('imageurl')
-            this.img=environment.profileUrl+this.imageprofile;
-          
-        // })
+
+          this.imageprofile = localStorage.getItem('imageurl')
+          this.img = environment.profileUrl + this.imageprofile;
+
+        })
       } catch (err) {
-        console.log('error occurs ',err)
+        console.log('error occurs ', err)
       }
     }
   }

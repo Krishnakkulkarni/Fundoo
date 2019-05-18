@@ -3,13 +3,15 @@
   <img src="{{data.note.image}}" class="notesImage" />
 
   <div mat-dialog-content>
-    <input matInput [(ngModel)]="data.note.title">
-    <input matInput [(ngModel)]="data.note.description">
+    <input matInput style="height:45px" [(ngModel)]="data.note.title">
+    <input matInput style="height:45px" [(ngModel)]="data.note.description">
   </div>
 
-  <div mat-dialog-actions fxLayout="row">
+  <div fxLayout="row">
     <app-icons></app-icons>
     <button mat-button [mat-dialog-close]="data.note">close</button>
   </div>
 
 </div>
+
+<!-- fxFlex style="margin:20px;padding-right: 20%" -->

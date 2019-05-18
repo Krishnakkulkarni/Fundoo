@@ -1,24 +1,26 @@
-<div class='main' fxLayoutAlign='center center'>
-  <mat-card fxFlex="70">
+<div fxLayoutAlign='center center' class="outerdiv">
+  <mat-card class="mat" fxFlex="35" fxFlex.sm="45" fxFlex.gt-sm="45" fxFlex.md="50" fxFlex.xs="80">
 
-    <div fxLayout='column' fxLayoutAlign='center center'>
-      <div fxLayoutAlign='center center'>
-        <div class="row">
-          <img id="image" src="../../../../assets/images/Fundoo.png">
-          <div class="row">
-            <h6>Sign in</h6>
-            <h6>Use your Fundoo Account</h6>
-          </div>
+    <form #LoginForm="ngForm" (ngSubmit)="onSubmit(LoginForm)" autocomplete="off">
+      <div fxLayout="column">
+
+        <div fxLayoutAlign='center center'><img id="image" src="../../../../assets/images/Fundoo.png"></div>
+
+        <div fxLayoutAlign='center center'>
+          <h3>Sign in</h3>
         </div>
-      </div>
 
-      <div fxLayout='col'>
-        <form class="col s12 white" #LoginForm="ngForm" (ngSubmit)="onSubmit(LoginForm)" autocomplete="off">
+        <div fxLayoutAlign='center center'>
+          <h3>With your Fundoo Account</h3>
+        </div>
+
+        <div fxLayout="column" fxLayoutGap="5px" fxLayout.sm="column" fxLayoutGap.sm="10px" fxLayout.md="column"
+          fxLayout.xs="column" fxLayoutGap.xs="10px">
 
           <div>
-            <mat-form-field class="field"  appearance="outline">
+            <mat-form-field class="field" appearance="outline">
               <mat-label>Email</mat-label>
-              <input matInput class="name" style="height:0%" type="text" name="UserName" #UserName="ngModel" [(ngModel)]="user.UserName"
+              <input matInput class="name" type="text" name="UserName" #UserName="ngModel" [(ngModel)]="user.UserName"
                 [pattern]="emailPattern" required>
             </mat-form-field>
           </div>
@@ -28,24 +30,31 @@
               <mat-label
                 [attr.data-error]="Password.errors!=null?(Password.errors.required?'required Field': 'minimum 3 characters required'):''">
                 Password</mat-label>
-              <input matInput style="height:0%"  type="password" name="Password" #Password="ngModel" [(ngModel)]="user.Password" required
+              <input matInput type="password" name="Password" #Password="ngModel" [(ngModel)]="user.Password" required
                 minlength="4">
             </mat-form-field>
+          </div>
+        </div>
 
-            <div class="row">
-              <a routerLink="/forgot-password" class="forgot-password" routerLinkActive="active">forgot-password?</a>
-            </div>
+        <div fxLayout="row" fxLayoutGap="100px" fxLayout.sm="row" fxLayoutGap.sm="100px" fxLayout.md="row"
+          fxLayout.xs="column" fxLayoutGap.xs="10px" fxLayoutAlign="space-between end">
+
+          <div fxLayout="column" fxLayoutGap="15px" >
+            <div >
+            <a routerLink="/forgot-password" class="Forgotpassword" routerLinkActive="active">Forgot password?</a>
+          </div>
+            <a routerLink="/user/user-register" class="register" routerLinkActive="active">Create account</a>
           </div>
 
-          <div fxLayout="row" fxLayoutAlign='space-around end'>
-            <a routerLink="/user/user-register" class="register" routerLinkActive="active">Create Account</a>
-            <div class="column">
-              <button mat-button class="btn" type="submit">Login</button>
-            </div>
+          <div>
+            <button mat-button class="loginbutton" type="submit">Login</button>
           </div>
 
-        </form>
+        </div>
+
+
       </div>
-    </div>
+    </form>
+
   </mat-card>
 </div>
