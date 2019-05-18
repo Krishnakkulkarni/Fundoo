@@ -164,5 +164,70 @@ namespace FundooApi.Controllers
 
             return this.Ok(new { result });
         }
+
+        [HttpPost]
+        [Route("addCollaborator")]
+        public IActionResult AddCollaboratorToNote(CollaboratorModel model)
+        {
+            try
+            {
+                var result = this.notesCreation.AddCollaboratorToNote(model);
+                if (result == null)
+                {
+                    return this.NotFound("Collaborator not added");
+                }
+
+                return this.Ok(new { result });
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return this.BadRequest();
+            }
+        }
+
+        
+        [HttpDelete]
+        [Route("removeCollaborator")]
+        public IActionResult RemoveCollaboratorToNote(int id)
+        {
+            try
+            {
+                var result = this.notesCreation.RemoveCollaboratorToNote(id);
+                if (result == null)
+                {
+                    return this.NotFound("Collaborator not found");
+                }
+
+                return this.Ok(new { result });
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return this.BadRequest();
+            }
+        }
+
+        
+        [HttpPut]
+        [Route("getCollaborator/{receiverEmail}")]
+        public IActionResult CollaboratorNote(string receiverEmail)
+        {
+            try
+            {
+                var result = this.notesCreation.CollaboratorNote(receiverEmail);
+                if (result == null)
+                {
+                    return this.NotFound("Collaborator not found");
+                }
+
+                return this.Ok(new { result });
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return this.BadRequest();
+            }
+        }
     }
 }

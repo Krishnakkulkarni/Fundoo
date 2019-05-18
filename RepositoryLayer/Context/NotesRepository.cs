@@ -135,9 +135,9 @@ namespace RepositoryLayer.Context
                 var uploadResult = cloudinary.Upload(imageUploadParams);
                 var data = this.authentication.NotesModel.Where(t => t.Id == id).FirstOrDefault();
                 data.Image = uploadResult.Uri.ToString();
-                
-               int result = this.authentication.SaveChanges();
-               return data.Image;
+
+                int result = this.authentication.SaveChanges();
+                return data.Image;
             }
             catch (Exception e)
             {
@@ -177,6 +177,89 @@ namespace RepositoryLayer.Context
             }
 
             return list;
+        }
+
+        public string AddCollaboratorToNote([FromBody] CollaboratorModel model)
+        {
+            try
+            {
+                var data = from t in this.authentication.Collaborator where t.UserId == model.UserId select t;
+                foreach (var item in data.ToList())
+                {
+                    if (item.NoteId.Equals(model.NoteId) && item.ReceiverEmail.Equals(model.ReceiverEmail))
+                    {
+                        return false.ToString();
+                    }
+                }
+
+                var newdata = new CollaboratorModel()
+                {
+                    UserId = model.UserId,
+                    NoteId = model.NoteId,
+                    SenderEmail = model.SenderEmail,
+                    ReceiverEmail = model.ReceiverEmail
+                };
+                this.authentication.Collaborator.Add(newdata);
+                var result = this.authentication.SaveChanges();
+                return result.ToString();
+            }
+            catch (Exception exception)
+            {
+                throw new Exception(exception.Message);
+            }
+        }
+
+        
+        public string RemoveCollaboratorToNote(int id)
+        {
+            try
+            {
+                var data = this.authentication.Collaborator.Where<CollaboratorModel>(t => t.Id == id).FirstOrDefault();
+                this.authentication.Collaborator.Remove(data);
+                var result = this.authentication.SaveChanges();
+                return result.ToString();
+            }
+            catch (Exception exception)
+            {
+                throw new Exception(exception.Message);
+            }
+        }
+
+        
+        public string CollaboratorNote(string receiverEmail)
+        {
+            try
+            {
+                var sharednotes = new List<NotesShareModel>();
+                var data = from coll in this.authentication.Collaborator
+                           where coll.ReceiverEmail == receiverEmail
+                           select new
+                           {
+                               coll.SenderEmail,
+                               coll.NoteId
+                           };
+                foreach (var result in data)
+                {
+                    var collnotes = from notes in this.authentication.NotesContext
+                                    where notes.Id == result.NoteId
+                                    select new NotesShareModel
+                                    {
+                                        NoteId = notes.Id,
+                                        Title = notes.Title,
+                                        TakeANote = notes.Descreption,
+                                    };
+                    foreach (var collaborator in collnotes)
+                    {
+                        sharednotes.Add(collaborator);
+                    }
+                }
+
+                return sharednotes.ToString();
+            }
+            catch (Exception exception)
+            {
+
+            }
         }
     }
 }

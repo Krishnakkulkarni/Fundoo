@@ -111,5 +111,39 @@ namespace BussinessLayer.Services
         {
             return this.notesRepository.TrashNote(userId);
         }
+
+        /// <summary>
+        /// Adds the collaborator to note.
+        /// </summary>
+        /// <param name="model">The model.</param>
+        /// <returns>returns string</returns>
+        public string AddCollaboratorToNote(CollaboratorModel model)
+        {
+            return this.notesRepository.AddCollaboratorToNote(model);
+        }
+
+        /// <summary>
+        /// Removes the collaborator to note.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns>
+        /// return string
+        /// </returns>
+        public string RemoveCollaboratorToNote(int id)
+        {
+            return this.notesRepository.RemoveCollaboratorToNote(id);
+        }
+
+        /// <summary>
+        /// Collaborators the note.
+        /// </summary>
+        /// <param name="receiverEmail">The receiver email.</param>
+        /// <returns>
+        /// return string
+        /// </returns>
+        public string CollaboratorNote(string receiverEmail)
+        {
+            return this.notesRepository.CollaboratorNote(receiverEmail);
+        }
     }
 }

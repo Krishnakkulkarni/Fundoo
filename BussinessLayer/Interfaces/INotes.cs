@@ -66,5 +66,11 @@ namespace BussinessLayer.Interfaces
         /// <param name="userId">The user identifier.</param>
         /// <returns>return list</returns>
         IList<NotesModel> Trash(Guid userId);
+
+        string AddCollaboratorToNote(CollaboratorModel model);
+
+        string RemoveCollaboratorToNote(int id);
+
+        string CollaboratorNote(string receiverEmail);
     }
 }

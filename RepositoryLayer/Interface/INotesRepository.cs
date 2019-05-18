@@ -71,5 +71,11 @@ namespace RepositoryLayer.Interface
         /// <param name="userId">The user identifier.</param>
         /// <returns>return list</returns>
         IList<NotesModel> TrashNote(Guid userId);
+
+        string AddCollaboratorToNote([FromBody] CollaboratorModel model);
+
+        string RemoveCollaboratorToNote(int id);
+
+        string CollaboratorNote(string receiverEmail);
     }
 }
