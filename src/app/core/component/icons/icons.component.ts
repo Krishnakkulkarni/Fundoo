@@ -11,7 +11,9 @@ import { DataService } from '../../services/DataServices/data.service';
 })
 export class IconsComponent implements OnInit {
   selectedFile: File = null;
-  
+
+  flag: boolean = false;
+  // @Input() more
   @Output() setcolortoNote = new EventEmitter();
 
   onFileSelected(Event: any, card: any) {
@@ -21,7 +23,7 @@ export class IconsComponent implements OnInit {
     this.Onupload(card)
 
   }
-  constructor(public httpClient: HttpClient, public notesService: NotesService, public SnackBar : MatSnackBar,private service:DataService ) { }
+  constructor(public httpClient: HttpClient, public notesService: NotesService, public SnackBar: MatSnackBar, private service: DataService) { }
   @Input() card: any;
 
   ngOnInit() {
@@ -32,10 +34,11 @@ export class IconsComponent implements OnInit {
       const formdata = new FormData();
       formdata.append('file', this.selectedFile);
       this.notesService.ImageUpload(formdata, card.id).subscribe
-        (data => { console.log(data)
-          this.service.change({type:'image'})
-          this.SnackBar.open("Image Uploaded", "close", { duration: 2000 }); 
-         
+        (data => {
+          console.log(data)
+          this.service.change({ type: 'image' })
+          this.SnackBar.open("Image Uploaded", "close", { duration: 2000 });
+
         },
           err => {
             console.log(err);
@@ -51,35 +54,50 @@ export class IconsComponent implements OnInit {
       console.log(card, "card")
       card.color = color;
       this.notesService.updateNotes(card.id, card).subscribe(
-        data => { console.log(data, "color update");},
+        data => { console.log(data, "color update"); },
         err => { console.log(err); }
       )
     }
   }
-  Archive(card){
-    card.isArchive=true;
+  Archive(card) {
+    card.isArchive = true;
     console.log(card)
-    this.notesService.ArchiveNote(card.id,card).subscribe(
-      data => { console.log(data);
-        this.SnackBar.open("Note Archived", "close", { duration: 2000 }); },
-        err => { console.log(err); }
-    ) 
+    this.notesService.ArchiveNote(card.id, card).subscribe(
+      data => {
+        console.log(data);
+        this.SnackBar.open("Note Archived", "close", { duration: 2000 });
+      },
+      err => { console.log(err); }
+    )
+  }
+
+  unarchive(card) {
+    card.isArchive = false;
+    this.notesService.ArchiveNote(card.id, card).subscribe(
+      data => {
+        console.log(data);
+        this.SnackBar.open("note unarchive", "close", { duration: 2000 });
+      },
+      err => { console.log(err); }
+    )
   }
 
   TrashNote(card) {
     console.log(card);
-    card.isTrash=true;
-      this.notesService.Trash(card.id,card).subscribe(
-        data => { console.log(data);
-          this.SnackBar.open("Note Trashed", "close", { duration: 2000 }); },
-        err => { console.log(err); }
-      )
+    card.isTrash = true;
+    this.notesService.Trash(card.id, card).subscribe(
+      data => {
+        console.log(data);
+        this.SnackBar.open("Note Trashed", "close", { duration: 2000 });
+      },
+      err => { console.log(err); }
+    )
   }
-  Delete(card){
+  Delete(card) {
     console.log(card);
-    this.notesService.DeleteNote(card.id,card).subscribe(
-      data=>{console.log(data); },
-      err => {console.log(err); }
-      )
+    this.notesService.DeleteNote(card.id, card).subscribe(
+      data => { console.log(data); },
+      err => { console.log(err); }
+    )
   }
 }

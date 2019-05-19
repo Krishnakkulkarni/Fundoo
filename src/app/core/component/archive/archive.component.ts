@@ -11,7 +11,7 @@ export class ArchiveComponent implements OnInit {
   notes = [];
   CardNotes = []
   id: string;
-
+// more='isArchive'
   constructor(public notesService: NotesService) { }
 
   ngOnInit() {

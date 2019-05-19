@@ -3,7 +3,7 @@
 
     <div fxFlex="100" fxLayout="row">
 
-      <div fxFlex="70" fxLayout="row">
+      <div fxFlex="65" fxLayout="row">
 
         <button mat-icon-button (click)="snav.toggle()">
           <mat-icon>menu</mat-icon>
@@ -11,10 +11,10 @@
 
         <img id="fundoo-image" src="../../assets/images/image.png" />
 
-
         <h1 class="example-app-name">{{HeaderName}}</h1>
 
         <div fxHide.xs='true' fxFlex fxLayout="row">
+
           <mat-form-field fxFlex appearance="outline" [style.fontSize.px]=2 fxFlexOffset="8">
             <div fxLayout="row">
               <button mat-icon-button>
@@ -23,6 +23,7 @@
               <input matInput [style.fontSize.px]=14 placeholder="Search">
             </div>
           </mat-form-field>
+
         </div>
 
       </div>
@@ -49,25 +50,18 @@
         <!----------------------------------LogOut------------------------------------------>
         <div fxLayout="row" fxLayoutAlign="end center">
 
-          <button mat-mini-fab style="background-color: #ecf3f7" [matMenuTriggerFor]="menu" style="outline:none">
+          <button mat-mini-fab [matMenuTriggerFor]="menu">
           </button>
 
           <mat-menu #menu="matMenu">
-
             <div>
-
               <button mat-mini-fab (click)="SelectImage.click()">
               </button>
-
               <input fxHide class="image" type="file" (change)="fileUpload($event)" #SelectImage>
-
             </div><br>
-
-            <button mat-menu-item (click)="onLogout()" style="outline:none">Logout</button>
-
+            <button mat-menu-item (click)="onLogout()">Logout</button>
           </mat-menu>
         </div>
-
       </div>
 
     </div>
@@ -80,11 +74,11 @@
       class="mat-side-nav-bar">
 
       <mat-nav-list>
-        <div fxLayout="column" fxLayoutGap="12px">
+        <div class="nav-list-div" fxLayout="column" fxLayoutGap="12px">
 
           <div fxLayout="column">
-            <button mat-button (click)='Note()' (click)="HeaderName= 'Fundoo Notes'"
-              [ngClass]="{'sidenav':HeaderName!= 'Fundoo Notes','sidenavlist':HeaderName=='Fundoo Notes'}">
+            <button mat-button (click)='Note()' (click)="HeaderName= 'Fundoo'"
+              [ngClass]="{'sidenav':HeaderName!= 'Fundoo','sidenavlist':HeaderName=='Fundoo'}">
               <mat-icon style="margin-right:25px">lightbulb_outline</mat-icon>
               Notes
             </button>

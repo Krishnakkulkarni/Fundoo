@@ -33,7 +33,7 @@ export class UserService {
     return this.httpService.post('Account/resetPassword', userresettpassword);
   }
 
-  uploadImage(data){
-    return this.httpService.post('Account/profile',data)
+  uploadImage(data,userid){
+    return this.httpService.post('Account/profile/'+userid,data)
   }
 }

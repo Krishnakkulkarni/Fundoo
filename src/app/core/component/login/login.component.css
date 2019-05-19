@@ -1,9 +1,21 @@
-.outerdiv{
+.outer-div{
     height: 100vh;
+}
+.image-div-style{
+    height:70px;
 }
 #image{
 width:  80px;
 padding-top: 3%;
+}
+.header-div-in{
+    height:15px;
+}
+.header-in{
+    font-weight:400; line-height: 1.333; font-size:24px; 
+}
+.fundoo-header{
+    font-weight:400
 }
 .field{
     width: 100%;
@@ -16,6 +28,9 @@ padding-top: 3%;
     color: azure;
     background-color:rgb(42, 123, 245)
 }
-.Forgotpassword{
+.forgot-div{
+    height:70px
+}
+.Forgot-password{
     color: rgb(42, 123, 245)
 }

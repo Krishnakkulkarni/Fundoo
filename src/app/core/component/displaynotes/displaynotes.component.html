@@ -1,5 +1,4 @@
-<div [ngClass]="main" fxLayoutGap="2%" fxLayout='row' fxLayout='row wrap'
-  style="margin-top:15px; margin-left: 20%; margin-right: 10%">
+<div [ngClass]="main" fxLayoutGap="2%" fxLayout='row' fxLayout='row wrap' class="outer-div-style">
 
   <div class="loop" *ngFor="let note of cards">
 
@@ -8,7 +7,7 @@
 
       <div *ngIf="note" (click)="openDialog(note)" class="element">
         <div>
-          <img src="{{note.image}}" class="notesImage" />
+          <img src="{{note.image}}" class="notes-image" />
         </div>
 
         <div>

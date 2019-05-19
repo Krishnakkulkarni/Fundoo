@@ -1,17 +1,18 @@
-<div fxLayout="column">
+<div class="dailog-outer-div" fxLayout="column" [style.background-color]='color'>
 
-  <img src="{{data.note.image}}" class="notesImage" />
+  <img src="{{data.note.image}}" class="notes-image" />
 
   <div mat-dialog-content>
-    <input matInput style="height:45px" [(ngModel)]="data.note.title">
-    <input matInput style="height:45px" [(ngModel)]="data.note.description">
+    <input matInput class="text" [(ngModel)]="data.note.title">
+    <input matInput class="text" [(ngModel)]="data.note.description">
   </div>
 
   <div fxLayout="row">
-    <app-icons></app-icons>
-    <button mat-button [mat-dialog-close]="data.note">close</button>
+    <app-icons (setcolortoNote)='SetColor($event)'></app-icons>
+    <div class="button-div">
+      <button mat-button [mat-dialog-close]="data.note">close</button>
+    </div>
+    
   </div>
 
 </div>
-
-<!-- fxFlex style="margin:20px;padding-right: 20%" -->

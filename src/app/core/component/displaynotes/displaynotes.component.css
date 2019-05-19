@@ -1,14 +1,32 @@
+.outer-div-style{
+    margin-top:15px; margin-left: 20%; margin-right: 10%; margin-bottom:20px;
+}
 .note{
-    min-width: 230px;
+    width: 230px;
     margin-top:15px;
 }
 .notes{
-    min-width: 675px;
-    margin-top:15px;   
+    width: 550px;
+    margin-top:15px;
+    margin-left: 130px
 }
 .element{
     position : center;
 }
-.notesImage{
+.notes-image{
     width: 100%;
+    background-size: cover;
+}
+@media screen and (max-width: 600px) {
+    .note{
+        width: 220px;
+        margin-top: 5px;
+    }
+}
+@media screen and (max-width: 600px) {
+    .notes{
+        width: 540px;
+        margin-top: 5px;
+        margin-left: 30px
+    }
 }

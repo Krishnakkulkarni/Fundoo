@@ -1,17 +1,18 @@
-<div fxLayoutAlign='center center' class="outerdiv">
+<div fxLayoutAlign='center center' class="outer-div">
   <mat-card class="mat" fxFlex="35" fxFlex.sm="45" fxFlex.gt-sm="45" fxFlex.md="50" fxFlex.xs="80">
 
     <form #LoginForm="ngForm" (ngSubmit)="onSubmit(LoginForm)" autocomplete="off">
       <div fxLayout="column">
 
-        <div fxLayoutAlign='center center'><img id="image" src="../../../../assets/images/Fundoo.png"></div>
+        <div fxLayoutAlign='center center' class="image-div-style"><img id="image"
+            src="../../../../assets/images/Fundoo.png"></div>
 
-        <div fxLayoutAlign='center center'>
-          <h3>Sign in</h3>
+        <div fxLayoutAlign='center center' class="header-div-in">
+          <h3 class="header-in">Sign in</h3>
         </div>
 
         <div fxLayoutAlign='center center'>
-          <h3>With your Fundoo Account</h3>
+          <h3 class="fundoo-header">With your Fundoo Account</h3>
         </div>
 
         <div fxLayout="column" fxLayoutGap="5px" fxLayout.sm="column" fxLayoutGap.sm="10px" fxLayout.md="column"
@@ -39,10 +40,10 @@
         <div fxLayout="row" fxLayoutGap="100px" fxLayout.sm="row" fxLayoutGap.sm="100px" fxLayout.md="row"
           fxLayout.xs="column" fxLayoutGap.xs="10px" fxLayoutAlign="space-between end">
 
-          <div fxLayout="column" fxLayoutGap="15px" >
-            <div >
-            <a routerLink="/forgot-password" class="Forgotpassword" routerLinkActive="active">Forgot password?</a>
-          </div>
+          <div fxLayout="column" fxLayoutGap="15px">
+            <div class="forgot-div">
+              <a routerLink="/forgot-password" class="Forgot-password" routerLinkActive="active">Forgot password?</a>
+            </div>
             <a routerLink="/user/user-register" class="register" routerLinkActive="active">Create account</a>
           </div>
 

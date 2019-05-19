@@ -1,8 +1,14 @@
-.outerdiv{
+.outer-div{
     height:100vh;
 }
 #image{
+    padding-top: 3%; 
     width:80px;
+}
+.fundoo-header{
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 0px;
 }
 .width{
     width:100%

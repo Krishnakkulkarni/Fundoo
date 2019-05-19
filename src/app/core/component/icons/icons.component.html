@@ -1,58 +1,63 @@
-<div class="Hover" fxLayout="row" fxLayoutAlign="space-around start" >
+<div class="Hover" fxLayout="row" fxLayoutAlign="space-around start">
   <!---------------------------------Remind-Me------------------------------------------->
 
-    <div class="img" matTooltip="Remind-Me">
-      <button mat-icon-button [matMenuTriggerFor]="MenuRemind">
-        <mat-icon>notification_important</mat-icon>
-      </button>
-    </div>
-  
+  <div class="img" matTooltip="Remind-Me">
+    <button mat-icon-button [matMenuTriggerFor]="MenuRemind">
+      <mat-icon>notification_important</mat-icon>
+    </button>
+  </div>
+
   <!---------------------------------Collaborator------------------------------------------->
 
-    <div class="img" matTooltip="Collaborator">
-      <button mat-icon-button (click)='Collaborator()'>
-        <mat-icon>person_add</mat-icon>
-      </button>
-    </div>
+  <div class="img" matTooltip="Collaborator">
+    <button mat-icon-button (click)='Collaborator()'>
+      <mat-icon>person_add</mat-icon>
+    </button>
+  </div>
 
   <!---------------------------------Change-color------------------------------------------->
- 
-    <div class="img">
-      <button mat-icon-button [matMenuTriggerFor]="MenuColor" style="outline: none" matTooltip="Change color">
-        <mat-icon>color_lens</mat-icon>
-      </button>
-    </div>
- 
+
+  <div class="img">
+    <button mat-icon-button [matMenuTriggerFor]="MenuColor" style="outline: none" matTooltip="Change color">
+      <mat-icon>color_lens</mat-icon>
+    </button>
+  </div>
+
   <!---------------------------------Add-Image------------------------------------------->
 
 
-    <div class="img">
-      <input type="file" name="file" style="display:none" #file (change)="onFileSelected($event,card)" />
-      <button mat-icon-button (click)='file.click()' matTooltip="Add Image">
-        <mat-icon>crop_original</mat-icon>
-      </button>
-    </div>
- 
+  <div class="img">
+    <input type="file" name="file" style="display:none" #file (change)="onFileSelected($event,card)" />
+    <button mat-icon-button (click)='file.click()' matTooltip="Add Image">
+      <mat-icon>crop_original</mat-icon>
+    </button>
+  </div>
+
 
   <!---------------------------------Archive------------------------------------------->
-  
-    <div class="img">
-      <button mat-icon-button (click)='Archive(card)' matTooltip="Archive">
-        <mat-icon>archive</mat-icon>
-      </button>
-    </div>
 
+  <div class="img">
+    <button mat-icon-button *ngIf="flag!=isArchive" (click)='Archive(card)' matTooltip="Archive">
+      <mat-icon>archive</mat-icon>
+    </button>
+  </div>
+
+  <div class="img">
+    <button mat-icon-button *ngIf="flag==isArchive" (click)='unarchive(card)' matTooltip="Archive">
+      <mat-icon>unarchive</mat-icon>
+    </button>
+  </div>
 
 
   <!----------------------------------More--------------------------------------------->
 
-    <div class="img">
-      <button mat-icon-button [matMenuTriggerFor]="Menu" style="outline:none" matTooltip="More">
-        <mat-icon>more_vert</mat-icon>
-      </button>
-    </div>
-
+  <div class="img">
+    <button mat-icon-button [matMenuTriggerFor]="Menu" style="outline:none" matTooltip="More">
+      <mat-icon>more_vert</mat-icon>
+    </button>
   </div>
+
+</div>
 
 <!------------------------------------Menu-Colors------------------------------------------->
 <mat-menu #MenuColor="matMenu">

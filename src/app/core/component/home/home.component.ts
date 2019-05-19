@@ -21,6 +21,7 @@ export class HomeComponent implements OnInit {
 
   profilePic: boolean;
   imageprofile: string;
+  userid : string;
 
   mobileQuery: MediaQueryList;
   private _mobileQueryListener: () => void;
@@ -36,6 +37,8 @@ export class HomeComponent implements OnInit {
 
   }
   ngOnInit() {
+    this.userid=localStorage.getItem("UserID");
+    
   }
 
   onLogout() {
@@ -64,15 +67,16 @@ export class HomeComponent implements OnInit {
 
 
   fileUpload($event) {
-    console.log($event, "......")
-    console.log($event.path[0].files[0], "upload file ")
+    console.log($event,this.userid ,"......")
+    console.log($event.path[0].files[0], "uploaded file ")
     this.imageFile = $event.path[0].files[0]
     const uploadImage = new FormData();
     uploadImage.append('file', this.imageFile, this.imageFile.name);
     this.ChangePic($event)
+    
   }
 
-  ChangePic(data) {
+  ChangePic(data: any) {
     {
       try {
         const dialogRef = this.dialog.open(ImagecropComponent, {

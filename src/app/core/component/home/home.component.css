@@ -61,8 +61,33 @@
   .mat-side-nav-bar{
    border:0px;
   }
-   /* @media screen and (min-width: 600px) {
-    mat-side-nav-bar {
+ 
+   @media screen and (max-width: 600px) {
+    .nav-list-div {
       display: none;
+      margin-top: 50px;
     }
-  } */
+  }
+
+  @media screen and (max-width: 600px) {
+  .sidenav{
+    width: 185px;
+    height: 27px;
+    background-color: white;
+    border-top-right-radius : 80px;
+    border-bottom-right-radius: 80px;
+    text-align: left;
+  }
+}
+@media screen and (max-width: 600px) {
+  .sidenavlist{
+    width: 185px;
+    height: 27px;
+    font-size : 15px;
+    background-color:rgb(250, 229, 189);
+    border-block-end: none;
+    border-top-right-radius : 80px;
+    border-bottom-right-radius: 80px;
+    text-align: left;
+  }
+}

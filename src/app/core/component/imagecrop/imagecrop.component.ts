@@ -13,12 +13,16 @@ import { DialogData } from '../home/home.component';
 export class ImagecropComponent implements OnInit {
 
   imagecroped: any;
+  userid: string;
+
 
   constructor(public dialogRef: MatDialogRef<ImagecropComponent>,
     @Inject(MAT_DIALOG_DATA) public dialogData: DialogData, public userService: UserService, public httpService: HttpService,
-    public dataService: DataService) { console.log(dialogData, "in image crop dialog") }
+    public dataService: DataService) 
+    { console.log(dialogData, "in image crop dialog") }
 
   ngOnInit() {
+    this.userid=localStorage.getItem('UserID')
   }
 
   private token = localStorage.getItem('token')
@@ -35,9 +39,9 @@ export class ImagecropComponent implements OnInit {
   setprofile() {
       const formdata = new FormData();
       formdata.append('file', this.imagecroped);
-      console.log(formdata, "form data");
+      console.log(formdata,this.userid, "form data");
 
-      this.userService.uploadImage(formdata).subscribe(data => {
+      this.userService.uploadImage(formdata,this.userid).subscribe(data => {
         console.log(data, "resp when setting img")
         localStorage.setItem('imageurl', data['status'].imageUrl);
         this.dialogRef.close();
