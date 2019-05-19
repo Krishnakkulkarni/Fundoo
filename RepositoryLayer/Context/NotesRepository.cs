@@ -240,13 +240,13 @@ namespace RepositoryLayer.Context
                            };
                 foreach (var result in data)
                 {
-                    var collnotes = from notes in this.authentication.NotesContext
+                    var collnotes = from notes in this.authentication.NotesModel
                                     where notes.Id == result.NoteId
                                     select new NotesShareModel
                                     {
                                         NoteId = notes.Id,
                                         Title = notes.Title,
-                                        TakeANote = notes.Descreption,
+                                        TakeANote = notes.Description,
                                     };
                     foreach (var collaborator in collnotes)
                     {
@@ -256,9 +256,9 @@ namespace RepositoryLayer.Context
 
                 return sharednotes.ToString();
             }
-            catch (Exception exception)
+            catch (Exception e)
             {
-
+                throw new Exception(e.Message);
             }
         }
     }

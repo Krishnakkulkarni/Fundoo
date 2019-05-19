@@ -188,7 +188,7 @@ namespace FundooApi.Controllers
 
         
         [HttpDelete]
-        [Route("removeCollaborator")]
+        [Route("removeCollaborator/{id}")]
         public IActionResult RemoveCollaboratorToNote(int id)
         {
             try
