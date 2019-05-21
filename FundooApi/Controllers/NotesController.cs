@@ -105,12 +105,12 @@ namespace FundooApi.Controllers
         /// <returns>return notes</returns>
         [HttpGet]
         [Route("{UserId}")]
-        public IActionResult ViewAll(Guid userId)
+        public IActionResult ViewAll(string userId)
         {
             try
             {
                 IList<NotesModel> note = this.notesCreation.AccessNotes(userId);
-                return this.Ok(note);
+                return this.Ok( new { note});
             }
             catch (Exception e)
             {
@@ -141,7 +141,7 @@ namespace FundooApi.Controllers
         
         [HttpGet]
         [Route("archive/{userId}")]
-        public IActionResult ArchiveNotes(Guid userId)
+        public IActionResult ArchiveNotes(string userId)
         {
             IList<NotesModel> result = this.notesCreation.Archive(userId);
             if (result == null)
@@ -154,7 +154,7 @@ namespace FundooApi.Controllers
 
         [HttpGet]
         [Route("trash/{userId}")]
-        public IActionResult TrashNotes(Guid userId)
+        public IActionResult TrashNotes(string userId)
         {
             IList<NotesModel> result = this.notesCreation.Trash(userId);
             if (result == null)
@@ -231,3 +231,31 @@ namespace FundooApi.Controllers
         }
     }
 }
+//public IList<NotesModel> AccessNotes(string userId)
+//{
+//    var cacheKey = redisdata + userId.ToString();
+//    using (var redis = new RedisClient())
+//    {
+//        if (redis.Get(cacheKey) == null)
+//        {
+//            var notes = this.notesRepository.GetNotes(userId);
+//            if (notes != null)
+//            {
+//                redis.Set(cacheKey, notes);
+//            }
+
+//            return notes.ToArray();
+//        }
+//        else
+//        {
+//            var redisNotes = redis.Get<List<NotesModel>>(cacheKey);
+//            return redisNotes;
+//        }
+//    }
+//}
+//----------------------------------
+//public IList<NotesModel> GetNotes(string userID)
+//{
+//    var note = from notes in this.context.NotesContext where notes.UserId.Equals(userID) && notes.IsArchive == false && notes.IsTrash == false orderby notes.Id descending select notes;
+//    return note.ToArray();
+//}

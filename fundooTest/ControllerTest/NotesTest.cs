@@ -31,7 +31,7 @@ namespace FundooTest.ControllerTest
                 Id = 1,
                 Title = "alphabetes",
                 Description = "abcdefgh",
-                UserId = Guid.NewGuid(),
+                UserId = Guid.NewGuid().ToString(),
                 CreatedDate = DateTime.Now,
                 ModifiedDate = DateTime.Now
             };
@@ -57,7 +57,7 @@ namespace FundooTest.ControllerTest
                 Id = 0,
                 Title = "Title",
                 Description = "Description",
-                UserId = Guid.NewGuid(),
+                UserId = Guid.NewGuid().ToString(),
                 CreatedDate = DateTime.Now,
                 ModifiedDate = DateTime.Now
             };
@@ -97,7 +97,7 @@ namespace FundooTest.ControllerTest
             var notes = new NotesCreation(service.Object);
 
             ////act
-            var data = notes.AccessNotes(Guid.NewGuid());
+            var data = notes.AccessNotes(Guid.NewGuid().ToString());
 
             ////assert
             Assert.Null(data);

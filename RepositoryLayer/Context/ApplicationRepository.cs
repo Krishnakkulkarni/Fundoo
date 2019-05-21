@@ -20,6 +20,7 @@ namespace RepositoryLayer.Context
     using Microsoft.Extensions.Options;
     using Microsoft.IdentityModel.Tokens;
     using RepositoryLayer.Interface;
+    using ServiceStack.Redis;
 
     /// <summary>
     /// Application Repository class
@@ -119,22 +120,32 @@ namespace RepositoryLayer.Context
             var user = await this.usermanager.FindByNameAsync(model.UserName);
             if (user != null && await this.usermanager.CheckPasswordAsync(user, model.Password))
             {
-                var tokenDescriptor = new SecurityTokenDescriptor
+                using(var redis = new RedisClient())
                 {
-                    Subject = new ClaimsIdentity(new Claim[] { new Claim("UserID", user.Id.ToString()) }),
-                    Expires = DateTime.UtcNow.AddDays(1),
-                    SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes(this.appSettings.JWT_Secrete)), SecurityAlgorithms.HmacSha256Signature)
-                };
+                    if(redis.Get(model.UserName)==null)
+                    {
+                        var tokenDescriptor = new SecurityTokenDescriptor
+                        {
+                            Subject = new ClaimsIdentity(new Claim[] { new Claim("UserID", user.Id.ToString()) }),
+                            SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes(this.appSettings.JWT_Secrete)), SecurityAlgorithms.HmacSha256Signature)
+                        };
+                        var tokenHandler = new JwtSecurityTokenHandler();
+                        var securityToken = tokenHandler.CreateToken(tokenDescriptor);
+                        var token = tokenHandler.WriteToken(securityToken);
 
-                var tokenHandler = new JwtSecurityTokenHandler();
-                var securityToken = tokenHandler.CreateToken(tokenDescriptor);
-                var token = tokenHandler.WriteToken(securityToken);
-                var cacheKey = token;
-                this.distributedCache.GetString(cacheKey);
-                this.distributedCache.SetString(cacheKey, token);
-                return token;
+                        if(tokenDescriptor != null)
+                        {
+                            redis.Set(model.UserName, tokenDescriptor);
+                        }
+                        return token;
+                    }
+                    else
+                    {
+                        var redis1 = redis.Get<ApplicationUserModel>(model.UserName);
+                        return redis1.ToString();
+                    }
+                }
             }
-
             return "invalid user";
         }
 

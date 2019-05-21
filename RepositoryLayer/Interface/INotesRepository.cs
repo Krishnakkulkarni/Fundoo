@@ -43,12 +43,7 @@ namespace RepositoryLayer.Interface
         /// <param name="id">The identifier.</param>
         void UpdateNotes(NotesModel notesModel, int id);
 
-        /// <summary>
-        /// Gets the notes.
-        /// </summary>
-        /// <param name="userId">The user identifier.</param>
-        /// <returns>return NotesModel</returns>
-        IList<NotesModel> GetNotes(Guid userId);
+        IList<NotesModel> GetNotes(string userID);
 
         /// <summary>
         /// Images the specified file.
@@ -63,19 +58,34 @@ namespace RepositoryLayer.Interface
         /// </summary>
         /// <param name="userId">The user identifier.</param>
         /// <returns>return list</returns>
-        IList<NotesModel> Archive(Guid userId);
+        IList<NotesModel> Archive(string userId);
 
         /// <summary>
         /// Trashes the note.
         /// </summary>
         /// <param name="userId">The user identifier.</param>
         /// <returns>return list</returns>
-        IList<NotesModel> TrashNote(Guid userId);
+        IList<NotesModel> TrashNote(string userId);
 
+        /// <summary>
+        /// Adds the collaborator to note.
+        /// </summary>
+        /// <param name="model">The model.</param>
+        /// <returns>returns string</returns>
         string AddCollaboratorToNote([FromBody] CollaboratorModel model);
 
+        /// <summary>
+        /// Removes the collaborator to note.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns>returns string</returns>
         string RemoveCollaboratorToNote(int id);
 
+        /// <summary>
+        /// Collaborators the note.
+        /// </summary>
+        /// <param name="receiverEmail">The receiver email.</param>
+        /// <returns>returns string</returns>
         string CollaboratorNote(string receiverEmail);
     }
 }

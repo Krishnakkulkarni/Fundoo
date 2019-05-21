@@ -20,6 +20,7 @@
     <PackageReference Include="Microsoft.Extensions.Identity.Stores" Version="2.1.1" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.9" />
     <PackageReference Include="Moq" Version="4.10.1" />
+    <PackageReference Include="ServiceStack.Redis" Version="5.5.0" />
     <PackageReference Include="xunit" Version="2.0.0" />
   </ItemGroup>
 

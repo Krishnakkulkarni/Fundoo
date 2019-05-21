@@ -6,6 +6,7 @@
 namespace Common.Models
 {
     using System;
+    using System.ComponentModel.DataAnnotations.Schema;
 
     /// <summary>
     /// Notes Model class
@@ -58,7 +59,8 @@ namespace Common.Models
         /// <value>
         /// The user identifier.
         /// </value>
-        public Guid UserId { get; set; }
+        [ForeignKey("ApplicationUser")]
+        public string UserId { get; set; }
 
         /// <summary>
         /// Gets or sets the color.

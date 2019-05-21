@@ -38,12 +38,7 @@ namespace BussinessLayer.Interfaces
         /// <returns>return integer</returns>
         Task<int> Change(NotesModel notesModel, int id);
 
-        /// <summary>
-        /// Accesses the notes.
-        /// </summary>
-        /// <param name="userId">The user identifier.</param>
-        /// <returns>return NotesModel</returns>
-        IList<NotesModel> AccessNotes(Guid userId);
+        IList<NotesModel> AccessNotes(string userId);
 
         /// <summary>
         /// Browses the image.
@@ -58,19 +53,34 @@ namespace BussinessLayer.Interfaces
         /// </summary>
         /// <param name="userId">The user identifier.</param>
         /// <returns>return list</returns>
-        IList<NotesModel> Archive(Guid userId);
+        IList<NotesModel> Archive(string userId);
 
         /// <summary>
         /// Trashes the specified user identifier.
         /// </summary>
         /// <param name="userId">The user identifier.</param>
         /// <returns>return list</returns>
-        IList<NotesModel> Trash(Guid userId);
+        IList<NotesModel> Trash(string userId);
 
+        /// <summary>
+        /// Adds the collaborator to note.
+        /// </summary>
+        /// <param name="model">The model.</param>
+        /// <returns>returns string</returns>
         string AddCollaboratorToNote(CollaboratorModel model);
 
+        /// <summary>
+        /// Removes the collaborator to note.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns>returns string</returns>
         string RemoveCollaboratorToNote(int id);
 
+        /// <summary>
+        /// Collaborators the note.
+        /// </summary>
+        /// <param name="receiverEmail">The receiver email.</param>
+        /// <returns>returns string</returns>
         string CollaboratorNote(string receiverEmail);
     }
 }

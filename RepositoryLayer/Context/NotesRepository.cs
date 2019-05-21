@@ -100,18 +100,12 @@ namespace RepositoryLayer.Context
         /// <summary>
         /// Gets the notes.
         /// </summary>
-        /// <param name="userId">The user identifier.</param>
-        /// <returns>return NotesModel</returns>
-        public IList<NotesModel> GetNotes(Guid userId)
+        /// <param name="userID">The user identifier.</param>
+        /// <returns>returns NotesModel</returns>
+        public IList<NotesModel> GetNotes(string userID)
         {
-            var list = new List<NotesModel>();
-            var note = from notes in this.authentication.NotesModel where notes.UserId == userId orderby notes.UserId descending select notes;
-            foreach (var item in note)
-            {
-                list.Add(item);
-            }
-
-            return list;
+            var note = from notes in this.authentication.NotesModel where notes.UserId.Equals(userID) && notes.IsArchive == false && notes.IsTrash == false orderby notes.Id descending select notes;
+            return note.ToArray();
         }
 
         /// <summary>
@@ -150,7 +144,7 @@ namespace RepositoryLayer.Context
         /// </summary>
         /// <param name="userId">The user identifier.</param>
         /// <returns>returns list</returns>
-        public IList<NotesModel> Archive(Guid userId)
+        public IList<NotesModel> Archive(string userId)
         {
             var list = new List<NotesModel>();
             var note = from notes in this.authentication.NotesModel where (notes.UserId == userId) && (notes.IsArchive == true) && (notes.IsTrash == false) select notes;
@@ -167,7 +161,7 @@ namespace RepositoryLayer.Context
         /// </summary>
         /// <param name="userId">The user identifier.</param>
         /// <returns>returns list</returns>
-        public IList<NotesModel> TrashNote(Guid userId)
+        public IList<NotesModel> TrashNote(string userId)
         {
             var list = new List<NotesModel>();
             var note = from notes in this.authentication.NotesModel where (notes.UserId == userId) && (notes.IsTrash == true) select notes;
