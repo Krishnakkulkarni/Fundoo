@@ -20,7 +20,7 @@ export class DisplaynotesComponent implements OnInit {
   constructor(private notesService: NotesService, public dataService: DataService, public matDialog: MatDialog) { }
 
   @Input() cards: any;
-
+  @Input() archived
   ngOnInit() {
     this.dataService.currentMessage.subscribe(data => {
       this.grid = data

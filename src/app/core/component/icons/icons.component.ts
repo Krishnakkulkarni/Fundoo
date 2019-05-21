@@ -14,6 +14,7 @@ export class IconsComponent implements OnInit {
 
   flag: boolean = false;
   // @Input() more
+  @Input() archivedicon
   @Output() setcolortoNote = new EventEmitter();
 
   onFileSelected(Event: any, card: any) {

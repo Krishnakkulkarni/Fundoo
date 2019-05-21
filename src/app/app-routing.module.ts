@@ -41,7 +41,7 @@ const routes: Routes = [
     ]
   },
   { path: 'editnote', component: EditnoteComponent },
-  { path: 'imagecroper', component:ImagecropComponent }
+  { path: 'imagecroper', component: ImagecropComponent }
 ];
 
 @NgModule({

@@ -37,13 +37,13 @@
   <!---------------------------------Archive------------------------------------------->
 
   <div class="img">
-    <button mat-icon-button *ngIf="flag!=isArchive" (click)='Archive(card)' matTooltip="Archive">
+    <button mat-icon-button *ngIf="archivedicon!='isArchive'" (click)='Archive(card)' matTooltip="Archive">
       <mat-icon>archive</mat-icon>
     </button>
   </div>
 
   <div class="img">
-    <button mat-icon-button *ngIf="flag==isArchive" (click)='unarchive(card)' matTooltip="Archive">
+    <button mat-icon-button *ngIf="archivedicon=='isArchive'" (click)='unarchive(card)' matTooltip="Unarchive">
       <mat-icon>unarchive</mat-icon>
     </button>
   </div>
@@ -107,14 +107,14 @@
 <!----------------------------------More-Menu------------------------------------------>
 <mat-menu #Menu="matMenu">
   <div>
-    <button mat-icon-button (click)="TrashNote(card)">Move To Trash</button>
+    <button mat-icon-button (click)="TrashNote(card)">Delete note</button>
   </div>
   <div>
     <button mat-icon-button (click)="AddLabel()">Add Label</button>
   </div>
-  <div>
+  <!-- <div>
     <button mat-icon-button (click)="Delete(card)">Delete forever</button>
-  </div>
+  </div> -->
 </mat-menu>
 
 <!----------------------------------Remind-Menu------------------------------------------>

@@ -49,6 +49,7 @@ export class HomeComponent implements OnInit {
 
   refresh() {
     location.reload()
+    
   }
 
   Note() {
