@@ -12,7 +12,7 @@ export class NotesService {
     return this.httpService.post('Notes/addNotes', data);
   }
   getNotesById(UserId: string) {
-    return this.httpService.Get('Notes/' + UserId);
+    return this.httpService.Get('Notes/'+ UserId);
   }
   ImageUpload(data, id) {
     return this.httpService.post('Notes/image/' + id, data);

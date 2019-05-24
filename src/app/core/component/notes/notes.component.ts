@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { NotesService } from '../../services/NotesServices/notes.service';
 import { FormControl, Validators } from '@angular/forms';
 
@@ -13,6 +13,9 @@ export class NotesComponent implements OnInit {
   take_a_note = new FormControl('', [Validators.required]);
   id: any;
   color: string = "#ffffff";
+  add : any;
+  @Output() AddEvent = new EventEmitter();
+  
 
   constructor(private notesService: NotesService) { }
 
@@ -33,14 +36,18 @@ export class NotesComponent implements OnInit {
       this.notesService.addNotes(notes).subscribe
         (data => {
           console.log(data)
+          this.AddEvent.emit(data)
         },
           err => {
+            this.AddEvent.emit({})
             console.log(err)
           }
         )
     }
   }
+
   SetColor($event: string) {
     this.color = $event
   }
+
 }

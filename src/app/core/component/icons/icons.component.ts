@@ -13,9 +13,12 @@ export class IconsComponent implements OnInit {
   selectedFile: File = null;
 
   flag: boolean = false;
-  // @Input() more
+  
   @Input() archivedicon
-  @Output() setcolortoNote = new EventEmitter();
+
+  @Output() setNote = new EventEmitter();
+  archive: boolean = true;
+  unarchive : boolean =true;
 
   onFileSelected(Event: any, card: any) {
     console.log(Event);
@@ -39,7 +42,6 @@ export class IconsComponent implements OnInit {
           console.log(data)
           this.service.change({ type: 'image' })
           this.SnackBar.open("Image Uploaded", "close", { duration: 2000 });
-
         },
           err => {
             console.log(err);
@@ -47,9 +49,10 @@ export class IconsComponent implements OnInit {
         )
     }
   }
+
   setcolor(color: any, card) {
     if (card == undefined) {
-      this.setcolortoNote.emit(color)
+      this.setNote.emit(color)
     }
     else {
       console.log(card, "card")
@@ -60,23 +63,27 @@ export class IconsComponent implements OnInit {
       )
     }
   }
+
   Archive(card) {
     card.isArchive = true;
     console.log(card)
     this.notesService.ArchiveNote(card.id, card).subscribe(
       data => {
         console.log(data);
+        this.setNote.emit(this.archive)
         this.SnackBar.open("Note Archived", "close", { duration: 2000 });
       },
       err => { console.log(err); }
     )
   }
 
-  unarchive(card) {
+  Unarchive(card) {
     card.isArchive = false;
     this.notesService.ArchiveNote(card.id, card).subscribe(
       data => {
         console.log(data);
+        this.setNote.emit(this.unarchive)
+
         this.SnackBar.open("note unarchive", "close", { duration: 2000 });
       },
       err => { console.log(err); }
@@ -89,12 +96,15 @@ export class IconsComponent implements OnInit {
     this.notesService.Trash(card.id, card).subscribe(
       data => {
         console.log(data);
+        this.setNote.emit(this.TrashNote)
         this.SnackBar.open("Note Trashed", "close", { duration: 2000 });
       },
       err => { console.log(err); }
     )
   }
+
   Delete(card) {
+    this.setNote.emit(this.Delete)
     console.log(card);
     this.notesService.DeleteNote(card.id, card).subscribe(
       data => { console.log(data); },

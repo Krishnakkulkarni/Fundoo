@@ -1,4 +1,4 @@
-<div [ngClass]="main" fxLayoutGap="2%" fxLayout='row' fxLayout='row wrap' class="outer-div-style">
+<div fxLayoutGap="2%" fxLayout='row' fxLayout='row wrap' class="outer-div-style">
 
   <div class="loop" *ngFor="let note of cards">
 
@@ -19,7 +19,7 @@
         </div>
       </div>
 
-      <app-icons [card]="note" [archivedicon]='archived'></app-icons>
+      <app-icons [card]="note" [archivedicon]='archived' (setNote)="Archive($event)"></app-icons>
     </mat-card>
 
   </div>

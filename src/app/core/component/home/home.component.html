@@ -15,12 +15,12 @@
 
         <div fxHide.xs='true' fxFlex fxLayout="row">
 
-          <mat-form-field fxFlex appearance="outline" [style.fontSize.px]=2 fxFlexOffset="8">
+          <mat-form-field fxFlex appearance="outline" [style.fontSize.px]=1 fxFlexOffset="8">
             <div fxLayout="row">
               <button mat-icon-button>
                 <mat-icon>search</mat-icon>
               </button>
-              <input matInput [style.fontSize.px]=14 placeholder="Search">
+              <input matInput [style.fontSize.px]=15 placeholder="Search">
             </div>
           </mat-form-field>
 
@@ -29,10 +29,10 @@
       </div>
 
 
-      <div fxFlex="30" fxLayout="row" fxLayoutAlign="end center">
+      <div fxFlex="25" fxLayout="row" fxLayoutAlign="end center">
 
         <div>
-          <button mat-icon-button fxFlexOffset="15">
+          <button mat-icon-button>
             <mat-icon (click)="refresh()">refresh</mat-icon>
           </button>
         </div>
@@ -50,16 +50,34 @@
         <!----------------------------------LogOut------------------------------------------>
         <div fxLayout="row" fxLayoutAlign="end center">
 
-          <button mat-mini-fab [matMenuTriggerFor]="menu">
+          <button mat-mini-fab class="mat-icon"
+            [ngStyle]="{'background-image': 'url(' + photo + ')','background-size':'cover'}" [matMenuTriggerFor]="menu"
+            fxLayout="row" fxLayoutAlign="end center" color='disabled' style="outline:none">
           </button>
+          <!--[ngStyle]="{'background-image': 'url(' + photo + ')','background-size':'cover'}" [matMenuTriggerFor]="menu1"
+             matTooltip=" Fundoo Account user: {{FirstName}}, email: {{Email}}"
+            [matTooltipClass]="'my-tooltip'"  -->
 
           <mat-menu #menu="matMenu">
-            <div>
-              <button mat-mini-fab (click)="SelectImage.click()">
-              </button>
+            <div class="backgroundimage" fxLayout="row">
               <input fxHide class="image" type="file" (change)="fileUpload($event)" #SelectImage>
+              <button mat-mini-fab (click)="SelectImage.click()">
+                <div mat-mini-fab class="changeProfile" fxLayoutAlign="end center">change</div>
+              </button>
+              <!-- [ngStyle]="{'background-image': 'url(' + photo + ')' ,'background-size':'cover','width':'70px','height':'70px'}"
+              <div>
+                <div class="profileName">
+                  {{FirstName}}
+                </div>
+                <div class="profileEmail">
+                  {{UserName}}
+                </div>
+              </div> -->
+
             </div><br>
-            <button mat-menu-item (click)="onLogout()">Logout</button>
+            <mat-divider></mat-divider>
+
+            <button mat-menu-item (click)="onLogout()">Sign out</button>
           </mat-menu>
         </div>
       </div>
@@ -67,6 +85,7 @@
     </div>
 
   </mat-toolbar>
+  <mat-divider></mat-divider>
 
   <!---------------------------------------------SideNav------------------------------------------------->
   <mat-sidenav-container class="side-nav-container">

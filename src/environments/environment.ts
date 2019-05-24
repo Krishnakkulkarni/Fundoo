@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   rooturl : 'https://localhost:44305/api/',
-  profileUrl :"http://34.213.106.173/"
+  profileUrl :"http://res.cloudinary.com/db4wyl94g/image/upload/v1558622391/kausxhagpokr9wpaozzi.png"
 };
 
 /*

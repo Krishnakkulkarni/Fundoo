@@ -1,7 +1,5 @@
-<!-- <div fxLayoutAlign="center center" [style.background-color]='Color' > -->
-<!-- <mat-card class="take-a-note-card"> -->
-<div class="notes-add" >
 
+<div class="notes-add" >
     <div *ngIf="!isOpen" (click)="isOpen=true" fxLayout="row" fxFlex.xs="80" fxFlex="20">
        <div>
         <textarea class="take-a-note" [style.background-color]='Color' [formControl]="title" type="text"
@@ -17,11 +15,11 @@
 
     <div *ngIf=isOpen [style.background-color]='color' fxFlex.xs="80" fxFlex="100" fxLayout="column">
         <div style="height:40px">
-            <input class="title-note" [formControl]="title" [style.background-color]='color' placeholder="  Title">
+            <input class="title-note" [formControl]="title" [style.background-color]='color' placeholder=" Title">
         </div>
         <div>
             <textarea class="take-note" [formControl]="take_a_note" [style.background-color]='color'
-            matTextareaAutosize placeholder=" Take a note..."></textarea>
+            matTextareaAutosize placeholder="Take a note..."></textarea>
         </div>
 
         <div fxLayout="row">
@@ -33,6 +31,4 @@
 
         </div>
     </div>
-
-    <!-- </mat-card> -->
 </div>

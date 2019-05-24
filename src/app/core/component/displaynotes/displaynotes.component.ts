@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { NotesService } from '../../services/NotesServices/notes.service';
 import { DataService } from '../../services/DataServices/data.service';
 import { MatDialog } from '@angular/material/dialog';
@@ -20,7 +20,11 @@ export class DisplaynotesComponent implements OnInit {
   constructor(private notesService: NotesService, public dataService: DataService, public matDialog: MatDialog) { }
 
   @Input() cards: any;
-  @Input() archived
+  @Input() archived;
+  @Output() messageEvent = new EventEmitter<any>();
+  unrchive: boolean;
+  archive: boolean;
+
   ngOnInit() {
     this.dataService.currentMessage.subscribe(data => {
       this.grid = data
@@ -39,5 +43,10 @@ export class DisplaynotesComponent implements OnInit {
         (data => { console.log(data, note); },
           err => { console.log(err); })
     });
+  }
+
+  Archive(event) {
+    console.log('event');
+    this.messageEvent.emit(event)
   }
 }

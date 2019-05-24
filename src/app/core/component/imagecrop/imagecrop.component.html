@@ -1,7 +1,7 @@
 <div>
   <div>
-  <image-cropper [imageChangedEvent]="data" [maintainAspectRatio]="true" [aspectRatio]="4 / 3" [resizeToWidth]="128"
-    format="png" (imageCropped)="imageCropped($event)"></image-cropper>
+    <image-cropper [imageChangedEvent]="dialogData" [maintainAspectRatio]="true" [aspectRatio]="4 / 3" [resizeToWidth]="128"
+      format="png" (imageCropped)="imageCropped($event)"></image-cropper>
   </div>
   <button mat-button class="close" (click)='cancel()'>cancel</button>
   <button mat-button class="upload" (click)='setprofile()'>set profile</button>

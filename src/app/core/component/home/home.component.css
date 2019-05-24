@@ -1,7 +1,11 @@
 .example-spacer {
   flex: 1 1 auto;
   }
-
+.mat-icon
+{
+    right: 0;
+    left: auto;
+}
 .example-container {
     display: flex;
     flex-direction: column;
@@ -11,7 +15,9 @@
     left: 0;
     right: 0;
   }
-  
+  .example-toolbar{
+    background-color: #ffffff
+  }
   .example-is-mobile .example-toolbar {
     position: fixed;
     /* Make sure the toolbar will stay on top of the content as it scrolls past. */
@@ -90,4 +96,8 @@
     border-bottom-right-radius: 80px;
     text-align: left;
   }
+}
+.backgroundimage {
+  width: auto;
+  height: auto;
 }

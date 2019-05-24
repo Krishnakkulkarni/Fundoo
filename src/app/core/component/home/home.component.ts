@@ -4,8 +4,10 @@ import { MatDialog } from '@angular/material';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material';
 import { DataService } from '../../services/DataServices/data.service';
-import { environment } from 'src/environments/environment';
+
 import { ImagecropComponent } from '../imagecrop/imagecrop.component';
+import { UserService } from '../../services/user.service';
+import { environment } from '../../../../environments/environment';
 
 export interface DialogData {
   data: any
@@ -19,9 +21,18 @@ export class HomeComponent implements OnInit {
 
   flag: boolean = true;
 
+  message: boolean;
   profilePic: boolean;
   imageprofile: string;
-  userid : string;
+
+  token: string;
+  userid: string;
+  FirstName: string;
+  userName: string;
+  UserName: string;
+  selectedFile: File;
+  value;
+  photo;
 
   mobileQuery: MediaQueryList;
   private _mobileQueryListener: () => void;
@@ -29,16 +40,22 @@ export class HomeComponent implements OnInit {
   HeaderName = "Fundoo"
 
   constructor(private router: Router, changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, public snackBar: MatSnackBar
-    , public dataService: DataService, public dialog: MatDialog) {
+    , public userService: UserService, public dataService: DataService, public dialog: MatDialog) {
 
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
 
   }
+
   ngOnInit() {
-    this.userid=localStorage.getItem("UserID");
-    
+    this.userid = localStorage.getItem("UserID");
+    this.photo = localStorage.getItem('imageUrl');
+    // localStorage.setItem('result',this.userid)
+    this.UserName = localStorage.getItem("UserName");
+    this.FirstName = localStorage.getItem("FirstName");
+    this.dataService.currentMsg.subscribe(message => this.message = message);
+    this.userName = localStorage.getItem("UserName")
   }
 
   onLogout() {
@@ -49,7 +66,6 @@ export class HomeComponent implements OnInit {
 
   refresh() {
     location.reload()
-    
   }
 
   Note() {
@@ -61,33 +77,44 @@ export class HomeComponent implements OnInit {
     this.dataService.changeView(this.flag)
   }
 
+  // onFileChanged(event) {
+  //   this.selectedFile = event.path[0].files[0];
+  //   let uploadData = new FormData();
+  //   uploadData.append('file', this.selectedFile, 'file');
+  //   console.log(uploadData);
+
+  //   this.userService.profilePicture(uploadData, this.userName).subscribe(data => {
+  //     // let obj = JSON.parse(data)
+  //     // localStorage.setItem('profile', obj.result)
+  //   }, err => {
+  //     console.log(err);
+  //   }
+  //   )
+  // }
 
   imageFile = null;
-  public imageNew = localStorage.getItem('imageurl')
+  public imageNew = localStorage.getItem('result');
   img = environment.profileUrl + this.imageNew;
 
 
-  fileUpload($event) {
-    console.log($event,this.userid ,"......")
-    console.log($event.path[0].files[0], "uploaded file ")
-    this.imageFile = $event.path[0].files[0]
+  fileUpload(event) {
+    console.log(event, this.userid, "......")
+    console.log(event.path[0].files[0], "uploaded file ")
+    this.imageFile = event.path[0].files[0]
     const uploadImage = new FormData();
     uploadImage.append('file', this.imageFile, this.imageFile.name);
-    this.ChangePic($event)
-    
+    this.ChangePic(event)
   }
 
   ChangePic(data: any) {
     {
       try {
-        const dialogRef = this.dialog.open(ImagecropComponent, {
-          data: data,
-          width: '600px'
-        });
+        const dialogRef = this.dialog.open(ImagecropComponent, { data: data, width: '600px' });
         dialogRef.afterClosed().subscribe(result => {
           this.dataService.currentImage.subscribe(response => {
           }
           )
+        
 
           this.imageprofile = localStorage.getItem('imageurl')
           this.img = environment.profileUrl + this.imageprofile;
@@ -98,9 +125,6 @@ export class HomeComponent implements OnInit {
       }
     }
   }
-
-
-
 
 
   Reminder() {

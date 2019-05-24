@@ -6,14 +6,14 @@ import { BehaviorSubject, Subject } from 'rxjs';
 })
 export class DataService {
 
-  private messageSource = new BehaviorSubject(true);
-  currentMessage = this.messageSource.asObservable();
+  private messageSrc = new BehaviorSubject<boolean>(false);
+  currentMsg = this.messageSrc.asObservable();
 
   private message = new BehaviorSubject({type:''});
   current = this.message.asObservable();
 
-
-
+  private messageSource = new BehaviorSubject(true);
+  currentMessage = this.messageSource.asObservable();
 
   private image = new Subject<boolean>();
   currentImage = this.image.asObservable();
@@ -25,8 +25,6 @@ export class DataService {
     this.image.next(message)
   }
   
-
-  
   changeView(view: boolean) {
     this.messageSource.next(view)
   }
@@ -35,5 +33,9 @@ export class DataService {
     this.message.next(message)
   }
   
+  changeMessage(message: boolean) {
+    console.log('message in data service',message);
+    this.messageSrc.next(message)
+  }
 
 }

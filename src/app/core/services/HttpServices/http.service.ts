@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { environment } from 'src/environments/environment';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from '../../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -22,5 +22,13 @@ export class HttpService {
   }
   deletenote(url: string, data) {
     return this.http.delete(this.rooturl + url,data)
+  }
+  postImage(url,data){
+    var http={
+      headers:new HttpHeaders({
+        'Authorization':localStorage.getItem('token')
+      })
+    };
+    return this.http.post(this.rooturl+url,data,http)
   }
 }

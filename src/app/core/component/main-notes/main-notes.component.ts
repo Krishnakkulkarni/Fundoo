@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NotesService } from '../../services/NotesServices/notes.service';
 import { DataService } from '../../services/DataServices/data.service';
-import * as jwt_decode from "jwt-decode";
 
 @Component({
   selector: 'app-main-notes',
@@ -11,17 +10,15 @@ import * as jwt_decode from "jwt-decode";
 export class MainNotesComponent implements OnInit {
 
   notes = [];
-  CardNotes = []
-  userid:any;
-  Token_Id : any;
+  CardNotes = [];
+  userid: any;
+  Token_Id: any;
 
   constructor(private notesService: NotesService, private dataservice: DataService) { }
 
   ngOnInit() {
     this.Token_Id = localStorage.getItem('token')
-    var jwt_token = jwt_decode(this.Token_Id);
-    localStorage.setItem("UserID",jwt_token.UserID)
-    this.userid=localStorage.getItem("UserID")
+    this.userid = localStorage.getItem("UserID")
 
     this.getAllCard();
     this.dataservice.current.subscribe(data => {
@@ -31,23 +28,27 @@ export class MainNotesComponent implements OnInit {
       }
     })
   }
+
   getAllCard() {
     this.CardNotes = [];
-    console.log(this.userid,"show");
-    
     this.notesService.getNotesById(this.userid).subscribe(
       (data: any) => {
-        this.notes = data
-        this.notes.forEach(element => {
-          if (element.isArchive == false && element.isTrash == false) {
-            this.CardNotes.push(element)
+        this.notes = data.note;
+
+        for (let i = 0; i < this.notes.length; i++) {
+          if (this.notes[i].isArchive == false && this.notes[i].isTrash == false) {
+            this.CardNotes.push(this.notes[i])
             console.log(this.CardNotes, "notes");
           }
-        });
-      }
-    ), (err: any) => {
-      console.log(err);
-    };
+        }
+      });
   }
-
+  eventOccur(event) {
+    this.getAllCard();
+  }
+  getnotes($event){
+    console.log('event occur');
+    
+    this.getAllCard();
+  }
 }
