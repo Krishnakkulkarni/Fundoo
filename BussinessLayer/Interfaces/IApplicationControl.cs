@@ -27,7 +27,7 @@ namespace BussinessLayer.Interfaces
         /// </summary>
         /// <param name="model">The model.</param>
         /// <returns>return string</returns>
-        Task<string> LoginAsync(ApplicationLoginModel model);
+        Task<dynamic> LoginAsync(ApplicationLoginModel model);
 
         /// <summary>
         /// Forgot the password asynchronous.
@@ -49,6 +49,13 @@ namespace BussinessLayer.Interfaces
         /// <param name="file">The file.</param>
         /// <param name="id">The identifier.</param>
         /// <returns>returns string</returns>
-        string ProfilePicture(IFormFile file, string id);
+        string ProfilePicture(IFormFile file, string userid);
+
+        /// <summary>
+        /// Profiles the URL.
+        /// </summary>
+        /// <param name="userid">The user id.</param>
+        /// <returns>returns response</returns>
+        //Task<string> ProfileUrl(string userid);
     }
 }

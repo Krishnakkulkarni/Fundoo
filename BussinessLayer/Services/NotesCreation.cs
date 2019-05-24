@@ -79,6 +79,11 @@ namespace BussinessLayer.Services
         {
             this.notesRepository.UpdateNotes(notesModel, id);
             var result = this.notesRepository.SaveChangesAsync();
+            using (var redis = new RedisClient())
+            {
+                redis.Remove(redisdata + notesModel.UserId);
+            }
+            AccessNotes(notesModel.UserId);
             return result;
         }
 
@@ -143,6 +148,18 @@ namespace BussinessLayer.Services
         }
 
         /// <summary>
+        /// Reminders the specified user identifier.
+        /// </summary>
+        /// <param name="userId">The user identifier.</param>
+        /// <returns>
+        /// returns list
+        /// </returns>
+        public IList<NotesModel> Reminder(string userId)
+        {
+            return this.notesRepository.Reminder(userId);
+        }
+
+        /// <summary>
         /// Adds the collaborator to note.
         /// </summary>
         /// <param name="model">The model.</param>
@@ -174,6 +191,13 @@ namespace BussinessLayer.Services
         public string CollaboratorNote(string receiverEmail)
         {
             return this.notesRepository.CollaboratorNote(receiverEmail);
+        }
+
+        public Task<int> UpdateCollaborater(NotesModel model, int id, string receiverEmail)
+        {
+            this.notesRepository.UpdateCollaborater(model, id, receiverEmail);
+            var result = this.notesRepository.SaveChangesAsync();
+            return result;
         }
     }
 }

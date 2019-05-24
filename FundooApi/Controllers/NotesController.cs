@@ -128,7 +128,7 @@ namespace FundooApi.Controllers
         [HttpPost]
         [Route("image/{id}")]
         public IActionResult Image(IFormFile file, int id)
-         {
+        {
             Console.WriteLine(file);
             if (file == null)
             {
@@ -160,6 +160,24 @@ namespace FundooApi.Controllers
             if (result == null)
             {
                 return this.NotFound();
+            }
+
+            return this.Ok(new { result });
+        }
+
+        /// <summary>
+        /// Reminders the specified user identifier.
+        /// </summary>
+        /// <param name="userId">The user identifier.</param>
+        /// <returns>returns response</returns>
+        [HttpGet]
+        [Route("reminder/{userId}")]
+        public IActionResult Reminder(string userId)
+        {
+            IList<NotesModel> result = this.notesCreation.Reminder(userId);
+            if (result == null)
+            {
+                return this.NotFound("no reminder");
             }
 
             return this.Ok(new { result });
@@ -229,33 +247,21 @@ namespace FundooApi.Controllers
                 return this.BadRequest();
             }
         }
+
+        [HttpPut]
+        [Route("updateCollaborater")]
+        public async Task<IActionResult> UpdateCollaborater(NotesModel model, int id, string receiverEmail)
+        {
+            try
+            {
+                //HttpContext.User.Claims.Where(x => x.Type == "UserId").SingleOrDefault();
+                var result = await this.notesCreation.UpdateCollaborater(model, id, receiverEmail);
+                return this.Ok(result);
+            }
+            catch (Exception)
+            {
+                return this.BadRequest();
+            }
+        }
     }
 }
-//public IList<NotesModel> AccessNotes(string userId)
-//{
-//    var cacheKey = redisdata + userId.ToString();
-//    using (var redis = new RedisClient())
-//    {
-//        if (redis.Get(cacheKey) == null)
-//        {
-//            var notes = this.notesRepository.GetNotes(userId);
-//            if (notes != null)
-//            {
-//                redis.Set(cacheKey, notes);
-//            }
-
-//            return notes.ToArray();
-//        }
-//        else
-//        {
-//            var redisNotes = redis.Get<List<NotesModel>>(cacheKey);
-//            return redisNotes;
-//        }
-//    }
-//}
-//----------------------------------
-//public IList<NotesModel> GetNotes(string userID)
-//{
-//    var note = from notes in this.context.NotesContext where notes.UserId.Equals(userID) && notes.IsArchive == false && notes.IsTrash == false orderby notes.Id descending select notes;
-//    return note.ToArray();
-//}

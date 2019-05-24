@@ -38,7 +38,7 @@ namespace BussinessLayer.Services
         /// <param name="applicationRepository">The application repository.</param>
         /// <param name="emailSender">The email sender.</param>
         /// <param name="distributedCache">The distributed cache.</param>
-        public ApplicationUserServices(IRepository applicationRepository, IEmailSender emailSender, IDistributedCache distributedCache)
+        public ApplicationUserServices(IRepository applicationRepository, IEmailSender emailSender)
         {
             this.applicationRepository = applicationRepository;
             this.emailSender = emailSender;
@@ -62,10 +62,10 @@ namespace BussinessLayer.Services
         /// <returns>
         /// return string
         /// </returns>
-        public async Task<string> LoginAsync(ApplicationLoginModel model)
+        public async Task<dynamic> LoginAsync(ApplicationLoginModel model)
         {
-            string result = await this.applicationRepository.LoginPage(model);
-            return result;
+            return  await this.applicationRepository.LoginPage(model);
+         
         }
 
         /// <summary>
@@ -108,10 +108,23 @@ namespace BussinessLayer.Services
         /// <returns>
         /// returns string
         /// </returns>
-        public string ProfilePicture(IFormFile file, string id)
+        public string ProfilePicture(IFormFile file, string userid)
         {
-            var result = this.applicationRepository.Image(file, id);
+            var result = this.applicationRepository.Image(file, userid);
             return result;
         }
+
+        /// <summary>
+        /// Profiles the URL.
+        /// </summary>
+        /// <param name="userid">The user id.</param>
+        /// <returns>
+        /// returns response
+        /// </returns>
+        //public Task<string> ProfileUrl(string userid)
+        //{
+        //    var result = this.applicationRepository.ProfileUrl(userid);
+        //    return result;
+        //}
     }
 }

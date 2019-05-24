@@ -61,7 +61,7 @@ namespace RepositoryLayer.Interface
         /// </summary>
         /// <param name="model">The model.</param>
         /// <returns>return string</returns>
-        Task<string> LoginPage(ApplicationLoginModel model);
+        Task<dynamic> LoginPage(ApplicationLoginModel model);
 
         /// <summary>
         /// Images the specified file.
@@ -69,6 +69,13 @@ namespace RepositoryLayer.Interface
         /// <param name="file">The file.</param>
         /// <param name="id">The identifier.</param>
         /// <returns>returns string</returns>
-        string Image(IFormFile file, string id);
+        string Image(IFormFile file, string userid);
+
+        /// <summary>
+        /// Profiles the URL.
+        /// </summary>
+        /// <param name="userid">The user id.</param>
+        /// <returns>returns response</returns>
+        //Task<string> ProfileUrl(string userid);
     }
 }

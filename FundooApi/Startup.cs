@@ -74,6 +74,8 @@ namespace FundooApi
             services.AddTransient<IEmailSender, EmailSender>();
             services.AddTransient<INotes, NotesCreation>();
             services.AddTransient<INotesRepository, NotesRepository>();
+            services.AddTransient<ILabels, LabelsBussiness>();
+            services.AddTransient<ILablesRepository, LabelsRepository>();
             services.Configure<EmailModel>(this.Configuration);
 
             services.Configure<IdentityOptions>(Options =>

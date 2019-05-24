@@ -71,7 +71,11 @@ namespace FundooApi.Controllers
             try  
             {
                 var result = await this.applicationUser.LoginAsync(applicationLoginModel);
+                if(result.Success == true)
+                {
                     return this.Ok(new { result });
+                }
+                    return BadRequest();
             }
             catch (Exception e)
             {
@@ -129,8 +133,8 @@ namespace FundooApi.Controllers
         }
 
         [HttpPost]
-        [Route("profile/{id}")]
-        public IActionResult Profile(IFormFile file,string id)
+        [Route("profile/{userid}")]
+        public IActionResult Profile(IFormFile file,string userid)
         {
             Console.WriteLine(file);
             if (file == null)
@@ -138,8 +142,21 @@ namespace FundooApi.Controllers
                 return this.NotFound("The file couldn't be found");
             }
 
-            var result = this.applicationUser.ProfilePicture(file, id);
+            var result = this.applicationUser.ProfilePicture(file, userid);
             return this.Ok(new { result });
         }
+
+        /// <summary>
+        /// Profiles the URL.
+        /// </summary>
+        /// <param name="userid">The user id.</param>
+        /// <returns>returns response</returns>
+        //[HttpGet]
+        //[Route("url/{userid}")]
+        //public Task<string> ProfileUrl(string userid)
+        //{
+        //    var result = this.applicationUser.ProfileUrl(userid);
+        //    return result;
+        //}
     }
 }

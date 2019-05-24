@@ -173,6 +173,23 @@ namespace RepositoryLayer.Context
             return list;
         }
 
+        /// <summary>
+        /// Reminders the specified user identifier.
+        /// </summary>
+        /// <param name="userId">The user identifier.</param>
+        /// <returns>returns list</returns>
+        public IList<NotesModel> Reminder(string userId)
+        {
+            var list = new List<NotesModel>();
+            var notesData = from notes in this.authentication.NotesModel where (notes.UserId == userId) && (notes.Reminder != null) select notes;
+            foreach (var data in notesData)
+            {
+                list.Add(data);
+            }
+
+            return list;
+        }
+
         public string AddCollaboratorToNote([FromBody] CollaboratorModel model)
         {
             try
@@ -253,6 +270,20 @@ namespace RepositoryLayer.Context
             catch (Exception e)
             {
                 throw new Exception(e.Message);
+            }
+        }
+
+        public void UpdateCollaborater([FromBody]NotesModel model, int id, string receiverEmail)
+        {
+            var data = from coll in this.authentication.Collaborator
+                       where coll.ReceiverEmail == receiverEmail && coll.UserId == model.UserId
+                       select new { coll.NoteId };
+
+            foreach (var result in data)
+            {
+                NotesModel collnotes = this.authentication.NotesModel.Where<NotesModel>(t => t.Id == id).FirstOrDefault();
+                collnotes.Title = model.Title;
+                collnotes.Description = model.Description;
             }
         }
     }

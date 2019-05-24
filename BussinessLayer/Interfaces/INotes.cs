@@ -63,6 +63,13 @@ namespace BussinessLayer.Interfaces
         IList<NotesModel> Trash(string userId);
 
         /// <summary>
+        /// Reminders the specified user identifier.
+        /// </summary>
+        /// <param name="userId">The user identifier.</param>
+        /// <returns>returns list</returns>
+        IList<NotesModel> Reminder(string userId);
+
+        /// <summary>
         /// Adds the collaborator to note.
         /// </summary>
         /// <param name="model">The model.</param>
@@ -82,5 +89,7 @@ namespace BussinessLayer.Interfaces
         /// <param name="receiverEmail">The receiver email.</param>
         /// <returns>returns string</returns>
         string CollaboratorNote(string receiverEmail);
+
+        Task<int> UpdateCollaborater(NotesModel model, int id, string receiverEmail);
     }
 }

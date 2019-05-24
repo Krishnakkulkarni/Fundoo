@@ -42,6 +42,21 @@ namespace RepositoryLayer.Migrations
                     b.ToTable("Collaborator");
                 });
 
+            modelBuilder.Entity("Common.Models.LabelsModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Label");
+
+                    b.Property<string>("UserId");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Labels");
+                });
+
             modelBuilder.Entity("Common.Models.NotesModel", b =>
                 {
                     b.Property<int>("Id")
@@ -52,7 +67,8 @@ namespace RepositoryLayer.Migrations
 
                     b.Property<DateTime>("CreatedDate");
 
-                    b.Property<string>("Description");
+                    b.Property<string>("Description")
+                        .IsRequired();
 
                     b.Property<string>("Image");
 
@@ -64,9 +80,11 @@ namespace RepositoryLayer.Migrations
 
                     b.Property<DateTime>("Reminder");
 
-                    b.Property<string>("Title");
+                    b.Property<string>("Title")
+                        .IsRequired();
 
-                    b.Property<string>("UserId");
+                    b.Property<string>("UserId")
+                        .IsRequired();
 
                     b.HasKey("Id");
 

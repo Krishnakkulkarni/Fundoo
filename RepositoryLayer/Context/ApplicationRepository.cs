@@ -13,10 +13,10 @@ namespace RepositoryLayer.Context
     using System.Threading.Tasks;
     using CloudinaryDotNet;
     using CloudinaryDotNet.Actions;
+    using Common.Models;
     using FundooNote.Models;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Identity;
-    using Microsoft.Extensions.Caching.Distributed;
     using Microsoft.Extensions.Options;
     using Microsoft.IdentityModel.Tokens;
     using RepositoryLayer.Interface;
@@ -39,11 +39,6 @@ namespace RepositoryLayer.Context
         private readonly AppSetting appSettings;
 
         /// <summary>
-        /// The distributed cache
-        /// </summary>
-        private readonly IDistributedCache distributedCache;
-
-        /// <summary>
         /// The authentication
         /// </summary>
         private readonly Authentication authentication;
@@ -54,11 +49,10 @@ namespace RepositoryLayer.Context
         /// <param name="userManager">The user manager.</param>
         /// <param name="appSettings">The application settings.</param>
         /// <param name="distributedCache">The distributed cache.</param>
-        public ApplicationRepository(UserManager<ApplicationUser> userManager, IOptions<AppSetting> appSettings, IDistributedCache distributedCache, Authentication authentication)
+        public ApplicationRepository(UserManager<ApplicationUser> userManager, IOptions<AppSetting> appSettings, Authentication authentication)
         {
             this.usermanager = userManager;
             this.appSettings = appSettings.Value;
-            this.distributedCache = distributedCache;
             this.authentication = authentication;
         }
 
@@ -115,38 +109,46 @@ namespace RepositoryLayer.Context
         /// <returns>
         /// return string
         /// </returns>
-        public async Task<string> LoginPage(ApplicationLoginModel model)
+        public async Task<dynamic> LoginPage(ApplicationLoginModel model)
         {
             var user = await this.usermanager.FindByNameAsync(model.UserName);
             if (user != null && await this.usermanager.CheckPasswordAsync(user, model.Password))
             {
-                using(var redis = new RedisClient())
+                //using(var redis = new RedisClient())
+                //{
+                //    if(redis.Get(model.UserName)==null)
+                //    {
+                var tokenDescriptor = new SecurityTokenDescriptor
                 {
-                    if(redis.Get(model.UserName)==null)
-                    {
-                        var tokenDescriptor = new SecurityTokenDescriptor
-                        {
-                            Subject = new ClaimsIdentity(new Claim[] { new Claim("UserID", user.Id.ToString()) }),
-                            SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes(this.appSettings.JWT_Secrete)), SecurityAlgorithms.HmacSha256Signature)
-                        };
-                        var tokenHandler = new JwtSecurityTokenHandler();
-                        var securityToken = tokenHandler.CreateToken(tokenDescriptor);
-                        var token = tokenHandler.WriteToken(securityToken);
+                    Subject = new ClaimsIdentity(new Claim[] { new Claim("UserID", user.Id.ToString()) }),
+                    SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes(this.appSettings.JWT_Secrete)), SecurityAlgorithms.HmacSha256Signature)
+                };
+                var tokenHandler = new JwtSecurityTokenHandler();
+                var securityToken = tokenHandler.CreateToken(tokenDescriptor);
+                var token = tokenHandler.WriteToken(securityToken);
 
-                        if(tokenDescriptor != null)
-                        {
-                            redis.Set(model.UserName, tokenDescriptor);
-                        }
-                        return token;
-                    }
-                    else
-                    {
-                        var redis1 = redis.Get<ApplicationUserModel>(model.UserName);
-                        return redis1.ToString();
-                    }
-                }
+                model.Success = true;
+                model.Token = token;
+                model.Userid = user.Id;
+                return model;
+                //        if(tokenDescriptor != null)
+                //        {
+                //            redis.Set(model.UserName, tokenDescriptor);
+                //        }
+                //        return token;
+                //    }
+                //    else
+                //    {
+                //        var redis1 = redis.Get<ApplicationUserModel>(model.UserName);
+                //        return redis1.ToString();
+                //    }
+                //}
             }
-            return "invalid user";
+            else
+            {
+                model.Success = false;
+                return model;
+            }
         }
 
         /// <summary>
@@ -209,7 +211,7 @@ namespace RepositoryLayer.Context
         /// <param name="file">The file.</param>
         /// <param name="id">The identifier.</param>
         /// <returns>return string</returns>
-        public string Image(IFormFile file, string id)
+        public string Image(IFormFile file, string userid)
         {
             try
             {
@@ -222,7 +224,7 @@ namespace RepositoryLayer.Context
                     File = new FileDescription(name, stream)
                 };
                 var uploadResult = cloudinary.Upload(imageUploadParams);
-                var data = this.authentication.ApplicationUsers.Where(t => t.Id == id).FirstOrDefault();
+                var data = this.authentication.ApplicationUsers.Where(t => t.Id == userid).FirstOrDefault();
                 data.Profile = uploadResult.Uri.ToString();
 
                 int result = this.authentication.SaveChanges();
@@ -233,5 +235,18 @@ namespace RepositoryLayer.Context
                 return e.Message;
             }
         }
+
+        /// <summary>
+        /// Profiles the URL.
+        /// </summary>
+        /// <param name="userid">The user id.</param>
+        /// <returns>
+        /// returns response
+        /// </returns>
+        //public async Task<string> ProfileUrl(string userid)
+        //{
+        //    var data = await this.usermanager.FindByIdAsync(userid);
+        //    return data.Profile.ToString();
+        //}
     }
 }

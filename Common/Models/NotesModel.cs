@@ -6,6 +6,7 @@
 namespace Common.Models
 {
     using System;
+    using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
 
     /// <summary>
@@ -27,6 +28,7 @@ namespace Common.Models
         /// <value>
         /// The title.
         /// </value>
+        [Required]
         public string Title { get; set; }
 
         /// <summary>
@@ -35,6 +37,7 @@ namespace Common.Models
         /// <value>
         /// The description.
         /// </value>
+        [Required]
         public string Description { get; set; }
 
         /// <summary>
@@ -60,6 +63,7 @@ namespace Common.Models
         /// The user identifier.
         /// </value>
         [ForeignKey("ApplicationUser")]
+        [Required]
         public string UserId { get; set; }
 
         /// <summary>
