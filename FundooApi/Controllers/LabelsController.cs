@@ -49,7 +49,7 @@ namespace FundooApi.Controllers
         /// <param name="userId">The user identifier.</param>
         /// <returns>returns response</returns>
         [HttpGet]
-        [Route("label/{userId}")]
+        [Route("getLabel/{userId}")]
         public IActionResult GetLabel(string userId)
         {
             IList<LabelsModel> result = this.labelsBusiness.GetLabels(userId);
@@ -68,10 +68,10 @@ namespace FundooApi.Controllers
         /// <param name="newlabel">The newlabel.</param>
         /// <returns>returns response</returns>
         [HttpPut]
-        [Route("label/{id}")]
-        public IActionResult UpdateLabel(int id, string newlabel)
+        [Route("updateLabel/{id}")]
+        public IActionResult UpdateLabel(LabelsModel label,int id )
         {
-            var result = this.labelsBusiness.UpdateLabels(id, newlabel);
+            var result = this.labelsBusiness.UpdateLabels(label,id);
             if (result == null)
             {
                 return this.NotFound();
@@ -86,7 +86,7 @@ namespace FundooApi.Controllers
         /// <param name="id">The identifier.</param>
         /// <returns>returns response</returns>
         [HttpDelete]
-        [Route("label/{id}")]
+        [Route("{id}")]
         public IActionResult Deletelabel(int id)
         {
             var result = this.labelsBusiness.DeleteLabel(id);

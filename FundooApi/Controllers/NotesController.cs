@@ -227,7 +227,7 @@ namespace FundooApi.Controllers
         }
 
         
-        [HttpPut]
+        [HttpGet]
         [Route("getCollaborator/{receiverEmail}")]
         public IActionResult CollaboratorNote(string receiverEmail)
         {
@@ -263,5 +263,114 @@ namespace FundooApi.Controllers
                 return this.BadRequest();
             }
         }
+
+        ///// <summary>
+        ///// Gets the label.
+        ///// </summary>
+        ///// <param name="userId">The user identifier.</param>
+        ///// <returns>returns result</returns>
+        //[HttpGet]
+        //[Route("label/{userId}")]
+        //public IActionResult GetLabel(string userId)
+        //{
+        //    IList<LabelsModel> result = this.notesCreation.GetLabels(userId);
+        //    if (result == null)
+        //    {
+        //        return this.NotFound();
+        //    }
+
+        //    return this.Ok(new { result });
+        //}
+
+        ///// <summary>
+        ///// Updates the label.
+        ///// </summary>
+        ///// <param name="label">The label.</param>
+        ///// <param name="id">The identifier.</param>
+        ///// <returns>returns result</returns>
+        //[HttpPut]
+        //[Route("label/{id}")]
+        //public IActionResult UpdateLabel(LabelModel label, int id)
+        //{
+        //    var result = this.notesCreation.UpdateLabels(label, id);
+        //    if (result == null)
+        //    {
+        //        return this.NotFound();
+        //    }
+
+        //    return this.Ok(new { result });
+        //}
+
+        ///// <summary>
+        ///// Deletelabels the specified identifier.
+        ///// </summary>
+        ///// <param name="id">The identifier.</param>
+        ///// <returns>returns result</returns>
+        //[HttpDelete]
+        //[Route("label/{id}")]
+        //public IActionResult Deletelabel(int id)
+        //{
+        //    var result = this.notesCreation.DeleteLabel(id);
+        //    if (result == null)
+        //    {
+        //        return this.NotFound();
+        //    }
+
+        //    return this.Ok(new { result });
+        //}
+
+        ///// <summary>
+        ///// Adds the note label.
+        ///// </summary>
+        ///// <param name="label">The label.</param>
+        ///// <returns>returns result</returns>
+        //[HttpPost]
+        //[Route("notelabel")]
+        //public IActionResult AddNoteLabel(NoteLabelModel label)
+        //{
+        //    var result = this.notesCreation.AddNotesLabel(label);
+        //    if (result == null)
+        //    {
+        //        return this.NotFound();
+        //    }
+
+        //    return this.Ok(new { result });
+        //}
+
+        ///// <summary>
+        ///// Gets the note label.
+        ///// </summary>
+        ///// <param name="userId">The user identifier.</param>
+        ///// <returns>returns result</returns>
+        //[HttpGet]
+        //[Route("notelabel/{userId}")]
+        //public IActionResult GetNoteLabel(Guid userId)
+        //{
+        //    IList<NoteLabelModel> result = this.notesCreation.GetNotesLabel(userId);
+        //    if (result == null)
+        //    {
+        //        return this.NotFound();
+        //    }
+
+        //    return this.Ok(new { result });
+        //}
+
+        ///// <summary>
+        ///// Deletes the note label.
+        ///// </summary>
+        ///// <param name="id">The identifier.</param>
+        ///// <returns>returns result</returns>
+        //[HttpDelete]
+        //[Route("notelabel/{id}")]
+        //public IActionResult DeleteNotelabel(int id)
+        //{
+        //    var result = this.notesCreation.DeleteNotesLabel(id);
+        //    if (result == null)
+        //    {
+        //        return this.NotFound();
+        //    }
+
+        //    return this.Ok(new { result });
+        //}
     }
 }

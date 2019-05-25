@@ -10,11 +10,11 @@ namespace BussinessLayer.Interfaces
     public interface ILabels
     {
         string AddLabels(LabelsModel label);
-
-        string DeleteLabel(int id);
-
+        
         List<LabelsModel> GetLabels(string userId);
 
-        string UpdateLabels(int id, string newlabel);
+        string UpdateLabels(LabelsModel label,int id);
+
+        string DeleteLabel(int id);
     }
 }

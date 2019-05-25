@@ -88,7 +88,7 @@ namespace BussinessLayer.Interfaces
         /// </summary>
         /// <param name="receiverEmail">The receiver email.</param>
         /// <returns>returns string</returns>
-        string CollaboratorNote(string receiverEmail);
+        IList<NotesModel> CollaboratorNote(string receiverEmail);
 
         Task<int> UpdateCollaborater(NotesModel model, int id, string receiverEmail);
     }

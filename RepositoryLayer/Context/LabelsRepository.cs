@@ -55,27 +55,7 @@ namespace RepositoryLayer.Context
                 throw new Exception(exception.Message);
             }
         }
-
-        /// <summary>
-        /// Deletes the label.
-        /// </summary>
-        /// <param name="id">The identifier.</param>
-        /// <returns>returns string</returns>
-        /// <exception cref="Exception">throws exception</exception>
-        public string DeleteLabel(int id)
-        {
-            LabelsModel label = this.authentication.Labels.Where(t => t.Id == id).FirstOrDefault();
-            try
-            {
-                this.authentication.Labels.Remove(label);
-                var result = this.authentication.SaveChanges();
-                return result.ToString();
-            }
-            catch (Exception exception)
-            {
-                throw new Exception(exception.Message);
-            }
-        }
+        
 
         /// <summary>
         /// Gets the labels.
@@ -109,12 +89,33 @@ namespace RepositoryLayer.Context
         /// <param name="newlabel">The new label.</param>
         /// <returns>returns string</returns>
         /// <exception cref="Exception">throws exception</exception>
-        public string UpdateLabels(int id, string newlabel)
+        public string UpdateLabels(LabelsModel label, int id)
         {
             LabelsModel labels = this.authentication.Labels.Where(t => t.Id == id).FirstOrDefault();
-            labels.Label = newlabel;
+            labels.Label = label.Label;
             try
             {
+                var result = this.authentication.SaveChanges();
+                return result.ToString();
+            }
+            catch (Exception exception)
+            {
+                throw new Exception(exception.Message);
+            }
+        }
+
+        /// <summary>
+        /// Deletes the label.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns>returns string</returns>
+        /// <exception cref="Exception">throws exception</exception>
+        public string DeleteLabel(int id)
+        {
+            LabelsModel label = this.authentication.Labels.Where(t => t.Id == id).FirstOrDefault();
+            try
+            {
+                this.authentication.Labels.Remove(label);
                 var result = this.authentication.SaveChanges();
                 return result.ToString();
             }

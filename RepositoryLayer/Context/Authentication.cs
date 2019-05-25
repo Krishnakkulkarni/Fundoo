@@ -53,6 +53,14 @@ namespace RepositoryLayer.Context
         public DbSet<LabelsModel> Labels { get; set; }
 
         /// <summary>
+        /// Gets or sets the note label.
+        /// </summary>
+        /// <value>
+        /// The note label.
+        /// </value>
+        public DbSet<NoteLabelModel> NoteLabel { get; set; }
+
+        /// <summary>
         /// Gets or sets the collaborator.
         /// </summary>
         /// <value>

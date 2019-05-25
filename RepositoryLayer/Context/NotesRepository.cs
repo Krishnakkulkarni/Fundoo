@@ -237,11 +237,11 @@ namespace RepositoryLayer.Context
         }
 
         
-        public string CollaboratorNote(string receiverEmail)
+        public IList<NotesModel> CollaboratorNote(string receiverEmail)
         {
             try
             {
-                var sharednotes = new List<NotesShareModel>();
+                var sharednotes = new List<NotesModel>();
                 var data = from coll in this.authentication.Collaborator
                            where coll.ReceiverEmail == receiverEmail
                            select new
@@ -253,11 +253,11 @@ namespace RepositoryLayer.Context
                 {
                     var collnotes = from notes in this.authentication.NotesModel
                                     where notes.Id == result.NoteId
-                                    select new NotesShareModel
+                                    select new NotesModel
                                     {
-                                        NoteId = notes.Id,
+                                        Id = notes.Id,
                                         Title = notes.Title,
-                                        TakeANote = notes.Description,
+                                        Description = notes.Description,
                                     };
                     foreach (var collaborator in collnotes)
                     {
@@ -265,7 +265,7 @@ namespace RepositoryLayer.Context
                     }
                 }
 
-                return sharednotes.ToString();
+                return sharednotes;
             }
             catch (Exception e)
             {
@@ -286,5 +286,181 @@ namespace RepositoryLayer.Context
                 collnotes.Description = model.Description;
             }
         }
+
+        ///// <summary>
+        ///// Adds the labels.
+        ///// </summary>
+        ///// <param name="label">The label.</param>
+        ///// <returns>returns string</returns>
+        ///// <exception cref="Exception">throws exception</exception>
+        //public string AddLabels([FromBody] LabelsModel label)
+        //{
+        //    var addLabel = new LabelsModel()
+        //    {
+        //        UserId = label.UserId,
+        //        Label = label.Label
+        //    };
+        //    try
+        //    {
+        //        this.authentication.Labels.Add(addLabel);
+        //        var result = this.authentication.SaveChanges();
+        //        return result.ToString();
+        //    }
+        //    catch (Exception exception)
+        //    {
+        //        throw new Exception(exception.Message);
+        //    }
+        //}
+
+        ///// <summary>
+        ///// Gets the labels.
+        ///// </summary>
+        ///// <param name="userId">The user identifier.</param>
+        ///// <returns>returns list</returns>
+        ///// <exception cref="Exception">throws exception</exception>
+        //public List<LabelsModel> GetLabels(Guid userId)
+        //{
+        //    try
+        //    {
+        //        var list = new List<LabelsModel>();
+        //        var labels = from t in this.authentication.Labels where t.UserId == userId select t;
+        //        foreach (var items in labels)
+        //        {
+        //            list.Add(items);
+        //        }
+
+        //        return list;
+        //    }
+        //    catch (Exception exception)
+        //    {
+        //        throw new Exception(exception.Message);
+        //    }
+        //}
+
+        ///// <summary>
+        ///// Updates the labels.
+        ///// </summary>
+        ///// <param name="label">The label.</param>
+        ///// <param name="id">The identifier.</param>
+        ///// <returns>returns string</returns>
+        ///// <exception cref="Exception">throws exception</exception>
+        //public string UpdateLabels([FromBody] LabelsModel label, int id)
+        //{
+        //    LabelsModel labels = this.authentication.Labels.Where(t => t.Id == id).FirstOrDefault();
+        //    labels.Label = label.Label;
+        //    try
+        //    {
+        //        var result = this.authentication.SaveChanges();
+        //        return result.ToString();
+        //    }
+        //    catch (Exception exception)
+        //    {
+        //        throw new Exception(exception.Message);
+        //    }
+        //}
+
+        ///// <summary>
+        ///// Deletes the label.
+        ///// </summary>
+        ///// <param name="id">The identifier.</param>
+        ///// <returns>returns string</returns>
+        ///// <exception cref="Exception">throws exception</exception>
+        //public string DeleteLabel(int id)
+        //{
+        //    LabelsModel label = this.authentication.Labels.Where(t => t.Id == id).FirstOrDefault();
+        //    try
+        //    {
+        //        this.authentication.Labels.Remove(label);
+        //        var result = this.authentication.SaveChanges();
+        //        return result.ToString();
+        //    }
+        //    catch (Exception exception)
+        //    {
+        //        throw new Exception(exception.Message);
+        //    }
+        //}
+
+        ///// <summary>
+        ///// Adds the notes label.
+        ///// </summary>
+        ///// <param name="model">The model.</param>
+        ///// <returns>returns string</returns>
+        ///// <exception cref="Exception">throws exception</exception>
+        //public string AddNotesLabel([FromBody] NoteLabelModel model)
+        //{
+        //    try
+        //    {
+        //        var labelData = from t in this.authentication.NoteLabel where t.UserId == model.UserId select t;
+        //        foreach (var datas in labelData.ToList())
+        //        {
+        //            if (datas.NoteId == model.NoteId && datas.LableId == model.LableId)
+        //            {
+        //                return false.ToString();
+        //            }
+        //        }
+
+        //        var data = new NoteLabelModel
+        //        {
+        //            LableId = model.LableId,
+        //            NoteId = model.NoteId,
+        //            UserId = model.UserId
+        //        };
+        //        int result = 0;
+        //        this.authentication.NoteLabel.Add(data);
+        //        result = this.authentication.SaveChanges();
+        //        return result.ToString();
+        //    }
+        //    catch (Exception exception)
+        //    {
+        //        throw new Exception(exception.Message);
+        //    }
+        //}
+
+        ///// <summary>
+        ///// Gets the notes label.
+        ///// </summary>
+        ///// <param name="userId">The user identifier.</param>
+        ///// <returns>returns list of label</returns>
+        ///// <exception cref="Exception">throws exception</exception>
+        //public List<NoteLabelModel> GetNotesLabel(Guid userId)
+        //{
+        //    var list = new List<NoteLabelModel>();
+        //    var labelData = from t in this.authentication.NoteLabel where t.UserId == userId select t;
+        //    try
+        //    {
+        //        foreach (var data in labelData)
+        //        {
+        //            list.Add(data);
+        //        }
+        //    }
+        //    catch (Exception exception)
+        //    {
+        //        throw new Exception(exception.Message);
+        //    }
+
+        //    return list;
+        //}
+
+        ///// <summary>
+        ///// Deletes the notes label.
+        ///// </summary>
+        ///// <param name="id">The identifier.</param>
+        ///// <returns>returns string</returns>
+        ///// <exception cref="Exception">throws exception</exception>
+        //public string DeleteNotesLabel(int id)
+        //{
+        //    var label = this.authentication.NoteLabel.Where<NoteLabelModel>(t => t.Id == id).FirstOrDefault();
+
+        //    try
+        //    {
+        //        this.authentication.NoteLabel.Remove(label);
+        //        var result = this.authentication.SaveChanges();
+        //        return result.ToString();
+        //    }
+        //    catch (Exception exception)
+        //    {
+        //        throw new Exception(exception.Message);
+        //    }
+        //}
     }
 }

@@ -3,7 +3,7 @@ namespace BussinessLayer.Services
 {
     using BussinessLayer.Interfaces;
     using Common.Models;
-    using RepositoryLayer.Context;
+    using RepositoryLayer.Interface;
     using System;
     using System.Collections.Generic;
     using System.Text;
@@ -13,13 +13,10 @@ namespace BussinessLayer.Services
         /// <summary>
         /// The labels repository
         /// </summary>
-        private readonly LabelsRepository labelsRepository;
+        private readonly ILablesRepository labelsRepository;
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="LabelBusiness"/> class.
-        /// </summary>
-        /// <param name="labelsRepository">The labels repository.</param>
-        public LabelsBussiness(LabelsRepository labelsRepository)
+        
+        public LabelsBussiness(ILablesRepository labelsRepository)
         {
             this.labelsRepository = labelsRepository;
         }
@@ -36,18 +33,7 @@ namespace BussinessLayer.Services
             var result = this.labelsRepository.AddLabels(label);
             return result;
         }
-
-        /// <summary>
-        /// Deletes the label.
-        /// </summary>
-        /// <param name="id">The identifier.</param>
-        /// <returns>
-        /// returns string
-        /// </returns>
-        public string DeleteLabel(int id)
-        {
-            return this.labelsRepository.DeleteLabel(id);
-        }
+        
 
         /// <summary>
         /// Gets the labels.
@@ -69,9 +55,21 @@ namespace BussinessLayer.Services
         /// <returns>
         /// returns string
         /// </returns>
-        public string UpdateLabels(int id, string newlabel)
+        public string UpdateLabels(LabelsModel label, int id)
         {
-            return this.labelsRepository.UpdateLabels(id, newlabel);
+            return this.labelsRepository.UpdateLabels(label,id);
+        }
+
+        /// <summary>
+        /// Deletes the label.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns>
+        /// returns string
+        /// </returns>
+        public string DeleteLabel(int id)
+        {
+            return this.labelsRepository.DeleteLabel(id);
         }
     }
 }

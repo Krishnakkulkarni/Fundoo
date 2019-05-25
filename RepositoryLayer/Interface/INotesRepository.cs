@@ -92,8 +92,8 @@ namespace RepositoryLayer.Interface
         /// Collaborators the note.
         /// </summary>
         /// <param name="receiverEmail">The receiver email.</param>
-        /// <returns>returns string</returns>
-        string CollaboratorNote(string receiverEmail);
+        /// <returns></returns>
+        IList<NotesModel> CollaboratorNote(string receiverEmail);
 
         void UpdateCollaborater([FromBody]NotesModel model, int id, string receiverEmail);
     }

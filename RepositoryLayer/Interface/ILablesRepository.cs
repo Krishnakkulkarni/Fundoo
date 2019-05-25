@@ -11,10 +11,10 @@ namespace RepositoryLayer.Interface
     {
         string AddLabels([FromBody] LabelsModel label);
 
-        string DeleteLabel(int id);
-
-        string UpdateLabels(int id, string newlabel);
+        string UpdateLabels(LabelsModel label, int id);
 
         List<LabelsModel> GetLabels(string userId);
+
+        string DeleteLabel(int id);
     }
 }
