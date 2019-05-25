@@ -38,4 +38,21 @@ export class NotesService {
   NoteUpdated(id, result) {
     return this.httpService.update('Notes/' + id, result)
   }
+  AddNotesLabels(data){
+    return this.httpService.post('',data)
+  }
+
+  getlabels(userId){
+    return this.httpService.Get('notes/label/'+userId);
+    
+    }
+  AddLabels(data){
+    return this.httpService.post('Labels/addLabel',data)
+  }
+  updateLabel(id,data){
+    return this.httpService.update(''+id,data)
+  }
+  deletelabel(id){
+    return this.httpService.deletelabel(''+id)
+  }
 }

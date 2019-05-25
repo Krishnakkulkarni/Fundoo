@@ -21,7 +21,9 @@ export class DisplaynotesComponent implements OnInit {
 
   @Input() cards: any;
   @Input() archived;
+
   @Output() messageEvent = new EventEmitter<any>();
+  
   unrchive: boolean;
   archive: boolean;
 

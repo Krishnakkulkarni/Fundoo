@@ -32,23 +32,24 @@
       <div fxFlex="25" fxLayout="row" fxLayoutAlign="end center">
 
         <div>
-          <button mat-icon-button>
+          <button mat-icon-button matTooltip="Refresh">
             <mat-icon (click)="refresh()">refresh</mat-icon>
           </button>
         </div>
 
         <!-------------------------------Grid and List--------------------------------------->
 
-        <button mat-icon-button *ngIf='flag==false' (click)='ReverseFlag()'>
-          <mat-icon>grid_view</mat-icon>
-        </button>
+        <div>
+          <button mat-icon-button *ngIf='flag==false' (click)='ReverseFlag()' matTooltip="Grid View">
+            <mat-icon>grid_view</mat-icon>
+          </button>
 
-        <button mat-icon-button *ngIf='flag==true' (click)='ReverseFlag()'>
-          <mat-icon>list_view</mat-icon>
-        </button>
-
+          <button mat-icon-button *ngIf='flag==true' (click)='ReverseFlag()' matTooltip="List View">
+            <mat-icon>view_stream</mat-icon>
+          </button>
+        </div>
         <!----------------------------------LogOut------------------------------------------>
-        <div fxLayout="row" fxLayoutAlign="end center">
+        <div fxLayout="row" fxLayoutAlign="end end">
 
           <button mat-mini-fab class="mat-icon"
             [ngStyle]="{'background-image': 'url(' + photo + ')','background-size':'cover'}" [matMenuTriggerFor]="menu"
@@ -116,13 +117,32 @@
             <div style="margin-left:25px; font-size: 11px">LABELS</div>
           </div>
 
+           <div *ngFor="let label of notesLabel">
+            <button (AferAddEvent)="add($event)" mat-button style="outline:none">
+              <div fxLayout="row">
+                <div class="imageopac">
+                  <img src="../../../../assets/images/outline-label-24px.png" />
+                </div>
+                <div style="margin-left:50px">{{label.label}}</div>
+              </div>
+            </button>
+          </div>
           <div>
+              <button mat-button (click)="EditLables()" (click)="HeaderName= 'EditLables'"
+                [ngClass]="{'sidenav':HeaderName!= 'EditLables','sidenavlist':HeaderName=='EditLables'}">
+                <i class="material-icons">
+                  <mat-icon style="margin-right:25px">edit</mat-icon>
+                </i> Edit Labels </button>
+            </div>
+
+          <!-- <div>
             <button mat-button class="btn" (click)='EditLables()' (click)="HeaderName= 'EditLables'"
               [ngClass]="{'sidenav':HeaderName!= 'EditLables','sidenavlist':HeaderName=='EditLables'}">
               <mat-icon style="margin-right:25px">edit</mat-icon>
               Edit lables
             </button>
-          </div>
+          </div> -->
+
 
           <div>
             <mat-divider></mat-divider>

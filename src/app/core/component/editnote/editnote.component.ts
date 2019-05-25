@@ -11,6 +11,7 @@ import { NotesService } from '../../services/NotesServices/notes.service';
 export class EditnoteComponent implements OnInit {
 
   color: string = "#ffffff";
+  
   constructor(public notesService: NotesService, public dialogRef: MatDialogRef<EditnoteComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData) {
     console.log(data);

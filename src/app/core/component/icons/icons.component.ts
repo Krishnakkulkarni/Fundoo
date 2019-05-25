@@ -17,8 +17,10 @@ export class IconsComponent implements OnInit {
   @Input() archivedicon
 
   @Output() setNote = new EventEmitter();
+  
   archive: boolean = true;
   unarchive : boolean =true;
+  userId: string;
 
   onFileSelected(Event: any, card: any) {
     console.log(Event);
@@ -100,6 +102,25 @@ export class IconsComponent implements OnInit {
         this.SnackBar.open("Note Trashed", "close", { duration: 2000 });
       },
       err => { console.log(err); }
+    )
+  }
+
+  LabelList(label)
+  {
+    console.log(label.id);
+    console.log(this.card.id);
+    this.userId = localStorage.getItem('UserID')
+    var notesLabel = {
+      "LableId":label.id,
+      "NoteId":this.card.id,
+      "UserId":this.userId
+    }
+    console.log(notesLabel);
+    this.notesService.AddNotesLabels(notesLabel).subscribe(data => {
+      console.log(data);
+    },err =>{
+      console.log(err);
+    }
     )
   }
 

@@ -106,30 +106,28 @@
 
 <!----------------------------------More-Menu------------------------------------------>
 <mat-menu #Menu="matMenu">
-  <div>
-    <button mat-icon-button (click)="TrashNote(card)">Delete note</button>
+  <button mat-menu-item (click)="TrashNote(card)" style="outline: none">Delete note</button>
+  <button mat-menu-item [matMenuTriggerFor]="Labelsmenu" style="outline: none">change lables</button>
+  <button mat-menu-item style="outline: none">Add drawing</button>
+  <button mat-menu-item style="outline: none">Make a copy</button>
+  <button mat-menu-item style="outline: none">show checkboxes</button>
+</mat-menu>
+
+<mat-menu #Labelsmenu="matMenu">
+  <div *ngFor="let label of notesLabel">
+
+    <div (click)="LabelList(label)">
+      <mat-checkbox>{{label.label}}</mat-checkbox>
+
+    </div>
+
   </div>
-  <div>
-    <button mat-icon-button (click)="AddLabel()">Add Label</button>
-  </div>
-  <!-- <div>
-    <button mat-icon-button (click)="Delete(card)">Delete forever</button>
-  </div> -->
 </mat-menu>
 
 <!----------------------------------Remind-Menu------------------------------------------>
 <mat-menu #MenuRemind="matMenu">
-  <label>Reminder:</label>
-  <div>
-    <button mat-icon-button (click)="LaterToday()">Later Today</button>
-  </div>
-  <div>
-    <button mat-icon-button (click)="Tomorrow()">Tomorrow</button>
-  </div>
-  <div>
-    <button mat-icon-button (click)="NextWeek()">Next Week</button>
-  </div>
-  <div>
-    <button mat-icon-button (click)="Pick()">Pick Date & Time</button>
-  </div>
+  <button mat-menu-item (click)="Today(card)" style="outline: none">Later today 8:00PM </button>
+  <button mat-menu-item (click)="Tomorrow(card)" style="outline: none">Tomorrow 8:00AM</button>
+  <button mat-menu-item (click)="nextWeek(card)" style="outline: none">Next Week 8:00AM</button>
+  <button mat-menu-item style="outline: none">Pick date & time</button>
 </mat-menu>

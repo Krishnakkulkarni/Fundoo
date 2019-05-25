@@ -21,14 +21,17 @@ export class HttpService {
     return this.http.put(this.rooturl + url, data)
   }
   deletenote(url: string, data) {
-    return this.http.delete(this.rooturl + url,data)
+    return this.http.delete(this.rooturl + url, data)
   }
-  postImage(url,data){
-    var http={
-      headers:new HttpHeaders({
-        'Authorization':localStorage.getItem('token')
+  postImage(url, data) {
+    var http = {
+      headers: new HttpHeaders({
+        'Authorization': localStorage.getItem('token')
       })
     };
-    return this.http.post(this.rooturl+url,data,http)
+    return this.http.post(this.rooturl + url, data, http)
+  }
+  deletelabel(id) {
+    return this.http.delete('')
   }
 }

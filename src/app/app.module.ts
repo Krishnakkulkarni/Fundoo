@@ -58,6 +58,7 @@ import { ImageCropperModule } from 'ngx-image-cropper';
     ImageCropperModule
   ],
   providers: [],
+  entryComponents:[EditLabelsComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
