@@ -65,6 +65,7 @@ export class HomeComponent implements OnInit {
     this.FirstName = localStorage.getItem("FirstName");
     this.dataService.currentMsg.subscribe(message => this.message = message);
     this.userName = localStorage.getItem("UserName")
+    this.getLabels();  
   }
 
   onLogout() {
@@ -142,9 +143,11 @@ export class HomeComponent implements OnInit {
 
   EditLables(): void {
     const dialogConfig = new MatDialogConfig();
+   console.log(this.payLoad);
     let dialogRef = this.dialog.open(EditLabelsComponent,
 
-    //   { data: this.notesLabel, width: '600px' });
+      // { data: this.notesLabel, width: '300px' }
+      );
 
     // dialogRef.afterClosed().subscribe(result => {
     //   console.log(result.result, "dash");
@@ -158,11 +161,15 @@ export class HomeComponent implements OnInit {
     //     });
     //   }
     // }
-    )
+    // )
   }
   getLabels() {
+   console.log(this.payLoad);
+    
     this.notesService.getlabels(this.payLoad.UserID).subscribe(responselabels => {
       this.notesLabel = responselabels['result'];
+      console.log(this.notesLabel);
+      
 
     }, err => {
       console.log(err);

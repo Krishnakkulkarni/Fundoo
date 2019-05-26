@@ -32,6 +32,7 @@ export class EditLabelsComponent implements OnInit {
     if (this.label.value != "") {
       this.notesService.AddLabels(data).subscribe(result =>
         console.log(data)
+        
       )
       this.dialogRef.close(data);
       this.AfterAddEvent.emit({});

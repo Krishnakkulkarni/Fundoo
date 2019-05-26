@@ -52,7 +52,15 @@
   <!----------------------------------More--------------------------------------------->
 
   <div class="img">
-    <button mat-icon-button [matMenuTriggerFor]="Menu" style="outline:none" matTooltip="More">
+    <button mat-icon-button *ngIf="trashed != 'isTrash'" [matMenuTriggerFor]="Menu" style="outline:none"
+      matTooltip="More">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+  </div>
+
+  <div class="img">
+    <button mat-icon-button *ngIf="trashed == 'isTrash'" [matMenuTriggerFor]="Menu1" style="outline:none"
+      matTooltip="More">
       <mat-icon>more_vert</mat-icon>
     </button>
   </div>
@@ -112,6 +120,13 @@
   <button mat-menu-item style="outline: none">Make a copy</button>
   <button mat-menu-item style="outline: none">show checkboxes</button>
 </mat-menu>
+
+<mat-menu #Menu1="matMenu">
+  <button mat-menu-item (click)="Delete(card)" style="outline: none">Delete forever</button>
+  <button mat-menu-item (click)="Restore(card)" style="outline: none">Restore</button>
+</mat-menu>
+
+<!-------------------------------------label--------------------------------------------->
 
 <mat-menu #Labelsmenu="matMenu">
   <div *ngFor="let label of notesLabel">

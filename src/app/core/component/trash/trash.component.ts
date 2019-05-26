@@ -11,6 +11,7 @@ export class TrashComponent implements OnInit {
   notes = [];
   CardNotes = []
   id: string;
+  more="isTrash"
 
   constructor(public notesService: NotesService) { }
 

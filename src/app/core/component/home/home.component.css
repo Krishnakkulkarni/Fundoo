@@ -64,6 +64,9 @@
     height:40px;
     width:40px;
   }
+  #label-image{
+    width: 18px
+  }
   .mat-side-nav-bar{
    border:0px;
   }

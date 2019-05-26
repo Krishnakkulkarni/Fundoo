@@ -43,7 +43,7 @@ export class NotesService {
   }
 
   getlabels(userId){
-    return this.httpService.Get('notes/label/'+userId);
+    return this.httpService.Get('Labels/getLabel/'+userId);
     
     }
   AddLabels(data){

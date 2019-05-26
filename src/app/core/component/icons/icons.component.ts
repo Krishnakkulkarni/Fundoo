@@ -13,13 +13,16 @@ export class IconsComponent implements OnInit {
   selectedFile: File = null;
 
   flag: boolean = false;
-  
+
   @Input() archivedicon
 
+  @Input() trashed
+
   @Output() setNote = new EventEmitter();
-  
+
+  trash: boolean = true;
   archive: boolean = true;
-  unarchive : boolean =true;
+  unarchive: boolean = true;
   userId: string;
 
   onFileSelected(Event: any, card: any) {
@@ -105,20 +108,31 @@ export class IconsComponent implements OnInit {
     )
   }
 
-  LabelList(label)
-  {
+  Restore(card) {
+    console.log(card);
+    card.isTrash = false;
+    this.notesService.Trash(card.id, card).subscribe(
+      data => {
+        console.log(data);
+        this.SnackBar.open("Note restored", "close", { duration: 2000 });
+      },
+      err => { console.log(err); }
+    )
+  }
+
+  LabelList(label) {
     console.log(label.id);
     console.log(this.card.id);
     this.userId = localStorage.getItem('UserID')
     var notesLabel = {
-      "LableId":label.id,
-      "NoteId":this.card.id,
-      "UserId":this.userId
+      "LableId": label.id,
+      "NoteId": this.card.id,
+      "UserId": this.userId
     }
     console.log(notesLabel);
     this.notesService.AddNotesLabels(notesLabel).subscribe(data => {
       console.log(data);
-    },err =>{
+    }, err => {
       console.log(err);
     }
     )

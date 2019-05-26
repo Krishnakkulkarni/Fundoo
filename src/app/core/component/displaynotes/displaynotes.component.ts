@@ -21,11 +21,13 @@ export class DisplaynotesComponent implements OnInit {
 
   @Input() cards: any;
   @Input() archived;
+  @Input() trash;
 
   @Output() messageEvent = new EventEmitter<any>();
   
   unrchive: boolean;
   archive: boolean;
+  trashNote: boolean;
 
   ngOnInit() {
     this.dataService.currentMessage.subscribe(data => {
@@ -50,5 +52,11 @@ export class DisplaynotesComponent implements OnInit {
   Archive(event) {
     console.log('event');
     this.messageEvent.emit(event)
+  }
+
+  Trash(event){
+    console.log('trash in');
+    this.messageEvent.emit(event);
+    
   }
 }
