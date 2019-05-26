@@ -73,6 +73,7 @@ namespace FundooApi.Controllers
                 var result = await this.applicationUser.LoginAsync(applicationLoginModel);
                 if(result.Success == true)
                 {
+
                     return this.Ok(new { result });
                 }
                     return BadRequest();
