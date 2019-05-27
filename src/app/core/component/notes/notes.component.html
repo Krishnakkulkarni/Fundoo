@@ -3,7 +3,7 @@
     <div *ngIf="!isOpen" (click)="isOpen=true" fxLayout="row" fxFlex.xs="80" fxFlex="20">
        <div>
         <textarea class="take-a-note" [style.background-color]='Color' [formControl]="title" type="text"
-            placeholder=" Take a note..."></textarea>
+            placeholder="Take a note..."></textarea>
         </div>
         <div class="image-on-note" fxFlexLayout="row" fxLayoutAlign="end center">
             <input type="file" name="file" style="display:none" #file (change)="onFileSelected($event,card)" />
@@ -15,7 +15,7 @@
 
     <div *ngIf=isOpen [style.background-color]='color' fxFlex.xs="80" fxFlex="100" fxLayout="column">
         <div style="height:40px">
-            <input class="title-note" [formControl]="title" [style.background-color]='color' placeholder=" Title">
+            <input class="title-note" [formControl]="title" [style.background-color]='color' placeholder="Title">
         </div>
         <div>
             <textarea class="take-note" [formControl]="take_a_note" [style.background-color]='color'

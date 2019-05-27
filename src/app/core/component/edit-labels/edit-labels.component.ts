@@ -16,7 +16,7 @@ export class EditLabelsComponent implements OnInit {
 
   constructor(public dataServices: DataService, public notesService: NotesService,
     public dialogRef: MatDialogRef<EditLabelsComponent>, @Inject(MAT_DIALOG_DATA) public data: any) { }
-  label = new FormControl('');
+    label = new FormControl('');
 
   ngOnInit() {
     this.userId = localStorage.getItem('UserID')
@@ -32,7 +32,7 @@ export class EditLabelsComponent implements OnInit {
     if (this.label.value != "") {
       this.notesService.AddLabels(data).subscribe(result =>
         console.log(data)
-        
+
       )
       this.dialogRef.close(data);
       this.AfterAddEvent.emit({});

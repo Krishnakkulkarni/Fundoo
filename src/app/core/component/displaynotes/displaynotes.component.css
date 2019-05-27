@@ -1,14 +1,22 @@
 .outer-div-style{
-    margin-top:15px; margin-left: 22%; margin-right: 10%; margin-bottom:20px;
+    margin-top:15px; margin-left: 20%; margin-right: 10%; margin-bottom:20px;
 }
 .note{
     width: 230px;
     margin-top:15px;
+    padding: 1%
 }
 .notes{
     width: 550px;
     margin-top:15px;
     margin-left: 130px
+}
+.titleinput{
+    padding-left: 3%;
+}
+.noteinput{
+    padding-left: 3%;
+
 }
 .element{
     position : center;
@@ -19,14 +27,50 @@
 }
 @media screen and (max-width: 600px) {
     .note{
-        width: 220px;
+        width: 470px;
         margin-top: 5px;
     }
+    .outer-div-style{
+        margin-top:15px; margin-left: 0%; margin-right: 0%; margin-bottom:20px;
+    }
 }
-@media screen and (max-width: 600px) {
-    .notes{
-        width: 540px;
+@media screen and (max-width: 450px) {
+    .note{
+        width: 435px;
         margin-top: 5px;
-        margin-left: 30px
+        margin-left: 1%
+    }
+    .outer-div-style{
+        margin-top:15px; margin-left: 0%; margin-right: 0%; margin-bottom:20px;
+    }
+}
+@media screen and (max-width: 425px) {
+    .note{
+        width: 415px;
+        margin-top: 5px;
+        margin-left: 1%
+    }
+    .outer-div-style{
+        margin-top:15px; margin-left: 0%; margin-right: 0%; margin-bottom:20px;
+    }
+}
+@media screen and (max-width: 375px) {
+    .note{
+        width: 365px;
+        margin-top: 5px;
+        margin-left: 1%
+    }
+    .outer-div-style{
+        margin-top:15px; margin-left: 0%; margin-right: 0%; margin-bottom:20px;
+    }
+}
+@media screen and (max-width: 320px) {
+    .note{
+        width: 310px;
+        margin-top: 5px;
+        margin-left: 1%
+    }
+    .outer-div-style{
+        margin-top:15px; margin-left: 0%; margin-right: 0%; margin-bottom:20px;
     }
 }

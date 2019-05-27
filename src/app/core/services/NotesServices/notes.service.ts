@@ -50,9 +50,9 @@ export class NotesService {
     return this.httpService.post('Labels/addLabel',data)
   }
   updateLabel(id,data){
-    return this.httpService.update(''+id,data)
+    return this.httpService.update('Labels/updateLabel/'+id,data)
   }
   deletelabel(id){
-    return this.httpService.deletelabel(''+id)
+    return this.httpService.deletelabel('Labels/'+id)
   }
 }

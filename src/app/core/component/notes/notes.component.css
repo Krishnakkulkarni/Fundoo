@@ -12,19 +12,23 @@
 .title-note{
     border:none; outline: none; resize: none; overflow: hidden;
     font-style: normal;
+    padding-top: 3%;
+    padding-left: 2%
 }
 
 .take-note{
     border:none; outline: none; resize: none; overflow: hidden;
     font-style: normal;
+    padding-left: 2%
 }
 .image-on-note{
     padding-left: 340px;
 }
 
-
 .take-a-note{
-    border:none; outline: none; resize: none; overflow: hidden
+    border:none; outline: none; resize: none; overflow: hidden;
+    padding-top: 4%;
+    padding-left: 10%
 }
 .button{
     padding-left:240px
@@ -32,12 +36,60 @@
 @media screen and (max-width: 600px) {
     .notes-add{
         margin-top: 85px;
-        width: 400px;
+        width: 98%;
+    }
+    .button{
+        padding-left:200px
+    }
+    .image-on-note{
+        padding-left: 340px;
+    }
+}
+@media screen and (max-width: 450px) {
+    .notes-add{
+        margin-top: 85px;
+        width: 98%;
+    }
+    .button{
+        padding-left:140px
+    }
+    .image-on-note{
+        padding-left: 220px;
+    }
+}
+@media screen and (max-width: 425px) {
+    .notes-add{
+        margin-top: 85px;
+        width: 98%;
+    }
+    .button{
+        padding-left:110px
+    }
+    .image-on-note{
+        padding-left: 215px;
+    }
+}
+@media screen and (max-width: 375px) {
+    .notes-add{
+        margin-top: 85px;
+        width: 98%;
+    }
+    .button{
+        padding-left:60px
+    }
+    .image-on-note{
+        padding-left: 170px;
     }
 }
 @media screen and (max-width: 320px) {
     .notes-add{
         margin-top: 85px;
-        width: 250px;
+        width: 98%;
+    }
+    .button{
+        padding-left:10px
+    }
+    .image-on-note{
+        padding-left: 115px;
     }
 }

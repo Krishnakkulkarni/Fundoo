@@ -9,5 +9,20 @@
     height:40px;
 }
 .button-div{
-    padding-left:160px;
+    padding-left:120px;
+}
+@media screen and (max-width: 600px) {
+    .dailog-outer-div{
+        width: 50%;
+        margin-top: 5px;
+    }
+    .notes-image{
+        background-size: cover
+    }
+    .text{
+        height:30px;
+    }
+    .button-div{
+        padding-left:100px;
+    }
 }

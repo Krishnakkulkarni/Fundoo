@@ -10,7 +10,7 @@
         </button>
 
         <img id="fundoo-image" src="../../assets/images/image.png" />
-        
+
         <h1 class="example-app-name">{{HeaderName}}</h1>
 
         <div fxHide.xs='true' fxFlex fxLayout="row">
@@ -51,9 +51,9 @@
         <!----------------------------------LogOut------------------------------------------>
         <div fxLayout="row" fxLayoutAlign="end end">
 
-          <button mat-mini-fab class="mat-icon"
+          <button mat-mini-fab class="menu-image-icon"
             [ngStyle]="{'background-image': 'url(' + photo + ')','background-size':'cover'}" [matMenuTriggerFor]="menu"
-            fxLayout="row" fxLayoutAlign="end center" color='disabled' style="outline:none">
+            fxLayout="row" fxLayoutAlign="end center" color='disabled' style="outline:none" matTooltip="Fundoo Account">
           </button>
           <!--[ngStyle]="{'background-image': 'url(' + photo + ')','background-size':'cover'}" [matMenuTriggerFor]="menu1"
              matTooltip=" Fundoo Account user: {{FirstName}}, email: {{Email}}"

@@ -26,7 +26,7 @@ export class HttpService {
   postImage(url, data) {
     var http = {
       headers: new HttpHeaders({
-        'Authorization': localStorage.getItem('token')
+        'Authorization': localStorage.getItem('result')
       })
     };
     return this.http.post(this.rooturl + url, data, http)

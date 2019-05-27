@@ -1,7 +1,5 @@
-<div class="dailog-outer-div" fxLayout="column" [style.background-color]='color'>
-
+<mat-card class="dailog-outer-div" fxFlex fxLayout="column" [style.background-color]='data.note.color'>
   <img src="{{data.note.image}}" class="notes-image" />
-
   <div mat-dialog-content>
     <input matInput class="text" [(ngModel)]="data.note.title">
     <input matInput class="text" [(ngModel)]="data.note.description">
@@ -12,7 +10,5 @@
     <div class="button-div">
       <button mat-button [mat-dialog-close]="data.note">close</button>
     </div>
-    
   </div>
-
-</div>
+</mat-card>

@@ -14,7 +14,7 @@ export class ImagecropComponent implements OnInit {
 
   imagecroped: any;
   userid: string;
-
+  imageurl: any
 
   constructor(public dialogRef: MatDialogRef<ImagecropComponent>,
     @Inject(MAT_DIALOG_DATA) public dialogData: DialogData, public userService: UserService, public httpService: HttpService,
@@ -45,7 +45,9 @@ export class ImagecropComponent implements OnInit {
 
       this.userService.profilePicture(this.userid,formdata).subscribe(data => {
         console.log(data, "resp when setting img")
-        localStorage.setItem('data', data['status']);
+        localStorage.setItem('result', data['result']);
+        this.imageurl=localStorage.getItem('result')
+        console.log('imageurl',this.imageurl);
         
         this.dialogRef.close();
         this.dataService.changeImage(true);
