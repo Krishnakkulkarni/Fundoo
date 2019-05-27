@@ -56,6 +56,6 @@ namespace BussinessLayer.Interfaces
         /// </summary>
         /// <param name="userid">The user id.</param>
         /// <returns>returns response</returns>
-        //Task<string> ProfileUrl(string userid);
+        Task<string> ProfileUrl(string userid);
     }
 }

@@ -243,10 +243,10 @@ namespace RepositoryLayer.Context
         /// <returns>
         /// returns response
         /// </returns>
-        //public async Task<string> ProfileUrl(string userid)
-        //{
-        //    var data = await this.usermanager.FindByIdAsync(userid);
-        //    return data.Profile.ToString();
-        //}
+        public async Task<string> ProfileUrl(string userid)
+        {
+            var data = await this.usermanager.FindByIdAsync(userid);
+            return data.Profile.ToString();
+        }
     }
 }

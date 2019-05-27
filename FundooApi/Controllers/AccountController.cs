@@ -152,12 +152,12 @@ namespace FundooApi.Controllers
         /// </summary>
         /// <param name="userid">The user id.</param>
         /// <returns>returns response</returns>
-        //[HttpGet]
-        //[Route("url/{userid}")]
-        //public Task<string> ProfileUrl(string userid)
-        //{
-        //    var result = this.applicationUser.ProfileUrl(userid);
-        //    return result;
-        //}
+        [HttpGet]
+        [Route("url/{userid}")]
+        public Task<string> ProfileUrl(string userid)
+        {
+            var result = this.applicationUser.ProfileUrl(userid);
+            return result;
+        }
     }
 }

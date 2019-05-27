@@ -121,10 +121,10 @@ namespace BussinessLayer.Services
         /// <returns>
         /// returns response
         /// </returns>
-        //public Task<string> ProfileUrl(string userid)
-        //{
-        //    var result = this.applicationRepository.ProfileUrl(userid);
-        //    return result;
-        //}
+        public Task<string> ProfileUrl(string userid)
+        {
+            var result = this.applicationRepository.ProfileUrl(userid);
+            return result;
+        }
     }
 }
