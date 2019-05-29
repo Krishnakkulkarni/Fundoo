@@ -132,7 +132,7 @@ namespace FundooApi
             }
 
             app.UseCors(bulider =>
-            bulider.WithOrigins("http://localhost:4200")
+            bulider.WithOrigins("https://localhost:4200")
             .AllowAnyHeader()
             .AllowAnyMethod().AllowAnyOrigin().AllowCredentials());
             app.UseAuthentication();

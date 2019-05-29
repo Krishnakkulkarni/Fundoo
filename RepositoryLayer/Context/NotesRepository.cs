@@ -130,7 +130,9 @@ namespace RepositoryLayer.Context
                 var data = this.authentication.NotesModel.Where(t => t.Id == id).FirstOrDefault();
                 data.Image = uploadResult.Uri.ToString();
 
-                int result = this.authentication.SaveChanges();
+                this.authentication.Update(data);
+                this.authentication.SaveChanges();
+
                 return data.Image;
             }
             catch (Exception e)

@@ -89,7 +89,7 @@ namespace FundooApi.Controllers
             try
             {
                 var result = await this.notesCreation.Change(notesModel, id);
-                return this.Ok(result);
+                return this.Ok(new { result });
             }
             catch (Exception e)
             {

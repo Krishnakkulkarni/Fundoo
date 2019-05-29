@@ -37,15 +37,15 @@ namespace RepositoryLayer.Context
         /// returns string
         /// </returns>
         /// <exception cref="Exception">throws exception</exception>
-        public string AddLabels([FromBody] LabelsModel label)
+        public string AddLabels(LabelsModel label)
         {
-            var addLabel = new LabelsModel()
-            {
-                UserId = label.UserId,
-                Label = label.Label
-            };
             try
             {
+                var addLabel = new LabelsModel()
+                {
+                    UserId = label.UserId,
+                    Label = label.Label
+                };
                 this.authentication.Labels.Add(addLabel);
                 var result = this.authentication.SaveChanges();
                 return result.ToString();

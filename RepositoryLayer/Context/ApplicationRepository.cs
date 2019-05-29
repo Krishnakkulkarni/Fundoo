@@ -227,7 +227,9 @@ namespace RepositoryLayer.Context
                 var data = this.authentication.ApplicationUsers.Where(t => t.Id == userid).FirstOrDefault();
                 data.Profile = uploadResult.Uri.ToString();
 
-                int result = this.authentication.SaveChanges();
+                this.authentication.Update(data);
+                this.authentication.SaveChanges();
+
                 return data.Profile;
             }
             catch (Exception e)

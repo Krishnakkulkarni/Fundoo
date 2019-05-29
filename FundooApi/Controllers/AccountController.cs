@@ -145,7 +145,7 @@ namespace FundooApi.Controllers
 
             var result = this.applicationUser.ProfilePicture(file, userid);
             return this.Ok(new { result });
-        }
+            }
 
         /// <summary>
         /// Profiles the URL.
