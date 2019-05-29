@@ -10,7 +10,6 @@ import { UserService } from '../../services/user.service';
 import { environment } from '../../../../environments/environment';
 import { EditLabelsComponent } from '../edit-labels/edit-labels.component';
 import { NotesService } from '../../services/NotesServices/notes.service';
-import * as jwt_decode from "jwt-decode";
 
 export interface DialogData {
   data: any
@@ -32,18 +31,18 @@ export class HomeComponent implements OnInit {
   notesLabel: any;
 
   token: string;
-  userid: string;
+  userId: string;
   FirstName: string;
   userName: string;
   UserName: string;
   selectedFile: File;
-  value;
-  photo;
+  value: any;
+  photo: string;
+
+  HeaderName = "Fundoo"
 
   mobileQuery: MediaQueryList;
   private _mobileQueryListener: () => void;
-
-  HeaderName = "Fundoo"
 
   constructor(private router: Router, changeDetectorRef: ChangeDetectorRef, media: MediaMatcher,
     public snackBar: MatSnackBar, public userService: UserService, public notesService: NotesService,
@@ -53,19 +52,21 @@ export class HomeComponent implements OnInit {
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
 
-    this.token = localStorage.getItem('token');
-    this.payLoad = jwt_decode(this.token, "decode");
+    this.payLoad = localStorage.getItem('token');
   }
 
   ngOnInit() {
-    this.userid = localStorage.getItem("UserID");
-    this.photo = localStorage.getItem('imageUrl');
+    this.userId = localStorage.getItem("userid");
+    this.photo = localStorage.getItem('profile');
     // localStorage.setItem('result',this.userid)
+
     this.UserName = localStorage.getItem("UserName");
     this.FirstName = localStorage.getItem("FirstName");
+
     this.dataService.currentMsg.subscribe(message => this.message = message);
     this.userName = localStorage.getItem("UserName")
-    this.getLabels();  
+
+    this.getLabels();
   }
 
   onLogout() {
@@ -107,8 +108,8 @@ export class HomeComponent implements OnInit {
   img = environment.profileUrl + this.imageNew;
 
 
-  fileUpload(event) {
-    console.log(event, this.userid, "......")
+  fileUpload(event: { path: { files: any[]; }[]; }) {
+    console.log(event, this.userId, "......")
     console.log(event.path[0].files[0], "uploaded file ")
     this.imageFile = event.path[0].files[0]
     const uploadImage = new FormData();
@@ -119,6 +120,7 @@ export class HomeComponent implements OnInit {
   ChangePic(data: any) {
     {
       try {
+        
         const dialogRef = this.dialog.open(ImagecropComponent,
           { data: data, width: '600px' });
         dialogRef.afterClosed().subscribe(result => {
@@ -143,11 +145,10 @@ export class HomeComponent implements OnInit {
 
   EditLables(): void {
     const dialogConfig = new MatDialogConfig();
-   console.log(this.payLoad);
     let dialogRef = this.dialog.open(EditLabelsComponent,
 
-      // { data: this.notesLabel, width: '300px' }
-      );
+       { data: this.notesLabel}
+    );
 
     // dialogRef.afterClosed().subscribe(result => {
     //   console.log(result.result, "dash");
@@ -164,18 +165,14 @@ export class HomeComponent implements OnInit {
     // )
   }
   getLabels() {
-   console.log(this.payLoad);
-    
-    this.notesService.getlabels(this.payLoad.UserID).subscribe(responselabels => {
+    this.notesService.getlabels(this.userId).subscribe(responselabels => {
       this.notesLabel = responselabels['result'];
-      console.log(this.notesLabel);
-      
-
     }, err => {
       console.log(err);
     })
   }
-  add($event) {
+
+  add($event: any) {
     this.getLabels();
   }
 

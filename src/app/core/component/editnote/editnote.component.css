@@ -1,15 +1,19 @@
 .dailog-outer-div{
     width: 100%;
-    background-size: cover
+    background-size: cover;
+    padding: 0%
 }
 .notes-image{
-    background-size: cover
+    background-size: cover;
 }
 .text{
-    height:40px;
+    height:35px;
+}
+.text-for-description{
+    border:none; outline: none; resize: none; overflow: hidden;
 }
 .button-div{
-    padding-left:120px;
+    padding-left:140px;
 }
 @media screen and (max-width: 600px) {
     .dailog-outer-div{

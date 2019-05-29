@@ -13,7 +13,7 @@ import { DialogData } from '../home/home.component';
 export class ImagecropComponent implements OnInit {
 
   imagecroped: any;
-  userid: string;
+  userId: string;
   imageurl: any
 
   constructor(public dialogRef: MatDialogRef<ImagecropComponent>,
@@ -24,7 +24,7 @@ export class ImagecropComponent implements OnInit {
     }
 
   ngOnInit() {
-    this.userid=localStorage.getItem('UserID')
+    this.userId=localStorage.getItem('userid')
   }
 
   private token = localStorage.getItem('token')
@@ -39,12 +39,13 @@ export class ImagecropComponent implements OnInit {
   }
 
   setprofile() {
-      const formdata = new FormData();
+      let formdata = new FormData();
       formdata.append('file', this.imagecroped);
-      console.log(formdata,this.userid, "form data");
+      console.log(formdata,this.userId, "form data");
 
-      this.userService.profilePicture(this.userid,formdata).subscribe(data => {
+      this.userService.profilePicture(this.userId,formdata).subscribe(data => {
         console.log(data, "resp when setting img")
+        
         localStorage.setItem('result', data['result']);
         this.imageurl=localStorage.getItem('result')
         console.log('imageurl',this.imageurl);
@@ -55,5 +56,4 @@ export class ImagecropComponent implements OnInit {
         console.log(err, "err")
       });
     }
-  
 }

@@ -14,6 +14,7 @@ import { ArchiveComponent } from './core/component/archive/archive.component';
 import { TrashComponent } from './core/component/trash/trash.component';
 import { EditnoteComponent } from './core/component/editnote/editnote.component';
 import { ImagecropComponent } from './core/component/imagecrop/imagecrop.component';
+import { CollaborationComponent } from './core/component/collaboration/collaboration.component';
 
 
 //This is my case 
@@ -41,7 +42,8 @@ const routes: Routes = [
     ]
   },
   { path: 'editnote', component: EditnoteComponent },
-  { path: 'imagecroper', component: ImagecropComponent }
+  { path: 'imagecroper', component: ImagecropComponent },
+  { path: 'collaborator', component:CollaborationComponent}
 ];
 
 @NgModule({

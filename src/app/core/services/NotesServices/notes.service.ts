@@ -12,7 +12,7 @@ export class NotesService {
     return this.httpService.post('Notes/addNotes', data);
   }
   getNotesById(UserId: string) {
-    return this.httpService.Get('Notes/'+ UserId);
+    return this.httpService.Get('Notes/' + UserId);
   }
   ImageUpload(data, id) {
     return this.httpService.post('Notes/image/' + id, data);
@@ -38,21 +38,21 @@ export class NotesService {
   NoteUpdated(id, result) {
     return this.httpService.update('Notes/' + id, result)
   }
-  AddNotesLabels(data){
-    return this.httpService.post('',data)
+  AddNotesLabels(data) {
+    return this.httpService.post('', data)
   }
 
-  getlabels(userId){
-    return this.httpService.Get('Labels/getLabel/'+userId);
-    
-    }
-  AddLabels(data){
-    return this.httpService.post('Labels/addLabel',data)
+  getlabels(userId) {
+    return this.httpService.Get('Labels/getLabel/' + userId);
+
   }
-  updateLabel(id,data){
-    return this.httpService.update('Labels/updateLabel/'+id,data)
+  AddLabels(data) {
+    return this.httpService.post('Labels/addLabel', data)
   }
-  deletelabel(id){
-    return this.httpService.deletelabel('Labels/'+id)
+  updateLabel(id, data) {
+    return this.httpService.update('Labels/updateLabel/' + id, data)
+  }
+  deletelabel(id) {
+    return this.httpService.deletelabel('Labels/' + id)
   }
 }

@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
     if (localStorage.getItem('token') != null)
       this.router.navigateByUrl('home');
-    this.resetForm();
+      this.resetForm();
 
   }
 
@@ -42,6 +42,7 @@ export class LoginComponent implements OnInit {
         (
           (data: any) => {
             localStorage.setItem('token', data.result.token);
+            localStorage.setItem('userid', data.result.userid);
             this.router.navigateByUrl('home');
             this.snackbar.open("login successful", "close", { duration: 2000 });
           },

@@ -5,7 +5,7 @@
 
       <div fxFlex="65" fxLayout="row">
 
-        <button mat-icon-button (click)="snav.toggle()">
+        <button mat-icon-button (click)="snav.toggle()" matTooltip="Main menu">
           <mat-icon>menu</mat-icon>
         </button>
 
@@ -25,7 +25,9 @@
           </mat-form-field>
 
         </div>
+        <div>
 
+        </div>
       </div>
 
 
@@ -45,15 +47,19 @@
           </button>
 
           <button mat-icon-button *ngIf='flag==true' (click)='ReverseFlag()' matTooltip="List View">
-            <mat-icon>view_stream</mat-icon>
+            <img id="" src="../../../../assets/images/outline-view_agenda-24px.svg">
+            <!-- <mat-icon>view_stream</mat-icon> -->
           </button>
         </div>
         <!----------------------------------LogOut------------------------------------------>
         <div fxLayout="row" fxLayoutAlign="end end">
 
-          <button mat-mini-fab class="menu-image-icon"
+          <button *ngIf='photo!=null' mat-mini-fab class="menu-image-icon"
             [ngStyle]="{'background-image': 'url(' + photo + ')','background-size':'cover'}" [matMenuTriggerFor]="menu"
             fxLayout="row" fxLayoutAlign="end center" color='disabled' style="outline:none" matTooltip="Fundoo Account">
+          </button>
+          <button *ngIf='photo==null' mat-mini-fab class="menu-image-icon" [matMenuTriggerFor]="menu" fxLayout="row"
+            fxLayoutAlign="end center" color='disabled' style="outline:none" matTooltip="Fundoo Account">
           </button>
           <!--[ngStyle]="{'background-image': 'url(' + photo + ')','background-size':'cover'}" [matMenuTriggerFor]="menu1"
              matTooltip=" Fundoo Account user: {{FirstName}}, email: {{Email}}"

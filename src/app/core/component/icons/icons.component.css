@@ -1,9 +1,13 @@
 .mat-icon-button{
     color: gray !important;
 }
-/* .Hover{
+.Hover{
     opacity:0 
 }
 .Hover:hover{
     opacity: 1
-} */
+}
+.remind{
+    padding-left: 10%;
+    padding-top: 15%;
+}

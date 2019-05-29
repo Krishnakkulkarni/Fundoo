@@ -31,7 +31,7 @@ export class HttpService {
     };
     return this.http.post(this.rooturl + url, data, http)
   }
-  deletelabel(id) {
-    return this.http.delete('')
+  deletelabel(url) {
+    return this.http.delete(this.rooturl + url)
   }
 }

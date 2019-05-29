@@ -10,7 +10,7 @@
   <!---------------------------------Collaborator------------------------------------------->
 
   <div class="img" matTooltip="Collaborator">
-    <button mat-icon-button (click)='Collaborator()'>
+    <button mat-icon-button (click)='Collaborator(note)'>
       <mat-icon>person_add</mat-icon>
     </button>
   </div>
@@ -115,7 +115,7 @@
 <!----------------------------------More-Menu------------------------------------------>
 <mat-menu #Menu="matMenu">
   <button mat-menu-item (click)="TrashNote(card)" style="outline: none">Delete note</button>
-  <button mat-menu-item [matMenuTriggerFor]="Labelsmenu" style="outline: none">change lables</button>
+  <button mat-menu-item [matMenuTriggerFor]="Labelsmenu" style="outline: none">Add lables</button>
   <button mat-menu-item style="outline: none">Add drawing</button>
   <button mat-menu-item style="outline: none">Make a copy</button>
   <button mat-menu-item style="outline: none">show checkboxes</button>
@@ -141,6 +141,7 @@
 
 <!----------------------------------Remind-Menu------------------------------------------>
 <mat-menu #MenuRemind="matMenu">
+  <label class="remind">Reminder:</label>
   <button mat-menu-item (click)="Today(card)" style="outline: none">Later today 8:00PM </button>
   <button mat-menu-item (click)="Tomorrow(card)" style="outline: none">Tomorrow 8:00AM</button>
   <button mat-menu-item (click)="nextWeek(card)" style="outline: none">Next Week 8:00AM</button>

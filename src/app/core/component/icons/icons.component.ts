@@ -1,8 +1,9 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { NotesService } from '../../services/NotesServices/notes.service';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar, MatDialogConfig, MatDialog } from '@angular/material';
 import { DataService } from '../../services/DataServices/data.service';
+import { CollaborationComponent } from '../collaboration/collaboration.component';
 
 @Component({
   selector: 'app-icons',
@@ -10,6 +11,7 @@ import { DataService } from '../../services/DataServices/data.service';
   styleUrls: ['./icons.component.css']
 })
 export class IconsComponent implements OnInit {
+  [x: string]: any;
   selectedFile: File = null;
 
   flag: boolean = false;
@@ -32,7 +34,8 @@ export class IconsComponent implements OnInit {
     this.Onupload(card)
 
   }
-  constructor(public httpClient: HttpClient, public notesService: NotesService, public SnackBar: MatSnackBar, private service: DataService) { }
+  constructor(public httpClient: HttpClient, public notesService: NotesService, 
+    public SnackBar: MatSnackBar, private service: DataService,public dialog: MatDialog) { }
   @Input() card: any;
 
   ngOnInit() {
@@ -123,7 +126,7 @@ export class IconsComponent implements OnInit {
   LabelList(label) {
     console.log(label.id);
     console.log(this.card.id);
-    this.userId = localStorage.getItem('UserID')
+    this.userId = localStorage.getItem('userid')
     var notesLabel = {
       "LableId": label.id,
       "NoteId": this.card.id,
@@ -145,5 +148,12 @@ export class IconsComponent implements OnInit {
       data => { console.log(data); },
       err => { console.log(err); }
     )
+  }
+  Collaborator(note): void {
+    // localStorage.setItem('noteId', note.id);
+    const dialogConfig = new MatDialogConfig();
+    let dialogRef = this.dialog.open(CollaborationComponent, {
+      // data: { note }
+    });
   }
 }

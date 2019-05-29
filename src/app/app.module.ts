@@ -26,6 +26,7 @@ import { IconsComponent } from './core/component/icons/icons.component';
 import { EditnoteComponent } from './core/component/editnote/editnote.component';
 import { ImagecropComponent } from './core/component/imagecrop/imagecrop.component';
 import { ImageCropperModule } from 'ngx-image-cropper';
+import { CollaborationComponent } from './core/component/collaboration/collaboration.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { ImageCropperModule } from 'ngx-image-cropper';
     TrashComponent,
     IconsComponent,
     EditnoteComponent,
-    ImagecropComponent
+    ImagecropComponent,
+    CollaborationComponent
   ],
   imports: [
     BrowserModule,

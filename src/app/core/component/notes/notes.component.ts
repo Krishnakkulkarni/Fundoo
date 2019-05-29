@@ -21,7 +21,8 @@ export class NotesComponent implements OnInit {
 
   ngOnInit() {
     localStorage.getItem('token');
-    this.id = localStorage.getItem("UserID")
+    this.id = localStorage.getItem("userid")
+    
   }
 
   AddNotes() {
