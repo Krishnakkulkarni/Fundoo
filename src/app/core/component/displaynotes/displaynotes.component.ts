@@ -24,7 +24,7 @@ export class DisplaynotesComponent implements OnInit {
   @Input() trash;
 
   @Output() messageEvent = new EventEmitter<any>();
-  
+
   unrchive: boolean;
   archive: boolean;
   trashNote: boolean;
@@ -42,7 +42,7 @@ export class DisplaynotesComponent implements OnInit {
       data: { note }
     });
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed', result);
+      console.log('The dialog was closed');
       this.notesService.NoteUpdated(result.id, result).subscribe
         (data => { console.log(data, note); },
           err => { console.log(err); })
@@ -54,9 +54,9 @@ export class DisplaynotesComponent implements OnInit {
     this.messageEvent.emit(event)
   }
 
-  Trash(event){
+  Trash(event) {
     console.log('trash in');
     this.messageEvent.emit(event);
-    
+
   }
 }

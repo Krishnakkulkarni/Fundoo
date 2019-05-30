@@ -19,27 +19,27 @@ export class CollaborationComponent implements OnInit {
   constructor(public dialogRef: MatDialogRef<CollaborationComponent>, private notes: NotesService,
     @Inject(MAT_DIALOG_DATA) public data: any) { }
 
-  ReceiverEmail = new FormControl('',Validators.email);    
+  ReceiverEmail = new FormControl('', Validators.email);
   ngOnInit() {
     this.FirstName = localStorage.getItem("FirstName");
     this.LastName = localStorage.getItem("LastName");
     this.Email = localStorage.getItem("Email");
-    this.userId = localStorage.getItem('UserID');
-   
+    this.userId = localStorage.getItem('userid');
+
   }
-  add(){
-    var values ={     
-      "UserId":this.userId,
+  add() {
+    var values = {
+      "UserId": this.userId,
       "noteId": localStorage.getItem('noteId'),
       "senderEmail": this.Email,
-      "receiverEmail":this.ReceiverEmail.value       
+      "receiverEmail": this.ReceiverEmail.value
     }
     // this.receiveremail=localStorage.setItem('receiverEmail',this.ReceiverEmail.value)
     // this.notes.addcollaborator(values).subscribe(result=>
     //   console.log(values)    
     //   )
-      // this.getcollab(); 
-      this.dialogRef.close(values);
+    // this.getcollab(); 
+    this.dialogRef.close(values);
   }
   // getcollab(){
   //   this.notes.getCollaboratorNote(this.data).subscribe(result=>

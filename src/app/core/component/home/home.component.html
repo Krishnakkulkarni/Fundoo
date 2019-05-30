@@ -61,9 +61,6 @@
           <button *ngIf='photo==null' mat-mini-fab class="menu-image-icon" [matMenuTriggerFor]="menu" fxLayout="row"
             fxLayoutAlign="end center" color='disabled' style="outline:none" matTooltip="Fundoo Account">
           </button>
-          <!--[ngStyle]="{'background-image': 'url(' + photo + ')','background-size':'cover'}" [matMenuTriggerFor]="menu1"
-             matTooltip=" Fundoo Account user: {{FirstName}}, email: {{Email}}"
-            [matTooltipClass]="'my-tooltip'"  -->
 
           <mat-menu #menu="matMenu">
             <div class="backgroundimage" fxLayout="row">
@@ -128,7 +125,7 @@
           <div>
             <div *ngFor="let label of notesLabel">
 
-              <button (AferAddEvent)="add($event)" (click)="HeaderName= 'add'"
+              <button (AferAddEvent)="add($event)" (click)="HeaderName= 'label'"
                 [ngClass]="{'sidenav':HeaderName!= 'add','sidenavlist':HeaderName=='add'}" mat-button
                 style="outline:none">
                 <div fxLayout="row">

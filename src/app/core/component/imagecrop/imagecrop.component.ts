@@ -39,11 +39,12 @@ export class ImagecropComponent implements OnInit {
   }
 
   setprofile() {
-      let formdata = new FormData();
+      const formdata = new FormData();
+      
       formdata.append('file', this.imagecroped);
       console.log(formdata,this.userId, "form data");
 
-      this.userService.profilePicture(this.userId,formdata).subscribe(data => {
+      this.userService.profilePicture(formdata,this.userId).subscribe(data => {
         console.log(data, "resp when setting img")
         
         localStorage.setItem('result', data['result']);

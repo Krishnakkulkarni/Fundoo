@@ -41,18 +41,4 @@ export class NotesService {
   AddNotesLabels(data) {
     return this.httpService.post('', data)
   }
-
-  getlabels(userId) {
-    return this.httpService.Get('Labels/getLabel/' + userId);
-
-  }
-  AddLabels(data) {
-    return this.httpService.post('Labels/addLabel', data)
-  }
-  updateLabel(id, data) {
-    return this.httpService.update('Labels/updateLabel/' + id, data)
-  }
-  deletelabel(id) {
-    return this.httpService.deletelabel('Labels/' + id)
-  }
 }

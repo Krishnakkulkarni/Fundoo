@@ -7,9 +7,9 @@ import { DataService } from '../../services/DataServices/data.service';
 
 import { ImagecropComponent } from '../imagecrop/imagecrop.component';
 import { UserService } from '../../services/user.service';
-import { environment } from '../../../../environments/environment';
 import { EditLabelsComponent } from '../edit-labels/edit-labels.component';
 import { NotesService } from '../../services/NotesServices/notes.service';
+import { LabelService } from '../../services/LabelServices/label.service';
 
 export interface DialogData {
   data: any
@@ -46,7 +46,7 @@ export class HomeComponent implements OnInit {
 
   constructor(private router: Router, changeDetectorRef: ChangeDetectorRef, media: MediaMatcher,
     public snackBar: MatSnackBar, public userService: UserService, public notesService: NotesService,
-    public dataService: DataService, public dialog: MatDialog) {
+    public dataService: DataService, public labelService: LabelService, public dialog: MatDialog) {
 
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
@@ -56,12 +56,21 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
+
     this.userId = localStorage.getItem("userid");
-    this.photo = localStorage.getItem('profile');
+    this.photo = localStorage.getItem("result");
+    // this.userService.imageurl(this.userId).subscribe(
+    //   data => {
+    //     var profile = data['result'];
+    //     localStorage.setItem('profile', profile);
+    //   },
+    //   err => { }
+    // )
+
     // localStorage.setItem('result',this.userid)
 
-    this.UserName = localStorage.getItem("UserName");
-    this.FirstName = localStorage.getItem("FirstName");
+    // this.UserName = localStorage.getItem("UserName");
+    // this.FirstName = localStorage.getItem("FirstName");
 
     this.dataService.currentMsg.subscribe(message => this.message = message);
     this.userName = localStorage.getItem("UserName")
@@ -104,9 +113,6 @@ export class HomeComponent implements OnInit {
   // }
 
   imageFile = null;
-  public imageNew = localStorage.getItem('result');
-  img = environment.profileUrl + this.imageNew;
-
 
   fileUpload(event: { path: { files: any[]; }[]; }) {
     console.log(event, this.userId, "......")
@@ -120,21 +126,13 @@ export class HomeComponent implements OnInit {
   ChangePic(data: any) {
     {
       try {
-        
         const dialogRef = this.dialog.open(ImagecropComponent,
           { data: data, width: '600px' });
         dialogRef.afterClosed().subscribe(result => {
-          this.dataService.currentImage.subscribe(response => {
-          }
-          )
-
-          this.imageprofile = localStorage.getItem('imageurl')
-          this.img = environment.profileUrl + this.imageprofile;
-
+          this.dataService.currentImage.subscribe(response => { })
         })
-      } catch (err) {
-        console.log('error occurs ', err)
       }
+      catch (err) { console.log('error occurs ', err) }
     }
   }
 
@@ -146,8 +144,7 @@ export class HomeComponent implements OnInit {
   EditLables(): void {
     const dialogConfig = new MatDialogConfig();
     let dialogRef = this.dialog.open(EditLabelsComponent,
-
-       { data: this.notesLabel}
+      { data: this.notesLabel }
     );
 
     // dialogRef.afterClosed().subscribe(result => {
@@ -165,7 +162,7 @@ export class HomeComponent implements OnInit {
     // )
   }
   getLabels() {
-    this.notesService.getlabels(this.userId).subscribe(responselabels => {
+    this.labelService.getlabels(this.userId).subscribe(responselabels => {
       this.notesLabel = responselabels['result'];
     }, err => {
       console.log(err);

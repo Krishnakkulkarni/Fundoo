@@ -41,6 +41,12 @@ export class LoginComponent implements OnInit {
       this.userService.login(form.value).subscribe
         (
           (data: any) => {
+            this.userService.imageurl(data.result.userid).subscribe(
+              result=>{console.log(result);
+              localStorage.setItem('result',result) },
+              err=>{console.log(err);
+              }
+            )
             localStorage.setItem('token', data.result.token);
             localStorage.setItem('userid', data.result.userid);
             this.router.navigateByUrl('home');

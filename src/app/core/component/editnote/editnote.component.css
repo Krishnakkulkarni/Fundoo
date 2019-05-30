@@ -1,13 +1,14 @@
 .dailog-outer-div{
     width: 100%;
     background-size: cover;
-    padding: 0%
+    padding: 0%;
+    border:none; outline: none; resize: none; overflow: hidden;
 }
 .notes-image{
     background-size: cover;
 }
 .text{
-    height:35px;
+    height:40px;
 }
 .text-for-description{
     border:none; outline: none; resize: none; overflow: hidden;

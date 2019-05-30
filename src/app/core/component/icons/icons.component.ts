@@ -44,6 +44,8 @@ export class IconsComponent implements OnInit {
   Onupload(card) {
     if (card.id != undefined) {
       const formdata = new FormData();
+      console.log(formdata);
+      
       formdata.append('file', this.selectedFile);
       this.notesService.ImageUpload(formdata, card.id).subscribe
         (data => {

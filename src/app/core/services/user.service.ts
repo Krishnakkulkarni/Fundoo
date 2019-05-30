@@ -37,8 +37,11 @@ export class UserService {
 //     return this.httpService.Get('Account/url/"+UserId);
 //  }
 
-  profilePicture(UserId, data) {
+  profilePicture(data,UserId) {
     return this.httpService.postImage('Account/profile/'+UserId,data);
+  }
+  imageurl(userid){
+    return this.httpService.GetString('Account/url/'+userid)
   }
 
 }

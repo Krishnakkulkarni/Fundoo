@@ -1,0 +1,86 @@
+.divider{
+    width: 550px;
+  }
+
+  input
+  {
+      border: 0px;
+      font-family:sans-serif;
+  }
+  .buttons {  
+    display: none;
+  }
+  
+  button:focus
+  {
+    outline: 0;
+  }
+  
+  input:focus{
+    outline: 0;
+  }
+  
+  textarea
+  {
+      overflow: hidden;
+      border: 0px;
+      width: 500px;
+      word-wrap: break-word; 
+      white-space: pre-wrap; /* Since CSS 2.1 */
+      white-space: -moz-pre-wrap; /* Mozilla, since 1999 */
+      white-space: -pre-wrap; /* Opera 4-6 */
+      white-space: -o-pre-wrap;
+  }
+  
+  textarea:focus
+  {
+      outline: 0;
+  }
+  
+  .actionDialog
+  {
+      background-color: rgba(236, 236, 236, 0.685);
+      margin-left:-20px;
+      margin-right:-20px;
+      padding-left: 420px;
+  }
+  
+  .actionButton{
+      box-shadow: none;
+      background-color: rgba(236, 236, 236, 0.685);;
+  }
+  .Collicon {
+      color: grey;
+      border-width: 1px;
+      border-style: solid;
+      border-color:grey;
+      border-radius: 50% 50% 50% 50%; 
+      margin:4px;
+  }
+  
+  .btnCollab
+  {
+      position: absolute;
+       right: 0; 
+      color:grey
+  }
+  .usernameStyle
+  {
+      margin-left:20px;
+      margin-top:5px;
+      font-family: sans-serif; 
+      font-size: 13px;
+      font-weight: bold;
+  }
+  
+  .emailStyle{
+      margin-left:20px;
+      font-family: sans-serif; 
+      font-size: 13px;
+      color: rgb(138, 138, 138);
+  }
+
+  .Colluser
+  {
+    margin-right: 35px;
+  }
