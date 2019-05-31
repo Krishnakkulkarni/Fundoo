@@ -20,9 +20,16 @@ export class EditnoteComponent implements OnInit {
   ngOnInit() {
   }
 
+  /**
+   * 
+   */
   onNoClick(): void {
     this.dialogRef.close();
   }
+  /**
+   * 
+   * @param $event 
+   */
   SetColor($event: string) {
     this.color = $event
   }

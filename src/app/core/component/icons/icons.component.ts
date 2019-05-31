@@ -41,6 +41,10 @@ export class IconsComponent implements OnInit {
   ngOnInit() {
   }
 
+  /**
+   * 
+   * @param card 
+   */
   Onupload(card) {
     if (card.id != undefined) {
       const formdata = new FormData();
@@ -60,6 +64,11 @@ export class IconsComponent implements OnInit {
     }
   }
 
+  /**
+   * 
+   * @param color 
+   * @param card 
+   */
   setcolor(color: any, card) {
     if (card == undefined) {
       this.setNote.emit(color)
@@ -74,6 +83,10 @@ export class IconsComponent implements OnInit {
     }
   }
 
+  /**
+   * 
+   * @param card 
+   */
   Archive(card) {
     card.isArchive = true;
     console.log(card)
@@ -87,6 +100,10 @@ export class IconsComponent implements OnInit {
     )
   }
 
+  /**
+   * 
+   * @param card 
+   */
   Unarchive(card) {
     card.isArchive = false;
     this.notesService.ArchiveNote(card.id, card).subscribe(
@@ -100,6 +117,10 @@ export class IconsComponent implements OnInit {
     )
   }
 
+  /**
+   * 
+   * @param card 
+   */
   TrashNote(card) {
     console.log(card);
     card.isTrash = true;
@@ -113,6 +134,10 @@ export class IconsComponent implements OnInit {
     )
   }
 
+  /**
+   * 
+   * @param card 
+   */
   Restore(card) {
     console.log(card);
     card.isTrash = false;
@@ -125,6 +150,10 @@ export class IconsComponent implements OnInit {
     )
   }
 
+  /**
+   * 
+   * @param label 
+   */
   LabelList(label) {
     console.log(label.id);
     console.log(this.card.id);
@@ -143,6 +172,10 @@ export class IconsComponent implements OnInit {
     )
   }
 
+  /**
+   * 
+   * @param card 
+   */
   Delete(card) {
     this.setNote.emit(this.Delete)
     console.log(card);
@@ -151,6 +184,11 @@ export class IconsComponent implements OnInit {
       err => { console.log(err); }
     )
   }
+  
+  /**
+   * 
+   * @param note 
+   */
   Collaborator(note): void {
     // localStorage.setItem('noteId', note.id);
     const dialogConfig = new MatDialogConfig();

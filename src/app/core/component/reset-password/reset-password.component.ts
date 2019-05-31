@@ -15,8 +15,15 @@ export class ResetPasswordComponent implements OnInit {
 
   constructor(private userService: UserService, private router: Router, private snackBar: MatSnackBar) { }
 
+  /**
+   * 
+   */
   ngOnInit() { this.resetForm(); }
 
+  /**
+   * 
+   * @param form 
+   */
   resetForm(form?: NgForm) {
     if (form != null)
       form.reset();
@@ -28,6 +35,10 @@ export class ResetPasswordComponent implements OnInit {
       }
   }
 
+  /**
+   * 
+   * @param form 
+   */
   onSubmit(form: NgForm) {
     if (form.value.Password != form.value.ConfirmPassword) {
       this.resetForm();

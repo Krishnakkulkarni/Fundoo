@@ -20,7 +20,8 @@
               <button mat-icon-button>
                 <mat-icon>search</mat-icon>
               </button>
-              <input matInput [style.fontSize.px]=15 placeholder="Search">
+              <input matInput [style.fontSize.px]=15  [(ngModel)]="value"
+              (keyup)="lookfor()" (click)='goSearch()'placeholder="Search">
             </div>
           </mat-form-field>
 

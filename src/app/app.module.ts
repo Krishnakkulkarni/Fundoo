@@ -27,6 +27,8 @@ import { EditnoteComponent } from './core/component/editnote/editnote.component'
 import { ImagecropComponent } from './core/component/imagecrop/imagecrop.component';
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { CollaborationComponent } from './core/component/collaboration/collaboration.component';
+import { SearchComponent } from './core/component/search/search.component';
+import { SearchPipe } from './core/pipe/search.pipe';
 
 @NgModule({
   declarations: [
@@ -47,7 +49,9 @@ import { CollaborationComponent } from './core/component/collaboration/collabora
     IconsComponent,
     EditnoteComponent,
     ImagecropComponent,
-    CollaborationComponent
+    CollaborationComponent,
+    SearchComponent,
+    SearchPipe
   ],
   imports: [
     BrowserModule,

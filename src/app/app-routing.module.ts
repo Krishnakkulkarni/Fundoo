@@ -15,6 +15,7 @@ import { TrashComponent } from './core/component/trash/trash.component';
 import { EditnoteComponent } from './core/component/editnote/editnote.component';
 import { ImagecropComponent } from './core/component/imagecrop/imagecrop.component';
 import { CollaborationComponent } from './core/component/collaboration/collaboration.component';
+import { SearchComponent } from './core/component/search/search.component';
 
 
 //This is my case 
@@ -38,12 +39,13 @@ const routes: Routes = [
       { path: 'Reminder', component: ReminderComponent },
       { path: 'EditLables', component: EditLabelsComponent },
       { path: 'Archive', component: ArchiveComponent },
-      { path: 'Trash', component: TrashComponent }
+      { path: 'Trash', component: TrashComponent },
+      { path: 'search', component: SearchComponent}
     ]
   },
   { path: 'editnote', component: EditnoteComponent },
   { path: 'imagecroper', component: ImagecropComponent },
-  { path: 'collaborator', component:CollaborationComponent}
+  { path: 'collaborator', component: CollaborationComponent}
 ];
 
 @NgModule({

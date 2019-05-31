@@ -1,6 +1,6 @@
 <div fxLayoutGap="2%" fxLayout='row' fxLayout='row wrap' class="outer-div-style">
 
-  <div class="loop" *ngFor="let note of cards">
+  <div class="loop" *ngFor="let note of cards |search:search">
 
     <mat-card fxLayout='column' [ngClass]="{'note':grid==true,'notes':grid==false }"
       [style.background-color]=note.color>
@@ -11,11 +11,11 @@
         </div>
 
         <div>
-          <mat-card-title class="titleinput">{{ note.title}}</mat-card-title>
+          <mat-card-title (click)="openDialog(note)" class="titleinput">{{ note.title}}</mat-card-title>
         </div>
 
         <div>
-          <mat-card-content class="noteinput">{{ note.description}}</mat-card-content>
+          <mat-card-content (click)="openDialog(note)" class="noteinput">{{ note.description}}</mat-card-content>
         </div>
       </div>
 

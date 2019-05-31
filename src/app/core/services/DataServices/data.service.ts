@@ -6,6 +6,9 @@ import { BehaviorSubject, Subject } from 'rxjs';
 })
 export class DataService {
 
+  private searchMessage = new BehaviorSubject<string>('');
+  currentSearchmsg = this.searchMessage.asObservable();
+
   private messageSrc = new BehaviorSubject<boolean>(false);
   currentMsg = this.messageSrc.asObservable();
 
@@ -38,4 +41,9 @@ export class DataService {
     this.messageSrc.next(message)
   }
 
+  changeSearchMsg(view: string){
+    console.log("in dataService search",view);
+    this.searchMessage.next(view);
+    
+  }
 }

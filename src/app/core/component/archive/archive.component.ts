@@ -15,6 +15,9 @@ export class ArchiveComponent implements OnInit {
 
   constructor(public notesService: NotesService) { }
 
+  /**
+   * 
+   */
   ngOnInit() {
     this.id = localStorage.getItem("userid")
     this.notesService.GetArchiveNotes(this.id).subscribe(

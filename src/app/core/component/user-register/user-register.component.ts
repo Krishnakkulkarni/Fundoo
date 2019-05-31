@@ -16,10 +16,17 @@ export class UserRegisterComponent implements OnInit {
   emailPattern = "^[a-z0-9.%+-]+@[a-z.-]+\.[a-z]{2,4}$";
   constructor(private userService: UserService, private router: Router, public snackbar: MatSnackBar) { }
 
+  /**
+   * 
+   */
   ngOnInit() {
     this.resetForm();
   }
 
+  /**
+   * 
+   * @param form 
+   */
   resetForm(form?: NgForm) {
     if (form != null)
       form.reset();
@@ -34,6 +41,10 @@ export class UserRegisterComponent implements OnInit {
       }
   }
 
+  /**
+   * 
+   * @param form 
+   */
   onSubmit(form: NgForm) {
     if (form.value.Password != form.value.ConfirmPassword) {
       this.resetForm();

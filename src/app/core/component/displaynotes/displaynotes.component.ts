@@ -6,6 +6,8 @@ import { EditnoteComponent } from '../editnote/editnote.component';
 
 export interface DialogData {
   note: any;
+  description: any;
+  title: any;
 }
 
 @Component({
@@ -19,6 +21,8 @@ export class DisplaynotesComponent implements OnInit {
 
   constructor(private notesService: NotesService, public dataService: DataService, public matDialog: MatDialog) { }
 
+  @Input() search;
+  
   @Input() cards: any;
   @Input() archived;
   @Input() trash;
@@ -28,13 +32,22 @@ export class DisplaynotesComponent implements OnInit {
   unrchive: boolean;
   archive: boolean;
   trashNote: boolean;
+  title: any;
+  description: any;
 
+  /**
+   * 
+   */
   ngOnInit() {
     this.dataService.currentMessage.subscribe(data => {
       this.grid = data
     });
   }
 
+  /**
+   * 
+   * @param note 
+   */
   openDialog(note: { id: any; }) {
     console.log(note);
     const dialogRef = this.matDialog.open(EditnoteComponent, {
@@ -49,11 +62,19 @@ export class DisplaynotesComponent implements OnInit {
     });
   }
 
+  /**
+   * 
+   * @param event 
+   */
   Archive(event) {
     console.log('event');
     this.messageEvent.emit(event)
   }
 
+  /**
+   * 
+   * @param event 
+   */
   Trash(event) {
     console.log('trash in');
     this.messageEvent.emit(event);

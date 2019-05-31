@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { NotesService } from '../../services/NotesServices/notes.service';
 import { DataService } from '../../services/DataServices/data.service';
 
@@ -11,15 +11,19 @@ export class MainNotesComponent implements OnInit {
 
   notes = [];
   CardNotes = [];
+  // @Input() search;
   userId: any;
   Token_Id: any;
 
   constructor(private notesService: NotesService, private dataservice: DataService) { }
 
+  /**
+   * 
+   */
   ngOnInit() {
     this.Token_Id = localStorage.getItem('token')
     this.userId = localStorage.getItem('userid')
-    
+
     this.getAllCard();
     this.dataservice.current.subscribe(data => {
       console.log('data ', data);
@@ -29,27 +33,37 @@ export class MainNotesComponent implements OnInit {
     })
   }
 
+  /**
+   * 
+   */
   getAllCard() {
     this.CardNotes = [];
     this.notesService.getNotesById(this.userId).subscribe(
       (data: any) => {
         this.notes = data.note;
-
         for (let i = 0; i < this.notes.length; i++) {
           if (this.notes[i].isArchive == false && this.notes[i].isTrash == false) {
             this.CardNotes.push(this.notes[i])
           }
         }
         console.log(this.CardNotes, "notes");
-
       });
   }
+
+  /**
+   * 
+   * @param event 
+   */
   eventOccur(event) {
     this.getAllCard();
   }
-  getnotes($event){
+
+  /**
+   * 
+   * @param $event 
+   */
+  getnotes($event) {
     console.log('event occur');
-    
     this.getAllCard();
   }
 }

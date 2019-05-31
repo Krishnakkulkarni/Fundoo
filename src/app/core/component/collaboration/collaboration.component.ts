@@ -20,6 +20,9 @@ export class CollaborationComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   ReceiverEmail = new FormControl('', Validators.email);
+  /**
+   * 
+   */
   ngOnInit() {
     this.FirstName = localStorage.getItem("FirstName");
     this.LastName = localStorage.getItem("LastName");
@@ -27,6 +30,9 @@ export class CollaborationComponent implements OnInit {
     this.userId = localStorage.getItem('userid');
 
   }
+  /**
+   * 
+   */
   add() {
     var values = {
       "UserId": this.userId,

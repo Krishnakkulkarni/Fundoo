@@ -15,6 +15,9 @@ export class TrashComponent implements OnInit {
 
   constructor(public notesService: NotesService) { }
 
+  /**
+   * 
+   */
   ngOnInit() {
     this.id = localStorage.getItem("userid")
     this.notesService.ViewInTrash(this.id).subscribe(

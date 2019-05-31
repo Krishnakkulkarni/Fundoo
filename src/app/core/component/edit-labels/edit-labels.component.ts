@@ -18,11 +18,17 @@ export class EditLabelsComponent implements OnInit {
     public dialogRef: MatDialogRef<EditLabelsComponent>, @Inject(MAT_DIALOG_DATA) public data: any) { }
   label = new FormControl('');
 
+  /**
+   * 
+   */
   ngOnInit() {
     this.userId = localStorage.getItem('userid')
     this.notesLabel = this.data
   }
 
+  /**
+   * 
+   */
   close() {
     var data = {
       "Label": this.label.value,
@@ -37,12 +43,20 @@ export class EditLabelsComponent implements OnInit {
     }
   }
 
+  /**
+   * 
+   * @param label 
+   */
   update(label) {
     console.log(label.label, "in label update");
     this.labelService.updateLabel(label.id, label).subscribe(result =>
       console.log(result)
     )
   }
+  /**
+   * 
+   * @param id 
+   */
   delete(id) {
     console.log(id);
     this.labelService.deletelabel(id).subscribe(result =>

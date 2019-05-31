@@ -14,17 +14,24 @@ export class NotesComponent implements OnInit {
   id: any;
   color: string = "#ffffff";
   add : any;
+  
   @Output() AddEvent = new EventEmitter();
   
 
   constructor(private notesService: NotesService) { }
 
+  /**
+   * 
+   */
   ngOnInit() {
     localStorage.getItem('token');
     this.id = localStorage.getItem("userid")
     
   }
 
+  /**
+   * 
+   */
   AddNotes() {
     if (this.title.value.trim() != "" && this.title.value != undefined &&
       this.take_a_note.value.trim() != "" && this.take_a_note != undefined) {
@@ -36,6 +43,8 @@ export class NotesComponent implements OnInit {
       }
       this.notesService.addNotes(notes).subscribe
         (data => {
+          this.title.reset();
+          this.take_a_note.reset();
           console.log(data)
           this.AddEvent.emit(data)
         },
@@ -47,6 +56,10 @@ export class NotesComponent implements OnInit {
     }
   }
 
+  /**
+   * 
+   * @param $event 
+   */
   SetColor($event: string) {
     this.color = $event
   }

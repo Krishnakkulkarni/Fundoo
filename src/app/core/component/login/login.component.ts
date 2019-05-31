@@ -17,6 +17,9 @@ export class LoginComponent implements OnInit {
 
   constructor(private userService: UserService, private router: Router, public snackbar: MatSnackBar) { }
 
+  /**
+   * 
+   */
   ngOnInit() {
     if (localStorage.getItem('token') != null)
       this.router.navigateByUrl('home');
@@ -24,6 +27,10 @@ export class LoginComponent implements OnInit {
 
   }
 
+  /**
+   * 
+   * @param form 
+   */
   resetForm(form?: NgForm) {
     if (form != null)
       form.reset();
@@ -33,6 +40,11 @@ export class LoginComponent implements OnInit {
         Password: '',
       }
   }
+  
+  /**
+   * 
+   * @param form 
+   */
   onSubmit(form: NgForm) {
     if (form.value.UserName == '' && form.value.Password == '') {
       this.snackbar.open("Invalid UserName and Password", "close", { duration: 2000 });

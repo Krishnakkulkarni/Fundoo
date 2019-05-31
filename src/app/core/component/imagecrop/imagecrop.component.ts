@@ -23,21 +23,34 @@ export class ImagecropComponent implements OnInit {
        console.log(dialogData, "in image crop dialog") 
     }
 
+    /**
+     * 
+     */
   ngOnInit() {
     this.userId=localStorage.getItem('userid')
   }
 
   private token = localStorage.getItem('token')
 
+  /**
+   * 
+   * @param $event 
+   */
   imageCropped($event) {
     this.imagecroped = $event.file;
     console.log(this.imagecroped, "image crop")
   }
 
+  /**
+   * 
+   */
   cancel() {
     this.dialogRef.close();
   }
 
+  /**
+   * 
+   */
   setprofile() {
       const formdata = new FormData();
       

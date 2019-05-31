@@ -15,15 +15,26 @@ export class ForgotPasswordComponent implements OnInit {
 
   constructor(private userService: UserService, private router: Router, public snackbar: MatSnackBar) { }
 
+  /**
+   * 
+   */
   ngOnInit() {
     this.resetForm();
   }
 
+  /**
+   * 
+   * @param form 
+   */
   resetForm(form?: NgForm) {
     if (form != null)
       form.reset();
     this.userforgotpassword = { UserName: '' }
   }
+  /**
+   * 
+   * @param form 
+   */
   onSubmit(form: NgForm) {
     console.log('in forgot', form.value);
     this.userService.forgotPassword(form.value)

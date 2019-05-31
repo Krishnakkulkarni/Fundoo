@@ -55,17 +55,13 @@ export class HomeComponent implements OnInit {
     this.payLoad = localStorage.getItem('token');
   }
 
+  /**
+   * 
+   */
   ngOnInit() {
 
     this.userId = localStorage.getItem("userid");
     this.photo = localStorage.getItem("result");
-    // this.userService.imageurl(this.userId).subscribe(
-    //   data => {
-    //     var profile = data['result'];
-    //     localStorage.setItem('profile', profile);
-    //   },
-    //   err => { }
-    // )
 
     // localStorage.setItem('result',this.userid)
 
@@ -78,20 +74,45 @@ export class HomeComponent implements OnInit {
     this.getLabels();
   }
 
+  /**
+   * 
+   */
+  lookfor() {
+    this.dataService.changeSearchMsg(this.value)
+  }
+  /**
+   * 
+   */
+  goSearch() {
+    this.router.navigate(['/home/search'])
+  }
+
+  /**
+   * 
+   */
   onLogout() {
     localStorage.removeItem('token');
     this.router.navigate(['user/login']);
     this.snackBar.open("logout successful", "close", { duration: 1500 });
   }
 
+  /**
+   * 
+   */
   refresh() {
     location.reload()
   }
 
+  /**
+   * 
+   */
   Note() {
     this.router.navigate(['home/MainNotes'])
   }
 
+  /**
+   * 
+   */
   ReverseFlag() {
     this.flag = !this.flag
     this.dataService.changeView(this.flag)
@@ -114,6 +135,10 @@ export class HomeComponent implements OnInit {
 
   imageFile = null;
 
+  /**
+   * 
+   * @param event 
+   */
   fileUpload(event: { path: { files: any[]; }[]; }) {
     console.log(event, this.userId, "......")
     console.log(event.path[0].files[0], "uploaded file ")
@@ -123,6 +148,10 @@ export class HomeComponent implements OnInit {
     this.ChangePic(event)
   }
 
+  /**
+   * 
+   * @param data 
+   */
   ChangePic(data: any) {
     {
       try {
@@ -136,11 +165,16 @@ export class HomeComponent implements OnInit {
     }
   }
 
-
+/**
+ * 
+ */
   Reminder() {
     this.router.navigate(['home/Reminder'])
   }
 
+  /**
+   * 
+   */
   EditLables(): void {
     const dialogConfig = new MatDialogConfig();
     let dialogRef = this.dialog.open(EditLabelsComponent,
@@ -161,6 +195,9 @@ export class HomeComponent implements OnInit {
     // }
     // )
   }
+  /**
+   * 
+   */
   getLabels() {
     this.labelService.getlabels(this.userId).subscribe(responselabels => {
       this.notesLabel = responselabels['result'];
@@ -169,14 +206,24 @@ export class HomeComponent implements OnInit {
     })
   }
 
+  /**
+   * 
+   * @param $event 
+   */
   add($event: any) {
     this.getLabels();
   }
 
+  /**
+   * 
+   */
   Archive() {
     this.router.navigate(['home/Archive'])
   }
 
+  /**
+   * 
+   */
   Trash() {
     this.router.navigate(['home/Trash'])
   }
