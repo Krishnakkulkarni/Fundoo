@@ -17,7 +17,6 @@ export class HttpService {
   Get(url: String) {
     return this.http.get(this.rooturl + url)
   }
-
  
   GetString(url: String) {
     return this.http.get(this.rooturl + url, {responseType: 'text'})

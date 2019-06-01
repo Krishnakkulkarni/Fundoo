@@ -63,9 +63,7 @@ export class HomeComponent implements OnInit {
     this.userId = localStorage.getItem("userid");
     this.photo = localStorage.getItem("result");
 
-    // localStorage.setItem('result',this.userid)
-
-    // this.UserName = localStorage.getItem("UserName");
+    this.UserName = localStorage.getItem("username");
     // this.FirstName = localStorage.getItem("FirstName");
 
     this.dataService.currentMsg.subscribe(message => this.message = message);
@@ -165,9 +163,9 @@ export class HomeComponent implements OnInit {
     }
   }
 
-/**
- * 
- */
+  /**
+   * 
+   */
   Reminder() {
     this.router.navigate(['home/Reminder'])
   }

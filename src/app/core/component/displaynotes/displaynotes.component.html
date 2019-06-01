@@ -19,7 +19,18 @@
         </div>
       </div>
 
-      <app-icons [card]="note" [archivedicon]='archived' (setNote)="Archive($event)" [trashed]='trash' ></app-icons>
+
+      <div *ngIf="note.label!==null">
+        <mat-chip-list #chipList>
+          <mat-chip [selectable]="selectable" [removable]="removable" (removed)="remove(note,note.id)">
+            {{note.label}}
+            <mat-icon matChipRemove style="opacity: 0" class="hower" *ngIf="removable">cancel</mat-icon>
+          </mat-chip>
+        </mat-chip-list>
+        <input [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes">
+      </div>
+
+      <app-icons [card]="note" [archivedicon]='archived' (setNote)="Archive($event)" [trashed]='trash'></app-icons>
     </mat-card>
 
   </div>

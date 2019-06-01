@@ -4,6 +4,7 @@ import { NotesService } from '../../services/NotesServices/notes.service';
 import { MatSnackBar, MatDialogConfig, MatDialog } from '@angular/material';
 import { DataService } from '../../services/DataServices/data.service';
 import { CollaborationComponent } from '../collaboration/collaboration.component';
+import { LabelService } from '../../services/LabelServices/label.service';
 
 @Component({
   selector: 'app-icons',
@@ -13,13 +14,11 @@ import { CollaborationComponent } from '../collaboration/collaboration.component
 export class IconsComponent implements OnInit {
   [x: string]: any;
   selectedFile: File = null;
-
   flag: boolean = false;
+  label;
 
   @Input() archivedicon
-
   @Input() trashed
-
   @Output() setNote = new EventEmitter();
 
   trash: boolean = true;
@@ -34,11 +33,17 @@ export class IconsComponent implements OnInit {
     this.Onupload(card)
 
   }
-  constructor(public httpClient: HttpClient, public notesService: NotesService, 
-    public SnackBar: MatSnackBar, private service: DataService,public dialog: MatDialog) { }
+  constructor(public httpClient: HttpClient, public notesService: NotesService, public labelService: LabelService,
+    public SnackBar: MatSnackBar, private service: DataService, public dialog: MatDialog) { }
   @Input() card: any;
 
   ngOnInit() {
+    this.userId = localStorage.getItem('userid');
+    this.labelService.getlabels(this.userId).subscribe(
+      data => {
+        this.label = data['result'];
+      }
+    )
   }
 
   /**
@@ -49,7 +54,7 @@ export class IconsComponent implements OnInit {
     if (card.id != undefined) {
       const formdata = new FormData();
       console.log(formdata);
-      
+
       formdata.append('file', this.selectedFile);
       this.notesService.ImageUpload(formdata, card.id).subscribe
         (data => {
@@ -152,11 +157,10 @@ export class IconsComponent implements OnInit {
 
   /**
    * 
-   * @param label 
+   * @param labels
    */
-  LabelList(label) {
+  checkList(label) {
     console.log(label.id);
-    console.log(this.card.id);
     this.userId = localStorage.getItem('userid')
     var notesLabel = {
       "LableId": label.id,
@@ -164,7 +168,7 @@ export class IconsComponent implements OnInit {
       "UserId": this.userId
     }
     console.log(notesLabel);
-    this.notesService.AddNotesLabels(notesLabel).subscribe(data => {
+    this.notesService.updateNotes(label.id, notesLabel).subscribe(data => {
       console.log(data);
     }, err => {
       console.log(err);
@@ -184,7 +188,7 @@ export class IconsComponent implements OnInit {
       err => { console.log(err); }
     )
   }
-  
+
   /**
    * 
    * @param note 

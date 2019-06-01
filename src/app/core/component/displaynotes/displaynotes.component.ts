@@ -3,6 +3,9 @@ import { NotesService } from '../../services/NotesServices/notes.service';
 import { DataService } from '../../services/DataServices/data.service';
 import { MatDialog } from '@angular/material/dialog';
 import { EditnoteComponent } from '../editnote/editnote.component';
+import { MatChipInputEvent } from '@angular/material';
+import { COMMA, ENTER } from '@angular/cdk/keycodes';
+import { Observable } from 'rxjs';
 
 export interface DialogData {
   note: any;
@@ -18,6 +21,12 @@ export interface DialogData {
 
 export class DisplaynotesComponent implements OnInit {
   grid: boolean = true
+
+  visible = true;
+  selectable = true;
+  removable = true;
+  addOnBlur = true;
+  separatorKeysCodes = [ENTER, COMMA];
 
   constructor(private notesService: NotesService, public dataService: DataService, public matDialog: MatDialog) { }
 

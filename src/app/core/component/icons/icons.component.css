@@ -11,3 +11,6 @@
     padding-left: 10%;
     padding-top: 15%;
 }
+.labelmenu{
+    border:none; outline: none; resize: none; overflow: hidden;
+}

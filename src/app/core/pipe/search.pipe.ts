@@ -7,8 +7,6 @@ export class SearchPipe implements PipeTransform {
 
   transform(value: any, args?: any): any {
 
-    console.log(value);
-    console.log(args);
     if (args == undefined) {
       return value;
     }

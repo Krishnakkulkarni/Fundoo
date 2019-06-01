@@ -115,10 +115,10 @@
 <!----------------------------------More-Menu------------------------------------------>
 <mat-menu #Menu="matMenu">
   <button mat-menu-item (click)="TrashNote(card)" style="outline: none">Delete note</button>
-  <button mat-menu-item [matMenuTriggerFor]="Labelsmenu" style="outline: none">Add lables</button>
-  <button mat-menu-item style="outline: none">Add drawing</button>
+  <button mat-menu-item [matMenuTriggerFor]="Labelsmenu" style="outline: none">Add lable</button>
+  <!-- <button mat-menu-item style="outline: none">Add drawing</button>
   <button mat-menu-item style="outline: none">Make a copy</button>
-  <button mat-menu-item style="outline: none">show checkboxes</button>
+  <button mat-menu-item style="outline: none">show checkboxes</button> -->
 </mat-menu>
 
 <mat-menu #Menu1="matMenu">
@@ -128,13 +128,21 @@
 
 <!-------------------------------------label--------------------------------------------->
 
-<mat-menu #Labelsmenu="matMenu">
-  <div *ngFor="let label of notesLabel">
+<mat-menu #Labelsmenu="matMenu" class="labelmenu">
 
-    <div (click)="LabelList(label)">
-      <mat-checkbox>{{label.label}}</mat-checkbox>
+  <div style="padding-left: 5%;padding-bottom: 7%">Label note</div>
 
+  <div style="padding-left: 5%;padding-bottom: 7%">
+    <input matInput type="text" class="label-input" placeholder="Enter label name">
+  </div>
+
+  <div *ngFor="let labels of label">
+    <div  (click)="checkList(labels)" style="padding-left: 5%">
+      <mat-checkbox>{{labels.label}}</mat-checkbox>
     </div>
+  </div>
+
+  <div (click)="LabelList(label)">
 
   </div>
 </mat-menu>

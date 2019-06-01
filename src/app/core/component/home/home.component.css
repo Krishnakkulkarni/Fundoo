@@ -1,3 +1,23 @@
+/* .profileName {
+  box-sizing: border-box;
+  text-align: center;
+  width: 100%;
+  display: block;
+  padding: 0px;
+  margin-left: 23px;
+  margin-top: -55px;
+  font-family: "Times New Roman";
+  font-weight: bold;
+} */
+
+.profileEmail {
+  box-sizing: border-box;
+  text-align: center;
+  width: 100%;
+  display: block;
+  padding: 34px;
+  opacity: 0.6;
+}
 .example-spacer {
   flex: 1 1 auto;
   }
