@@ -91,5 +91,7 @@ namespace BussinessLayer.Interfaces
         IList<NotesModel> CollaboratorNote(string receiverEmail);
 
         Task<int> UpdateCollaborater(NotesModel model, int id, string receiverEmail);
+
+        string AddNotesLabel(NoteLabelModel model);
     }
 }

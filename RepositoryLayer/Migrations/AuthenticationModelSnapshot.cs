@@ -57,6 +57,23 @@ namespace RepositoryLayer.Migrations
                     b.ToTable("Labels");
                 });
 
+            modelBuilder.Entity("Common.Models.NoteLabelModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("LableId");
+
+                    b.Property<int>("NoteId");
+
+                    b.Property<string>("UserId");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("NoteLabel");
+                });
+
             modelBuilder.Entity("Common.Models.NotesModel", b =>
                 {
                     b.Property<int>("Id")
@@ -75,6 +92,8 @@ namespace RepositoryLayer.Migrations
                     b.Property<bool>("IsArchive");
 
                     b.Property<bool>("IsTrash");
+
+                    b.Property<string>("Label");
 
                     b.Property<DateTime>("ModifiedDate");
 

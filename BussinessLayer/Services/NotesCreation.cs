@@ -200,58 +200,16 @@ namespace BussinessLayer.Services
             return result;
         }
 
-        ///// <summary>
-        ///// Adds the labels.
-        ///// </summary>
-        ///// <param name="label">The label.</param>
-        ///// <returns>returns string</returns>
-        //public string AddLabels(LabelsModel label)
-        //{
-        //    var result = this.notesRepository.AddLabels(label);
-        //    return result;
-        //}
-
-        ///// <summary>
-        ///// Gets the labels.
-        ///// </summary>
-        ///// <param name="userId">The user identifier.</param>
-        ///// <returns>returns list</returns>
-        //public List<LabelsModel> GetLabels(string userId)
-        //{
-        //    return this.notesRepository.GetLabels(userId);
-        //}
-
-        ///// <summary>
-        ///// Updates the labels.
-        ///// </summary>
-        ///// <param name="label">The label.</param>
-        ///// <param name="id">The identifier.</param>
-        ///// <returns>returns string</returns>
-        //public string UpdateLabels(LabelsModel label, int id)
-        //{
-        //    return this.notesRepository.UpdateLabels(label, id);
-        //}
-
-        ///// <summary>
-        ///// Deletes the label.
-        ///// </summary>
-        ///// <param name="id">The identifier.</param>
-        ///// <returns>returns string</returns>
-        //public string DeleteLabel(int id)
-        //{
-        //    return this.notesRepository.DeleteLabel(id);
-        //}
-
-        ///// <summary>
-        ///// Adds the notes label.
-        ///// </summary>
-        ///// <param name="model">The model.</param>
-        ///// <returns>returns string</returns>
-        //public string AddNotesLabel(NoteLabelModel model)
-        //{
-        //    var result = this.notesRepository.AddNotesLabel(model);
-        //    return result;
-        //}
+        /// <summary>
+        /// Adds the notes label.
+        /// </summary>
+        /// <param name="model">The model.</param>
+        /// <returns>returns string</returns>
+        public string AddNotesLabel(NoteLabelModel model)
+        {
+            var result = this.notesRepository.AddNoteLabel(model);
+            return result;
+        }
 
         ///// <summary>
         ///// Gets the notes label.

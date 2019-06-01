@@ -51,6 +51,7 @@ namespace RepositoryLayer.Context
                 UserId = notesModel.UserId,
                 Title = notesModel.Title,
                 Description = notesModel.Description,
+                Label = notesModel.Label,
                 Color = notesModel.Color,
                 IsArchive = notesModel.IsArchive,
                 IsTrash = notesModel.IsTrash,
@@ -91,6 +92,7 @@ namespace RepositoryLayer.Context
             NotesModel notes = this.authentication.NotesModel.Where<NotesModel>(c => c.Id.Equals(id)).FirstOrDefault();
             notes.Title = model.Title;
             notes.Description = model.Description;
+            notes.Label = model.Label;
             notes.Color = model.Color;
             notes.IsArchive = model.IsArchive;
             notes.IsTrash = model.IsTrash;
@@ -289,134 +291,41 @@ namespace RepositoryLayer.Context
             }
         }
 
-        ///// <summary>
-        ///// Adds the labels.
-        ///// </summary>
-        ///// <param name="label">The label.</param>
-        ///// <returns>returns string</returns>
-        ///// <exception cref="Exception">throws exception</exception>
-        //public string AddLabels([FromBody] LabelsModel label)
-        //{
-        //    var addLabel = new LabelsModel()
-        //    {
-        //        UserId = label.UserId,
-        //        Label = label.Label
-        //    };
-        //    try
-        //    {
-        //        this.authentication.Labels.Add(addLabel);
-        //        var result = this.authentication.SaveChanges();
-        //        return result.ToString();
-        //    }
-        //    catch (Exception exception)
-        //    {
-        //        throw new Exception(exception.Message);
-        //    }
-        //}
+        /// <summary>
+        /// Adds the notes label.
+        /// </summary>
+        /// <param name="model">The model.</param>
+        /// <returns>returns string</returns>
+        /// <exception cref="Exception">throws exception</exception>
+        public string AddNoteLabel([FromBody] NoteLabelModel model)
+        {
+            try
+            {
+                var labelData = from t in this.authentication.NoteLabel where t.UserId == model.UserId select t;
+                foreach (var datas in labelData.ToList())
+                {
+                    if (datas.NoteId == model.NoteId && datas.LableId == model.LableId)
+                    {
+                        return false.ToString();
+                    }
+                }
 
-        ///// <summary>
-        ///// Gets the labels.
-        ///// </summary>
-        ///// <param name="userId">The user identifier.</param>
-        ///// <returns>returns list</returns>
-        ///// <exception cref="Exception">throws exception</exception>
-        //public List<LabelsModel> GetLabels(Guid userId)
-        //{
-        //    try
-        //    {
-        //        var list = new List<LabelsModel>();
-        //        var labels = from t in this.authentication.Labels where t.UserId == userId select t;
-        //        foreach (var items in labels)
-        //        {
-        //            list.Add(items);
-        //        }
-
-        //        return list;
-        //    }
-        //    catch (Exception exception)
-        //    {
-        //        throw new Exception(exception.Message);
-        //    }
-        //}
-
-        ///// <summary>
-        ///// Updates the labels.
-        ///// </summary>
-        ///// <param name="label">The label.</param>
-        ///// <param name="id">The identifier.</param>
-        ///// <returns>returns string</returns>
-        ///// <exception cref="Exception">throws exception</exception>
-        //public string UpdateLabels([FromBody] LabelsModel label, int id)
-        //{
-        //    LabelsModel labels = this.authentication.Labels.Where(t => t.Id == id).FirstOrDefault();
-        //    labels.Label = label.Label;
-        //    try
-        //    {
-        //        var result = this.authentication.SaveChanges();
-        //        return result.ToString();
-        //    }
-        //    catch (Exception exception)
-        //    {
-        //        throw new Exception(exception.Message);
-        //    }
-        //}
-
-        ///// <summary>
-        ///// Deletes the label.
-        ///// </summary>
-        ///// <param name="id">The identifier.</param>
-        ///// <returns>returns string</returns>
-        ///// <exception cref="Exception">throws exception</exception>
-        //public string DeleteLabel(int id)
-        //{
-        //    LabelsModel label = this.authentication.Labels.Where(t => t.Id == id).FirstOrDefault();
-        //    try
-        //    {
-        //        this.authentication.Labels.Remove(label);
-        //        var result = this.authentication.SaveChanges();
-        //        return result.ToString();
-        //    }
-        //    catch (Exception exception)
-        //    {
-        //        throw new Exception(exception.Message);
-        //    }
-        //}
-
-        ///// <summary>
-        ///// Adds the notes label.
-        ///// </summary>
-        ///// <param name="model">The model.</param>
-        ///// <returns>returns string</returns>
-        ///// <exception cref="Exception">throws exception</exception>
-        //public string AddNotesLabel([FromBody] NoteLabelModel model)
-        //{
-        //    try
-        //    {
-        //        var labelData = from t in this.authentication.NoteLabel where t.UserId == model.UserId select t;
-        //        foreach (var datas in labelData.ToList())
-        //        {
-        //            if (datas.NoteId == model.NoteId && datas.LableId == model.LableId)
-        //            {
-        //                return false.ToString();
-        //            }
-        //        }
-
-        //        var data = new NoteLabelModel
-        //        {
-        //            LableId = model.LableId,
-        //            NoteId = model.NoteId,
-        //            UserId = model.UserId
-        //        };
-        //        int result = 0;
-        //        this.authentication.NoteLabel.Add(data);
-        //        result = this.authentication.SaveChanges();
-        //        return result.ToString();
-        //    }
-        //    catch (Exception exception)
-        //    {
-        //        throw new Exception(exception.Message);
-        //    }
-        //}
+                var data = new NoteLabelModel
+                {
+                    LableId = model.LableId,
+                    NoteId = model.NoteId,
+                    UserId = model.UserId
+                };
+                int result = 0;
+                this.authentication.NoteLabel.Add(data);
+                result = this.authentication.SaveChanges();
+                return result.ToString();
+            }
+            catch (Exception exception)
+            {
+                throw new Exception(exception.Message);
+            }
+        }
 
         ///// <summary>
         ///// Gets the notes label.

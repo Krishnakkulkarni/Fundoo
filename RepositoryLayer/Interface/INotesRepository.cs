@@ -96,5 +96,7 @@ namespace RepositoryLayer.Interface
         IList<NotesModel> CollaboratorNote(string receiverEmail);
 
         void UpdateCollaborater([FromBody]NotesModel model, int id, string receiverEmail);
+
+        string AddNoteLabel([FromBody] NoteLabelModel model);
     }
 }
