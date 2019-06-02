@@ -1,5 +1,11 @@
+.Hover{
+    opacity:0 
+}
+.Hover:hover{
+    opacity: 1 !important
+}
 .outer-div-style{
-    margin: 1em auto 0 auto; margin-left: 13em ; margin-bottom: 1em;
+    margin: 1em auto 0 auto;
 }
 .note{
     width: 230px;
@@ -9,8 +15,6 @@
 }
 .notes{
     width: 550px;
-    margin: 1em auto 0 auto;
-    margin-left: 12em;
     padding: 0%
 }
 .titleinput{
@@ -32,12 +36,21 @@
         width: 590px;
         margin-top: 5px;
     }
+    .notes{
+        width: 590px;
+        margin-top: 5px;
+    }
     .outer-div-style{
         margin-top:15px; margin-left: 0%; margin-right: 0%; margin-bottom:20px;
     }
 }
 @media screen and (max-width: 450px) {
     .note{
+        width: 435px;
+        margin-top: 5px;
+        margin-left: 1%
+    }
+    .notes{
         width: 435px;
         margin-top: 5px;
         margin-left: 1%
@@ -52,6 +65,11 @@
         margin-top: 5px;
         margin-left: 1%
     }
+    .notes{
+        width: 415px;
+        margin-top: 5px;
+        margin-left: 1%
+    }
     .outer-div-style{
         margin-top:15px; margin-left: 0%; margin-right: 0%; margin-bottom:20px;
     }
@@ -62,12 +80,22 @@
         margin-top: 5px;
         margin-left: 1%
     }
+    .notes{
+        width: 365px;
+        margin-top: 5px;
+        margin-left: 1%
+    }
     .outer-div-style{
         margin-top:15px; margin-left: 0%; margin-right: 0%; margin-bottom:20px;
     }
 }
 @media screen and (max-width: 320px) {
     .note{
+        width: 310px;
+        margin-top: 5px;
+        margin-left: 1%
+    }
+    .notes{
         width: 310px;
         margin-top: 5px;
         margin-left: 1%

@@ -1,16 +1,16 @@
 .mat-icon-button{
     color: gray !important;
 }
-.Hover{
-    opacity:0 
-}
-.Hover:hover{
-    opacity: 1
-}
 .remind{
     padding-left: 10%;
     padding-top: 15%;
 }
 .labelmenu{
     border:none; outline: none; resize: none; overflow: hidden;
+}
+.label-note{
+    padding-left: 5%;padding-bottom: 7%;
+}
+.input-label{
+    padding-left: 5%;padding-bottom: 7%;
 }

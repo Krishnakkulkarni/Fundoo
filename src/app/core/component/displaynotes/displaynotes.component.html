@@ -1,4 +1,5 @@
-<div fxLayoutGap="2%" fxLayout='row' fxLayout='row wrap' class="outer-div-style">
+<div fxLayoutGap="1%"  fxLayout='row' fxLayout='row wrap' fxLayout="column" fxLayoutAlign="start center" 
+  class="outer-div-style">
 
   <div class="loop" *ngFor="let note of cards |search:search">
 
@@ -24,13 +25,15 @@
         <mat-chip-list #chipList>
           <mat-chip [selectable]="selectable" [removable]="removable" (removed)="remove(note,note.id)">
             {{note.label}}
-            <mat-icon matChipRemove style="opacity: 0" class="hower" *ngIf="removable">cancel</mat-icon>
+            <mat-icon matChipRemove class="Hover" *ngIf="removable">cancel</mat-icon>
           </mat-chip>
         </mat-chip-list>
         <input [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes">
       </div>
 
-      <app-icons [card]="note" [archivedicon]='archived' (setNote)="Archive($event)" [trashed]='trash'></app-icons>
+      <div class="Hover">
+        <app-icons [card]="note" [archivedicon]='archived' (setNote)="Archive($event)" [trashed]='trash'></app-icons>
+      </div>
     </mat-card>
 
   </div>

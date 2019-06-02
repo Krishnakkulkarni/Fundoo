@@ -41,4 +41,10 @@ export class NotesService {
   AddNotesLabels(data) {
     return this.httpService.post('', data)
   }
+  addcollaborator(data){
+    return this.httpService.post('Notes/addCollaborator',data)
+  }
+  getCollaboratorNote(id){
+    return this.httpService.Get('Notes/getCollaborator/'+id)
+  }
 }

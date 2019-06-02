@@ -157,18 +157,12 @@ export class IconsComponent implements OnInit {
 
   /**
    * 
-   * @param labels
+   * @param label
    */
   checkList(label) {
-    console.log(label.id);
-    this.userId = localStorage.getItem('userid')
-    var notesLabel = {
-      "LableId": label.id,
-      "NoteId": this.card.id,
-      "UserId": this.userId
-    }
-    console.log(notesLabel);
-    this.notesService.updateNotes(label.id, notesLabel).subscribe(data => {
+    console.log(this.card);
+    this.card.label = label
+    this.notesService.updateNotes(this.card.id, this.card).subscribe(data => {
       console.log(data);
     }, err => {
       console.log(err);
@@ -193,11 +187,11 @@ export class IconsComponent implements OnInit {
    * 
    * @param note 
    */
-  Collaborator(note): void {
-    // localStorage.setItem('noteId', note.id);
+  Collaborator(card): void {
+    localStorage.setItem('noteId', card.id);
     const dialogConfig = new MatDialogConfig();
     let dialogRef = this.dialog.open(CollaborationComponent, {
-      // data: { note }
+      data: { card }
     });
   }
 }

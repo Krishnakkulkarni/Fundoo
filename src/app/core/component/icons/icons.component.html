@@ -1,4 +1,4 @@
-<div class="Hover" fxLayout="row" fxLayoutAlign="space-around start">
+<div fxLayout="row" fxLayoutAlign="space-around start">
   <!---------------------------------Remind-Me------------------------------------------->
 
   <div class="img" matTooltip="Remind-Me">
@@ -10,7 +10,7 @@
   <!---------------------------------Collaborator------------------------------------------->
 
   <div class="img" matTooltip="Collaborator">
-    <button mat-icon-button (click)='Collaborator(note)'>
+    <button mat-icon-button (click)='Collaborator(card)'>
       <mat-icon>person_add</mat-icon>
     </button>
   </div>
@@ -130,14 +130,14 @@
 
 <mat-menu #Labelsmenu="matMenu" class="labelmenu">
 
-  <div style="padding-left: 5%;padding-bottom: 7%">Label note</div>
+  <div class="label-note">Label note</div>
 
-  <div style="padding-left: 5%;padding-bottom: 7%">
+  <div class="input-label">
     <input matInput type="text" class="label-input" placeholder="Enter label name">
   </div>
 
   <div *ngFor="let labels of label">
-    <div  (click)="checkList(labels)" style="padding-left: 5%">
+    <div (click)="checkList(labels.label)" style="padding-left: 5%">
       <mat-checkbox>{{labels.label}}</mat-checkbox>
     </div>
   </div>

@@ -11,12 +11,12 @@ import { Validators, FormControl } from '@angular/forms';
 export class CollaborationComponent implements OnInit {
   FirstName: string;
   LastName: string;
-  Email: string;
+  UserName: string;
   userId: any;
   notesid: any;
   receiveremail: void;
 
-  constructor(public dialogRef: MatDialogRef<CollaborationComponent>, private notes: NotesService,
+  constructor(public dialogRef: MatDialogRef<CollaborationComponent>, private notesService: NotesService,
     @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   ReceiverEmail = new FormControl('', Validators.email);
@@ -26,7 +26,7 @@ export class CollaborationComponent implements OnInit {
   ngOnInit() {
     this.FirstName = localStorage.getItem("FirstName");
     this.LastName = localStorage.getItem("LastName");
-    this.Email = localStorage.getItem("Email");
+    this.UserName = localStorage.getItem("username");
     this.userId = localStorage.getItem('userid');
 
   }
@@ -37,19 +37,23 @@ export class CollaborationComponent implements OnInit {
     var values = {
       "UserId": this.userId,
       "noteId": localStorage.getItem('noteId'),
-      "senderEmail": this.Email,
+      "senderEmail": this.UserName,
       "receiverEmail": this.ReceiverEmail.value
     }
-    // this.receiveremail=localStorage.setItem('receiverEmail',this.ReceiverEmail.value)
-    // this.notes.addcollaborator(values).subscribe(result=>
-    //   console.log(values)    
-    //   )
-    // this.getcollab(); 
+    console.log("addColl");
+    
+    this.receiveremail = localStorage.setItem('receiverEmail', this.ReceiverEmail.value)
+    console.log(this.receiveremail);
+    
+    this.notesService.addcollaborator(values).subscribe(result =>
+      console.log(values)
+    )
+    this.getcollab();
     this.dialogRef.close(values);
   }
-  // getcollab(){
-  //   this.notes.getCollaboratorNote(this.data).subscribe(result=>
-  //     console.log(this.data)          
-  //     )  
-  // }
+  getcollab() {
+    this.notesService.getCollaboratorNote(this.data).subscribe(result =>
+      console.log(this.data)
+    )
+  }
 }
