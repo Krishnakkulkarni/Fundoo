@@ -1,4 +1,8 @@
-﻿
+﻿//-----------------------------------------------------------------------
+// <copyright file="LabelsController.cs" company="Bridgelabz">
+//     Company @ 2019 </copyright>
+// <creator name = "Krishna Kulkarni" />
+//-----------------------------------------------------------------------
 namespace FundooApi.Controllers
 {
     using BussinessLayer.Interfaces;
@@ -64,14 +68,14 @@ namespace FundooApi.Controllers
         /// <summary>
         /// Updates the label.
         /// </summary>
-        /// <param name="id">The identifier.</param>
-        /// <param name="newlabel">The newlabel.</param>
+        /// <param name="label">The identifier.</param>
+        /// <param name="id">The newlabel.</param>
         /// <returns>returns response</returns>
         [HttpPut]
         [Route("updateLabel/{id}")]
-        public IActionResult UpdateLabel(LabelsModel label,int id )
+        public IActionResult UpdateLabel(LabelsModel label, int id)
         {
-            var result = this.labelsBusiness.UpdateLabels(label,id);
+            var result = this.labelsBusiness.UpdateLabels(label, id);
             if (result == null)
             {
                 return this.NotFound();

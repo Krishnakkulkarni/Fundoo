@@ -114,10 +114,10 @@ namespace RepositoryLayer.Context
             var user = await this.usermanager.FindByNameAsync(model.UserName);
             if (user != null && await this.usermanager.CheckPasswordAsync(user, model.Password))
             {
-                //using(var redis = new RedisClient())
-                //{
-                //    if(redis.Get(model.UserName)==null)
-                //    {
+                ////using(var redis = new RedisClient())
+                ////{
+                ////    if(redis.Get(model.UserName)==null)
+                ////   {
                 var tokenDescriptor = new SecurityTokenDescriptor
                 {
                     Subject = new ClaimsIdentity(new Claim[] { new Claim("UserID", user.Id.ToString()) }),
@@ -131,18 +131,18 @@ namespace RepositoryLayer.Context
                 model.Token = token;
                 model.Userid = user.Id;
                 return model;
-                //        if(tokenDescriptor != null)
-                //        {
-                //            redis.Set(model.UserName, tokenDescriptor);
-                //        }
-                //        return token;
-                //    }
-                //    else
-                //    {
-                //        var redis1 = redis.Get<ApplicationUserModel>(model.UserName);
-                //        return redis1.ToString();
-                //    }
-                //}
+                ////        if(tokenDescriptor != null)
+                ////        {
+                ////            redis.Set(model.UserName, tokenDescriptor);
+                ////        }
+                ////        return token;
+                ////    }
+                ////    else
+                ////    {
+                ////        var redis1 = redis.Get<ApplicationUserModel>(model.UserName);
+                ////        return redis1.ToString();
+                ////    }
+                ////}
             }
             else
             {
@@ -209,7 +209,7 @@ namespace RepositoryLayer.Context
         /// Images the specified file.
         /// </summary>
         /// <param name="file">The file.</param>
-        /// <param name="id">The identifier.</param>
+        /// <param name="userid">The identifier.</param>
         /// <returns>return string</returns>
         public string Image(IFormFile file, string userid)
         {

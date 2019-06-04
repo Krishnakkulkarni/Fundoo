@@ -110,7 +110,7 @@ namespace FundooApi.Controllers
             try
             {
                 IList<NotesModel> note = this.notesCreation.AccessNotes(userId);
-                return this.Ok( new { note});
+                return this.Ok(new { note });
             }
             catch (Exception e)
             {
@@ -138,7 +138,12 @@ namespace FundooApi.Controllers
             var result = this.notesCreation.BrowseImage(file, id);  
             return this.Ok(new { result });
         }
-        
+
+        /// <summary>
+        /// Archives the notes.
+        /// </summary>
+        /// <param name="userId">The user identifier.</param>
+        /// <returns></returns>
         [HttpGet]
         [Route("archive/{userId}")]
         public IActionResult ArchiveNotes(string userId)
@@ -152,6 +157,11 @@ namespace FundooApi.Controllers
             return this.Ok(new { result });
         }
 
+        /// <summary>
+        /// Trashes the notes.
+        /// </summary>
+        /// <param name="userId">The user identifier.</param>
+        /// <returns></returns>
         [HttpGet]
         [Route("trash/{userId}")]
         public IActionResult TrashNotes(string userId)
@@ -183,6 +193,11 @@ namespace FundooApi.Controllers
             return this.Ok(new { result });
         }
 
+        /// <summary>
+        /// Adds the collaborator to note.
+        /// </summary>
+        /// <param name="model">The model.</param>
+        /// <returns></returns>
         [HttpPost]
         [Route("addCollaborator")]
         public IActionResult AddCollaboratorToNote(CollaboratorModel model)
@@ -204,7 +219,11 @@ namespace FundooApi.Controllers
             }
         }
 
-        
+        /// <summary>
+        /// Removes the collaborator to note.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns></returns>
         [HttpDelete]
         [Route("removeCollaborator/{id}")]
         public IActionResult RemoveCollaboratorToNote(int id)
@@ -226,7 +245,11 @@ namespace FundooApi.Controllers
             }
         }
 
-        
+        /// <summary>
+        /// Collaborators the note.
+        /// </summary>
+        /// <param name="receiverEmail">The receiver email.</param>
+        /// <returns></returns>
         [HttpGet]
         [Route("getCollaborator/{receiverEmail}")]
         public IActionResult CollaboratorNote(string receiverEmail)
@@ -248,6 +271,13 @@ namespace FundooApi.Controllers
             }
         }
 
+        /// <summary>
+        /// Updates the collaborater.
+        /// </summary>
+        /// <param name="model">The model.</param>
+        /// <param name="id">The identifier.</param>
+        /// <param name="receiverEmail">The receiver email.</param>
+        /// <returns></returns>
         [HttpPut]
         [Route("updateCollaborater")]
         public async Task<IActionResult> UpdateCollaborater(NotesModel model, int id, string receiverEmail)

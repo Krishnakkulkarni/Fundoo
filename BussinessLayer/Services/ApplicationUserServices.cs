@@ -37,7 +37,6 @@ namespace BussinessLayer.Services
         /// </summary>
         /// <param name="applicationRepository">The application repository.</param>
         /// <param name="emailSender">The email sender.</param>
-        /// <param name="distributedCache">The distributed cache.</param>
         public ApplicationUserServices(IRepository applicationRepository, IEmailSender emailSender)
         {
             this.applicationRepository = applicationRepository;
@@ -51,8 +50,8 @@ namespace BussinessLayer.Services
         /// <returns>return boolean</returns>
         public async Task<bool> PostApplicationUserAsync(ApplicationUserModel model)
         {
-            await this.applicationRepository.CreateAsync(model);
-            return true;
+           await this.applicationRepository.CreateAsync(model);
+           return true;
         }
 
         /// <summary>
@@ -64,8 +63,7 @@ namespace BussinessLayer.Services
         /// </returns>
         public async Task<dynamic> LoginAsync(ApplicationLoginModel model)
         {
-            return  await this.applicationRepository.LoginPage(model);
-         
+           return await this.applicationRepository.LoginPage(model);
         }
 
         /// <summary>
@@ -104,7 +102,7 @@ namespace BussinessLayer.Services
         /// Profiles the picture.
         /// </summary>
         /// <param name="file">The file.</param>
-        /// <param name="id">The identifier.</param>
+        /// <param name="userid">The identifier.</param>
         /// <returns>
         /// returns string
         /// </returns>

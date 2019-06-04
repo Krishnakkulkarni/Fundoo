@@ -38,6 +38,11 @@ namespace BussinessLayer.Interfaces
         /// <returns>return integer</returns>
         Task<int> Change(NotesModel notesModel, int id);
 
+        /// <summary>
+        /// Accesses the notes.
+        /// </summary>
+        /// <param name="userId">The user identifier.</param>
+        /// <returns></returns>
         IList<NotesModel> AccessNotes(string userId);
 
         /// <summary>
@@ -90,8 +95,20 @@ namespace BussinessLayer.Interfaces
         /// <returns>returns string</returns>
         IList<NotesModel> CollaboratorNote(string receiverEmail);
 
+        /// <summary>
+        /// Updates the collaborater.
+        /// </summary>
+        /// <param name="model">The model.</param>
+        /// <param name="id">The identifier.</param>
+        /// <param name="receiverEmail">The receiver email.</param>
+        /// <returns></returns>
         Task<int> UpdateCollaborater(NotesModel model, int id, string receiverEmail);
 
+        /// <summary>
+        /// Adds the notes label.
+        /// </summary>
+        /// <param name="model">The model.</param>
+        /// <returns></returns>
         string AddNotesLabel(NoteLabelModel model);
     }
 }

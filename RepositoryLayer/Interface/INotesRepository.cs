@@ -43,6 +43,11 @@ namespace RepositoryLayer.Interface
         /// <param name="id">The identifier.</param>
         void UpdateNotes(NotesModel notesModel, int id);
 
+        /// <summary>
+        /// Gets the notes.
+        /// </summary>
+        /// <param name="userID">The user identifier.</param>
+        /// <returns></returns>
         IList<NotesModel> GetNotes(string userID);
 
         /// <summary>
@@ -95,8 +100,19 @@ namespace RepositoryLayer.Interface
         /// <returns></returns>
         IList<NotesModel> CollaboratorNote(string receiverEmail);
 
+        /// <summary>
+        /// Updates the collaborater.
+        /// </summary>
+        /// <param name="model">The model.</param>
+        /// <param name="id">The identifier.</param>
+        /// <param name="receiverEmail">The receiver email.</param>
         void UpdateCollaborater([FromBody]NotesModel model, int id, string receiverEmail);
 
+        /// <summary>
+        /// Adds the note label.
+        /// </summary>
+        /// <param name="model">The model.</param>
+        /// <returns></returns>
         string AddNoteLabel([FromBody] NoteLabelModel model);
     }
 }

@@ -47,7 +47,7 @@ namespace BussinessLayer.Interfaces
         /// Profiles the picture.
         /// </summary>
         /// <param name="file">The file.</param>
-        /// <param name="id">The identifier.</param>
+        /// <param name="userid">The identifier.</param>
         /// <returns>returns string</returns>
         string ProfilePicture(IFormFile file, string userid);
 

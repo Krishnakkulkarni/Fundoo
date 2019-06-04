@@ -194,6 +194,11 @@ namespace RepositoryLayer.Context
             return list;
         }
 
+        /// <summary>
+        /// Method to add Collaborator
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns>returns string</returns>
         public string AddCollaboratorToNote([FromBody] CollaboratorModel model)
         {
             try
@@ -224,7 +229,11 @@ namespace RepositoryLayer.Context
             }
         }
 
-        
+        /// <summary>
+        /// Method to remove Collaborator
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>returns string</returns>
         public string RemoveCollaboratorToNote(int id)
         {
             try
@@ -240,7 +249,11 @@ namespace RepositoryLayer.Context
             }
         }
 
-        
+        /// <summary>
+        /// Method to get Collaborator
+        /// </summary>
+        /// <param name="receiverEmail"></param>
+        /// <returns></returns>
         public IList<NotesModel> CollaboratorNote(string receiverEmail)
         {
             try
@@ -277,6 +290,12 @@ namespace RepositoryLayer.Context
             }
         }
 
+        /// <summary>
+        /// Method to update Collaborator
+        /// </summary>
+        /// <param name="model"></param>
+        /// <param name="id"></param>
+        /// <param name="receiverEmail"></param>
         public void UpdateCollaborater([FromBody]NotesModel model, int id, string receiverEmail)
         {
             var data = from coll in this.authentication.Collaborator

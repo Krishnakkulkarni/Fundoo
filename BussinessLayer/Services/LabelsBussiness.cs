@@ -1,4 +1,8 @@
-﻿
+﻿//-----------------------------------------------------------------------
+// <copyright file="LabelsBussiness.cs" company="Bridgelabz">
+//     Company @ 2019 </copyright>
+// <creator name = "Krishna Kulkarni" />
+//-----------------------------------------------------------------------
 namespace BussinessLayer.Services
 {
     using BussinessLayer.Interfaces;
@@ -15,7 +19,10 @@ namespace BussinessLayer.Services
         /// </summary>
         private readonly ILablesRepository labelsRepository;
 
-        
+        /// <summary>
+        /// Initializes a new instance of the <see cref="LabelsBussiness"/> class.
+        /// </summary>
+        /// <param name="labelsRepository">The labels repository.</param>
         public LabelsBussiness(ILablesRepository labelsRepository)
         {
             this.labelsRepository = labelsRepository;
@@ -34,7 +41,6 @@ namespace BussinessLayer.Services
             return result;
         }
         
-
         /// <summary>
         /// Gets the labels.
         /// </summary>
@@ -50,14 +56,14 @@ namespace BussinessLayer.Services
         /// <summary>
         /// Updates the labels.
         /// </summary>
-        /// <param name="id">The identifier.</param>
-        /// <param name="newlabel">The new label.</param>
+        /// <param name="label">The identifier.</param>
+        /// <param name="id">The new label.</param>
         /// <returns>
         /// returns string
         /// </returns>
         public string UpdateLabels(LabelsModel label, int id)
         {
-            return this.labelsRepository.UpdateLabels(label,id);
+            return this.labelsRepository.UpdateLabels(label, id);
         }
 
         /// <summary>

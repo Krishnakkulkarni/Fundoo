@@ -77,5 +77,11 @@ namespace FundooNote.Models
         /// The profile.
         /// </value>
         public string Profile { get; set; }
+
+        ////public string Result { get; set; }
+
+        ////public string Firstname { get; set; }
+
+        ////public string Lastname { get; set; }
     }
 }

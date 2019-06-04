@@ -53,7 +53,8 @@ namespace BussinessLayer.Services
             {
                 redis.Remove(redisdata + notesModel.UserId);
             }
-            AccessNotes(notesModel.UserId);
+
+            this.AccessNotes(notesModel.UserId);
             return result;
         }
 
@@ -83,7 +84,8 @@ namespace BussinessLayer.Services
             {
                 redis.Remove(redisdata + notesModel.UserId);
             }
-            AccessNotes(notesModel.UserId);
+
+            this.AccessNotes(notesModel.UserId);
             return result;
         }
 
@@ -193,6 +195,13 @@ namespace BussinessLayer.Services
             return this.notesRepository.CollaboratorNote(receiverEmail);
         }
 
+        /// <summary>
+        /// Updates the collaborater.
+        /// </summary>
+        /// <param name="model">The model.</param>
+        /// <param name="id">The identifier.</param>
+        /// <param name="receiverEmail">The receiver email.</param>
+        /// <returns></returns>
         public Task<int> UpdateCollaborater(NotesModel model, int id, string receiverEmail)
         {
             this.notesRepository.UpdateCollaborater(model, id, receiverEmail);

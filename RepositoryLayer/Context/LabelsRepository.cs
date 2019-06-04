@@ -1,4 +1,8 @@
-﻿
+﻿//-----------------------------------------------------------------------
+// <copyright file="LabelsRepository.cs" company="Bridgelabz">
+//     Company @ 2019 </copyright>
+// <creator name = "Krishna Kulkarni" />
+//-----------------------------------------------------------------------
 namespace RepositoryLayer.Context
 {
     using Common.Models;
@@ -18,7 +22,7 @@ namespace RepositoryLayer.Context
         /// <summary>
         /// The authentication
         /// </summary>
-        public Authentication authentication;
+        private Authentication authentication;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="LabelsRepository"/> class.
@@ -56,7 +60,6 @@ namespace RepositoryLayer.Context
             }
         }
         
-
         /// <summary>
         /// Gets the labels.
         /// </summary>
@@ -85,8 +88,8 @@ namespace RepositoryLayer.Context
         /// <summary>
         /// Updates the labels.
         /// </summary>
-        /// <param name="id">The identifier.</param>
-        /// <param name="newlabel">The new label.</param>
+        /// <param name="label">The identifier.</param>
+        /// <param name="id">The new label.</param>
         /// <returns>returns string</returns>
         /// <exception cref="Exception">throws exception</exception>
         public string UpdateLabels(LabelsModel label, int id)

@@ -67,7 +67,7 @@ namespace RepositoryLayer.Interface
         /// Images the specified file.
         /// </summary>
         /// <param name="file">The file.</param>
-        /// <param name="id">The identifier.</param>
+        /// <param name="userid">The identifier.</param>
         /// <returns>returns string</returns>
         string Image(IFormFile file, string userid);
 

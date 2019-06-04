@@ -71,12 +71,12 @@ namespace FundooApi.Controllers
             try  
             {
                 var result = await this.applicationUser.LoginAsync(applicationLoginModel);
-                if(result.Success == true)
+                if (result.Success == true)
                 {
-
                     return this.Ok(new { result });
                 }
-                    return BadRequest();
+
+                    return this.BadRequest();
             }
             catch (Exception e)
             {
@@ -133,9 +133,15 @@ namespace FundooApi.Controllers
             }
         }
 
+        /// <summary>
+        /// Profiles the specified file.
+        /// </summary>
+        /// <param name="file">The file.</param>
+        /// <param name="userid">The userid.</param>
+        /// <returns></returns>
         [HttpPost]
         [Route("profile/{userid}")]
-        public IActionResult Profile(IFormFile file,string userid)
+        public IActionResult Profile(IFormFile file, string userid)
         {
             Console.WriteLine(file);
             if (file == null)
