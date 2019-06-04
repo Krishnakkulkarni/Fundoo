@@ -149,6 +149,7 @@ export class IconsComponent implements OnInit {
     this.notesService.Trash(card.id, card).subscribe(
       data => {
         console.log(data);
+        this.setNote.emit(this.Restore)
         this.SnackBar.open("Note restored", "close", { duration: 2000 });
       },
       err => { console.log(err); }
@@ -175,10 +176,12 @@ export class IconsComponent implements OnInit {
    * @param card 
    */
   Delete(card) {
-    this.setNote.emit(this.Delete)
     console.log(card);
     this.notesService.DeleteNote(card.id, card).subscribe(
-      data => { console.log(data); },
+      data => {
+        console.log(data);
+        this.setNote.emit(this.Delete)
+      },
       err => { console.log(err); }
     )
   }

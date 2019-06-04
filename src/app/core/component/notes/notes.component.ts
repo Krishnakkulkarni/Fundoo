@@ -33,7 +33,7 @@ export class NotesComponent implements OnInit {
    * 
    */
   AddNotes() {
-    if (this.title.value.trim() != "" && this.title.value != undefined &&
+    if (this.title.value != "" && this.title.value != undefined &&
       this.take_a_note.value.trim() != "" && this.take_a_note != undefined) {
       var notes = {
         UserId: this.id,

@@ -11,6 +11,7 @@ export interface DialogData {
   note: any;
   description: any;
   title: any;
+  label : string
 }
 
 @Component({
@@ -27,11 +28,12 @@ export class DisplaynotesComponent implements OnInit {
   removable = true;
   addOnBlur = true;
   separatorKeysCodes = [ENTER, COMMA];
-
+  dialogData: DialogData []
+  
   constructor(private notesService: NotesService, public dataService: DataService, public matDialog: MatDialog) { }
 
   @Input() search;
-  
+
   @Input() cards: any;
   @Input() archived;
   @Input() trash;
@@ -87,6 +89,13 @@ export class DisplaynotesComponent implements OnInit {
   Trash(event) {
     console.log('trash in');
     this.messageEvent.emit(event);
-
   }
+  
+  remove(note: DialogData) {
+    const index = this.dialogData.indexOf(note);
+    if (index >= 0) {
+      this.dialogData.splice(index, 1);
+    }
+  }
+
 }

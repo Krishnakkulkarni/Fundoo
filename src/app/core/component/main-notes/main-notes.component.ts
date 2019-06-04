@@ -11,7 +11,6 @@ export class MainNotesComponent implements OnInit {
 
   notes = [];
   CardNotes = [];
-  // @Input() search;
   userId: any;
   Token_Id: any;
 

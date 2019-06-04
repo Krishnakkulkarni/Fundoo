@@ -34,7 +34,7 @@ export class UserRegisterComponent implements OnInit {
       {
         UserName: '',
         Password: '',
-        ConfirmPassword:'',
+        ConfirmPassword: '',
         Email: '',
         FirstName: '',
         LastName: ''
@@ -51,21 +51,23 @@ export class UserRegisterComponent implements OnInit {
       this.snackbar.open('Password and ConfirmPassword Missmatch', 'close', { duration: 2000 });
       return;
     }
-    else{
+    else {
       console.log('in register', form.value);
       this.userService.registerUser(form.value).subscribe
         (
           (data: any) => {
             console.log(data);
-  
+
             if (data) {
               this.router.navigateByUrl('user/login');
+              // localStorage.setItem("firstName",data.result.FirstName)
+              // localStorage.setItem("lastName",data.result.LastName)
               this.snackbar.open("register successful", "close", { duration: 2000 });
               this.resetForm(form);
             }
           }
         );
     }
-    
+
   }
 }
