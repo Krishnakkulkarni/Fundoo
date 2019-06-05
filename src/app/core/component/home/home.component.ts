@@ -116,21 +116,6 @@ export class HomeComponent implements OnInit {
     this.dataService.changeView(this.flag)
   }
 
-  // onFileChanged(event) {
-  //   this.selectedFile = event.path[0].files[0];
-  //   let uploadData = new FormData();
-  //   uploadData.append('file', this.selectedFile, 'file');
-  //   console.log(uploadData);
-
-  //   this.userService.profilePicture(uploadData, this.userName).subscribe(data => {
-  //     // let obj = JSON.parse(data)
-  //     // localStorage.setItem('profile', obj.result)
-  //   }, err => {
-  //     console.log(err);
-  //   }
-  //   )
-  // }
-
   imageFile = null;
 
   /**
@@ -193,6 +178,8 @@ export class HomeComponent implements OnInit {
     // }
     // )
   }
+
+  
   /**
    * 
    */

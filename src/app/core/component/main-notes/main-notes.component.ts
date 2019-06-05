@@ -33,7 +33,7 @@ export class MainNotesComponent implements OnInit {
   }
 
   /**
-   * 
+   * To get all cards 
    */
   getAllCard() {
     this.CardNotes = [];
@@ -65,4 +65,5 @@ export class MainNotesComponent implements OnInit {
     console.log('event occur');
     this.getAllCard();
   }
+  
 }

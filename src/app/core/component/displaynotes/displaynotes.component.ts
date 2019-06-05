@@ -11,7 +11,6 @@ export interface DialogData {
   note: any;
   description: any;
   title: any;
-  label : string
 }
 
 @Component({
@@ -22,15 +21,22 @@ export interface DialogData {
 
 export class DisplaynotesComponent implements OnInit {
   grid: boolean = true
-
+  // notes:Notes[];
+  
   visible = true;
   selectable = true;
   removable = true;
   addOnBlur = true;
   separatorKeysCodes = [ENTER, COMMA];
-  dialogData: DialogData []
-  
-  constructor(private notesService: NotesService, public dataService: DataService, public matDialog: MatDialog) { }
+
+  constructor(private notesService: NotesService, public dataService: DataService, public matDialog: MatDialog) {
+    this.notesService.getCollaboratorNote(this.receiverEmail).subscribe(response => {
+      this.collaborator = response;
+
+    }, err => {
+      console.log(err);
+    })
+  }
 
   @Input() search;
 
@@ -46,6 +52,10 @@ export class DisplaynotesComponent implements OnInit {
   title: any;
   description: any;
 
+  collaborator: any;
+  receiverEmail: string;
+  userId: any
+
   /**
    * 
    */
@@ -53,8 +63,36 @@ export class DisplaynotesComponent implements OnInit {
     this.dataService.currentMessage.subscribe(data => {
       this.grid = data
     });
+    this.userId = localStorage.getItem("userid")
+    this.receiverEmail = localStorage.getItem('receiverEmail')
   }
 
+  // getAllNotes()
+  // {
+  //    this.userId=localStorage.getItem("userid")
+  //   this.notesService.getNotesById(this.userId).subscribe(  
+  //     data => {
+  //       this.notes=data;
+  //       this.cards=[];
+  //     this.cards=data;
+  //     this.cards.forEach(element => {
+  //       if(element.isArchive || element.isTrash){
+  //         return;
+  //       }
+  //       else
+  //       this.cards.push(element);       
+  //     });
+  //     console.log(this.cards);
+  //     }
+  // ),err=>{
+  //          console.log(err);         
+  //        };
+  // }
+  // updateCome(event) {
+   
+  //   this.getAllNotes();
+  // }
+  
   /**
    * 
    * @param note 
@@ -90,12 +128,20 @@ export class DisplaynotesComponent implements OnInit {
     console.log('trash in');
     this.messageEvent.emit(event);
   }
-  
-  remove(note: DialogData) {
-    const index = this.dialogData.indexOf(note);
-    if (index >= 0) {
-      this.dialogData.splice(index, 1);
-    }
+
+  remove(id, label) {
+    console.log(this.cards);
+    label.label = null;
+    console.log(this.cards);
+
+    this.notesService.NoteUpdated(id, label).subscribe(
+      data => {
+        console.log(data);
+      },
+      err => {
+        console.log(err);
+      }
+    )
   }
 
 }

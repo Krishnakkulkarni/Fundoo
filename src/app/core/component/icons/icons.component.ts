@@ -35,7 +35,8 @@ export class IconsComponent implements OnInit {
   }
   constructor(public httpClient: HttpClient, public notesService: NotesService, public labelService: LabelService,
     public SnackBar: MatSnackBar, private service: DataService, public dialog: MatDialog) { }
-  @Input() card: any;
+ 
+    @Input() card: any;
 
   ngOnInit() {
     this.userId = localStorage.getItem('userid');

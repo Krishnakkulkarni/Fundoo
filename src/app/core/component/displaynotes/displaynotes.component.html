@@ -19,15 +19,20 @@
         </div>
       </div>
 
+      <div >
+        <mat-icon class="material-icons" matTooltip={{receiverEmail}}>account_circle</mat-icon>
+      </div>
 
-      <div *ngIf="note.label!==null">
-        <mat-chip-list #chipList>
-          <mat-chip [selectable]="selectable" [removable]="removable" (removed)="remove(note,note.id)">
-            {{note.label}}
-            <mat-icon matChipRemove class="Hover" *ngIf="removable">cancel</mat-icon>
-          </mat-chip>
-        </mat-chip-list>
-        <input [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes">
+      <div fxLayout="row">
+        <div *ngIf="note.label!==null">
+          <mat-chip-list #chipList>
+            <mat-chip [selectable]="selectable" [removable]="removable" (removed)="remove(note.id,note)">
+              {{note.label}}
+              <mat-icon matChipRemove class="Hover" *ngIf="removable">cancel</mat-icon>
+            </mat-chip>
+          </mat-chip-list>
+          <!-- <input [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"> -->
+        </div>
       </div>
 
       <div class="Hover">
