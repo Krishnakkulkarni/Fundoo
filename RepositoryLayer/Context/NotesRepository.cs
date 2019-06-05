@@ -15,6 +15,7 @@ namespace RepositoryLayer.Context
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
     using RepositoryLayer.Interface;
+    using RepositoryLayer.Migrations;
 
     /// <summary>
     /// Notes Repository class

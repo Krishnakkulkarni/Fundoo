@@ -56,20 +56,20 @@ namespace Common.Models
             [EmailAddress]
             public string ReceiverEmail { get; set; }
 
-            /// <summary>
-            /// Gets or sets the application user.
-            /// </summary>
-            /// <value>
-            /// The application user.
-            /// </value>
-            public virtual ApplicationUser ApplicationUser { get; set; }
+            ///// <summary>
+            ///// Gets or sets the application user.
+            ///// </summary>
+            ///// <value>
+            ///// The application user.
+            ///// </value>
+            ////public virtual ApplicationUser ApplicationUser { get; set; }
 
-            /// <summary>
-            /// Gets or sets the notes model.
-            /// </summary>
-            /// <value>
-            /// The notes model.
-            /// </value>
-            public virtual NotesModel NotesModel { get; set; }
+            ///// <summary>
+            ///// Gets or sets the notes model.
+            ///// </summary>
+            ///// <value>
+            ///// The notes model.
+            ///// </value>
+            ////public virtual NotesModel NotesModel { get; set; }
     }
 }
