@@ -30,6 +30,13 @@ namespace BussinessLayer.Interfaces
         Task<dynamic> LoginAsync(ApplicationLoginModel model);
 
         /// <summary>
+        /// Faces the book login asynchronous.
+        /// </summary>
+        /// <param name="UserName">The UserName.</param>
+        /// <returns></returns>
+        Task<string> FaceBookLoginAsync(string UserName);
+
+        /// <summary>
         /// Forgot the password asynchronous.
         /// </summary>
         /// <param name="model">The model.</param>

@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
+    <UserSecretsId>12725d5d-2cf9-4938-90c5-cd286745d203</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -22,6 +23,7 @@
     <PackageReference Include="Moq" Version="4.10.1" />
     <PackageReference Include="Quartz" Version="3.0.7" />
     <PackageReference Include="ServiceStack.Redis" Version="5.5.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="4.0.1" />
     <PackageReference Include="xunit" Version="2.0.0" />
   </ItemGroup>
 

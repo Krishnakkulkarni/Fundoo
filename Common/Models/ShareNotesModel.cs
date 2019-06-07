@@ -5,7 +5,7 @@ namespace Common.Models
     using System.Collections.Generic;
     using System.Text;
 
-    class ShareNotesModel
+    public class ShareNotesModel
     {
         /// <summary>
         /// Gets or sets the note identifier.
@@ -13,7 +13,7 @@ namespace Common.Models
         /// <value>
         /// The note identifier.
         /// </value>
-        public int noteId { get; set; }
+        public int NoteId { get; set; }
 
         /// <summary>
         /// Gets or sets the title.
@@ -37,6 +37,9 @@ namespace Common.Models
         /// <value>
         /// The sendermail.
         /// </value>
-        public string sendermail { get; set; }
+        public string Sendermail { get; set; }
+
+        public string ReceiverEmail { get; set; }
+
     }
 }

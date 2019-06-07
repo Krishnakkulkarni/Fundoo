@@ -36,6 +36,13 @@ namespace RepositoryLayer.Interface
         Task<bool> CheckPasswordAsync(ApplicationLoginModel model);
 
         /// <summary>
+        /// Faces the book login asynchronous.
+        /// </summary>
+        /// <param name="UserName">Name of the user.</param>
+        /// <returns></returns>
+        Task<string> FaceBookLoginAsync(string UserName);
+
+        /// <summary>
         /// Finds the by email asynchronous.
         /// </summary>
         /// <param name="model">The model.</param>

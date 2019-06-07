@@ -67,6 +67,19 @@ namespace BussinessLayer.Services
         }
 
         /// <summary>
+        /// Faces the book login asynchronous.
+        /// </summary>
+        /// <param name="email">The email.</param>
+        /// <returns>
+        /// returns response
+        /// </returns>
+        public Task<string> FaceBookLoginAsync(string UserName)
+        {
+            var result = this.applicationRepository.FaceBookLoginAsync(UserName);
+            return result;
+        }
+
+        /// <summary>
         /// Forgot the password asynchronous.
         /// </summary>
         /// <param name="model">The model.</param>
@@ -124,5 +137,7 @@ namespace BussinessLayer.Services
             var result = this.applicationRepository.ProfileUrl(userid);
             return result;
         }
+
+
     }
 }

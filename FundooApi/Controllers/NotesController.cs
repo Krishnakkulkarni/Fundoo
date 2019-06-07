@@ -10,6 +10,7 @@ namespace FundooApi.Controllers
     using System.Threading.Tasks;
     using BussinessLayer.Interfaces;
     using Common.Models;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
 
@@ -17,6 +18,7 @@ namespace FundooApi.Controllers
     /// Notes Controller
     /// </summary>
     /// <seealso cref="Microsoft.AspNetCore.Mvc.ControllerBase" />
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class NotesController : ControllerBase
@@ -47,7 +49,7 @@ namespace FundooApi.Controllers
                 var result = await this.notesCreation.Create(notesModel);
                 if (result == 1)
                 {
-                    return this.Ok();
+                    return this.Ok(result);
                 }
                 else
                 {
@@ -60,6 +62,7 @@ namespace FundooApi.Controllers
         /// </summary>
         /// <param name="id">The identifier.</param>
         /// <returns>return result</returns>
+        [AllowAnonymous]
         [HttpDelete]
         [Route("{id}")]
         public async Task<IActionResult> DeleteNotes(int id)

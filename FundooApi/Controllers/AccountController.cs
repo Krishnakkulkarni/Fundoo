@@ -9,6 +9,7 @@ namespace FundooApi.Controllers
     using System.Threading.Tasks;
     using BussinessLayer.Interfaces;
     using FundooNote.Models;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
 
@@ -16,8 +17,9 @@ namespace FundooApi.Controllers
     /// Application User Controller
     /// </summary>
     /// <seealso cref="Microsoft.AspNetCore.Mvc.ControllerBase" />
+    [Authorize]
     [Route("api/[controller]")]
-    [ApiController]
+    [ApiController]    
     public class AccountController : ControllerBase
     {
         /// <summary>
@@ -39,6 +41,7 @@ namespace FundooApi.Controllers
         /// </summary>
         /// <param name="applicationUserModel">The application user model.</param>
         /// <returns>return result</returns>
+        [AllowAnonymous]
         [HttpPost]
         [Route("register")]
         public async Task<IActionResult> Register(ApplicationUserModel applicationUserModel)
@@ -64,6 +67,7 @@ namespace FundooApi.Controllers
         /// </summary>
         /// <param name="applicationLoginModel">The application login model.</param>
         /// <returns>return status code</returns>
+        [AllowAnonymous]
         [HttpPost]
         [Route("login")]
         public async Task<IActionResult> Login(ApplicationLoginModel applicationLoginModel)
@@ -81,6 +85,26 @@ namespace FundooApi.Controllers
             catch (Exception e)
             {
                throw new Exception(e.Message);
+            }
+        }
+
+        /// <summary>
+        /// Faces the book login.
+        /// </summary>
+        /// <param name="UserName">The UserName.</param>
+        /// <returns>returns response</returns>
+        [HttpPost]
+        [Route("fblogin")]
+        public async Task<IActionResult> FaceBookLogin(string UserName)
+        {
+            var result = await this.applicationUser.FaceBookLoginAsync(UserName);
+            if (result == "invalid user")
+            {
+                return this.BadRequest();
+            }
+            else
+            {
+                return this.Ok(new { result });
             }
         }
 
@@ -158,6 +182,7 @@ namespace FundooApi.Controllers
         /// </summary>
         /// <param name="userid">The user id.</param>
         /// <returns>returns response</returns>
+        [AllowAnonymous]
         [HttpGet]
         [Route("url/{userid}")]
         public Task<string> ProfileUrl(string userid)

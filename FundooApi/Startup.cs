@@ -6,6 +6,7 @@
 namespace FundooApi
 {
     using System;
+    using System.Collections.Generic;
     using System.Text;
     using BussinessLayer.Interfaces;
     using BussinessLayer.Services;
@@ -23,6 +24,8 @@ namespace FundooApi
     using Microsoft.IdentityModel.Tokens;
     using RepositoryLayer.Context;
     using RepositoryLayer.Interface;
+    using Swashbuckle.AspNetCore.Swagger;
+    using Swashbuckle.AspNetCore.SwaggerGen;
 
     /// <summary>
     /// Main Class
@@ -57,6 +60,28 @@ namespace FundooApi
             services.Configure<AppSetting>(this.Configuration.GetSection("AppSetting"));
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            ////configuring swagger to ask upload file option
+            services.ConfigureSwaggerGen(options =>
+            {
+                //// Register File Upload Operation Filter
+                options.OperationFilter<FileUploadOperation>();
+            });
+
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Info { Title = "Fundoo", Version = "v1" });
+            });
+
+            // services.AddDefaultIdentity<IdentityUser>()
+            //.AddDefaultUI(UIFramework.Bootstrap4)
+            //.AddEntityFrameworkStores<ApplicationDbContext>();
+
+            services.AddAuthentication().AddFacebook(facebookOptions =>
+            {
+                facebookOptions.AppId = Configuration["Authentication:Facebook:AppId"];
+                facebookOptions.AppSecret = Configuration["Authentication:Facebook:AppSecret"];
+            });
 
             //// adding connection string
             services.AddDbContext<Authentication>(options =>
@@ -137,6 +162,85 @@ namespace FundooApi
             .AllowAnyMethod().AllowAnyOrigin().AllowCredentials());
             app.UseAuthentication();
             app.UseMvc();
+            // Enable middleware to serve generated Swagger as a JSON endpoint.
+            app.UseSwagger();
+
+            // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.), 
+            // specifying the Swagger JSON endpoint.
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+            });
+        }
+
+        /// <summary>
+        /// method to upload file
+        /// </summary>
+        public class FileUploadOperation : IOperationFilter
+        {
+            /// <summary>
+            /// method for upload file
+            /// </summary>
+            /// <param name="operation">pass operation</param>
+            /// <param name="context">pass context</param>
+            public void Apply(Operation operation, OperationFilterContext context)
+            {
+                if (operation.Parameters == null)
+                {
+                    operation.Parameters = new List<IParameter>();
+                }
+
+                ////adding auhtorization header in all api's
+                operation.Parameters.Add(new NonBodyParameter
+                {
+                    Name = "Authorization",
+                    In = "header",
+                    Type = "string",
+                    Required = true // set to false if this is optional
+                });
+
+                //if (operation.OperationId.ToLower() == "apinotescreationimagebyidpost")
+                //{
+                //    operation.Parameters.Clear();
+                //    operation.Parameters.Add(new NonBodyParameter
+                //    {
+                //        Name = "file",
+                //        In = "formData",
+                //        Description = "Upload File",
+                //        Required = true,
+                //        Type = "file"
+                //    });
+                //    operation.Parameters.Add(new NonBodyParameter
+                //    {
+                //        Name = "id",
+                //        In = "path",
+                //        Description = "Id",
+                //        Required = true,
+                //        Type = "integer"
+                //    });
+                //}
+
+                //if (operation.OperationId.ToLower() == "apiuserprofilepicturebyidpost")
+                //{
+                //    operation.Parameters.Clear();
+                //    operation.Parameters.Add(new NonBodyParameter
+                //    {
+                //        Name = "file",
+                //        In = "formData",
+                //        Description = "Upload File",
+                //        Required = true,
+                //        Type = "file"
+                //    });
+                //    operation.Parameters.Add(new NonBodyParameter
+                //    {
+                //        Name = "id",
+                //        In = "path",
+                //        Description = "Id",
+                //        Required = true,
+                //        Type = "string"
+                //    });
+                //}
+            }
         }
     }
 }

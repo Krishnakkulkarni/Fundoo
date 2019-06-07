@@ -8,11 +8,13 @@ namespace FundooApi.Controllers
     using BussinessLayer.Interfaces;
     using BussinessLayer.Services;
     using Common.Models;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using System.Collections.Generic;
 
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class LabelsController : ControllerBase
     {
         /// <summary>
