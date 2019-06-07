@@ -12,30 +12,63 @@ export class HttpService {
   constructor(public http: HttpClient) { }
 
   post(url: string, data: any) {
-    return this.http.post(this.rooturl + url, data)
+    var httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization':'bearer '+ localStorage.getItem('token')
+      })
+    };
+    return this.http.post(this.rooturl + url, data,httpOptions)
   }
   Get(url: String) {
-    return this.http.get(this.rooturl + url)
+    var httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization':'bearer '+ localStorage.getItem('token')
+      })
+    };
+    return this.http.get(this.rooturl + url,httpOptions)
   }
- 
+
   GetString(url: String) {
-    return this.http.get(this.rooturl + url, {responseType: 'text'})
-  }
-  update(url: string, data: any) {
-    return this.http.put(this.rooturl + url, data)
-  }
-  deletenote(url: string, data) {
-    return this.http.delete(this.rooturl + url, data)
-  }
-  postImage(url,data) {
-    // var http = {
+    // var httpOptions = {
     //   headers: new HttpHeaders({
-    //     'Authorization': localStorage.getItem('result')
+    //     'Authorization':'bearer '+ localStorage.getItem('token')
     //   })
     // };
-    return this.http.post(this.rooturl + url,data)
+    return this.http.get(this.rooturl + url, { responseType: 'text' })
+  }
+  
+  update(url: string, data: any) {
+    var httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization':'bearer '+ localStorage.getItem('token')
+      })
+    };
+    return this.http.put(this.rooturl + url, data,httpOptions)
+  }
+  deletenote(url: string, data) {
+     return this.http.delete(this.rooturl + url, data)
+  //   return this.http.request('DELETE', this.rooturl + url, {
+  //     headers: new HttpHeaders({
+  //         'Content-Type': 'application/json',
+  //         'Authorization':'bearer '+ localStorage.getItem('token')
+  //     }),
+  //     body: data
+  // });
+  }
+  postImage(url, data) {
+    var httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization':'bearer '+ localStorage.getItem('token')
+      })
+    };
+    return this.http.post(this.rooturl + url, data,httpOptions)
   }
   deletelabel(url) {
-    return this.http.delete(this.rooturl + url)
+    var httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization':'bearer '+ localStorage.getItem('token')
+      })
+    };
+    return this.http.delete(this.rooturl + url,httpOptions)
   }
 }

@@ -198,4 +198,9 @@ export class IconsComponent implements OnInit {
       data: { card }
     });
   }
+
+  Today(card){
+    
+  }
+
 }

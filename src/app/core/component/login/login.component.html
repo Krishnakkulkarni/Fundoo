@@ -47,12 +47,16 @@
             <a routerLink="/user/user-register" class="register" routerLinkActive="active">Create account</a>
           </div>
 
-          <div>
-            <button mat-button class="loginbutton" type="submit">Login</button>
+          <div fxLayout="column" fxLayoutGap="2%">
+            <div fxLayoutAlign='end center'>
+              <button mat-button class="loginbutton" type="submit">Login</button>
+            </div>
+            <div fxLayoutAlign='end center'>------or------</div>
+            <div style="text-align:center">
+              <button mat-button colour="primary" (click)="socialSignIn('facebook')">Sign in with Facebook</button>
+            </div>
           </div>
-
         </div>
-
 
       </div>
     </form>

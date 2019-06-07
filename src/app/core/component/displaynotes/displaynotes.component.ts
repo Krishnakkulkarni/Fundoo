@@ -29,14 +29,7 @@ export class DisplaynotesComponent implements OnInit {
   addOnBlur = true;
   separatorKeysCodes = [ENTER, COMMA];
 
-  constructor(private notesService: NotesService, public dataService: DataService, public matDialog: MatDialog) {
-    this.notesService.getCollaboratorNote(this.receiverEmail).subscribe(response => {
-      this.collaborator = response;
-
-    }, err => {
-      console.log(err);
-    })
-  }
+  constructor(private notesService: NotesService, public dataService: DataService, public matDialog: MatDialog) { }
 
   @Input() search;
 
@@ -64,7 +57,16 @@ export class DisplaynotesComponent implements OnInit {
       this.grid = data
     });
     this.userId = localStorage.getItem("userid")
-    this.receiverEmail = localStorage.getItem('receiverEmail')
+    this.receiverEmail = localStorage.getItem('receiverEmail');
+    console.log(this.receiverEmail);
+    this.notesService.getCollaboratorNote(this.userId).subscribe(response => {
+      this.collaborator = response;
+      console.log(this.collaborator);
+      
+    }, err => {
+      console.log(err);
+    })
+    
   }
 
   // getAllNotes()
