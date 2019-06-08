@@ -93,6 +93,7 @@ namespace FundooApi.Controllers
         /// </summary>
         /// <param name="UserName">The UserName.</param>
         /// <returns>returns response</returns>
+        [AllowAnonymous]
         [HttpPost]
         [Route("fblogin")]
         public async Task<IActionResult> FaceBookLogin(string UserName)
