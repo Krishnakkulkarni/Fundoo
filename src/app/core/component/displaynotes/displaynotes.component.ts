@@ -58,7 +58,6 @@ export class DisplaynotesComponent implements OnInit {
     });
     this.userId = localStorage.getItem("userid")
     this.receiverEmail = localStorage.getItem('receiverEmail');
-    console.log(this.receiverEmail);
     this.notesService.getCollaboratorNote(this.userId).subscribe(response => {
       this.collaborator = response;
       console.log(this.collaborator);

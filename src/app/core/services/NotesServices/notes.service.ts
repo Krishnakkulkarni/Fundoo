@@ -18,7 +18,7 @@ export class NotesService {
     return this.httpService.post('Notes/image/' + id, data);
   }
   updateNotes(id, data) {
-    return this.httpService.update('Notes/' + id, data)
+    return this.httpService.update('Notes/reminder/' + id, data)
   }
   Trash(id, card) {
     return this.httpService.update('Notes/' + id, card)

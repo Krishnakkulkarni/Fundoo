@@ -11,21 +11,27 @@ export class HttpService {
 
   constructor(public http: HttpClient) { }
 
+  postwithoutToken(url: string, data: any) {
+    console.log(data);
+
+    return this.http.post(this.rooturl + url, data)
+  }
+
   post(url: string, data: any) {
     var httpOptions = {
       headers: new HttpHeaders({
-        'Authorization':'bearer '+ localStorage.getItem('token')
+        'Authorization': 'bearer ' + localStorage.getItem('token')
       })
     };
-    return this.http.post(this.rooturl + url, data,httpOptions)
+    return this.http.post(this.rooturl + url, data, httpOptions)
   }
   Get(url: String) {
     var httpOptions = {
       headers: new HttpHeaders({
-        'Authorization':'bearer '+ localStorage.getItem('token')
+        'Authorization': 'bearer ' + localStorage.getItem('token')
       })
     };
-    return this.http.get(this.rooturl + url,httpOptions)
+    return this.http.get(this.rooturl + url, httpOptions)
   }
 
   GetString(url: String) {
@@ -36,39 +42,39 @@ export class HttpService {
     // };
     return this.http.get(this.rooturl + url, { responseType: 'text' })
   }
-  
+
   update(url: string, data: any) {
     var httpOptions = {
       headers: new HttpHeaders({
-        'Authorization':'bearer '+ localStorage.getItem('token')
+        'Authorization': 'bearer' + localStorage.getItem('token')
       })
     };
-    return this.http.put(this.rooturl + url, data,httpOptions)
+    return this.http.put(this.rooturl + url, data, httpOptions)
   }
   deletenote(url: string, data) {
-     return this.http.delete(this.rooturl + url, data)
-  //   return this.http.request('DELETE', this.rooturl + url, {
-  //     headers: new HttpHeaders({
-  //         'Content-Type': 'application/json',
-  //         'Authorization':'bearer '+ localStorage.getItem('token')
-  //     }),
-  //     body: data
-  // });
+    return this.http.delete(this.rooturl + url, data)
+    //   return this.http.request('DELETE', this.rooturl + url, {
+    //     headers: new HttpHeaders({
+    //         'Content-Type': 'application/json',
+    //         'Authorization':'bearer '+ localStorage.getItem('token')
+    //     }),
+    //     body: data
+    // });
   }
   postImage(url, data) {
     var httpOptions = {
       headers: new HttpHeaders({
-        'Authorization':'bearer '+ localStorage.getItem('token')
+        'Authorization': 'bearer ' + localStorage.getItem('token')
       })
     };
-    return this.http.post(this.rooturl + url, data,httpOptions)
+    return this.http.post(this.rooturl + url, data, httpOptions)
   }
   deletelabel(url) {
     var httpOptions = {
       headers: new HttpHeaders({
-        'Authorization':'bearer '+ localStorage.getItem('token')
+        'Authorization': 'bearer ' + localStorage.getItem('token')
       })
     };
-    return this.http.delete(this.rooturl + url,httpOptions)
+    return this.http.delete(this.rooturl + url, httpOptions)
   }
 }

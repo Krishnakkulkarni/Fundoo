@@ -133,7 +133,7 @@
   <div class="label-note">Label note</div>
 
   <div class="input-label">
-    <input matInput type="text" class="label-input" placeholder="Enter label name">
+    <input matInput type="text" class="label-input" (click)="$event.stopPropogation()" placeholder="Enter label name">
   </div>
 
   <div *ngFor="let labels of label">

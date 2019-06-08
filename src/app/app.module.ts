@@ -29,6 +29,20 @@ import { ImageCropperModule } from 'ngx-image-cropper';
 import { CollaborationComponent } from './core/component/collaboration/collaboration.component';
 import { SearchComponent } from './core/component/search/search.component';
 import { SearchPipe } from './core/pipe/search.pipe';
+import { SocialLoginModule, AuthServiceConfig, FacebookLoginProvider } from "angular-6-social-login";
+import { environment} from '../environments/environment';
+
+export function getAuthServiceConfigs() {
+  let config = new AuthServiceConfig(
+    [
+      {
+        id: FacebookLoginProvider.PROVIDER_ID,
+        provider: new FacebookLoginProvider(environment.getFbId)
+      }
+    ]
+  );
+  return config;
+}
 
 @NgModule({
   declarations: [
@@ -61,10 +75,14 @@ import { SearchPipe } from './core/pipe/search.pipe';
     AppMaterial,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    ImageCropperModule
+    ImageCropperModule,
+    SocialLoginModule
   ],
-  providers: [],
-  entryComponents:[EditLabelsComponent],
+  providers: [{
+    provide: AuthServiceConfig,
+    useFactory: getAuthServiceConfigs
+  }],
+  entryComponents: [EditLabelsComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

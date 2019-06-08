@@ -23,6 +23,13 @@ export class UserService {
     return this.httpService.post('Account/login', data);
   }
 
+  fbLogin(data) {
+    console.log(data);
+    return this.httpService.postwithoutToken('Account/fblogin', data);
+    
+    
+  }
+
   forgotPassword(userforgotpassword: Userforgotpassword) {
     console.log(userforgotpassword);
     return this.httpService.post('Account/forgotPassword', userforgotpassword);
@@ -33,21 +40,11 @@ export class UserService {
     return this.httpService.post('Account/resetPassword', userresettpassword);
   }
 
-//   profile(UserId) {
-//     return this.httpService.Get('Account/url/"+UserId);
-//  }
-
-  profilePicture(data,UserId) {
-    return this.httpService.postImage('Account/profile/'+UserId,data);
+  profilePicture(data, UserId) {
+    return this.httpService.postImage('Account/profile/' + UserId, data);
   }
-  imageurl(userid){
-    return this.httpService.GetString('Account/url/'+userid)
+  imageurl(userid) {
+    return this.httpService.GetString('Account/url/' + userid)
   }
 
 }
-
-//  profilePicture(path,email)
-//   {
-// return this.http.post(this.BaseURI+'applicationuser/profilepicture/'+email,path
-//  ,{responseType:'text'});
-//   }

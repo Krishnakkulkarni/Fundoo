@@ -35,8 +35,8 @@ export class IconsComponent implements OnInit {
   }
   constructor(public httpClient: HttpClient, public notesService: NotesService, public labelService: LabelService,
     public SnackBar: MatSnackBar, private service: DataService, public dialog: MatDialog) { }
- 
-    @Input() card: any;
+
+  @Input() card: any;
 
   ngOnInit() {
     this.userId = localStorage.getItem('userid');
@@ -199,8 +199,46 @@ export class IconsComponent implements OnInit {
     });
   }
 
-  Today(card){
-    
+  Today(card) {
+    console.log(card);
+
+    var date = new Date();
+    date.setHours(20, 0, 0)
+    console.log(this.data.reminder);
+
+    card.reminder = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate() + " " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+    console.log(card.reminder);
+
+    this.notesService.updateNotes(card.id, card).subscribe(data => {
+      console.log(data);
+      this.update.emit({});
+    }, err => {
+      console.log(err);
+    })
+  }
+
+  Tomorrow(card) {
+    var date = new Date();
+    date.setHours(8, 0, 0)
+    card.reminder = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + (date.getDate() + 1) + " " + date.getHours() + ":" + date.getMinutes();
+    this.notesService.updateNotes(card.id, card).subscribe(data => {
+      console.log(data);
+      this.update.emit({});
+    }, err => {
+      console.log(err);
+    })
+  }
+
+  nextWeek(card) {
+    var date = new Date();
+    date.setHours(8, 0, 0)
+    card.reminder = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + (date.getDate() + 7) + " " + date.getHours() + ":" + date.getMinutes();
+    this.notesService.updateNotes(card.id, card).subscribe(data => {
+      console.log(data);
+      this.update.emit({});
+    }, err => {
+      console.log(err);
+    })
   }
 
 }
