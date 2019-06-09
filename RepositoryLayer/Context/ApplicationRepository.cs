@@ -151,16 +151,34 @@ namespace RepositoryLayer.Context
             }
         }
 
-
         /// <summary>
         /// Faces the book login asynchronous.
         /// </summary>
         /// <param name="email">The email.</param>
         /// <returns>returns response</returns>
-        public async Task<string> FaceBookLoginAsync(string UserName)
+        public async Task<dynamic> FaceBookLoginAsync(SocialModel model)
         {
-            var user = await this.usermanager.FindByEmailAsync(UserName);
-            if (user != null)
+            var user = await this.usermanager.FindByNameAsync(model.UserName);
+            if (user == null)
+            {
+                ApplicationUser socialUser = new ApplicationUser()
+                {
+                    UserName = model.UserName
+                };
+                 var socialuser = this.usermanager.CreateAsync(socialUser);
+                
+                 var tokenDescriptor = new SecurityTokenDescriptor
+                {
+                    Subject = new ClaimsIdentity(new Claim[]{ new Claim("UserID", socialuser.Id.ToString())}),
+                    Expires = DateTime.UtcNow.AddDays(1),
+                    SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes(this.appSettings.JWT_Secrete)), SecurityAlgorithms.HmacSha256Signature)
+                };
+                var tokenHandler = new JwtSecurityTokenHandler();
+                var securityToken = tokenHandler.CreateToken(tokenDescriptor);
+                var token = tokenHandler.WriteToken(securityToken);
+                return token;
+            }
+            else
             {
                 var tokenDescriptor = new SecurityTokenDescriptor
                 {
@@ -173,8 +191,6 @@ namespace RepositoryLayer.Context
                 var token = tokenHandler.WriteToken(securityToken);
                 return token;
             }
-
-            return "invalid user";
         }
 
         /// <summary>

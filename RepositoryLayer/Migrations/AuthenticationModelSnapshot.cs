@@ -35,10 +35,6 @@ namespace RepositoryLayer.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("NoteId");
-
-                    b.HasIndex("UserId");
-
                     b.ToTable("Collaborator");
                 });
 
@@ -295,21 +291,11 @@ namespace RepositoryLayer.Migrations
 
                     b.Property<string>("Profile");
 
+                    b.Property<int>("SocialId");
+
                     b.ToTable("ApplicationUser");
 
                     b.HasDiscriminator().HasValue("ApplicationUser");
-                });
-
-            modelBuilder.Entity("Common.Models.CollaboratorModel", b =>
-                {
-                    b.HasOne("Common.Models.NotesModel", "NotesModel")
-                        .WithMany()
-                        .HasForeignKey("NoteId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("FundooNote.Models.ApplicationUser", "ApplicationUser")
-                        .WithMany()
-                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

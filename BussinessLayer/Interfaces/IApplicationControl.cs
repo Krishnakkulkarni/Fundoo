@@ -6,6 +6,7 @@
 namespace BussinessLayer.Interfaces
 {
     using System.Threading.Tasks;
+    using Common.Models;
     using FundooNote.Models;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
@@ -34,7 +35,7 @@ namespace BussinessLayer.Interfaces
         /// </summary>
         /// <param name="UserName">The UserName.</param>
         /// <returns></returns>
-        Task<string> FaceBookLoginAsync(string UserName);
+        Task<dynamic> FaceBookLoginAsync(SocialModel model);
 
         /// <summary>
         /// Forgot the password asynchronous.

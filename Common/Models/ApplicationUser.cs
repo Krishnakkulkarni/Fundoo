@@ -55,5 +55,7 @@ namespace FundooNote.Models
         /// The profile.
         /// </value>
         public string Profile { get; set; }
+        
     }
 }
+

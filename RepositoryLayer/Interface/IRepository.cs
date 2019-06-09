@@ -6,6 +6,7 @@
 namespace RepositoryLayer.Interface
 {
     using System.Threading.Tasks;
+    using Common.Models;
     using FundooNote.Models;
     using Microsoft.AspNetCore.Http;
 
@@ -40,7 +41,7 @@ namespace RepositoryLayer.Interface
         /// </summary>
         /// <param name="UserName">Name of the user.</param>
         /// <returns></returns>
-        Task<string> FaceBookLoginAsync(string UserName);
+        Task<dynamic> FaceBookLoginAsync(SocialModel Model);
 
         /// <summary>
         /// Finds the by email asynchronous.

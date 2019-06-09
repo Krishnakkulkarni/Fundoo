@@ -8,6 +8,7 @@ namespace FundooApi.Controllers
     using System;
     using System.Threading.Tasks;
     using BussinessLayer.Interfaces;
+    using Common.Models;
     using FundooNote.Models;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Http;
@@ -70,11 +71,11 @@ namespace FundooApi.Controllers
         [AllowAnonymous]
         [HttpPost]
         [Route("login")]
-        public async Task<IActionResult> Login(ApplicationLoginModel applicationLoginModel)
-        {
+        public async Task<IActionResult> Login(ApplicationLoginModel Model)
+         {
             try  
             {
-                var result = await this.applicationUser.LoginAsync(applicationLoginModel);
+                var result = await this.applicationUser.LoginAsync(Model);
                 if (result.Success == true)
                 {
                     return this.Ok(new { result });
@@ -96,18 +97,28 @@ namespace FundooApi.Controllers
         [AllowAnonymous]
         [HttpPost]
         [Route("fblogin")]
-        public async Task<IActionResult> FaceBookLogin(string UserName)
+        public async Task<IActionResult> FaceBookLogin(SocialModel model)
         {
-            var result = await this.applicationUser.FaceBookLoginAsync(UserName);
-            if (result == "invalid user")
-            {
-                return this.BadRequest();
-            }
-            else
+            var result = await this.applicationUser.FaceBookLoginAsync(model);
+            if (result != null)
             {
                 return this.Ok(new { result });
             }
+
+            return this.BadRequest();
         }
+        //check email already present or not
+
+        //if (false)
+        //{
+        //    //add model in db and return added user details
+
+        //}
+        //else
+        //{
+        //    //get the user details
+        //}
+
 
         /// <summary>
         /// Forgot the specified forgot password model.

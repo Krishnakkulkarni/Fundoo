@@ -9,6 +9,7 @@ namespace BussinessLayer.Services
     using System;
     using System.Threading.Tasks;
     using BussinessLayer.Interfaces;
+    using Common.Models;
     using FundooNote.Interfaces;
     using FundooNote.Models;
     using Microsoft.AspNetCore.Http;
@@ -73,10 +74,9 @@ namespace BussinessLayer.Services
         /// <returns>
         /// returns response
         /// </returns>
-        public Task<string> FaceBookLoginAsync(string UserName)
+        public Task<dynamic> FaceBookLoginAsync(SocialModel model)
         {
-            var result = this.applicationRepository.FaceBookLoginAsync(UserName);
-            return result;
+            return this.applicationRepository.FaceBookLoginAsync(model);
         }
 
         /// <summary>
