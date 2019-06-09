@@ -7,6 +7,7 @@ export const environment = {
   rooturl : 'https://localhost:44305/api/',
   profileUrl :"http://res.cloudinary.com/db4wyl94g/image/upload/v1558622391/kausxhagpokr9wpaozzi.png",
   getFbId : "340699629961053"
+  // 
 };
 
 /*

@@ -12,8 +12,6 @@ export class HttpService {
   constructor(public http: HttpClient) { }
 
   postwithoutToken(url: string, data: any) {
-    console.log(data);
-
     return this.http.post(this.rooturl + url, data)
   }
 

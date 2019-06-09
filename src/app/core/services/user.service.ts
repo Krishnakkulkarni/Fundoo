@@ -24,10 +24,7 @@ export class UserService {
   }
 
   fbLogin(data) {
-    console.log(data);
     return this.httpService.postwithoutToken('Account/fblogin', data);
-    
-    
   }
 
   forgotPassword(userforgotpassword: Userforgotpassword) {

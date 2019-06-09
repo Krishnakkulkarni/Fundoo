@@ -16,7 +16,8 @@ export class LoginComponent implements OnInit {
   user: UserLogin;
   emailPattern = "^[a-z0-9.%+-]+@[a-z.-]+\.[a-z]{2,4}$";
   userName: any;
-
+  UserData: any;
+  // socialStatus: any;
   constructor(private userService: UserService, private router: Router, public snackbar: MatSnackBar,
     private authService: AuthService) { }
 
@@ -38,12 +39,18 @@ export class LoginComponent implements OnInit {
          * Calling the api for social login
          */
         console.log(this.userName, "check");
-
-        this.userService.fbLogin(this.userName).subscribe(
+        this.user =
+          {
+            UserName: this.userName,
+            Password: '123abc',
+          }
+        // this.socialStatus=true;
+        this.userService.fbLogin(this.user).subscribe(
           (data: any) => {
-            console.log(data);
+            console.log(data.result);
 
-            // localStorage.setItem('token', data.result.token);
+            localStorage.setItem('token', data.result);
+            this.router.navigateByUrl('home')
           },
           (error: any) => { console.log(error); }
         )
