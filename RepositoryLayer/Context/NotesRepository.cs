@@ -186,7 +186,7 @@ namespace RepositoryLayer.Context
         public IList<NotesModel> Reminder(string userId)
         {
             var list = new List<NotesModel>();
-            var notesData = from notes in this.authentication.NotesModel where (notes.UserId == userId) && (notes.Reminder != null) select notes;
+            var notesData = from notes in this.authentication.NotesModel where (notes.UserId == userId) && (notes.Reminder.Year != 0001) select notes;
             foreach (var data in notesData)
             {
                 list.Add(data);
