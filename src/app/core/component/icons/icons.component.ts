@@ -20,7 +20,7 @@ export class IconsComponent implements OnInit {
   @Input() archivedicon
   @Input() trashed
   @Output() setNote = new EventEmitter();
-
+  @Output() update = new EventEmitter();
   trash: boolean = true;
   archive: boolean = true;
   unarchive: boolean = true;

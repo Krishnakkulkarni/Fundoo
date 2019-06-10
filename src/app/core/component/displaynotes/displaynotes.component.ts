@@ -22,7 +22,7 @@ export interface DialogData {
 export class DisplaynotesComponent implements OnInit {
   grid: boolean = true
   // notes:Notes[];
-  
+
   visible = true;
   selectable = true;
   removable = true;
@@ -61,11 +61,11 @@ export class DisplaynotesComponent implements OnInit {
     this.notesService.getCollaboratorNote(this.userId).subscribe(response => {
       this.collaborator = response;
       console.log(this.collaborator);
-      
+
     }, err => {
       console.log(err);
     })
-    
+
   }
 
   // getAllNotes()
@@ -90,10 +90,10 @@ export class DisplaynotesComponent implements OnInit {
   //        };
   // }
   // updateCome(event) {
-   
+
   //   this.getAllNotes();
   // }
-  
+
   /**
    * 
    * @param note 
@@ -106,7 +106,7 @@ export class DisplaynotesComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
-      this.notesService.NoteUpdated(result.id, result).subscribe
+      this.notesService.updateNotes(result.id, result).subscribe
         (data => { console.log(data, note); },
           err => { console.log(err); })
     });
@@ -130,12 +130,27 @@ export class DisplaynotesComponent implements OnInit {
     this.messageEvent.emit(event);
   }
 
+  removeReminder(cards) {
+    console.log(this.cards);
+    cards.reminder = '0001-01-01T00:00:00-08:00';
+    console.log(this.cards);
+
+    this.notesService.updateNotes(cards.id, cards).subscribe(
+      data => {
+        console.log(data);
+      },
+      err => {
+        console.log(err);
+      }
+    )
+  }
+
   remove(id, label) {
     console.log(this.cards);
     label.label = null;
     console.log(this.cards);
 
-    this.notesService.NoteUpdated(id, label).subscribe(
+    this.notesService.updateNotes(id, label).subscribe(
       data => {
         console.log(data);
       },

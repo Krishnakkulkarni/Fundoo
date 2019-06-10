@@ -41,14 +41,15 @@ export class HttpService {
     return this.http.get(this.rooturl + url, { responseType: 'text' })
   }
 
-  update(url: string, data: any) {
+  updateAll(url: string, data: any) {
     var httpOptions = {
       headers: new HttpHeaders({
-        'Authorization': 'bearer' + localStorage.getItem('token')
+        'Authorization': 'bearer ' + localStorage.getItem('token')
       })
     };
     return this.http.put(this.rooturl + url, data, httpOptions)
   }
+
   deletenote(url: string, data) {
     return this.http.delete(this.rooturl + url, data)
     //   return this.http.request('DELETE', this.rooturl + url, {

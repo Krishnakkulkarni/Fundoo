@@ -15,7 +15,7 @@ export class LabelService {
     return this.httpService.post('Labels/addLabel', data)
   }
   updateLabel(id, data) {
-    return this.httpService.update('Labels/updateLabel/' + id, data)
+    return this.httpService.updateAll('Labels/updateLabel/' + id, data)
   }
   deletelabel(id) {
     return this.httpService.deletelabel('Labels/' + id)

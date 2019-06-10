@@ -70,7 +70,9 @@
     .notes{
         width: 415px;
         margin-top: 5px;
-        margin-left: 1%
+        margin-left: 1%;
+        margin-right: -19%
+
     }
     .outer-div-style{
         margin-top:15px; margin-left: 0%; margin-right: 0%; margin-bottom:20px;
@@ -85,7 +87,8 @@
     .notes{
         width: 365px;
         margin-top: 5px;
-        margin-left: 1%
+        margin-left: 1%;
+        margin-right: -23%
     }
     .outer-div-style{
         margin-top:15px; margin-left: 0%; margin-right: 0%; margin-bottom:20px;
@@ -100,7 +103,8 @@
     .notes{
         width: 310px;
         margin-top: 5px;
-        margin-left: 1%
+        margin-left: 1%;
+        margin-right: -23%
     }
     .outer-div-style{
         margin-top:15px; margin-left: 0%; margin-right: 0%; margin-bottom:20px;
