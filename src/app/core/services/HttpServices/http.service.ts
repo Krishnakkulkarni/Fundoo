@@ -38,7 +38,7 @@ export class HttpService {
     //     'Authorization':'bearer '+ localStorage.getItem('token')
     //   })
     // };
-    return this.http.get(this.rooturl + url, { responseType: 'text' })
+    return this.http.get(this.rooturl + url)
   }
 
   updateAll(url: string, data: any) {

@@ -60,14 +60,11 @@ export class UserRegisterComponent implements OnInit {
 
             if (data) {
               this.router.navigateByUrl('user/login');
-              // localStorage.setItem("firstName",data.result.FirstName)
-              // localStorage.setItem("lastName",data.result.LastName)
               this.snackbar.open("register successful", "close", { duration: 2000 });
               this.resetForm(form);
             }
           }
         );
     }
-
   }
 }

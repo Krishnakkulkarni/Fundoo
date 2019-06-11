@@ -19,8 +19,10 @@ export class IconsComponent implements OnInit {
 
   @Input() archivedicon
   @Input() trashed
+
   @Output() setNote = new EventEmitter();
   @Output() update = new EventEmitter();
+
   trash: boolean = true;
   archive: boolean = true;
   unarchive: boolean = true;
@@ -31,13 +33,16 @@ export class IconsComponent implements OnInit {
     this.selectedFile = <File>Event.path[0].files[0];
     console.log(this.selectedFile);
     this.Onupload(card)
-
   }
+
   constructor(public httpClient: HttpClient, public notesService: NotesService, public labelService: LabelService,
     public SnackBar: MatSnackBar, private service: DataService, public dialog: MatDialog) { }
 
   @Input() card: any;
 
+  /**
+   * Main Method
+   */
   ngOnInit() {
     this.userId = localStorage.getItem('userid');
     this.labelService.getlabels(this.userId).subscribe(
@@ -48,7 +53,7 @@ export class IconsComponent implements OnInit {
   }
 
   /**
-   * 
+   * Method to Upload image on card
    * @param card 
    */
   Onupload(card) {
@@ -71,7 +76,7 @@ export class IconsComponent implements OnInit {
   }
 
   /**
-   * 
+   * Method to set color on card
    * @param color 
    * @param card 
    */
@@ -90,7 +95,7 @@ export class IconsComponent implements OnInit {
   }
 
   /**
-   * 
+   * Method to Archive the card 
    * @param card 
    */
   Archive(card) {
@@ -107,7 +112,7 @@ export class IconsComponent implements OnInit {
   }
 
   /**
-   * 
+   * Method to Unarchive the card
    * @param card 
    */
   Unarchive(card) {
@@ -124,7 +129,7 @@ export class IconsComponent implements OnInit {
   }
 
   /**
-   * 
+   * Method to Trash the card
    * @param card 
    */
   TrashNote(card) {
@@ -141,7 +146,7 @@ export class IconsComponent implements OnInit {
   }
 
   /**
-   * 
+   * Method to restore the card to dashboard
    * @param card 
    */
   Restore(card) {
@@ -158,7 +163,7 @@ export class IconsComponent implements OnInit {
   }
 
   /**
-   * 
+   * Method to add labels on card
    * @param label
    */
   checkList(label) {
@@ -173,7 +178,7 @@ export class IconsComponent implements OnInit {
   }
 
   /**
-   * 
+   * Method to delete the card
    * @param card 
    */
   Delete(card) {
@@ -188,7 +193,7 @@ export class IconsComponent implements OnInit {
   }
 
   /**
-   * 
+   * Method to add collaborator
    * @param note 
    */
   Collaborator(card): void {
@@ -199,11 +204,16 @@ export class IconsComponent implements OnInit {
     });
   }
 
+
+  /**
+   * Method to set reminder for Today
+   * @param card 
+   */
   Today(card) {
     console.log(card);
 
     var date = new Date();
-    date.setHours(20, 0, 0)
+    date.setHours(8, 0, 0)
     card.reminder = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate() + " " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
     console.log(card.reminder);
 
@@ -215,6 +225,10 @@ export class IconsComponent implements OnInit {
     })
   }
 
+  /**
+   * Method to set reminder for Tomorrow
+   * @param card 
+   */
   Tomorrow(card) {
     var date = new Date();
     date.setHours(8, 0, 0)
@@ -227,6 +241,10 @@ export class IconsComponent implements OnInit {
     })
   }
 
+  /**
+   * Method to set reminder for nextWeek
+   * @param card 
+   */
   nextWeek(card) {
     var date = new Date();
     date.setHours(8, 0, 0)
@@ -238,5 +256,4 @@ export class IconsComponent implements OnInit {
       console.log(err);
     })
   }
-
 }

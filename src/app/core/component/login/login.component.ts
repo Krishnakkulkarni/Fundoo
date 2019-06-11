@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit {
   emailPattern = "^[a-z0-9.%+-]+@[a-z.-]+\.[a-z]{2,4}$";
   userName: any;
   UserData: any;
-  // socialStatus: any;
+
   constructor(private userService: UserService, private router: Router, public snackbar: MatSnackBar,
     private authService: AuthService) { }
 
@@ -44,12 +44,9 @@ export class LoginComponent implements OnInit {
             UserName: this.userName,
             Password: '123abc',
           }
-        // this.socialStatus=true;
         this.userService.fbLogin(this.user).subscribe(
           (data: any) => {
             console.log(data.result);
-
-            localStorage.setItem('token', data.result);
             this.router.navigateByUrl('home')
           },
           (error: any) => { console.log(error); }
@@ -92,18 +89,28 @@ export class LoginComponent implements OnInit {
     }
     else {
       this.userService.login(form.value).subscribe
-        (
-          (data: any) => {
-            this.userService.imageurl(data.result.userid).subscribe
-              (result => { console.log(result); localStorage.setItem('result', result) },
-                err => { console.log(err); }
-              )
-            localStorage.setItem('token', data.result.token);
-            localStorage.setItem('userid', data.result.userid);
-            localStorage.setItem('username', data.result.userName);
-            this.router.navigateByUrl('home');
-            this.snackbar.open("login successful", "close", { duration: 2000 });
-          },
+        ((data: any) => {
+          console.log(data.result);
+
+          this.userService.imageurl(data.result.userid).subscribe
+            (result => {
+              console.log(result['result'][0].id)
+              localStorage.setItem('firstName', result['result'][0].firstName);
+              localStorage.setItem('lastName', result['result'][0].lastName);
+              localStorage.setItem('profileUrl', result['result'][0].profile);
+
+            },
+              err => { console.log(err); }
+            )
+          localStorage.setItem('token', data.result.token);
+          localStorage.setItem('userid', data.result.userid);
+          localStorage.setItem('username', data.result.userName);
+
+
+
+          this.router.navigateByUrl('home');
+          this.snackbar.open("login successful", "close", { duration: 2000 });
+        },
           error => {
             console.log(error);
             this.snackbar.open("Entered wrong username Or password", "close", { duration: 2500 })

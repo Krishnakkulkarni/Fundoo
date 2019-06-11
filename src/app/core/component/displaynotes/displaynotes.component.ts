@@ -53,6 +53,8 @@ export class DisplaynotesComponent implements OnInit {
    * 
    */
   ngOnInit() {
+    console.log(this.cards);
+    
     this.dataService.currentMessage.subscribe(data => {
       this.grid = data
     });
@@ -132,8 +134,8 @@ export class DisplaynotesComponent implements OnInit {
 
   removeReminder(cards) {
     console.log(this.cards);
-    cards.reminder = '0001-01-01T00:00:00-08:00';
-    console.log(this.cards);
+    cards.reminder = '0001-01-01T00:00:00';
+    console.log(this.cards.reminder);
 
     this.notesService.updateNotes(cards.id, cards).subscribe(
       data => {
@@ -159,5 +161,4 @@ export class DisplaynotesComponent implements OnInit {
       }
     )
   }
-
 }

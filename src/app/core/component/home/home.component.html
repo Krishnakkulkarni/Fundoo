@@ -69,12 +69,12 @@
               <button mat-mini-fab
                 [ngStyle]="{'background-image': 'url(' + photo + ')' ,'background-size':'cover','width':'70px','height':'70px'}"
                 (click)="SelectImage.click()">
-                <div mat-mini-fab class="changeProfile" fxLayoutAlign="end center">change</div>
+                <div mat-mini-fab class="changeProfile">change</div>
               </button>
 
               <div>
                 <div class="profileName">
-                  {{FirstName}}
+                  {{FirstName}} {{LastName}}
                 </div>
                 <div class="profileEmail">
                   {{UserName}}
@@ -83,8 +83,14 @@
 
             </div><br>
             <mat-divider></mat-divider>
-
-            <button mat-menu-item (click)="onLogout()">Sign out</button>
+            <div fxLayout="row">
+              <div fxLayoutAlign="start end">
+                <button mat-button (click)="ToHome()">Add account</button>
+              </div>
+              <div fxLayoutAlign="end end">
+                <button mat-button (click)="onLogout()">Sign out</button>
+              </div>
+            </div>
           </mat-menu>
         </div>
       </div>

@@ -1,4 +1,4 @@
-<div fxLayout="row" fxLayoutAlign="space-around start">
+<div *ngIf="trashed != 'isTrash'" fxLayout="row" fxLayoutAlign="space-around start">
   <!---------------------------------Remind-Me------------------------------------------->
 
   <div class="img" matTooltip="Remind-Me">
@@ -52,19 +52,18 @@
   <!----------------------------------More--------------------------------------------->
 
   <div class="img">
-    <button mat-icon-button *ngIf="trashed != 'isTrash'" [matMenuTriggerFor]="Menu" style="outline:none"
-      matTooltip="More">
+    <button mat-icon-button [matMenuTriggerFor]="Menu" style="outline:none" matTooltip="More">
       <mat-icon>more_vert</mat-icon>
     </button>
   </div>
 
-  <div class="img">
-    <button mat-icon-button *ngIf="trashed == 'isTrash'" [matMenuTriggerFor]="Menu1" style="outline:none"
-      matTooltip="More">
-      <mat-icon>more_vert</mat-icon>
-    </button>
-  </div>
+</div>
 
+<div class="img">
+  <button mat-icon-button *ngIf="trashed == 'isTrash'" [matMenuTriggerFor]="Menu1" style="outline:none"
+    matTooltip="More">
+    <mat-icon>more_vert</mat-icon>
+  </button>
 </div>
 
 <!------------------------------------Menu-Colors------------------------------------------->
@@ -147,11 +146,14 @@
   </div>
 </mat-menu>
 
-<!----------------------------------Remind-Menu------------------------------------------>
+<!----------------------------------Reminder-Menu------------------------------------------>
 <mat-menu #MenuRemind="matMenu">
   <label class="remind">Reminder:</label>
   <button mat-menu-item (click)="Today(card)" style="outline: none">Later today 8:00PM </button>
   <button mat-menu-item (click)="Tomorrow(card)" style="outline: none">Tomorrow 8:00AM</button>
   <button mat-menu-item (click)="nextWeek(card)" style="outline: none">Next Week 8:00AM</button>
-  <button mat-menu-item style="outline: none">Pick date & time</button>
+  <button mat-menu-item style="outline: none">
+    <mat-icon>access_time</mat-icon>
+    Pick date & time
+  </button>
 </mat-menu>

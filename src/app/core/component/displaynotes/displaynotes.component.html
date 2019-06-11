@@ -35,9 +35,11 @@
         </div>
       </div>
 
-      <div *ngIf="note.reminder != '0001-01-01T00:00:00-08:00'">
+      <div *ngIf="note.reminder != '0001-01-01T00:00:00'">
+        
         <mat-chip-list>
           <mat-chip [selectable]="selectable" [removable]="removable">
+            <mat-icon>access_time</mat-icon>
             {{note.reminder }}
             <mat-icon matChipRemove (click)="removeReminder(note)">cancel</mat-icon>
           </mat-chip>

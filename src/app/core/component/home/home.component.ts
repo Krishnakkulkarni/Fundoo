@@ -33,6 +33,7 @@ export class HomeComponent implements OnInit {
   token: string;
   userId: string;
   FirstName: string;
+  LastName: string;
   userName: string;
   UserName: string;
   selectedFile: File;
@@ -64,12 +65,17 @@ export class HomeComponent implements OnInit {
     this.photo = localStorage.getItem("result");
 
     this.UserName = localStorage.getItem("username");
-    // this.FirstName = localStorage.getItem("FirstName");
+    this.FirstName = localStorage.getItem("firstName");
+    this.LastName = localStorage.getItem("lastName");
 
     this.dataService.currentMsg.subscribe(message => this.message = message);
     this.userName = localStorage.getItem("UserName")
 
     this.getLabels();
+  }
+
+  ToHome(){
+    this.router.navigateByUrl('user/login');
   }
 
   /**
@@ -179,7 +185,7 @@ export class HomeComponent implements OnInit {
     // )
   }
 
-  
+
   /**
    * 
    */
