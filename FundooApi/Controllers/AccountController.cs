@@ -6,6 +6,7 @@
 namespace FundooApi.Controllers
 {
     using System;
+    using System.Collections.Generic;
     using System.Threading.Tasks;
     using BussinessLayer.Interfaces;
     using Common.Models;
@@ -107,18 +108,6 @@ namespace FundooApi.Controllers
 
             return this.BadRequest();
         }
-        //check email already present or not
-
-        //if (false)
-        //{
-        //    //add model in db and return added user details
-
-        //}
-        //else
-        //{
-        //    //get the user details
-        //}
-
 
         /// <summary>
         /// Forgot the specified forgot password model.
@@ -197,10 +186,10 @@ namespace FundooApi.Controllers
         [AllowAnonymous]
         [HttpGet]
         [Route("url/{userid}")]
-        public Task<string> ProfileUrl(string userid)
+        public IActionResult ProfileUrl(string userid)
         {
             var result = this.applicationUser.ProfileUrl(userid);
-            return result;
+            return this.Ok(new { result });
         }
     }
 }

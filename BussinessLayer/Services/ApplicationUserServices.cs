@@ -7,6 +7,7 @@
 namespace BussinessLayer.Services
 {
     using System;
+    using System.Collections.Generic;
     using System.Threading.Tasks;
     using BussinessLayer.Interfaces;
     using Common.Models;
@@ -51,8 +52,8 @@ namespace BussinessLayer.Services
         /// <returns>return boolean</returns>
         public async Task<bool> PostApplicationUserAsync(ApplicationUserModel model)
         {
-           await this.applicationRepository.CreateAsync(model);
-           return true;
+            await this.applicationRepository.CreateAsync(model);
+            return true;
         }
 
         /// <summary>
@@ -64,7 +65,7 @@ namespace BussinessLayer.Services
         /// </returns>
         public async Task<dynamic> LoginAsync(ApplicationLoginModel model)
         {
-           return await this.applicationRepository.LoginPage(model);
+            return await this.applicationRepository.LoginPage(model);
         }
 
         /// <summary>
@@ -132,12 +133,16 @@ namespace BussinessLayer.Services
         /// <returns>
         /// returns response
         /// </returns>
-        public Task<string> ProfileUrl(string userid)
+        //public Task<string> ProfileUrl(string userid)
+        //{
+        //    var result = this.applicationRepository.ProfileUrl(userid);
+        //    return result;
+        //}
+
+        public IList<ApplicationUser> ProfileUrl(string userid)
         {
             var result = this.applicationRepository.ProfileUrl(userid);
             return result;
         }
-
-
     }
 }

@@ -6,6 +6,7 @@
 namespace RepositoryLayer.Context
 {
     using System;
+    using System.Collections.Generic;
     using System.IdentityModel.Tokens.Jwt;
     using System.Linq;
     using System.Security.Claims;
@@ -280,6 +281,13 @@ namespace RepositoryLayer.Context
             }
         }
 
+        public IList<ApplicationUser> ProfileUrl(string userid)
+        {
+            //var list = new List<ApplicationUser>();
+            var note = from notes in this.authentication.ApplicationUsers where (notes.Id == userid) select notes;
+           
+            return note.ToArray();
+        }
         /// <summary>
         /// Profiles the URL.
         /// </summary>
@@ -287,10 +295,10 @@ namespace RepositoryLayer.Context
         /// <returns>
         /// returns response
         /// </returns>
-        public async Task<string> ProfileUrl(string userid)
-        {
-            var data = await this.usermanager.FindByIdAsync(userid);
-            return data.Profile.ToString();
-        }
+        //public async Ilist<ApplicationUserModel> ProfileUrl(string userid)
+        //{
+        //    var data = await this.usermanager.FindByIdAsync(userid);
+        //    return data.Profile.ToString();
+        //}
     }
 }

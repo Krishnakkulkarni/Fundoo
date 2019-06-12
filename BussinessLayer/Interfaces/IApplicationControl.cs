@@ -5,6 +5,7 @@
 //-----------------------------------------------------------------------
 namespace BussinessLayer.Interfaces
 {
+    using System.Collections.Generic;
     using System.Threading.Tasks;
     using Common.Models;
     using FundooNote.Models;
@@ -59,11 +60,13 @@ namespace BussinessLayer.Interfaces
         /// <returns>returns string</returns>
         string ProfilePicture(IFormFile file, string userid);
 
+        IList<ApplicationUser> ProfileUrl(string userid);
+
         /// <summary>
         /// Profiles the URL.
         /// </summary>
         /// <param name="userid">The user id.</param>
         /// <returns>returns response</returns>
-        Task<string> ProfileUrl(string userid);
+        //Task<string> ProfileUrl(string userid);
     }
 }
