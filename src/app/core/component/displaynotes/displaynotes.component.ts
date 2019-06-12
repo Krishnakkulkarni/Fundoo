@@ -103,7 +103,7 @@ export class DisplaynotesComponent implements OnInit {
   openDialog(note: { id: any; }) {
     console.log(note);
     const dialogRef = this.matDialog.open(EditnoteComponent, {
-      width: '500px',
+      panelClass:"editDailog",
       data: { note }
     });
     dialogRef.afterClosed().subscribe(result => {

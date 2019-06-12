@@ -1,9 +1,10 @@
-<div class="dailog-outer-div" fxFlex fxLayout="column" [style.background-color]='data.note.color'>
+<mat-card class="dailog-outer-div" fxFlex fxLayout="column" [style.background-color]='data.note.color'>
   <img src="{{data.note.image}}" class="notes-image" />
 
-  <div mat-dialog-content class="mat-dailog">
-    <input matInput class="text" [(ngModel)]="data.note.title">
-    <textarea matInput matTextareaAutosize class="text-for-description" [(ngModel)]="data.note.description"></textarea>
+  <div mat-dialog-content>
+    <input matInput class="text" [(ngModel)]="data.note.title" placeholder="Title">
+    <textarea matInput matTextareaAutosize class="text-for-description" [(ngModel)]="data.note.description"
+    placeholder="Description"></textarea>
   </div>
 
   <div fxLayout="row">
@@ -12,4 +13,4 @@
       <button mat-button [mat-dialog-close]="data.note">close</button>
     </div>
   </div>
-</div>
+</mat-card>
