@@ -1,4 +1,8 @@
-﻿
+﻿//-----------------------------------------------------------------------
+// <copyright file="ShareNotesModel.cs" company="Bridgelabz">
+//     Company @ 2019 </copyright>
+// <creator name = "Krishna Kulkarni" />
+//-----------------------------------------------------------------------
 namespace Common.Models
 {
     using System;
@@ -39,7 +43,12 @@ namespace Common.Models
         /// </value>
         public string Sendermail { get; set; }
 
+        /// <summary>
+        /// Gets or sets the receiver email.
+        /// </summary>
+        /// <value>
+        /// The receiver email.
+        /// </value>
         public string ReceiverEmail { get; set; }
-
     }
 }

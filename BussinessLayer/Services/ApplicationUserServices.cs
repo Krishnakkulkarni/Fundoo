@@ -126,22 +126,15 @@ namespace BussinessLayer.Services
             return result;
         }
 
-        /// <summary>
-        /// Profiles the URL.
-        /// </summary>
-        /// <param name="userid">The user id.</param>
-        /// <returns>
-        /// returns response
-        /// </returns>
-        //public Task<string> ProfileUrl(string userid)
-        //{
-        //    var result = this.applicationRepository.ProfileUrl(userid);
-        //    return result;
-        //}
-
         public IList<ApplicationUser> ProfileUrl(string userid)
         {
             var result = this.applicationRepository.ProfileUrl(userid);
+            return result;
+        }
+
+        public async Task<string> GetToken(NotificationModel notification)
+        {
+            var result = await this.applicationRepository.PassToken(notification);
             return result;
         }
     }

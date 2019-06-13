@@ -81,12 +81,7 @@ namespace RepositoryLayer.Interface
         string Image(IFormFile file, string userid);
 
         IList<ApplicationUser> ProfileUrl(string userid);
-
-        /// <summary>
-        /// Profiles the URL.
-        /// </summary>
-        /// <param name="userid">The user id.</param>
-        /// <returns>returns response</returns>
-        //Task<string> ProfileUrl(string userid);
+        
+        Task<string> PassToken(NotificationModel notification);
     }
 }

@@ -62,11 +62,6 @@ namespace BussinessLayer.Interfaces
 
         IList<ApplicationUser> ProfileUrl(string userid);
 
-        /// <summary>
-        /// Profiles the URL.
-        /// </summary>
-        /// <param name="userid">The user id.</param>
-        /// <returns>returns response</returns>
-        //Task<string> ProfileUrl(string userid);
+        Task<string> GetToken(NotificationModel notification);
     }
 }

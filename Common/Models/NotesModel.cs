@@ -113,7 +113,5 @@ namespace Common.Models
         /// The label.
         /// </value>
         public string Label { get; set; }
-
-         
     }
 }

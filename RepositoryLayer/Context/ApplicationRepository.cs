@@ -277,28 +277,48 @@ namespace RepositoryLayer.Context
             }
             catch (Exception e)
             {
-                return e.Message;
+               return e.Message;
             }
         }
 
-        public IList<ApplicationUser> ProfileUrl(string userid)
-        {
-            //var list = new List<ApplicationUser>();
-            var note = from notes in this.authentication.ApplicationUsers where (notes.Id == userid) select notes;
-           
-            return note.ToArray();
-        }
         /// <summary>
         /// Profiles the URL.
         /// </summary>
-        /// <param name="userid">The user id.</param>
-        /// <returns>
-        /// returns response
-        /// </returns>
-        //public async Ilist<ApplicationUserModel> ProfileUrl(string userid)
-        //{
-        //    var data = await this.usermanager.FindByIdAsync(userid);
-        //    return data.Profile.ToString();
-        //}
+        /// <param name="userid">The userid.</param>
+        /// <returns>returns list</returns>
+        public IList<ApplicationUser> ProfileUrl(string userid)
+        {
+           var note = from notes in this.authentication.ApplicationUsers where notes.Id == userid select notes;
+           
+           return note.ToArray();
+        }
+
+        /// <summary>
+        /// Passes the token.
+        /// </summary>
+        /// <param name="notification">The notification.</param>
+        /// <returns>returns string</returns>
+        public async Task<string> PassToken(NotificationModel notification)
+        {
+            var token = from Notification in this.authentication.Notifications
+                        where Notification.Userid.Equals(notification.Userid)
+                        select Notification;
+            if (token == null)
+            {
+                var addToken = new NotificationModel()
+                {
+                    Userid = notification.Userid,
+                    NotificationToken = notification.NotificationToken
+                };
+                this.authentication.Notifications.Add(addToken);
+                var result = authentication.SaveChanges();
+            }
+            else
+            {
+                this.authentication.Update(notification.NotificationToken);
+                authentication.SaveChanges();
+            }
+            return notification.NotificationToken;
+        }
     }
 }

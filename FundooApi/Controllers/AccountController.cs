@@ -188,8 +188,31 @@ namespace FundooApi.Controllers
         [Route("url/{userid}")]
         public IActionResult ProfileUrl(string userid)
         {
-            var result = this.applicationUser.ProfileUrl(userid);
-            return this.Ok(new { result });
+            try
+            {
+                var result = this.applicationUser.ProfileUrl(userid);
+                return this.Ok(new { result });
+            }
+            catch (Exception e)
+            {
+                return this.BadRequest(e.Message);
+            }
+        }
+
+        [HttpPost]
+        [Route("notification")]
+        [AllowAnonymous]
+        public async Task<IActionResult> PushNotification(NotificationModel notification)
+        {
+            try
+            { 
+                var token = await this.applicationUser.GetToken(notification);
+                return this.Ok(new { token });
+            }
+            catch (Exception e)
+            {
+                return this.BadRequest(e.Message);
+            }
         }
     }
 }

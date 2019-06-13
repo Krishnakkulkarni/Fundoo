@@ -106,6 +106,27 @@ namespace RepositoryLayer.Migrations
                     b.ToTable("NotesModel");
                 });
 
+            modelBuilder.Entity("Common.Models.NotificationModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreatedData");
+
+                    b.Property<DateTime>("ModifiedData");
+
+                    b.Property<string>("NotificationToken");
+
+                    b.Property<string>("Userid");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Userid");
+
+                    b.ToTable("Notifications");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
@@ -291,11 +312,16 @@ namespace RepositoryLayer.Migrations
 
                     b.Property<string>("Profile");
 
-                    b.Property<int>("SocialId");
-
                     b.ToTable("ApplicationUser");
 
                     b.HasDiscriminator().HasValue("ApplicationUser");
+                });
+
+            modelBuilder.Entity("Common.Models.NotificationModel", b =>
+                {
+                    b.HasOne("FundooNote.Models.ApplicationUser", "ApplicationUser")
+                        .WithMany()
+                        .HasForeignKey("Userid");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

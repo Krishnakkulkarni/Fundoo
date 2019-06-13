@@ -68,6 +68,8 @@ namespace RepositoryLayer.Context
         /// </value>
         public DbSet<CollaboratorModel> Collaborator { get; set; }
 
+        public DbSet<NotificationModel> Notifications { get; set; }
+
         /// <summary>
         /// Asynchronously saves all changes made in this context to the database.
         /// </summary>
