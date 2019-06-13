@@ -1,44 +1,45 @@
 import { Injectable } from '@angular/core';
-import { AngularFireMessaging } from '@angular/fire/messaging';
-import { BehaviorSubject } from 'rxjs';
-
+import { BehaviorSubject } from 'rxjs'
+import * as firebase from 'firebase/app'
+import 'firebase/messaging';
+import { Router } from '@angular/router';
 @Injectable({
   providedIn: 'root'
 })
 export class MessagingService {
-
   currentMessage = new BehaviorSubject(null);
-
-  constructor(private angularFireMessaging: AngularFireMessaging) { }
-
-
-
-  /**
- * request permission for notification from firebase cloud messaging
- * 
- * @param userId userId
- */
-  requestPermission(userId) {
-    this.angularFireMessaging.requestToken.subscribe(
-      (token) => {
-        console.log(token);
-        // this.updateToken(userId, token);
-      },
-      (err) => {
-        console.error('Unable to get permission to notify.', err);
-      }
-    );
+  messaging;
+  constructor(private router: Router) {
+    try {
+      firebase.initializeApp({
+        'messagingSenderId': '250115212184'
+      });
+      this.messaging = firebase.messaging();
+    } catch (err) {
+      console.error('Firebase initialization error', err.stack);
+    }
   }
-
-  /**
-   * hook method when new notification received in foreground
-   */
-  receiveMessage() {
-    this.angularFireMessaging.messages.subscribe(
-      (payload) => {
-        console.log("new message received. ", payload);
-        this.currentMessage.next(payload);
+  getPermission() {
+    this.messaging.requestPermission()
+      .then(() => {
+        return this.messaging.getToken()
       })
+      .then(token => {
+        console.log(token)
+        localStorage.setItem("notiToken", token)
+        this.router.navigateByUrl('home');
+
+      })
+      .catch((err) => {
+        console.log('Unable to get permission to notify.', err);
+      });
   }
 
+  receiveMessage() {
+    this.messaging.onMessage((payload) => {
+      console.log("Message received. ", payload);
+      this.currentMessage.next(payload)
+    });
+  }
 }
+

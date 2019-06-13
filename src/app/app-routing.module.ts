@@ -40,12 +40,12 @@ const routes: Routes = [
       { path: 'EditLables', component: EditLabelsComponent },
       { path: 'Archive', component: ArchiveComponent },
       { path: 'Trash', component: TrashComponent },
-      { path: 'search', component: SearchComponent}
+      { path: 'search', component: SearchComponent }
     ]
   },
   { path: 'editnote', component: EditnoteComponent },
   { path: 'imagecroper', component: ImagecropComponent },
-  { path: 'collaborator', component: CollaborationComponent}
+  { path: 'collaborator', component: CollaborationComponent }
 ];
 
 @NgModule({

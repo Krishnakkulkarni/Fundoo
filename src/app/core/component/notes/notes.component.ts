@@ -33,7 +33,7 @@ export class NotesComponent implements OnInit {
    * 
    */
   AddNotes() {
-    if (this.title.value != "" && this.title.value != undefined &&
+    if (this.title.value.trim() != ""  && this.title.value != undefined &&
       this.take_a_note.value.trim() != "" && this.take_a_note != undefined) {
       var notes = {
         UserId: this.id,
@@ -43,10 +43,10 @@ export class NotesComponent implements OnInit {
       }
       this.notesService.addNotes(notes).subscribe
         (data => {
-          this.title.reset();
-          this.take_a_note.reset();
           console.log(data)
           this.AddEvent.emit(data)
+          this.title.reset();
+          this.take_a_note.reset();
         },
           err => {
             this.AddEvent.emit({})

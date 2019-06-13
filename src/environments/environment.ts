@@ -4,9 +4,9 @@
 
 export const environment = {
   production: false,
-  rooturl : 'https://localhost:44305/api/',
-  profileUrl :"http://res.cloudinary.com/db4wyl94g/image/upload/v1558622391/kausxhagpokr9wpaozzi.png",
-  getFbId : "340699629961053"
+  rooturl: 'https://localhost:44305/api/',
+  profileUrl: "http://res.cloudinary.com/db4wyl94g/image/upload/v1558622391/kausxhagpokr9wpaozzi.png",
+  getFbId: "340699629961053"
   // 
 };
 
@@ -18,4 +18,3 @@ export const environment = {
  * on performance if an error is thrown.
  */
 // import 'zone.js/dist/zone-error';  // Included with Angular CLI.
- 

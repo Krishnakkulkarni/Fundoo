@@ -30,7 +30,7 @@ import { CollaborationComponent } from './core/component/collaboration/collabora
 import { SearchComponent } from './core/component/search/search.component';
 import { SearchPipe } from './core/pipe/search.pipe';
 import { SocialLoginModule, AuthServiceConfig, FacebookLoginProvider } from "angular-6-social-login";
-import { environment} from '../environments/environment';
+import { environment } from '../environments/environment';
 
 export function getAuthServiceConfigs() {
   let config = new AuthServiceConfig(
