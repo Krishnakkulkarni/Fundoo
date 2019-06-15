@@ -1,6 +1,9 @@
 .outer-div{
     height: 100vh;
 }
+/* .mat{
+    max-width:32% !important;
+} */
 .image-div-style{
     height:70px;
 }
@@ -34,3 +37,8 @@ padding-top: 3%;
 .Forgot-password{
     color: rgb(42, 123, 245)
 }
+/* @media screen and (max-width: 600px) {
+    .mat{
+        max-width:30% !important;
+    }
+} */

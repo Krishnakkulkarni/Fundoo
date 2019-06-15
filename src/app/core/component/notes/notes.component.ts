@@ -13,27 +13,25 @@ export class NotesComponent implements OnInit {
   take_a_note = new FormControl('', [Validators.required]);
   id: any;
   color: string = "#ffffff";
-  add : any;
-  
+  add: any;
+
   @Output() AddEvent = new EventEmitter();
-  
 
   constructor(private notesService: NotesService) { }
 
   /**
-   * 
+   * Main Method
    */
   ngOnInit() {
-    localStorage.getItem('token');
+    localStorage.getItem('token')
     this.id = localStorage.getItem("userid")
-    
   }
 
   /**
-   * 
+   * Method to add Notes
    */
   AddNotes() {
-    if (this.title.value.trim() != ""  && this.title.value != undefined &&
+    if (this.title.value.trim() != "" && this.title.value != undefined &&
       this.take_a_note.value.trim() != "" && this.take_a_note != undefined) {
       var notes = {
         UserId: this.id,
@@ -57,7 +55,7 @@ export class NotesComponent implements OnInit {
   }
 
   /**
-   * 
+   * Method to set color
    * @param $event 
    */
   SetColor($event: string) {

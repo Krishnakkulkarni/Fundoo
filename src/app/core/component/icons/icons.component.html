@@ -132,7 +132,8 @@
   <div class="label-note">Label note</div>
 
   <div class="input-label">
-    <input matInput type="text" class="label-input" (click)="$event.stopPropogation()" placeholder="Enter label name">
+    <input matInput type="text" class="label-input" stopPropagation (click)="stopPropogation()"
+      placeholder="Enter label name">
   </div>
 
   <div *ngFor="let labels of label">
@@ -152,8 +153,24 @@
   <button mat-menu-item (click)="Today(card)" style="outline: none">Later today 8:00PM </button>
   <button mat-menu-item (click)="Tomorrow(card)" style="outline: none">Tomorrow 8:00AM</button>
   <button mat-menu-item (click)="nextWeek(card)" style="outline: none">Next Week 8:00AM</button>
-  <button mat-menu-item style="outline: none">
+  <button mat-menu-item [matMenuTriggerFor]="pick" style="outline: none">
     <mat-icon>access_time</mat-icon>
     Pick date & time
   </button>
+</mat-menu>
+
+<mat-menu #pick="matMenu">
+  <label>Pick date & time</label>
+  <mat-form-field class="example-full-width">
+    <input matInput [matDatepickerFilter]="myFilter" [matDatepicker]="picker" placeholder="Choose a date">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+  <button mat-menu-item [matMenuTriggerFor]="pickTime" (click)="time" style="outline: none">pick-time</button>
+</mat-menu>
+
+<mat-menu #pickTime="matMenu">
+  <button mat-menu-item (click)="Today(card)" style="outline: none">Morning 8:00AM </button>
+  <button mat-menu-item (click)="Tomorrow(card)" style="outline: none">After 1:00PM</button>
+  <button mat-menu-item (click)="nextWeek(card)" style="outline: none">Night 8:00AM</button>
 </mat-menu>

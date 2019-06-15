@@ -16,7 +16,7 @@ export class DataService {
   current = this.message.asObservable();
 
   private messageSource = new BehaviorSubject(true);
-  currentMessage = this.messageSource.asObservable();
+  currentview = this.messageSource.asObservable();
 
   private image = new Subject<boolean>();
   currentImage = this.image.asObservable();

@@ -17,7 +17,7 @@
 
           <mat-form-field fxFlex appearance="outline" [style.fontSize.px]=1 fxFlexOffset="8">
             <div fxLayout="row">
-              <button mat-icon-button>
+              <button mat-icon-button matTooltip="Search">
                 <mat-icon>search</mat-icon>
               </button>
               <input matInput [style.fontSize.px]=15 [(ngModel)]="value" (keyup)="lookfor()" (click)='goSearch()'

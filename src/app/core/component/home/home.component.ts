@@ -57,7 +57,7 @@ export class HomeComponent implements OnInit {
   }
 
   /**
-   * 
+   * Main Method
    */
   ngOnInit() {
 
@@ -74,16 +74,20 @@ export class HomeComponent implements OnInit {
     this.getLabels();
   }
 
-  ToHome(){
+  /**
+   * Method to navigate to login page
+   */
+  ToHome() {
     this.router.navigateByUrl('user/login');
   }
 
   /**
-   * 
+   * Method to search
    */
   lookfor() {
     this.dataService.changeSearchMsg(this.value)
   }
+
   /**
    * 
    */
@@ -92,30 +96,37 @@ export class HomeComponent implements OnInit {
   }
 
   /**
-   * 
+   * Method to logout from app
    */
   onLogout() {
     localStorage.removeItem('token');
+    localStorage.removeItem('result');
+    localStorage.removeItem('username');
+    localStorage.removeItem('lastName');
+    localStorage.removeItem('firstName');
+    localStorage.removeItem('userid');
+    localStorage.removeItem('noteId');
+    localStorage.removeItem('profileUrl');
     this.router.navigate(['user/login']);
     this.snackBar.open("logout successful", "close", { duration: 1500 });
   }
 
   /**
-   * 
+   * refresh the page
    */
   refresh() {
     location.reload()
   }
 
   /**
-   * 
+   * Method to navigate to notes page
    */
   Note() {
     this.router.navigate(['home/MainNotes'])
   }
 
   /**
-   * 
+   * Method to set the view(grid or list)
    */
   ReverseFlag() {
     this.flag = !this.flag
@@ -125,7 +136,7 @@ export class HomeComponent implements OnInit {
   imageFile = null;
 
   /**
-   * 
+   * Method to uploade Profile
    * @param event 
    */
   fileUpload(event: { path: { files: any[]; }[]; }) {
@@ -138,7 +149,7 @@ export class HomeComponent implements OnInit {
   }
 
   /**
-   * 
+   * Method to change the profile picture
    * @param data 
    */
   ChangePic(data: any) {
@@ -155,14 +166,14 @@ export class HomeComponent implements OnInit {
   }
 
   /**
-   * 
+   * Method to navigate reminder page
    */
   Reminder() {
     this.router.navigate(['home/Reminder'])
   }
 
   /**
-   * 
+   * Method to add labels
    */
   EditLables(): void {
     const dialogConfig = new MatDialogConfig();
@@ -187,7 +198,7 @@ export class HomeComponent implements OnInit {
 
 
   /**
-   * 
+   * Method to get labels
    */
   getLabels() {
     this.labelService.getlabels(this.userId).subscribe(responselabels => {
@@ -206,14 +217,14 @@ export class HomeComponent implements OnInit {
   }
 
   /**
-   * 
+   * Method to navigate archive page
    */
   Archive() {
     this.router.navigate(['home/Archive'])
   }
 
   /**
-   * 
+   * Method to navigate trash page
    */
   Trash() {
     this.router.navigate(['home/Trash'])

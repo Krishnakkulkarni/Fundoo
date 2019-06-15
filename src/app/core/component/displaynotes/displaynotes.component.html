@@ -40,7 +40,7 @@
         <mat-chip-list>
           <mat-chip [selectable]="selectable" [removable]="removable">
             <mat-icon>access_time</mat-icon>
-            {{note.reminder }}
+            {{note.reminder|date:'shortTime'}}
             <mat-icon matChipRemove (click)="removeReminder(note)">cancel</mat-icon>
           </mat-chip>
         </mat-chip-list>

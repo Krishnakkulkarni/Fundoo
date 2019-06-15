@@ -50,14 +50,14 @@ export class DisplaynotesComponent implements OnInit {
   userId: any
 
   /**
-   * 
+   * Main Method 
    */
   ngOnInit() {
     console.log(this.cards);
-    
-    this.dataService.currentMessage.subscribe(data => {
+    this.dataService.currentview.subscribe(data => {
       this.grid = data
     });
+
     this.userId = localStorage.getItem("userid")
     this.receiverEmail = localStorage.getItem('receiverEmail');
     this.notesService.getCollaboratorNote(this.userId).subscribe(response => {
@@ -97,13 +97,13 @@ export class DisplaynotesComponent implements OnInit {
   // }
 
   /**
-   * 
+   * Method to Edit Note 
    * @param note 
    */
   openDialog(note: { id: any; }) {
     console.log(note);
     const dialogRef = this.matDialog.open(EditnoteComponent, {
-      panelClass:"editDailog",
+      panelClass: "editDailog",
       data: { note }
     });
     dialogRef.afterClosed().subscribe(result => {
@@ -115,7 +115,7 @@ export class DisplaynotesComponent implements OnInit {
   }
 
   /**
-   * 
+   * Method for archive
    * @param event 
    */
   Archive(event) {
@@ -124,7 +124,7 @@ export class DisplaynotesComponent implements OnInit {
   }
 
   /**
-   * 
+   * Method for trash
    * @param event 
    */
   Trash(event) {
@@ -132,6 +132,10 @@ export class DisplaynotesComponent implements OnInit {
     this.messageEvent.emit(event);
   }
 
+  /**
+   * Method to remove Reminder
+   * @param cards 
+   */
   removeReminder(cards) {
     console.log(this.cards);
     cards.reminder = '0001-01-01T00:00:00';
@@ -147,6 +151,11 @@ export class DisplaynotesComponent implements OnInit {
     )
   }
 
+  /**
+   * Method to remove label
+   * @param id 
+   * @param label 
+   */
   remove(id, label) {
     console.log(this.cards);
     label.label = null;

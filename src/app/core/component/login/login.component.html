@@ -1,5 +1,5 @@
 <div fxLayoutAlign='center center' class="outer-div">
-  <mat-card class="mat" fxFlex="35" fxFlex.sm="45" fxFlex.gt-sm="45" fxFlex.md="50" fxFlex.xs="80">
+  <mat-card class="mat" fxFlex="30" fxFlex.sm="45" fxFlex.gt-sm="45" fxFlex.md="50" fxFlex.xs="80">
 
     <form #LoginForm="ngForm" (ngSubmit)="onSubmit(LoginForm)" autocomplete="off">
       <div fxLayout="column">
@@ -15,8 +15,8 @@
           <h3 class="fundoo-header">With your Fundoo Account</h3>
         </div>
 
-        <div fxLayout="column" fxLayoutGap="5px" fxLayout.sm="column" fxLayoutGap.sm="10px" fxLayout.md="column"
-          fxLayout.xs="column" fxLayoutGap.xs="10px">
+        <div fxLayout="column" fxLayoutGap="3px" fxLayout.sm="column" fxLayoutGap.sm="5px" fxLayout.md="column"
+          fxLayout.xs="column" fxLayoutGap.xs="5px">
 
           <div>
             <mat-form-field class="field" appearance="outline">
@@ -37,8 +37,8 @@
           </div>
         </div>
 
-        <div fxLayout="row" fxLayoutGap="100px" fxLayout.sm="row" fxLayoutGap.sm="100px" fxLayout.md="row"
-          fxLayout.xs="column" fxLayoutGap.xs="10px" fxLayoutAlign="space-between end">
+        <div fxLayout="row" fxLayoutGap="100px" fxLayout.sm="row" fxLayoutGap.sm="60px" fxLayout.md="column"
+          fxLayoutGap.md="15px" fxLayout.xs="column" fxLayoutGap.xs="10px" fxLayoutAlign="space-between end">
 
           <div fxLayout="column" fxLayoutGap="15px">
             <div class="forgot-div">
@@ -47,14 +47,11 @@
             <a routerLink="/user/user-register" class="register" routerLinkActive="active">Create account</a>
           </div>
 
-          <div fxLayout="column" fxLayoutGap="2%">
-
-            <div fxLayout="column" fxLayoutAlign='end center'>
-              <button mat-button class="loginbutton" type="submit" >Login</button>
-              <button mat-button colour="primary" (click)="socialSignIn('facebook')">Sign in with Facebook</button>
-            </div>
-
+          <div fxLayout="column" fxLayoutAlign='end end'>
+            <button mat-button class="loginbutton" type="submit">Login</button>
+            <button mat-button (click)="socialSignIn('facebook')">Sign in with Facebook</button>
           </div>
+
         </div>
 
       </div>
