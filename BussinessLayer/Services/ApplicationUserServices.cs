@@ -8,14 +8,14 @@ namespace BussinessLayer.Services
 {
     using System;
     using System.Collections.Generic;
+    using System.Net.Http;
+    using System.Net.Http.Headers;
     using System.Threading.Tasks;
     using BussinessLayer.Interfaces;
     using Common.Models;
     using FundooNote.Interfaces;
     using FundooNote.Models;
     using Microsoft.AspNetCore.Http;
-    using Microsoft.Extensions.Caching.Distributed;
-    using Microsoft.Extensions.Options;
     using RepositoryLayer.Interface;
 
     /// <summary>
@@ -50,8 +50,9 @@ namespace BussinessLayer.Services
         /// </summary>
         /// <param name="model">The model.</param>
         /// <returns>return boolean</returns>
-        public async Task<bool> PostApplicationUserAsync(ApplicationUserModel model)
+        public async Task<bool> UserRegisterAsync(ApplicationUserModel model)
         {
+            //// Method to call the repository
             await this.applicationRepository.CreateAsync(model);
             return true;
         }
@@ -65,18 +66,20 @@ namespace BussinessLayer.Services
         /// </returns>
         public async Task<dynamic> LoginAsync(ApplicationLoginModel model)
         {
+            //// Method to call the repository
             return await this.applicationRepository.LoginPage(model);
         }
 
         /// <summary>
         /// Faces the book login asynchronous.
         /// </summary>
-        /// <param name="email">The email.</param>
+        /// <param name="model">The model.</param>
         /// <returns>
-        /// returns response
+        /// returns dynamic
         /// </returns>
         public Task<dynamic> FaceBookLoginAsync(SocialModel model)
         {
+            //// Method to call the repository
             return this.applicationRepository.FaceBookLoginAsync(model);
         }
 
@@ -87,6 +90,7 @@ namespace BussinessLayer.Services
         /// <returns>return boolean</returns>
         public bool ForgotPasswordAsync(ForgotPasswordModel model)
         {
+            //// Verify the user by its email
             var result = this.applicationRepository.FindByEmailAsync(model);
             if (result != null)
             {
@@ -108,6 +112,7 @@ namespace BussinessLayer.Services
         /// <returns>return boolean</returns>
         public async Task<bool> ResetPasswordAsync(ResetPasswordModel model)
         {
+            //// Verify the user to reset the password
             var result = await this.applicationRepository.ResetPasswordAsync(model);
             return result;
         }
@@ -122,19 +127,45 @@ namespace BussinessLayer.Services
         /// </returns>
         public string ProfilePicture(IFormFile file, string userid)
         {
+            //// Method to call the repository
             var result = this.applicationRepository.Image(file, userid);
             return result;
         }
 
+        /// <summary>
+        /// Profiles the URL.
+        /// </summary>
+        /// <param name="userid">The user id.</param>
+        /// <returns>
+        /// returns list
+        /// </returns>
         public IList<ApplicationUser> ProfileUrl(string userid)
         {
+            //// Method to call the repository for ProfileUrl
             var result = this.applicationRepository.ProfileUrl(userid);
             return result;
         }
 
-        public async Task<string> GetToken(NotificationModel notification)
+        /// <summary>
+        /// Gets the token.
+        /// </summary>
+        /// <param name="notification">The notification.</param>
+        /// <returns>
+        /// returns string
+        /// </returns>
+        public async Task<int> GetToken(NotificationModel notification)
         {
+            //// Method to pass the token for notification
             var result = await this.applicationRepository.PassToken(notification);
+            ////using (var client = new HttpClient())
+            ////{
+            ////    client.BaseAddress = new Uri("https://fcm.googleapis.com/");
+            ////    client.DefaultRequestHeaders.Accept.Clear();
+            ////    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+            ////    HTTP GET
+            ////    HttpResponseMessage response = await client.GetAsync("fcm/send");
+            ////}
             return result;
         }
     }

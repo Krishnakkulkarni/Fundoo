@@ -15,7 +15,6 @@ namespace RepositoryLayer.Context
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
     using RepositoryLayer.Interface;
-    using RepositoryLayer.Migrations;
 
     /// <summary>
     /// Notes Repository class
@@ -44,9 +43,9 @@ namespace RepositoryLayer.Context
         /// Adds the notes.
         /// </summary>
         /// <param name="notesModel">The notes model.</param>
-        /// <returns>return string</returns>
         public void AddNotes(NotesModel notesModel)
         {
+            //// Creating an instance to add notes
             var notes = new NotesModel()
             {
                 UserId = notesModel.UserId,
@@ -69,6 +68,7 @@ namespace RepositoryLayer.Context
         /// <returns>return integer</returns>
         public Task<int> SaveChangesAsync()
         {
+            //// update database
             var result = this.authentication.SaveChangesAsync();
             return result;
         }
@@ -79,6 +79,7 @@ namespace RepositoryLayer.Context
         /// <param name="id">The identifier.</param>
         public void RemoveNotes(int id)
         {
+            //// LinQ query to remove notes by comparing its note id
             var note = this.authentication.NotesModel.Where<NotesModel>(c => c.Id.Equals(id)).FirstOrDefault();
             var result = this.authentication.NotesModel.Remove(note);
         }
@@ -90,6 +91,7 @@ namespace RepositoryLayer.Context
         /// <param name="id">The identifier.</param>
         public void UpdateNotes(NotesModel model, int id)
         {
+            //// LinQ query to update notes by comparing its note id
             NotesModel notes = this.authentication.NotesModel.Where<NotesModel>(c => c.Id.Equals(id)).FirstOrDefault();
             notes.Title = model.Title;
             notes.Description = model.Description;
@@ -107,6 +109,7 @@ namespace RepositoryLayer.Context
         /// <returns>returns NotesModel</returns>
         public IList<NotesModel> GetNotes(string userID)
         {
+            //// LinQ query to Get all notes by comparing its userid
             var note = from notes in this.authentication.NotesModel where notes.UserId.Equals(userID) && notes.IsArchive == false && notes.IsTrash == false orderby notes.Id descending select notes;
             return note.ToArray();
         }
@@ -152,6 +155,7 @@ namespace RepositoryLayer.Context
         public IList<NotesModel> Archive(string userId)
         {
             var list = new List<NotesModel>();
+            //// LinQ query to Get archived notes by comparing its userid
             var note = from notes in this.authentication.NotesModel where (notes.UserId == userId) && (notes.IsArchive == true) && (notes.IsTrash == false) select notes;
             foreach (var data in note)
             {
@@ -169,6 +173,7 @@ namespace RepositoryLayer.Context
         public IList<NotesModel> TrashNote(string userId)
         {
             var list = new List<NotesModel>();
+            //// LinQ query to Get trashed notes by comparing its userid
             var note = from notes in this.authentication.NotesModel where (notes.UserId == userId) && (notes.IsTrash == true) select notes;
             foreach (var data in note)
             {
@@ -186,6 +191,7 @@ namespace RepositoryLayer.Context
         public IList<NotesModel> Reminder(string userId)
         {
             var list = new List<NotesModel>();
+            //// LinQ query to Get reminder on note by comparing its userid
             var notesData = from notes in this.authentication.NotesModel where (notes.UserId == userId) && (notes.Reminder.Year != 0001) select notes;
             foreach (var data in notesData)
             {
@@ -198,7 +204,7 @@ namespace RepositoryLayer.Context
         /// <summary>
         /// Method to add Collaborator
         /// </summary>
-        /// <param name="model"></param>
+        /// <param name="model">The model</param>
         /// <returns>returns string</returns>
         public string AddCollaboratorToNote([FromBody] CollaboratorModel model)
         {
@@ -233,7 +239,7 @@ namespace RepositoryLayer.Context
         /// <summary>
         /// Method to remove Collaborator
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="id">The id.</param>
         /// <returns>returns string</returns>
         public string RemoveCollaboratorToNote(int id)
         {
@@ -251,10 +257,13 @@ namespace RepositoryLayer.Context
         }
 
         /// <summary>
-        /// Method to get Collaborator
+        /// Collaborators the note.
         /// </summary>
-        /// <param name="receiverEmail"></param>
-        /// <returns></returns>
+        /// <param name="receiverEmail">The receiver email.</param>
+        /// <returns>
+        /// returns list
+        /// </returns>
+        /// <exception cref="Exception">error message</exception>
         public IList<NotesModel> CollaboratorNote(string receiverEmail)
         {
             try
@@ -292,11 +301,11 @@ namespace RepositoryLayer.Context
         }
 
         /// <summary>
-        /// Method to update Collaborator
+        /// Updates the collaborator.
         /// </summary>
-        /// <param name="model"></param>
-        /// <param name="id"></param>
-        /// <param name="receiverEmail"></param>
+        /// <param name="model">The model.</param>
+        /// <param name="id">The identifier.</param>
+        /// <param name="receiverEmail">The receiver email.</param>
         public void UpdateCollaborater([FromBody]NotesModel model, int id, string receiverEmail)
         {
             var data = from coll in this.authentication.Collaborator
@@ -346,52 +355,5 @@ namespace RepositoryLayer.Context
                 throw new Exception(exception.Message);
             }
         }
-
-        ///// <summary>
-        ///// Gets the notes label.
-        ///// </summary>
-        ///// <param name="userId">The user identifier.</param>
-        ///// <returns>returns list of label</returns>
-        ///// <exception cref="Exception">throws exception</exception>
-        //public List<NoteLabelModel> GetNotesLabel(Guid userId)
-        //{
-        //    var list = new List<NoteLabelModel>();
-        //    var labelData = from t in this.authentication.NoteLabel where t.UserId == userId select t;
-        //    try
-        //    {
-        //        foreach (var data in labelData)
-        //        {
-        //            list.Add(data);
-        //        }
-        //    }
-        //    catch (Exception exception)
-        //    {
-        //        throw new Exception(exception.Message);
-        //    }
-
-        //    return list;
-        //}
-
-        ///// <summary>
-        ///// Deletes the notes label.
-        ///// </summary>
-        ///// <param name="id">The identifier.</param>
-        ///// <returns>returns string</returns>
-        ///// <exception cref="Exception">throws exception</exception>
-        //public string DeleteNotesLabel(int id)
-        //{
-        //    var label = this.authentication.NoteLabel.Where<NoteLabelModel>(t => t.Id == id).FirstOrDefault();
-
-        //    try
-        //    {
-        //        this.authentication.NoteLabel.Remove(label);
-        //        var result = this.authentication.SaveChanges();
-        //        return result.ToString();
-        //    }
-        //    catch (Exception exception)
-        //    {
-        //        throw new Exception(exception.Message);
-        //    }
-        //}
     }
 }

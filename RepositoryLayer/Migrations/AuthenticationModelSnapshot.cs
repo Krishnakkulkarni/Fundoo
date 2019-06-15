@@ -112,9 +112,9 @@ namespace RepositoryLayer.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime>("CreatedData");
+                    b.Property<DateTime>("CreatedDate");
 
-                    b.Property<DateTime>("ModifiedData");
+                    b.Property<DateTime>("ModifiedDate");
 
                     b.Property<string>("NotificationToken");
 

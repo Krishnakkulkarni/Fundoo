@@ -1,12 +1,11 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="ApplicationUserController.cs" company="Bridgelabz">
+// <copyright file="AccountController.cs" company="Bridgelabz">
 //     Company @ 2019 </copyright>
 // <creator name = "Krishna Kulkarni" />
 //-----------------------------------------------------------------------
 namespace FundooApi.Controllers
 {
     using System;
-    using System.Collections.Generic;
     using System.Threading.Tasks;
     using BussinessLayer.Interfaces;
     using Common.Models;
@@ -30,7 +29,7 @@ namespace FundooApi.Controllers
         private readonly IApplicationControl applicationUser;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ApplicationUserController"/> class.
+        /// Initializes a new instance of the <see cref="AccountController"/> class.
         /// </summary>
         /// <param name="applicationUser">The application user.</param>
         public AccountController(IApplicationControl applicationUser)
@@ -52,7 +51,7 @@ namespace FundooApi.Controllers
             {
                 try
                 {
-                    var result = await this.applicationUser.PostApplicationUserAsync(applicationUserModel);
+                    var result = await this.applicationUser.UserRegisterAsync(applicationUserModel);
                     return this.Ok(result);
                 }
                 catch (Exception e)
@@ -65,18 +64,18 @@ namespace FundooApi.Controllers
         }
 
         /// <summary>
-        /// Logins the specified application login model.
+        ///  Logins the specified application login model.
         /// </summary>
-        /// <param name="applicationLoginModel">The application login model.</param>
-        /// <returns>return status code</returns>
+        /// <param name="model">The model</param>
+        /// <returns>returns status code</returns>
         [AllowAnonymous]
         [HttpPost]
         [Route("login")]
-        public async Task<IActionResult> Login(ApplicationLoginModel Model)
+        public async Task<IActionResult> Login(ApplicationLoginModel model)
          {
             try  
             {
-                var result = await this.applicationUser.LoginAsync(Model);
+                var result = await this.applicationUser.LoginAsync(model);
                 if (result.Success == true)
                 {
                     return this.Ok(new { result });
@@ -93,8 +92,8 @@ namespace FundooApi.Controllers
         /// <summary>
         /// Faces the book login.
         /// </summary>
-        /// <param name="UserName">The UserName.</param>
-        /// <returns>returns response</returns>
+        /// <param name="model">The model</param>
+        /// <returns>returns status</returns>
         [AllowAnonymous]
         [HttpPost]
         [Route("fblogin")]
@@ -162,8 +161,8 @@ namespace FundooApi.Controllers
         /// Profiles the specified file.
         /// </summary>
         /// <param name="file">The file.</param>
-        /// <param name="userid">The userid.</param>
-        /// <returns></returns>
+        /// <param name="userid">The user id.</param>
+        /// <returns>returns result</returns>
         [HttpPost]
         [Route("profile/{userid}")]
         public IActionResult Profile(IFormFile file, string userid)
@@ -175,6 +174,7 @@ namespace FundooApi.Controllers
             }
 
             var result = this.applicationUser.ProfilePicture(file, userid);
+
             return this.Ok(new { result });
             }
 
@@ -199,6 +199,11 @@ namespace FundooApi.Controllers
             }
         }
 
+        /// <summary>
+        /// API for push notification
+        /// </summary>
+        /// <param name="notification">The notification.</param>
+        /// <returns>returns status</returns>
         [HttpPost]
         [Route("notification")]
         [AllowAnonymous]

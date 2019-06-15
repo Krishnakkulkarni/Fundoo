@@ -5,13 +5,16 @@
 //-----------------------------------------------------------------------
 namespace BussinessLayer.Services
 {
+    using System;
+    using System.Collections.Generic;
     using BussinessLayer.Interfaces;
     using Common.Models;
     using RepositoryLayer.Interface;
-    using System;
-    using System.Collections.Generic;
-    using System.Text;
 
+    /// <summary>
+    /// Label class for business layer 
+    /// </summary>
+    /// <seealso cref="BussinessLayer.Interfaces.ILabels" />
     public class LabelsBussiness : ILabels
     {
         /// <summary>

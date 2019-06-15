@@ -5,9 +5,9 @@
 //-----------------------------------------------------------------------
 namespace Common.Models
 {
-    using FundooNote.Models;
     using System;
     using System.ComponentModel.DataAnnotations.Schema;
+    using FundooNote.Models;
 
     /// <summary>
     /// Class for Notification Model
@@ -23,10 +23,10 @@ namespace Common.Models
         public int Id { get; set; }
 
         /// <summary>
-        /// Gets or sets the userid.
+        /// Gets or sets the user id.
         /// </summary>
         /// <value>
-        /// The userid.
+        /// The user id.
         /// </value>
         [ForeignKey("ApplicationUser")]
         public string Userid { get; set; }
@@ -45,16 +45,21 @@ namespace Common.Models
         /// <value>
         /// The created data.
         /// </value>
-        public DateTime CreatedData { get; set; }
+        public DateTime CreatedDate { get; set; }
 
         /// <summary>
         /// Gets or sets the modified data.
         /// </summary>
         /// <value>
         /// The modified data.
-        /// </value>
-        public DateTime ModifiedData { get; set; } 
+        public DateTime ModifiedDate { get; set; }
 
+        /// <summary>
+        /// Gets or sets the application user.
+        /// </summary>
+        /// <value>
+        /// The application user.
+        /// </value>
         public ApplicationUser ApplicationUser { get; set; }
     }
 }

@@ -5,13 +5,16 @@
 //-----------------------------------------------------------------------
 namespace FundooApi.Controllers
 {
+    using System.Collections.Generic;
     using BussinessLayer.Interfaces;
-    using BussinessLayer.Services;
     using Common.Models;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
-    using System.Collections.Generic;
 
+    /// <summary>
+    /// Controller Label class 
+    /// </summary>
+    /// <seealso cref="Microsoft.AspNetCore.Mvc.ControllerBase" />
     [Route("api/[controller]")]
     [ApiController]
     [Authorize]
@@ -70,8 +73,8 @@ namespace FundooApi.Controllers
         /// <summary>
         /// Updates the label.
         /// </summary>
-        /// <param name="label">The identifier.</param>
-        /// <param name="id">The newlabel.</param>
+        /// <param name="label">The label.</param>
+        /// <param name="id">The identifier.</param>
         /// <returns>returns response</returns>
         [HttpPut]
         [Route("updateLabel/{id}")]
@@ -87,7 +90,7 @@ namespace FundooApi.Controllers
         }
 
         /// <summary>
-        /// Deletelabels the specified identifier.
+        /// Delete labels the specified identifier.
         /// </summary>
         /// <param name="id">The identifier.</param>
         /// <returns>returns response</returns>

@@ -127,7 +127,7 @@ namespace FundooApi.Controllers
         /// </summary>
         /// <param name="file">The file.</param>
         /// <param name="id">The identifier.</param>
-        /// <returns></returns>
+        /// <returns>returns response</returns>
         [HttpPost]
         [Route("image/{id}")]
         public IActionResult Image(IFormFile file, int id)
@@ -146,7 +146,7 @@ namespace FundooApi.Controllers
         /// Archives the notes.
         /// </summary>
         /// <param name="userId">The user identifier.</param>
-        /// <returns></returns>
+        /// <returns>returns response</returns>
         [HttpGet]
         [Route("archive/{userId}")]
         public IActionResult ArchiveNotes(string userId)
@@ -164,7 +164,7 @@ namespace FundooApi.Controllers
         /// Trashes the notes.
         /// </summary>
         /// <param name="userId">The user identifier.</param>
-        /// <returns></returns>
+        /// <returns>returns response</returns>
         [HttpGet]
         [Route("trash/{userId}")]
         public IActionResult TrashNotes(string userId)
@@ -200,7 +200,7 @@ namespace FundooApi.Controllers
         /// Adds the collaborator to note.
         /// </summary>
         /// <param name="model">The model.</param>
-        /// <returns></returns>
+        /// <returns>returns response</returns>
         [HttpPost]
         [Route("addCollaborator")]
         public IActionResult AddCollaboratorToNote(CollaboratorModel model)
@@ -226,7 +226,7 @@ namespace FundooApi.Controllers
         /// Removes the collaborator to note.
         /// </summary>
         /// <param name="id">The identifier.</param>
-        /// <returns></returns>
+        /// <returns>returns response</returns>
         [HttpDelete]
         [Route("removeCollaborator/{id}")]
         public IActionResult RemoveCollaboratorToNote(int id)
@@ -252,7 +252,7 @@ namespace FundooApi.Controllers
         /// Collaborators the note.
         /// </summary>
         /// <param name="receiverEmail">The receiver email.</param>
-        /// <returns></returns>
+        /// <returns>returns response</returns>
         [HttpGet]
         [Route("getCollaborator/{receiverEmail}")]
         public IActionResult CollaboratorNote(string receiverEmail)
@@ -275,19 +275,19 @@ namespace FundooApi.Controllers
         }
 
         /// <summary>
-        /// Updates the collaborater.
+        /// Updates the collaborator.
         /// </summary>
         /// <param name="model">The model.</param>
         /// <param name="id">The identifier.</param>
         /// <param name="receiverEmail">The receiver email.</param>
-        /// <returns></returns>
+        /// <returns>returns status</returns>
         [HttpPut]
         [Route("updateCollaborater")]
         public async Task<IActionResult> UpdateCollaborater(NotesModel model, int id, string receiverEmail)
         {
             try
             {
-                //HttpContext.User.Claims.Where(x => x.Type == "UserId").SingleOrDefault();
+                //// Update collaborator
                 var result = await this.notesCreation.UpdateCollaborater(model, id, receiverEmail);
                 return this.Ok(result);
             }
@@ -314,41 +314,5 @@ namespace FundooApi.Controllers
 
             return this.Ok(new { result });
         }
-
-        ///// <summary>
-        ///// Gets the note label.
-        ///// </summary>
-        ///// <param name="userId">The user identifier.</param>
-        ///// <returns>returns result</returns>
-        //[HttpGet]
-        //[Route("notelabel/{userId}")]
-        //public IActionResult GetNoteLabel(Guid userId)
-        //{
-        //    IList<NoteLabelModel> result = this.notesCreation.GetNotesLabel(userId);
-        //    if (result == null)
-        //    {
-        //        return this.NotFound();
-        //    }
-
-        //    return this.Ok(new { result });
-        //}
-
-        ///// <summary>
-        ///// Deletes the note label.
-        ///// </summary>
-        ///// <param name="id">The identifier.</param>
-        ///// <returns>returns result</returns>
-        //[HttpDelete]
-        //[Route("notelabel/{id}")]
-        //public IActionResult DeleteNotelabel(int id)
-        //{
-        //    var result = this.notesCreation.DeleteNotesLabel(id);
-        //    if (result == null)
-        //    {
-        //        return this.NotFound();
-        //    }
-
-        //    return this.Ok(new { result });
-        //}
     }
 }

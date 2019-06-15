@@ -6,10 +6,7 @@
 namespace FundooNote.Models
 {
     using System;
-    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    using System.Linq;
-    using System.Threading.Tasks;
 
     /// <summary>
     /// Application User Model
@@ -24,8 +21,8 @@ namespace FundooNote.Models
         /// </value>
         [Required]
         [EmailAddress]
-        /// [RegularExpression("^((?!UserName)[a-z'])+$", ErrorMessage = "enter proper UserName")]
         public string UserName { get; set; }
+        //// [RegularExpression("^((?!UserName)[a-z'])+$", ErrorMessage = "enter proper UserName")]
 
         /// <summary>
         /// Gets or sets the password.
@@ -77,11 +74,5 @@ namespace FundooNote.Models
         /// The profile.
         /// </value>
         public string Profile { get; set; }
-
-        ////public string Result { get; set; }
-
-        ////public string Firstname { get; set; }
-
-        ////public string Lastname { get; set; }
     }
 }

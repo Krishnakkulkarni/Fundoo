@@ -22,9 +22,9 @@ namespace BussinessLayer.Services
     public class NotesCreation : INotes
     {
         /// <summary>
-        /// The redisdata
+        /// The identifier.
         /// </summary>
-        public const string redisdata = "Notes_";
+        public const string Redisdata = "Notes_";
 
         /// <summary>
         /// The notes repository
@@ -51,7 +51,7 @@ namespace BussinessLayer.Services
             var result = this.notesRepository.SaveChangesAsync();
             using (var redis = new RedisClient())
             {
-                redis.Remove(redisdata + notesModel.UserId);
+                redis.Remove(Redisdata + notesModel.UserId);
             }
 
             this.AccessNotes(notesModel.UserId);
@@ -82,7 +82,7 @@ namespace BussinessLayer.Services
             var result = this.notesRepository.SaveChangesAsync();
             using (var redis = new RedisClient())
             {
-                redis.Remove(redisdata + notesModel.UserId);
+                redis.Remove(Redisdata + notesModel.UserId);
             }
 
             this.AccessNotes(notesModel.UserId);
@@ -96,7 +96,7 @@ namespace BussinessLayer.Services
         /// <returns>returns NotesModel</returns>
         public IList<NotesModel> AccessNotes(string userId)
         {
-            var cacheKey = redisdata + userId.ToString();
+            var cacheKey = Redisdata + userId.ToString();
             using (var redis = new RedisClient())
             {
                 if (redis.Get(cacheKey) == null)
@@ -196,12 +196,12 @@ namespace BussinessLayer.Services
         }
 
         /// <summary>
-        /// Updates the collaborater.
+        /// Updates the collaborator.
         /// </summary>
         /// <param name="model">The model.</param>
         /// <param name="id">The identifier.</param>
         /// <param name="receiverEmail">The receiver email.</param>
-        /// <returns></returns>
+        /// <returns>returns integer</returns>
         public Task<int> UpdateCollaborater(NotesModel model, int id, string receiverEmail)
         {
             this.notesRepository.UpdateCollaborater(model, id, receiverEmail);
@@ -219,25 +219,5 @@ namespace BussinessLayer.Services
             var result = this.notesRepository.AddNoteLabel(model);
             return result;
         }
-
-        ///// <summary>
-        ///// Gets the notes label.
-        ///// </summary>
-        ///// <param name="userId">The user identifier.</param>
-        ///// <returns>returns list</returns>
-        //public List<NoteLabelModel> GetNotesLabel(string userId)
-        //{
-        //    return this.notesRepository.GetNotesLabel(userId);
-        //}
-
-        ///// <summary>
-        ///// Deletes the notes label.
-        ///// </summary>
-        ///// <param name="id">The identifier.</param>
-        ///// <returns>returns string</returns>
-        //public string DeleteNotesLabel(int id)
-        //{
-        //    return this.notesRepository.DeleteNotesLabel(id);
-        //}
     }
 }

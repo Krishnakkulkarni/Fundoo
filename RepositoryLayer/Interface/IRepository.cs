@@ -40,9 +40,9 @@ namespace RepositoryLayer.Interface
         /// <summary>
         /// Faces the book login asynchronous.
         /// </summary>
-        /// <param name="UserName">Name of the user.</param>
-        /// <returns></returns>
-        Task<dynamic> FaceBookLoginAsync(SocialModel Model);
+        /// <param name="model">The model.</param>
+        /// <returns>returns dynamic</returns>
+        Task<dynamic> FaceBookLoginAsync(SocialModel model);
 
         /// <summary>
         /// Finds the by email asynchronous.
@@ -80,8 +80,18 @@ namespace RepositoryLayer.Interface
         /// <returns>returns string</returns>
         string Image(IFormFile file, string userid);
 
+        /// <summary>
+        /// Profiles the URL.
+        /// </summary>
+        /// <param name="userid">The user id.</param>
+        /// <returns>returns list</returns>
         IList<ApplicationUser> ProfileUrl(string userid);
-        
-        Task<string> PassToken(NotificationModel notification);
+
+        /// <summary>
+        /// Passes the token.
+        /// </summary>
+        /// <param name="notification">The notification.</param>
+        /// <returns>returns string</returns>
+        Task<int> PassToken(NotificationModel notification);
     }
 }

@@ -73,9 +73,9 @@ namespace FundooApi
                 c.SwaggerDoc("v1", new Info { Title = "Fundoo", Version = "v1" });
             });
 
-            // services.AddDefaultIdentity<IdentityUser>()
-            //.AddDefaultUI(UIFramework.Bootstrap4)
-            //.AddEntityFrameworkStores<ApplicationDbContext>();
+            //// services.AddDefaultIdentity<IdentityUser>()
+            ////.AddDefaultUI(UIFramework.Bootstrap4)
+            ////.AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.AddAuthentication().AddFacebook(facebookOptions =>
             {
@@ -162,11 +162,11 @@ namespace FundooApi
             .AllowAnyMethod().AllowAnyOrigin().AllowCredentials());
             app.UseAuthentication();
             app.UseMvc();
-            // Enable middleware to serve generated Swagger as a JSON endpoint.
+            //// Enable middleware to serve generated Swagger as a JSON endpoint.
             app.UseSwagger();
 
-            // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.), 
-            // specifying the Swagger JSON endpoint.
+            //// Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.), 
+            //// specifying the Swagger JSON endpoint.
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
@@ -196,50 +196,8 @@ namespace FundooApi
                     Name = "Authorization",
                     In = "header",
                     Type = "string",
-                    Required = true // set to false if this is optional
+                    Required = true //// set to false if this is optional
                 });
-
-                //if (operation.OperationId.ToLower() == "apinotescreationimagebyidpost")
-                //{
-                //    operation.Parameters.Clear();
-                //    operation.Parameters.Add(new NonBodyParameter
-                //    {
-                //        Name = "file",
-                //        In = "formData",
-                //        Description = "Upload File",
-                //        Required = true,
-                //        Type = "file"
-                //    });
-                //    operation.Parameters.Add(new NonBodyParameter
-                //    {
-                //        Name = "id",
-                //        In = "path",
-                //        Description = "Id",
-                //        Required = true,
-                //        Type = "integer"
-                //    });
-                //}
-
-                //if (operation.OperationId.ToLower() == "apiuserprofilepicturebyidpost")
-                //{
-                //    operation.Parameters.Clear();
-                //    operation.Parameters.Add(new NonBodyParameter
-                //    {
-                //        Name = "file",
-                //        In = "formData",
-                //        Description = "Upload File",
-                //        Required = true,
-                //        Type = "file"
-                //    });
-                //    operation.Parameters.Add(new NonBodyParameter
-                //    {
-                //        Name = "id",
-                //        In = "path",
-                //        Description = "Id",
-                //        Required = true,
-                //        Type = "string"
-                //    });
-                //}
             }
         }
     }

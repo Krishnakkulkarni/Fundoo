@@ -83,18 +83,18 @@ namespace Common.Models
         public string Image { get; set; }
 
         /// <summary>
-        /// Gets or sets the is archive.
+        /// Gets or sets a value indicating whether this instance is archive.
         /// </summary>
         /// <value>
-        /// The is archive.
+        ///   <c>true</c> if this instance is archive; otherwise, <c>false</c>.
         /// </value>
         public bool IsArchive { get; set; }
 
         /// <summary>
-        /// Gets or sets the is trash.
+        /// Gets or sets a value indicating whether this instance is trash.
         /// </summary>
         /// <value>
-        /// The is trash.
+        ///   <c>true</c> if this instance is trash; otherwise, <c>false</c>.
         /// </value>
         public bool IsTrash { get; set; }
 

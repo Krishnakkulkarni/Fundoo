@@ -5,14 +5,13 @@
 //-----------------------------------------------------------------------
 namespace RepositoryLayer.Interface
 {
-    using Common.Models;
-    using Microsoft.AspNetCore.Mvc;
     using System;
     using System.Collections.Generic;
-    using System.Text;
+    using Common.Models;
+    using Microsoft.AspNetCore.Mvc;
 
     /// <summary>
-    /// Interface of ILablesRepository
+    /// Interface of Labels Repository
     /// </summary>
     public interface ILablesRepository
     {
@@ -20,7 +19,7 @@ namespace RepositoryLayer.Interface
         /// Adds the labels.
         /// </summary>
         /// <param name="label">The label.</param>
-        /// <returns></returns>
+        /// <returns>returns string</returns>
         string AddLabels([FromBody] LabelsModel label);
 
         /// <summary>
@@ -28,21 +27,21 @@ namespace RepositoryLayer.Interface
         /// </summary>
         /// <param name="label">The label.</param>
         /// <param name="id">The identifier.</param>
-        /// <returns></returns>
+        /// <returns>returns string</returns>
         string UpdateLabels(LabelsModel label, int id);
 
         /// <summary>
         /// Gets the labels.
         /// </summary>
         /// <param name="userId">The user identifier.</param>
-        /// <returns></returns>
+        /// <returns>returns list</returns>
         List<LabelsModel> GetLabels(string userId);
 
         /// <summary>
         /// Deletes the label.
         /// </summary>
         /// <param name="id">The identifier.</param>
-        /// <returns></returns>
+        /// <returns>returns string</returns>
         string DeleteLabel(int id);
     }
 }

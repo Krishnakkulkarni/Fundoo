@@ -49,26 +49,12 @@ namespace RepositoryLayer.Context
         /// </summary>
         /// <param name="userManager">The user manager.</param>
         /// <param name="appSettings">The application settings.</param>
-        /// <param name="distributedCache">The distributed cache.</param>
+        /// <param name="authentication">The authentication.</param>
         public ApplicationRepository(UserManager<ApplicationUser> userManager, IOptions<AppSetting> appSettings, Authentication authentication)
         {
             this.usermanager = userManager;
             this.appSettings = appSettings.Value;
             this.authentication = authentication;
-        }
-
-        /// <summary>
-        /// Checks the password asynchronous.
-        /// </summary>
-        /// <param name="model">The model.</param>
-        /// <returns>
-        /// return boolean
-        /// </returns>
-        public async Task<bool> CheckPasswordAsync(ApplicationLoginModel model)
-        {
-            var result = await this.usermanager.FindByNameAsync(model.UserName);
-            var user = await this.usermanager.CheckPasswordAsync(result, model.Password);
-            return user;
         }
 
         /// <summary>
@@ -80,6 +66,7 @@ namespace RepositoryLayer.Context
         /// </returns>
         public Task CreateAsync(ApplicationUserModel applicationUserModel)
         {
+            //// Creating an instance to add the user 
             ApplicationUser user = new ApplicationUser()
             {
                 UserName = applicationUserModel.UserName,
@@ -91,6 +78,21 @@ namespace RepositoryLayer.Context
         }
 
         /// <summary>
+        /// Checks the password asynchronous.
+        /// </summary>
+        /// <param name="model">The model.</param>
+        /// <returns>
+        /// return boolean
+        /// </returns>
+        public async Task<bool> CheckPasswordAsync(ApplicationLoginModel model)
+        {
+            //// Verify the user by password
+            var result = await this.usermanager.FindByNameAsync(model.UserName);
+            var user = await this.usermanager.CheckPasswordAsync(result, model.Password);
+            return user;
+        }
+
+        /// <summary>
         /// Finds the by name asynchronous.
         /// </summary>
         /// <param name="model">The model.</param>
@@ -99,6 +101,7 @@ namespace RepositoryLayer.Context
         /// </returns>
         public Task FindByNameAsync(ApplicationLoginModel model)
         {
+            //// Verify the user by user name
             var result = this.usermanager.FindByNameAsync(model.UserName);
             return result;
         }
@@ -155,10 +158,11 @@ namespace RepositoryLayer.Context
         /// <summary>
         /// Faces the book login asynchronous.
         /// </summary>
-        /// <param name="email">The email.</param>
-        /// <returns>returns response</returns>
+        /// <param name="model">The model.</param>
+        /// <returns>returns dynamic</returns>
         public async Task<dynamic> FaceBookLoginAsync(SocialModel model)
         {
+            //// Verify the user for social login 
             var user = await this.usermanager.FindByNameAsync(model.UserName);
             if (user == null)
             {
@@ -170,8 +174,8 @@ namespace RepositoryLayer.Context
                 
                  var tokenDescriptor = new SecurityTokenDescriptor
                 {
-                    Subject = new ClaimsIdentity(new Claim[]{ new Claim("UserID", socialuser.Id.ToString())}),
-                    Expires = DateTime.UtcNow.AddDays(1),
+                     Subject = new ClaimsIdentity(new Claim[] { new Claim("UserID", user.Id.ToString()) }),
+                     Expires = DateTime.UtcNow.AddDays(1),
                     SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes(this.appSettings.JWT_Secrete)), SecurityAlgorithms.HmacSha256Signature)
                 };
                 var tokenHandler = new JwtSecurityTokenHandler();
@@ -183,7 +187,7 @@ namespace RepositoryLayer.Context
             {
                 var tokenDescriptor = new SecurityTokenDescriptor
                 {
-                    Subject = new ClaimsIdentity(new Claim[]{ new Claim("UserID", user.Id.ToString())}),
+                    Subject = new ClaimsIdentity(new Claim[] { new Claim("UserID", user.Id.ToString()) }),
                     Expires = DateTime.UtcNow.AddDays(1),
                     SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes(this.appSettings.JWT_Secrete)), SecurityAlgorithms.HmacSha256Signature)
                 };
@@ -203,6 +207,7 @@ namespace RepositoryLayer.Context
         /// </returns>
         public Task FindByEmailAsync(ForgotPasswordModel model)
         {
+            //// Verify the user by user name
             var result = this.usermanager.FindByEmailAsync(model.Username);
             return result;
         }
@@ -216,6 +221,7 @@ namespace RepositoryLayer.Context
         /// </returns>
         public async Task<string> GeneratePasswordResetTokenAsync(ForgotPasswordModel model)
         {
+            //// Generate the password by verifying the email
             var result = await this.usermanager.FindByEmailAsync(model.Username);
             var user = await this.usermanager.GenerateEmailConfirmationTokenAsync(result);
             return user;
@@ -230,6 +236,7 @@ namespace RepositoryLayer.Context
         /// </returns>
         public async Task<bool> ResetPasswordAsync(ResetPasswordModel model)
         {
+            //// Verify the user to reset the new password
             var userEmail = await this.usermanager.FindByEmailAsync(model.Email);
             if (userEmail == null)
             {
@@ -284,12 +291,14 @@ namespace RepositoryLayer.Context
         /// <summary>
         /// Profiles the URL.
         /// </summary>
-        /// <param name="userid">The userid.</param>
-        /// <returns>returns list</returns>
+        /// <param name="userid">The user id.</param>
+        /// <returns>
+        /// returns list
+        /// </returns>
         public IList<ApplicationUser> ProfileUrl(string userid)
         {
+            //// Query to check the userid
            var note = from notes in this.authentication.ApplicationUsers where notes.Id == userid select notes;
-           
            return note.ToArray();
         }
 
@@ -298,27 +307,31 @@ namespace RepositoryLayer.Context
         /// </summary>
         /// <param name="notification">The notification.</param>
         /// <returns>returns string</returns>
-        public async Task<string> PassToken(NotificationModel notification)
+        public async Task<int> PassToken(NotificationModel notification)
         {
+            //// Query to check the userid
             var token = from Notification in this.authentication.Notifications
-                        where Notification.Userid.Equals(notification.Userid)
+                        where Notification.Userid==notification.Userid
                         select Notification;
+            //// Check the token is null or not
             if (token == null)
             {
-                var addToken = new NotificationModel()
+                NotificationModel addToken = new NotificationModel()
                 {
                     Userid = notification.Userid,
                     NotificationToken = notification.NotificationToken
                 };
-                this.authentication.Notifications.Add(addToken);
-                var result = authentication.SaveChanges();
+                 this.authentication.Notifications.Add(addToken);
             }
             else
             {
-                this.authentication.Update(notification.NotificationToken);
-                authentication.SaveChanges();
+                //// If token is not null update the token for that userid
+                NotificationModel notes = this.authentication.Notifications.Where<NotificationModel>(c => c.Userid.Equals(notification.Userid)).FirstOrDefault();
+                notes.NotificationToken = notification.NotificationToken;
             }
-            return notification.NotificationToken;
+
+            //// update the database
+            return await authentication.SaveChangesAsync();
         }
     }
 }

@@ -5,11 +5,9 @@
 //-----------------------------------------------------------------------
 namespace BussinessLayer.Interfaces
 {
-    using Common.Models;
-    using Microsoft.AspNetCore.Mvc;
     using System;
     using System.Collections.Generic;
-    using System.Text;
+    using Common.Models;
 
     /// <summary>
     /// Interface ILabels
@@ -20,14 +18,14 @@ namespace BussinessLayer.Interfaces
         /// Adds the labels.
         /// </summary>
         /// <param name="label">The label.</param>
-        /// <returns></returns>
+        /// <returns>returns string</returns>
         string AddLabels(LabelsModel label);
 
         /// <summary>
         /// Gets the labels.
         /// </summary>
         /// <param name="userId">The user identifier.</param>
-        /// <returns></returns>
+        /// <returns>returns list</returns>
         List<LabelsModel> GetLabels(string userId);
 
         /// <summary>
@@ -35,14 +33,14 @@ namespace BussinessLayer.Interfaces
         /// </summary>
         /// <param name="label">The label.</param>
         /// <param name="id">The identifier.</param>
-        /// <returns></returns>
+        /// <returns>returns string</returns>
         string UpdateLabels(LabelsModel label, int id);
 
         /// <summary>
         /// Deletes the label.
         /// </summary>
         /// <param name="id">The identifier.</param>
-        /// <returns></returns>
+        /// <returns>returns string</returns>
         string DeleteLabel(int id);
     }
 }

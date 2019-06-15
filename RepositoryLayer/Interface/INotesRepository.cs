@@ -21,7 +21,6 @@ namespace RepositoryLayer.Interface
         /// Adds the notes.
         /// </summary>
         /// <param name="notesModel">The notes model.</param>
-        /// <returns>return string</returns>
         void AddNotes(NotesModel notesModel);
 
         /// <summary>
@@ -47,7 +46,7 @@ namespace RepositoryLayer.Interface
         /// Gets the notes.
         /// </summary>
         /// <param name="userID">The user identifier.</param>
-        /// <returns></returns>
+        /// <returns>returns list</returns>
         IList<NotesModel> GetNotes(string userID);
 
         /// <summary>
@@ -97,11 +96,11 @@ namespace RepositoryLayer.Interface
         /// Collaborators the note.
         /// </summary>
         /// <param name="receiverEmail">The receiver email.</param>
-        /// <returns></returns>
+        /// <returns>returns list</returns>
         IList<NotesModel> CollaboratorNote(string receiverEmail);
 
         /// <summary>
-        /// Updates the collaborater.
+        /// Updates the collaborator.
         /// </summary>
         /// <param name="model">The model.</param>
         /// <param name="id">The identifier.</param>
@@ -112,7 +111,7 @@ namespace RepositoryLayer.Interface
         /// Adds the note label.
         /// </summary>
         /// <param name="model">The model.</param>
-        /// <returns></returns>
+        /// <returns>returns string</returns>
         string AddNoteLabel([FromBody] NoteLabelModel model);
     }
 }

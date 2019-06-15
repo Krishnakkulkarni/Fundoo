@@ -6,10 +6,12 @@
 namespace Common.Models
 {
     using System;
-    using FundooNote.Models;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
 
+    /// <summary>
+    /// Collaborator class
+    /// </summary>
     public class CollaboratorModel
     {
             /// <summary>

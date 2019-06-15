@@ -68,6 +68,12 @@ namespace RepositoryLayer.Context
         /// </value>
         public DbSet<CollaboratorModel> Collaborator { get; set; }
 
+        /// <summary>
+        /// Gets or sets the notifications.
+        /// </summary>
+        /// <value>
+        /// The notifications.
+        /// </value>
         public DbSet<NotificationModel> Notifications { get; set; }
 
         /// <summary>

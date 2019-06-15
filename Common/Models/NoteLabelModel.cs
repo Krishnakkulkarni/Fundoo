@@ -6,9 +6,10 @@
 namespace Common.Models
 {
     using System;
-    using System.Collections.Generic;
-    using System.Text;
 
+    /// <summary>
+    /// Note Label class
+    /// </summary>
     public class NoteLabelModel
     {
         /// <summary>
@@ -20,10 +21,10 @@ namespace Common.Models
         public int Id { get; set; }
 
         /// <summary>
-        /// Gets or sets the lable identifier.
+        /// Gets or sets the label identifier.
         /// </summary>
         /// <value>
-        /// The lable identifier.
+        /// The label identifier.
         /// </value>
         public int LableId { get; set; }
 

@@ -5,13 +5,11 @@
 //-----------------------------------------------------------------------
 namespace RepositoryLayer.Context
 {
-    using Common.Models;
-    using Microsoft.AspNetCore.Mvc;
-    using RepositoryLayer.Interface;
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Text;
+    using Common.Models;
+    using RepositoryLayer.Interface;
 
     /// <summary>
     /// Labels Repository class 
@@ -22,7 +20,7 @@ namespace RepositoryLayer.Context
         /// <summary>
         /// The authentication
         /// </summary>
-        private Authentication authentication;
+        private readonly Authentication authentication;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="LabelsRepository"/> class.

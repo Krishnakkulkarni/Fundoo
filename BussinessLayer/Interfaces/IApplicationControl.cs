@@ -10,8 +10,7 @@ namespace BussinessLayer.Interfaces
     using Common.Models;
     using FundooNote.Models;
     using Microsoft.AspNetCore.Http;
-    using Microsoft.AspNetCore.Mvc;
-
+    
     /// <summary>
     /// Application Control Interface
     /// </summary>
@@ -22,7 +21,7 @@ namespace BussinessLayer.Interfaces
         /// </summary>
         /// <param name="applicationUserModel">The application user model.</param>
         /// <returns>return boolean</returns>
-        Task<bool> PostApplicationUserAsync(ApplicationUserModel applicationUserModel);
+        Task<bool> UserRegisterAsync(ApplicationUserModel applicationUserModel);
 
         /// <summary>
         /// Logins the asynchronous.
@@ -34,8 +33,8 @@ namespace BussinessLayer.Interfaces
         /// <summary>
         /// Faces the book login asynchronous.
         /// </summary>
-        /// <param name="UserName">The UserName.</param>
-        /// <returns></returns>
+        /// <param name="model">The model.</param>
+        /// <returns>returns dynamic</returns>
         Task<dynamic> FaceBookLoginAsync(SocialModel model);
 
         /// <summary>
@@ -60,8 +59,18 @@ namespace BussinessLayer.Interfaces
         /// <returns>returns string</returns>
         string ProfilePicture(IFormFile file, string userid);
 
+        /// <summary>
+        /// Profiles the URL.
+        /// </summary>
+        /// <param name="userid">The user id.</param>
+        /// <returns>returns list</returns>
         IList<ApplicationUser> ProfileUrl(string userid);
 
-        Task<string> GetToken(NotificationModel notification);
+        /// <summary>
+        /// Gets the token.
+        /// </summary>
+        /// <param name="notification">The notification.</param>
+        /// <returns>returns string</returns>
+        Task<int> GetToken(NotificationModel notification);
     }
 }

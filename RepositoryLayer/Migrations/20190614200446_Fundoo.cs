@@ -1,33 +1,11 @@
-﻿//-----------------------------------------------------------------------
-// <copyright file="InitialCreate.cs" company="Bridgelabz">
-//     Company @ 2019 </copyright>
-// <creator name = "Krishna Kulkarni" />
-//-----------------------------------------------------------------------
+﻿using System;
+using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
+
 namespace RepositoryLayer.Migrations
 {
-    using System;
-    using Microsoft.EntityFrameworkCore.Metadata;
-    using Microsoft.EntityFrameworkCore.Migrations;
-
-    /// <summary>
-    /// class InitialCreate
-    /// </summary>
-    /// <seealso cref="Microsoft.EntityFrameworkCore.Migrations.Migration" />
-    public partial class InitialCreate : Migration
+    public partial class Fundoo : Migration
     {
-        /// <summary>
-        /// <para>
-        /// Builds the operations that will migrate the database 'up'.
-        /// </para>
-        /// <para>
-        /// That is, builds the operations that will take the database from the state left in by the
-        /// previous migration so that it is up-to-date with regard to this migration.
-        /// </para>
-        /// <para>
-        /// This method must be overridden in each class the inherits from <see cref="T:Microsoft.EntityFrameworkCore.Migrations.Migration" />.
-        /// </para>
-        /// </summary>
-        /// <param name="migrationBuilder">The <see cref="T:Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder" /> that will build the operations.</param>
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
@@ -76,21 +54,67 @@ namespace RepositoryLayer.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Collaborator",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    UserId = table.Column<string>(nullable: true),
+                    NoteId = table.Column<int>(nullable: false),
+                    SenderEmail = table.Column<string>(nullable: true),
+                    ReceiverEmail = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Collaborator", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Labels",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Label = table.Column<string>(nullable: true),
+                    UserId = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Labels", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "NoteLabel",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    LableId = table.Column<int>(nullable: false),
+                    NoteId = table.Column<int>(nullable: false),
+                    UserId = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_NoteLabel", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "NotesModel",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Title = table.Column<string>(nullable: true),
-                    Description = table.Column<string>(nullable: true),
+                    Title = table.Column<string>(nullable: false),
+                    Description = table.Column<string>(nullable: false),
                     CreatedDate = table.Column<DateTime>(nullable: false),
                     ModifiedDate = table.Column<DateTime>(nullable: false),
-                    UserId = table.Column<string>(nullable: true),
+                    UserId = table.Column<string>(nullable: false),
                     Color = table.Column<string>(nullable: true),
                     Image = table.Column<string>(nullable: true),
                     IsArchive = table.Column<bool>(nullable: false),
                     IsTrash = table.Column<bool>(nullable: false),
-                    Reminder = table.Column<DateTime>(nullable: false)
+                    Reminder = table.Column<DateTime>(nullable: false),
+                    Label = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -204,28 +228,22 @@ namespace RepositoryLayer.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Collaborator",
+                name: "Notifications",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    UserId = table.Column<string>(nullable: true),
-                    NoteId = table.Column<int>(nullable: false),
-                    SenderEmail = table.Column<string>(nullable: true),
-                    ReceiverEmail = table.Column<string>(nullable: true)
+                    Userid = table.Column<string>(nullable: true),
+                    NotificationToken = table.Column<string>(nullable: true),
+                    CreatedDate = table.Column<DateTime>(nullable: false),
+                    ModifiedDate = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Collaborator", x => x.Id);
+                    table.PrimaryKey("PK_Notifications", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Collaborator_NotesModel_NoteId",
-                        column: x => x.NoteId,
-                        principalTable: "NotesModel",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Collaborator_AspNetUsers_UserId",
-                        column: x => x.UserId,
+                        name: "FK_Notifications_AspNetUsers_Userid",
+                        column: x => x.Userid,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -271,14 +289,9 @@ namespace RepositoryLayer.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Collaborator_NoteId",
-                table: "Collaborator",
-                column: "NoteId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Collaborator_UserId",
-                table: "Collaborator",
-                column: "UserId");
+                name: "IX_Notifications_Userid",
+                table: "Notifications",
+                column: "Userid");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -302,10 +315,19 @@ namespace RepositoryLayer.Migrations
                 name: "Collaborator");
 
             migrationBuilder.DropTable(
-                name: "AspNetRoles");
+                name: "Labels");
+
+            migrationBuilder.DropTable(
+                name: "NoteLabel");
 
             migrationBuilder.DropTable(
                 name: "NotesModel");
+
+            migrationBuilder.DropTable(
+                name: "Notifications");
+
+            migrationBuilder.DropTable(
+                name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");

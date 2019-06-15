@@ -6,9 +6,10 @@
 namespace Common.Models
 {
     using System;
-    using System.Collections.Generic;
-    using System.Text;
 
+    /// <summary>
+    /// Share Notes model class
+    /// </summary>
     public class ShareNotesModel
     {
         /// <summary>
@@ -36,10 +37,10 @@ namespace Common.Models
         public string TakeANote { get; set; }
 
         /// <summary>
-        /// Gets or sets the sendermail.
+        /// Gets or sets the sender mail.
         /// </summary>
         /// <value>
-        /// The sendermail.
+        /// The sender mail.
         /// </value>
         public string Sendermail { get; set; }
 
