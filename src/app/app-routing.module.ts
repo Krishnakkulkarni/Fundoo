@@ -17,7 +17,6 @@ import { ImagecropComponent } from './core/component/imagecrop/imagecrop.compone
 import { CollaborationComponent } from './core/component/collaboration/collaboration.component';
 import { SearchComponent } from './core/component/search/search.component';
 
-
 //This is my case 
 const routes: Routes = [
   { path: '', redirectTo: '/user/login', pathMatch: 'full' },

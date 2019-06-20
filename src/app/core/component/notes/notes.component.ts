@@ -34,10 +34,10 @@ export class NotesComponent implements OnInit {
     if (this.title.value.trim() != "" && this.title.value != undefined &&
       this.take_a_note.value.trim() != "" && this.take_a_note != undefined) {
       var notes = {
-        UserId: this.id,
-        Title: this.title.value,
-        Description: this.take_a_note.value,
-        Color: this.color
+        "UserId": this.id,
+        "Title": this.title.value,
+        "Description": this.take_a_note.value,
+        "Color": this.color
       }
       this.notesService.addNotes(notes).subscribe
         (data => {

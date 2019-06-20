@@ -11,7 +11,13 @@ import { NotesService } from '../../services/NotesServices/notes.service';
 export class EditnoteComponent implements OnInit {
 
   color: string = "#ffffff";
-  
+
+  /**
+   * constructor
+   * @param notesService 
+   * @param dialogRef 
+   * @param data 
+   */
   constructor(public notesService: NotesService, public dialogRef: MatDialogRef<EditnoteComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData) {
     console.log(data);
@@ -21,13 +27,14 @@ export class EditnoteComponent implements OnInit {
   }
 
   /**
-   * 
+   * Method to close the dialog
    */
   onNoClick(): void {
     this.dialogRef.close();
   }
+
   /**
-   * 
+   * Method to set color on note
    * @param $event 
    */
   SetColor($event: string) {

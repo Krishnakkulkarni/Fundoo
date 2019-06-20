@@ -12,9 +12,9 @@ export class CollaborationComponent implements OnInit {
   FirstName: string;
   LastName: string;
   UserName: string;
+  receiverEmail: any;
   userId: any;
-  notesid: any;
-  receiveremail: void;
+  noteid: any;
 
   constructor(public dialogRef: MatDialogRef<CollaborationComponent>, private notesService: NotesService,
     @Inject(MAT_DIALOG_DATA) public data: any) { }
@@ -22,39 +22,53 @@ export class CollaborationComponent implements OnInit {
   ReceiverEmail = new FormControl('', Validators.email);
 
   /**
-   * 
+   * Main Method 
    */
   ngOnInit() {
-    // this.FirstName = localStorage.getItem("FirstName");
-    // this.LastName = localStorage.getItem("LastName");
+    this.FirstName = localStorage.getItem("firstName");
+    this.LastName = localStorage.getItem("lastName");
     this.UserName = localStorage.getItem("username");
     this.userId = localStorage.getItem('userid');
+    this.noteid = localStorage.getItem('noteId');
 
   }
 
   /**
-   * 
+   * Method to add collaborator
    */
   add() {
     var values = {
       "UserId": this.userId,
-      "noteId": localStorage.getItem('noteId'),
+      "noteId": this.noteid,
       "senderEmail": this.UserName,
       "receiverEmail": this.ReceiverEmail.value
     }
     console.log(this.ReceiverEmail.value);
 
-    this.receiveremail = localStorage.setItem('receiverEmail', this.ReceiverEmail.value)
-
+    localStorage.setItem('receiverEmail', this.ReceiverEmail.value)
+    this.receiverEmail = localStorage.getItem('receiverEmail');
+    console.log(this.receiverEmail);
     this.notesService.addcollaborator(values).subscribe(result =>
-      console.log("add collaborator",values)
+      console.log("add collaborator", values.noteId)
     )
     this.getcollab();
     this.dialogRef.close(values);
   }
+
+  /**
+   * Method to get collaborator 
+   */
   getcollab() {
-    this.notesService.getCollaboratorNote(this.data).subscribe(result =>
-      console.log("get collaborator",this.data)
+    console.log(this.data);
+    this.notesService.getCollaboratorNote(this.userId).subscribe(result =>
+      console.log("get collaborator", this.data)
     )
+  }
+  removeColl(){
+    console.log(this.noteid);
+    this.notesService.removeCollaborator(this.noteid).subscribe(data=>
+      { console.log(); }
+      )
+    
   }
 }

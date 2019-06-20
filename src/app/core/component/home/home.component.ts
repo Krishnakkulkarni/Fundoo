@@ -62,7 +62,7 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
 
     this.userId = localStorage.getItem("userid");
-    this.photo = localStorage.getItem("result");
+    this.photo = localStorage.getItem("profileUrl");
 
     this.UserName = localStorage.getItem("username");
     this.FirstName = localStorage.getItem("firstName");
@@ -107,6 +107,7 @@ export class HomeComponent implements OnInit {
     localStorage.removeItem('userid');
     localStorage.removeItem('noteId');
     localStorage.removeItem('profileUrl');
+    localStorage.removeItem('receiverEmail');
     this.router.navigate(['user/login']);
     this.snackBar.open("logout successful", "close", { duration: 1500 });
   }

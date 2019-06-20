@@ -58,12 +58,11 @@ export class MainNotesComponent implements OnInit {
   }
 
   /**
-   * 
+   * Method to show all notes on dashboard
    * @param $event 
    */
   getnotes($event) {
-    console.log('event occur');
     this.getAllCard();
   }
-  
+
 }

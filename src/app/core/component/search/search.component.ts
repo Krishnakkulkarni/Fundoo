@@ -9,36 +9,33 @@ import { NotesService } from '../../services/NotesServices/notes.service';
 })
 export class SearchComponent implements OnInit {
   userId: string;
-  noteCards=[];
-  SearchCard:any;
-  searchText:string=''
-  
-  constructor(public dataServices: DataService, public notesService:NotesService) { }
+  SearchCard: any;
+  searchText: string = ''
+
+  constructor(public dataServices: DataService, public notesService: NotesService) { }
 
   /**
-   * 
+   * Main Method
    */
   ngOnInit() {
     this.userId = localStorage.getItem("userid")
     this.dataServices.currentSearchmsg.subscribe(response => {
-      console.log('message in search',typeof response);
-      
-      this.searchText=response;
+      console.log('message in search', typeof response);
+      this.searchText = response;
       this.getallCards();
-  })
+    })
   }
 
   /**
    * Method to get cards
    */
-  getallCards(){
-    this.notesService.getNotesById(this.userId).subscribe(data =>{
-      this.noteCards=[];
+  getallCards() {
+    this.notesService.getNotesById(this.userId).subscribe(data => {
       console.log(data);
-      this.SearchCard=data;
-    },err=>{
+      this.SearchCard = data;
+    }, err => {
       console.log(err);
-      
+
     })
   }
 }

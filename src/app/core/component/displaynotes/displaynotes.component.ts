@@ -1,11 +1,10 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { NotesService } from '../../services/NotesServices/notes.service';
 import { DataService } from '../../services/DataServices/data.service';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { EditnoteComponent } from '../editnote/editnote.component';
-import { MatChipInputEvent } from '@angular/material';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
-import { Observable } from 'rxjs';
+import { CollaborationComponent } from '../collaboration/collaboration.component';
 
 export interface DialogData {
   note: any;
@@ -61,8 +60,7 @@ export class DisplaynotesComponent implements OnInit {
     this.userId = localStorage.getItem("userid")
     this.receiverEmail = localStorage.getItem('receiverEmail');
     this.notesService.getCollaboratorNote(this.userId).subscribe(response => {
-      this.collaborator = response;
-      console.log(this.collaborator);
+      this.collaborator = response['note'];
 
     }, err => {
       console.log(err);
@@ -115,6 +113,17 @@ export class DisplaynotesComponent implements OnInit {
   }
 
   /**
+   * Method to add collaborator
+   * @param note 
+   */
+  colDialog(card): void {
+    // localStorage.setItem('noteId', card.id);
+    const dialogConfig = new MatDialogConfig();
+    let dialogRef = this.matDialog.open(CollaborationComponent,
+      { data: { card } });
+  }
+
+  /**
    * Method for archive
    * @param event 
    */
@@ -131,6 +140,8 @@ export class DisplaynotesComponent implements OnInit {
     console.log('trash in');
     this.messageEvent.emit(event);
   }
+
+  
 
   /**
    * Method to remove Reminder

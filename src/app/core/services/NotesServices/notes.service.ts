@@ -49,7 +49,10 @@ export class NotesService {
   addcollaborator(data) {
     return this.httpService.post('Notes/addCollaborator', data)
   }
-  getCollaboratorNote(id) {
-    return this.httpService.Get('Notes/getCollaborator/' + id)
+  getCollaboratorNote(UserId) {
+    return this.httpService.Get('Notes/' + UserId)
+  }
+  removeCollaborator(id){
+    return this.httpService.deletelabel('Notes/removeCollaborator/'+ id)
   }
 }

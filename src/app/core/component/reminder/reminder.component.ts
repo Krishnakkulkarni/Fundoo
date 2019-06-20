@@ -8,19 +8,25 @@ import { NotesService } from '../../services/NotesServices/notes.service';
 })
 export class ReminderComponent implements OnInit {
   userId: any
-  reminderCards: any;
+  reminderCards = [];
   constructor(public notesService: NotesService) { }
 
   ngOnInit() {
     this.reminder();
 
   }
+
   reminder() {
     this.userId = localStorage.getItem('userid')
     this.notesService.reminders(this.userId).subscribe(data => {
       console.log(data);
-
-      this.reminderCards = data["result"];
+      var array = data["result"]
+      this.reminderCards = [];
+      for (let i = 0; i < array.length; i++) {
+        if (array[i].reminder != "0001-01-01T00:00:00-08:00") {
+          this.reminderCards.push(array[i])
+        }
+      }
       console.log(this.reminderCards)
     }, err => {
       console.log(err);

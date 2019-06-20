@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { NotesService } from '../../services/NotesServices/notes.service';
-import { MatSnackBar, MatDialogConfig, MatDialog } from '@angular/material';
+import { MatSnackBar, MatDialog } from '@angular/material';
 import { DataService } from '../../services/DataServices/data.service';
 import { CollaborationComponent } from '../collaboration/collaboration.component';
 import { LabelService } from '../../services/LabelServices/label.service';
@@ -198,12 +198,9 @@ export class IconsComponent implements OnInit {
    */
   Collaborator(card): void {
     localStorage.setItem('noteId', card.id);
-    const dialogConfig = new MatDialogConfig();
-    let dialogRef = this.dialog.open(CollaborationComponent, {
-      data: { card }
-    });
+    let dialogRef = this.dialog.open(CollaborationComponent,
+      { data: {card} });
   }
-
 
   /**
    * Method to set reminder for Today
@@ -257,7 +254,7 @@ export class IconsComponent implements OnInit {
     })
   }
 
-  stopPropogation(){
+  stopPropogation() {
 
   }
   myFilter = (d: Date): boolean => {
