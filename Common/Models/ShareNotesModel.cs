@@ -42,7 +42,7 @@ namespace Common.Models
         /// <value>
         /// The sender mail.
         /// </value>
-        public string Sendermail { get; set; }
+        ////public string Sendermail { get; set; }
 
         /// <summary>
         /// Gets or sets the receiver email.
@@ -50,6 +50,6 @@ namespace Common.Models
         /// <value>
         /// The receiver email.
         /// </value>
-        public string ReceiverEmail { get; set; }
+        //// public string ReceiverEmail { get; set; }
     }
 }

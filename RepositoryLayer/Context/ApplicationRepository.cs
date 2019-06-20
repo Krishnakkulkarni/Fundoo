@@ -311,7 +311,7 @@ namespace RepositoryLayer.Context
         {
             //// Query to check the userid
             var token = from Notification in this.authentication.Notifications
-                        where Notification.Userid==notification.Userid
+                        where Notification.Userid == notification.Userid
                         select Notification;
             //// Check the token is null or not
             if (token == null)
@@ -331,7 +331,7 @@ namespace RepositoryLayer.Context
             }
 
             //// update the database
-            return await authentication.SaveChangesAsync();
+            return await this.authentication.SaveChangesAsync();
         }
     }
 }

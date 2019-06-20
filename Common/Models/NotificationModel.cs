@@ -48,10 +48,11 @@ namespace Common.Models
         public DateTime CreatedDate { get; set; }
 
         /// <summary>
-        /// Gets or sets the modified data.
+        /// Gets or sets the modified date.
         /// </summary>
         /// <value>
-        /// The modified data.
+        /// The modified date.
+        /// </value>
         public DateTime ModifiedDate { get; set; }
 
         /// <summary>

@@ -91,7 +91,7 @@ namespace RepositoryLayer.Context
         /// <param name="id">The identifier.</param>
         public void UpdateNotes(NotesModel model, int id)
         {
-            //// LinQ query to update notes by comparing its note id
+            //// query to update notes by comparing its note id
             NotesModel notes = this.authentication.NotesModel.Where<NotesModel>(c => c.Id.Equals(id)).FirstOrDefault();
             notes.Title = model.Title;
             notes.Description = model.Description;
@@ -107,11 +107,62 @@ namespace RepositoryLayer.Context
         /// </summary>
         /// <param name="userID">The user identifier.</param>
         /// <returns>returns NotesModel</returns>
-        public IList<NotesModel> GetNotes(string userID)
+        public IList<NotesModel> GetNotes(string userId)
         {
-            //// LinQ query to Get all notes by comparing its userid
-            var note = from notes in this.authentication.NotesModel where notes.UserId.Equals(userID) && notes.IsArchive == false && notes.IsTrash == false orderby notes.Id descending select notes;
-            return note.ToArray();
+            //// query to Get all notes by comparing its userid
+            //// var note = from notes in this.authentication.NotesModel where notes.UserId.Equals(userID) && notes.IsArchive == false && notes.IsTrash == false orderby notes.Id descending select notes;
+            //// return note.ToArray();
+            
+            var Noteslist = new List<NotesModel>();
+            // var CollList = new List<CollaboratorModel>();
+
+            var note = from notes in this.authentication.NotesModel where (notes.UserId == userId && notes.IsTrash == false && notes.IsArchive == false) orderby notes.UserId descending select notes;
+            foreach (var item in note)
+            {
+                Noteslist.Add(item);
+            }
+            // var coll = from notes in this.authentication.Collaborator where notes.UserId == userId orderby notes.UserId descending select notes;
+            // foreach (var items in coll)
+            // {
+            //    CollList.Add(items);
+            // }
+            var user = from users in authentication.ApplicationUsers where users.Id == userId select users;
+            foreach (var users in user)
+            {
+                var noteJoin = from u in this.authentication.NotesModel
+                                join c in this.authentication.Collaborator on u.UserId equals c.UserId
+                                where u.Id == c.NoteId && c.ReceiverEmail == users.UserName
+
+                                select new NotesModel
+                                {
+                                    Id = u.Id,
+                                    UserId = u.UserId,
+                                    Title = u.Title,
+                                    Description = u.Description,
+                                    Color = u.Color,
+                                    Label = u.Label,
+                                    Image = u.Image,
+                                };
+                //var collaboratorjoin = from u in this.authentication.NotesModel
+                //                       join c in this.authentication.Collaborator on u.UserId equals c.UserId
+                //                       where u.Id == c.NoteId && c.ReceiverEmail == users.UserName
+
+                //                       select new CollaboratorModel
+                //                       {
+                //                           NoteId = c.NoteId,
+                //                           ReceiverEmail = c.ReceiverEmail,
+                //                           SenderEmail = c.SenderEmail
+                //                       };
+                foreach (var notesJoin in noteJoin)
+                {
+                    Noteslist.Add(notesJoin);
+                }
+                //foreach (var collaboratorsJoin in collaboratorjoin)
+                //{
+                //    CollList.Add(collaboratorsJoin);
+                //}
+            }
+            return Noteslist.ToArray();
         }
 
         /// <summary>
@@ -192,7 +243,7 @@ namespace RepositoryLayer.Context
         {
             var list = new List<NotesModel>();
             //// LinQ query to Get reminder on note by comparing its userid
-            var notesData = from notes in this.authentication.NotesModel where (notes.UserId == userId) && (notes.Reminder.Year != 0001) select notes;
+            var notesData = from notes in this.authentication.NotesModel where (notes.UserId == userId) && (notes.Reminder != null) && (notes.IsArchive == false) && (notes.IsTrash == false) select notes;
             foreach (var data in notesData)
             {
                 list.Add(data);
@@ -206,19 +257,11 @@ namespace RepositoryLayer.Context
         /// </summary>
         /// <param name="model">The model</param>
         /// <returns>returns string</returns>
-        public string AddCollaboratorToNote([FromBody] CollaboratorModel model)
+        public string AddCollaboratorToNote(CollaboratorModel model)
         {
             try
             {
-                var data = from t in this.authentication.Collaborator where t.UserId == model.UserId select t;
-                foreach (var item in data.ToList())
-                {
-                    if (item.NoteId.Equals(model.NoteId) && item.ReceiverEmail.Equals(model.ReceiverEmail))
-                    {
-                        return false.ToString();
-                    }
-                }
-
+                var data = from t in this.authentication.Collaborator where t.UserId == model.UserId && t.NoteId == model.NoteId select t;
                 var newdata = new CollaboratorModel()
                 {
                     UserId = model.UserId,
@@ -264,41 +307,42 @@ namespace RepositoryLayer.Context
         /// returns list
         /// </returns>
         /// <exception cref="Exception">error message</exception>
-        public IList<NotesModel> CollaboratorNote(string receiverEmail)
-        {
-            try
-            {
-                var sharednotes = new List<NotesModel>();
-                var data = from coll in this.authentication.Collaborator
-                           where coll.ReceiverEmail == receiverEmail
-                           select new
-                           {
-                               coll.SenderEmail,
-                               coll.NoteId
-                           };
-                foreach (var result in data)
-                {
-                    var collnotes = from notes in this.authentication.NotesModel
-                                    where notes.Id == result.NoteId
-                                    select new NotesModel
-                                    {
-                                        Id = notes.Id,
-                                        Title = notes.Title,
-                                        Description = notes.Description,
-                                    };
-                    foreach (var collaborator in collnotes)
-                    {
-                        sharednotes.Add(collaborator);
-                    }
-                }
+        ////public IList<ShareNotesModel> CollaboratorNote(string receiverEmail)
+        ////{
+        ////    try
+        ////    {
+        ////        var collaboratorData = new List<NotesModel>();
+        ////        var sharednotes = new List<ShareNotesModel>();
+        ////        var data = from coll in this.authentication.Collaborator
+        ////                   where coll.ReceiverEmail == receiverEmail
+        ////                   select new
+        ////                   {
+        ////                       coll.SenderEmail,
+        ////                       coll.NoteId
+        ////                   };
+        ////        foreach (var result in data)
+        ////        {
+        ////            var collnotes = from notes in this.authentication.NotesModel
+        ////                            where notes.Id == result.NoteId
+        ////                            select new ShareNotesModel
+        ////                            {
+        ////                                NoteId = notes.Id,
+        ////                                Title = notes.Title,
+        ////                                TakeANote = notes.Description,
+        ////                            };
+        ////            foreach (var collaborator in collnotes)
+        ////            {
+        ////                sharednotes.Add(collaborator);
+        ////            }
+        ////        }
 
-                return sharednotes;
-            }
-            catch (Exception e)
-            {
-                throw new Exception(e.Message);
-            }
-        }
+        ////        return sharednotes.ToArray();
+        ////    }
+        ////    catch (Exception e)
+        ////    {
+        ////        throw new Exception(e.Message);
+        ////    }
+        ////}
 
         /// <summary>
         /// Updates the collaborator.

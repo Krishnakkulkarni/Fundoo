@@ -50,6 +50,8 @@ namespace RepositoryLayer.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("UserId");
+
                     b.ToTable("Labels");
                 });
 
@@ -102,6 +104,8 @@ namespace RepositoryLayer.Migrations
                         .IsRequired();
 
                     b.HasKey("Id");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("NotesModel");
                 });
@@ -315,6 +319,21 @@ namespace RepositoryLayer.Migrations
                     b.ToTable("ApplicationUser");
 
                     b.HasDiscriminator().HasValue("ApplicationUser");
+                });
+
+            modelBuilder.Entity("Common.Models.LabelsModel", b =>
+                {
+                    b.HasOne("FundooNote.Models.ApplicationUser", "ApplicationUser")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+                });
+
+            modelBuilder.Entity("Common.Models.NotesModel", b =>
+                {
+                    b.HasOne("FundooNote.Models.ApplicationUser", "ApplicationUser")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Common.Models.NotificationModel", b =>

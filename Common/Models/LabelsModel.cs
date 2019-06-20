@@ -5,8 +5,10 @@
 //-----------------------------------------------------------------------
 namespace Common.Models
 {
+    using FundooNote.Models;
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations.Schema;
     using System.Text;
 
     /// <summary>
@@ -36,6 +38,9 @@ namespace Common.Models
         /// <value>
         /// The user identifier.
         /// </value>
-        public string UserId { get; set; } 
+        [ForeignKey("ApplicationUser")]
+        public string UserId { get; set; }
+
+        public ApplicationUser ApplicationUser { get; set; }
     }
 }

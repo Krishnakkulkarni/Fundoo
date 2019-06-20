@@ -5,6 +5,7 @@
 //-----------------------------------------------------------------------
 namespace Common.Models
 {
+    using FundooNote.Models;
     using System;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
@@ -113,5 +114,13 @@ namespace Common.Models
         /// The label.
         /// </value>
         public string Label { get; set; }
+
+        /// <summary>
+        /// Gets or sets the application user.
+        /// </summary>
+        /// <value>
+        /// The application user.
+        /// </value>
+        public ApplicationUser ApplicationUser { get; set; }
     }
 }

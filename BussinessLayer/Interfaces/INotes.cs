@@ -93,7 +93,7 @@ namespace BussinessLayer.Interfaces
         /// </summary>
         /// <param name="receiverEmail">The receiver email.</param>
         /// <returns>returns string</returns>
-        IList<NotesModel> CollaboratorNote(string receiverEmail);
+        ////IList<ShareNotesModel> CollaboratorNote(string receiverEmail);
 
         /// <summary>
         /// Updates the collaborator.

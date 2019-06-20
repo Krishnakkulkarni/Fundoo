@@ -111,6 +111,7 @@ namespace BussinessLayer.Services
                 }
                 else
                 {
+                    var notes = this.notesRepository.GetNotes(userId);
                     var redisNotes = redis.Get<List<NotesModel>>(cacheKey);
                     return redisNotes;
                 }
@@ -190,10 +191,10 @@ namespace BussinessLayer.Services
         /// <returns>
         /// return string
         /// </returns>
-        public IList<NotesModel> CollaboratorNote(string receiverEmail)
-        {
-            return this.notesRepository.CollaboratorNote(receiverEmail);
-        }
+        ////public IList<ShareNotesModel> CollaboratorNote(string receiverEmail)
+        ////{
+        ////    return this.notesRepository.CollaboratorNote(receiverEmail);
+        ////}
 
         /// <summary>
         /// Updates the collaborator.

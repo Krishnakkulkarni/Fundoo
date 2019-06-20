@@ -47,7 +47,7 @@ namespace RepositoryLayer.Interface
         /// </summary>
         /// <param name="userID">The user identifier.</param>
         /// <returns>returns list</returns>
-        IList<NotesModel> GetNotes(string userID);
+        IList<NotesModel> GetNotes(string userId);
 
         /// <summary>
         /// Images the specified file.
@@ -97,7 +97,7 @@ namespace RepositoryLayer.Interface
         /// </summary>
         /// <param name="receiverEmail">The receiver email.</param>
         /// <returns>returns list</returns>
-        IList<NotesModel> CollaboratorNote(string receiverEmail);
+        ////IList<ShareNotesModel> CollaboratorNote(string receiverEmail);
 
         /// <summary>
         /// Updates the collaborator.

@@ -107,7 +107,7 @@ namespace FundooApi.Controllers
         /// <param name="userId">The user identifier.</param>
         /// <returns>return notes</returns>
         [HttpGet]
-        [Route("{UserId}")]
+        [Route("{userId}")]
         public IActionResult ViewAll(string userId)
         {
             try
@@ -202,6 +202,7 @@ namespace FundooApi.Controllers
         /// <param name="model">The model.</param>
         /// <returns>returns response</returns>
         [HttpPost]
+        [AllowAnonymous]
         [Route("addCollaborator")]
         public IActionResult AddCollaboratorToNote(CollaboratorModel model)
         {
@@ -253,26 +254,26 @@ namespace FundooApi.Controllers
         /// </summary>
         /// <param name="receiverEmail">The receiver email.</param>
         /// <returns>returns response</returns>
-        [HttpGet]
-        [Route("getCollaborator/{receiverEmail}")]
-        public IActionResult CollaboratorNote(string receiverEmail)
-        {
-            try
-            {
-                var result = this.notesCreation.CollaboratorNote(receiverEmail);
-                if (result == null)
-                {
-                    return this.NotFound("Collaborator not found");
-                }
+        ////[HttpGet]
+        ////[Route("getCollaborator/{receiverEmail}")]
+        ////public IActionResult CollaboratorNote(string receiverEmail)
+        ////{
+        ////    try
+        ////    {
+        ////        var result = this.notesCreation.CollaboratorNote(receiverEmail);
+        ////        if (result == null)
+        ////        {
+        ////            return this.NotFound("Collaborator not found");
+        ////        }
 
-                return this.Ok(new { result });
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-                return this.BadRequest();
-            }
-        }
+        ////        return this.Ok(new { result });
+        ////    }
+        ////    catch (Exception e)
+        ////    {
+        ////        Console.WriteLine(e.Message);
+        ////        return this.BadRequest();
+        ////    }
+        ////}
 
         /// <summary>
         /// Updates the collaborator.
