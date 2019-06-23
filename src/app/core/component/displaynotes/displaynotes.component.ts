@@ -21,7 +21,7 @@ export interface DialogData {
 export class DisplaynotesComponent implements OnInit {
   grid: boolean = true
   // notes:Notes[];
-
+  users;
   visible = true;
   selectable = true;
   removable = true;
@@ -31,16 +31,13 @@ export class DisplaynotesComponent implements OnInit {
   constructor(private notesService: NotesService, public dataService: DataService, public matDialog: MatDialog) { }
 
   @Input() search;
-
+  @Input() Collnotes;
   @Input() cards: any;
   @Input() archived;
   @Input() trash;
 
   @Output() messageEvent = new EventEmitter<any>();
 
-  unrchive: boolean;
-  archive: boolean;
-  trashNote: boolean;
   title: any;
   description: any;
 
@@ -52,19 +49,20 @@ export class DisplaynotesComponent implements OnInit {
    * Main Method 
    */
   ngOnInit() {
-    console.log(this.cards);
     this.dataService.currentview.subscribe(data => {
       this.grid = data
     });
 
-    this.userId = localStorage.getItem("userid")
-    this.receiverEmail = localStorage.getItem('receiverEmail');
-    this.notesService.getCollaboratorNote(this.userId).subscribe(response => {
-      this.collaborator = response['note'];
+    this.users = {
+      user: localStorage.getItem("username")
+    }
+    // this.receiverEmail = localStorage.getItem('receiverEmail');
+    // this.notesService.getCollaboratorNote(this.userId).subscribe(response => {
+    //   this.collaborator = response['note'];
 
-    }, err => {
-      console.log(err);
-    })
+    // }, err => {
+    //   console.log(err);
+    // })
 
   }
 
@@ -141,7 +139,7 @@ export class DisplaynotesComponent implements OnInit {
     this.messageEvent.emit(event);
   }
 
-  
+
 
   /**
    * Method to remove Reminder

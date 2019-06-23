@@ -13,11 +13,13 @@ export class MainNotesComponent implements OnInit {
   CardNotes = [];
   userId: any;
   Token_Id: any;
+  CollNotes = [];
+  firstId="";
 
   constructor(private notesService: NotesService, private dataservice: DataService) { }
 
   /**
-   * 
+   * Main Method
    */
   ngOnInit() {
     this.Token_Id = localStorage.getItem('token')
@@ -39,13 +41,21 @@ export class MainNotesComponent implements OnInit {
     this.CardNotes = [];
     this.notesService.getNotesById(this.userId).subscribe(
       (data: any) => {
-        this.notes = data.note;
-        for (let i = 0; i < this.notes.length; i++) {
-          if (this.notes[i].isArchive == false && this.notes[i].isTrash == false) {
-            this.CardNotes.push(this.notes[i])
-          }
-        }
+        console.log(data);
+        
+        this.CardNotes = data.note.item1;
+        this.CollNotes = data.note.item2;
+        
+        
+        // for (let i = 0; i < data.note.item1.length; i++) {
+        //   if (data.note.item1[i].id!=this.firstId) {
+        //     this.firstId=data.note.item1[i].id
+        //     this.CardNotes.push(data.note.item1[i])
+        //   }
+        // }
         console.log(this.CardNotes, "notes");
+        console.log(this.CollNotes,"Collaborator");
+        
       });
   }
 
@@ -62,6 +72,10 @@ export class MainNotesComponent implements OnInit {
    * @param $event 
    */
   getnotes($event) {
+    this.getAllCard();
+  }
+
+  labelEvent($event){
     this.getAllCard();
   }
 

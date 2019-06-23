@@ -12,11 +12,11 @@ import { LabelService } from '../../services/LabelServices/label.service';
 export class EditLabelsComponent implements OnInit {
   notesLabel: any;
   userId: any;
-  @Output() AfterAddEvent = new EventEmitter();
+  @Output() Labelevent = new EventEmitter();
 
   constructor(public dataServices: DataService, public labelService: LabelService,
     public dialogRef: MatDialogRef<EditLabelsComponent>, @Inject(MAT_DIALOG_DATA) public data: any) { }
-  label = new FormControl('');
+    label = new FormControl('');
 
   /**
    * 
@@ -39,7 +39,7 @@ export class EditLabelsComponent implements OnInit {
         console.log(data)
       )
       this.dialogRef.close(data);
-      this.AfterAddEvent.emit({});
+      this.Labelevent.emit({});
     }
   }
 

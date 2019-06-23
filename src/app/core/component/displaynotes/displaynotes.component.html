@@ -29,21 +29,35 @@
           </div>
         </div>
 
-        <div *ngIf="note.reminder != '0001-01-01T00:00:00-08:00'">
+        <div *ngIf="note.reminder != '0001-01-01T00:00:00'">
           <mat-chip-list>
             <mat-chip [selectable]="selectable" [removable]="removable">
               <mat-icon>access_time</mat-icon>
-              {{note.reminder|date:shortTime}}
+              {{note.reminder|date:Time}}
               <mat-icon matChipRemove (click)="removeReminder(note)">cancel</mat-icon>
             </mat-chip>
           </mat-chip-list>
         </div>
       </div>
 
-      <div *ngIf="receiverEmail != null">
-        <mat-icon class="material-icons" (click)="colDialog(card)" matTooltip={{receiverEmail}}>account_circle
-        </mat-icon>
+      <div *ngFor="let coll of Collnotes">
+        <div *ngIf='note.id == coll.noteId'>
+          <div *ngIf="users.user == coll.receiverEmail">
+            <mat-icon class="material-icons" (click)="colDialog(card)" matTooltip={{coll.senderEmail}}>account_circle
+            </mat-icon>
+          </div>
+        </div>
       </div>
+
+      <div *ngFor="let coll of Collnotes">
+        <div *ngIf='note.id == coll.noteId'>
+          <div *ngIf="users.user == coll.senderEmail">
+            <mat-icon class="material-icons" (click)="colDialog(card)" matTooltip={{coll.receiverEmail}}>account_circle
+            </mat-icon>
+          </div>
+        </div>
+      </div>
+
 
       <div class="Hover">
         <app-icons [card]="note" [archivedicon]='archived' (setNote)="Archive($event)" [trashed]='trash'></app-icons>

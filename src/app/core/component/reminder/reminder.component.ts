@@ -23,7 +23,7 @@ export class ReminderComponent implements OnInit {
       var array = data["result"]
       this.reminderCards = [];
       for (let i = 0; i < array.length; i++) {
-        if (array[i].reminder != "0001-01-01T00:00:00-08:00") {
+        if (array[i].reminder != "0001-01-01T00:00:00") {
           this.reminderCards.push(array[i])
         }
       }
@@ -33,5 +33,4 @@ export class ReminderComponent implements OnInit {
     }
     )
   }
-
 }

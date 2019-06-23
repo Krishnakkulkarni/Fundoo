@@ -36,7 +36,7 @@ export class CollaborationComponent implements OnInit {
   /**
    * Method to add collaborator
    */
-  add() {
+  AddCollaborator() {
     var values = {
       "UserId": this.userId,
       "noteId": this.noteid,
@@ -45,30 +45,28 @@ export class CollaborationComponent implements OnInit {
     }
     console.log(this.ReceiverEmail.value);
 
-    localStorage.setItem('receiverEmail', this.ReceiverEmail.value)
-    this.receiverEmail = localStorage.getItem('receiverEmail');
-    console.log(this.receiverEmail);
+    // localStorage.setItem('receiverEmail', this.ReceiverEmail.value)
+    // this.receiverEmail = localStorage.getItem('receiverEmail');
     this.notesService.addcollaborator(values).subscribe(result =>
       console.log("add collaborator", values.noteId)
     )
-    this.getcollab();
-    this.dialogRef.close(values);
+    // this.getcollab();
+    // this.dialogRef.close(values);
   }
 
   /**
    * Method to get collaborator 
    */
-  getcollab() {
-    console.log(this.data);
-    this.notesService.getCollaboratorNote(this.userId).subscribe(result =>
-      console.log("get collaborator", this.data)
-    )
-  }
-  removeColl(){
+  // getcollab() {
+  //   console.log(this.data);
+  //   this.notesService.getCollaboratorNote(this.userId).subscribe(result =>
+  //     console.log("get collaborator", this.data)
+  //   )
+  // }
+  removeColl() {
     console.log(this.noteid);
-    this.notesService.removeCollaborator(this.noteid).subscribe(data=>
-      { console.log(); }
-      )
-    
+    this.notesService.removeCollaborator(this.noteid).subscribe(data => { console.log(); }
+    )
+
   }
 }
