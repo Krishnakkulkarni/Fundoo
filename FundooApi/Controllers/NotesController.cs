@@ -112,7 +112,7 @@ namespace FundooApi.Controllers
         {
             try
             {
-                IList<NotesModel> note = this.notesCreation.AccessNotes(userId);
+                (IList<NotesModel>,IList<CollaboratorModel>) note = this.notesCreation.AccessNotes(userId);
                 return this.Ok(new { note });
             }
             catch (Exception e)

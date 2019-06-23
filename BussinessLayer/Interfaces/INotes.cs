@@ -43,7 +43,7 @@ namespace BussinessLayer.Interfaces
         /// </summary>
         /// <param name="userId">The user identifier.</param>
         /// <returns>returns list</returns>
-        IList<NotesModel> AccessNotes(string userId);
+        (IList<NotesModel>,IList<CollaboratorModel>) AccessNotes(string userId);
 
         /// <summary>
         /// Browses the image.

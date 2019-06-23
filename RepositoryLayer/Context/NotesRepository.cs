@@ -107,62 +107,59 @@ namespace RepositoryLayer.Context
         /// </summary>
         /// <param name="userID">The user identifier.</param>
         /// <returns>returns NotesModel</returns>
-        public IList<NotesModel> GetNotes(string userId)
+        public (IList<NotesModel>,IList<CollaboratorModel>) GetNotes(string userId)
         {
             //// query to Get all notes by comparing its userid
-            //// var note = from notes in this.authentication.NotesModel where notes.UserId.Equals(userID) && notes.IsArchive == false && notes.IsTrash == false orderby notes.Id descending select notes;
-            //// return note.ToArray();
+          //  var note = from notes in this.authentication.NotesModel where notes.UserId.Equals(userId) && notes.IsArchive == false && notes.IsTrash == false orderby notes.Id descending select notes;
             
-            var Noteslist = new List<NotesModel>();
-            // var CollList = new List<CollaboratorModel>();
 
-            var note = from notes in this.authentication.NotesModel where (notes.UserId == userId && notes.IsTrash == false && notes.IsArchive == false) orderby notes.UserId descending select notes;
-            foreach (var item in note)
+            var Noteslist = new List<NotesModel>();
+            var CollList = new List<CollaboratorModel>();
+
+            var note = from notes in this.authentication.NotesModel where (notes.UserId.Equals(userId) && notes.IsTrash == false && notes.IsArchive == false) orderby notes.UserId descending select notes;
+            foreach (var notes in note)
             {
-                Noteslist.Add(item);
+                Noteslist.Add(notes);
             }
-            // var coll = from notes in this.authentication.Collaborator where notes.UserId == userId orderby notes.UserId descending select notes;
-            // foreach (var items in coll)
-            // {
-            //    CollList.Add(items);
-            // }
+
             var user = from users in authentication.ApplicationUsers where users.Id == userId select users;
             foreach (var users in user)
             {
                 var noteJoin = from u in this.authentication.NotesModel
-                                join c in this.authentication.Collaborator on u.UserId equals c.UserId
-                                where u.Id == c.NoteId && c.ReceiverEmail == users.UserName
+                               join c in this.authentication.Collaborator on u.UserId equals c.UserId
+                               where u.Id == c.NoteId && (c.ReceiverEmail == users.UserName)
 
-                                select new NotesModel
-                                {
-                                    Id = u.Id,
-                                    UserId = u.UserId,
-                                    Title = u.Title,
-                                    Description = u.Description,
-                                    Color = u.Color,
-                                    Label = u.Label,
-                                    Image = u.Image,
-                                };
-                //var collaboratorjoin = from u in this.authentication.NotesModel
-                //                       join c in this.authentication.Collaborator on u.UserId equals c.UserId
-                //                       where u.Id == c.NoteId && c.ReceiverEmail == users.UserName
-
-                //                       select new CollaboratorModel
-                //                       {
-                //                           NoteId = c.NoteId,
-                //                           ReceiverEmail = c.ReceiverEmail,
-                //                           SenderEmail = c.SenderEmail
-                //                       };
+                               select new NotesModel
+                               {
+                                   Id = u.Id,
+                                   UserId = u.UserId,
+                                   Title = u.Title,
+                                   Description = u.Description,
+                                   Color = u.Color,
+                                   Label = u.Label,
+                                   Image = u.Image,
+                               };
+                var collaboratorjoin = from u in this.authentication.NotesModel
+                                       join c in this.authentication.Collaborator on u.UserId equals c.UserId
+                                       where u.Id == c.NoteId
+                                       select new CollaboratorModel
+                                       {
+                                           Id = c.Id,
+                                           UserId = c.UserId,
+                                           NoteId = c.NoteId,
+                                           ReceiverEmail = c.ReceiverEmail,
+                                           SenderEmail = c.SenderEmail
+                                       };
                 foreach (var notesJoin in noteJoin)
                 {
                     Noteslist.Add(notesJoin);
                 }
-                //foreach (var collaboratorsJoin in collaboratorjoin)
-                //{
-                //    CollList.Add(collaboratorsJoin);
-                //}
+                foreach (var collaboratorsJoin in collaboratorjoin)
+                {
+                    CollList.Add(collaboratorsJoin);
+                }
             }
-            return Noteslist.ToArray();
+            return (Noteslist.ToArray(),CollList.ToArray());
         }
 
         /// <summary>
@@ -243,7 +240,7 @@ namespace RepositoryLayer.Context
         {
             var list = new List<NotesModel>();
             //// LinQ query to Get reminder on note by comparing its userid
-            var notesData = from notes in this.authentication.NotesModel where (notes.UserId == userId) && (notes.Reminder != null) && (notes.IsArchive == false) && (notes.IsTrash == false) select notes;
+            var notesData = from notes in this.authentication.NotesModel where (notes.UserId == userId) && (notes.Reminder != null || !notes.Reminder.Equals("0001-01-01 00:00:00.0000000")) select notes;
             foreach (var data in notesData)
             {
                 list.Add(data);

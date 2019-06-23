@@ -310,11 +310,11 @@ namespace RepositoryLayer.Context
         public async Task<int> PassToken(NotificationModel notification)
         {
             //// Query to check the userid
-            var token = from Notification in this.authentication.Notifications
+            var NotifiToken = from Notification in this.authentication.Notifications
                         where Notification.Userid == notification.Userid
                         select Notification;
             //// Check the token is null or not
-            if (token == null)
+            if (NotifiToken == null)
             {
                 NotificationModel addToken = new NotificationModel()
                 {

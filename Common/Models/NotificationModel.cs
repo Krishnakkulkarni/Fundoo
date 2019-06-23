@@ -6,6 +6,7 @@
 namespace Common.Models
 {
     using System;
+    using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using FundooNote.Models;
 
@@ -29,6 +30,7 @@ namespace Common.Models
         /// The user id.
         /// </value>
         [ForeignKey("ApplicationUser")]
+        [Required]
         public string Userid { get; set; }
 
         /// <summary>
@@ -37,6 +39,7 @@ namespace Common.Models
         /// <value>
         /// The notification token.
         /// </value>
+        [Required]
         public string NotificationToken { get; set; }
 
         /// <summary>

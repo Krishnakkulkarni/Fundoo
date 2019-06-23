@@ -47,7 +47,7 @@ namespace RepositoryLayer.Interface
         /// </summary>
         /// <param name="userID">The user identifier.</param>
         /// <returns>returns list</returns>
-        IList<NotesModel> GetNotes(string userId);
+        (IList<NotesModel>,IList<CollaboratorModel>) GetNotes(string userId);
 
         /// <summary>
         /// Images the specified file.

@@ -49,12 +49,12 @@ namespace BussinessLayer.Services
         {
             this.notesRepository.AddNotes(notesModel);
             var result = this.notesRepository.SaveChangesAsync();
-            using (var redis = new RedisClient())
-            {
-                redis.Remove(Redisdata + notesModel.UserId);
-            }
+            //using (var redis = new RedisClient())
+            //{
+            //    redis.Remove(Redisdata + notesModel.UserId);
+            //}
 
-            this.AccessNotes(notesModel.UserId);
+            //this.AccessNotes(notesModel.UserId);
             return result;
         }
 
@@ -80,12 +80,12 @@ namespace BussinessLayer.Services
         {
             this.notesRepository.UpdateNotes(notesModel, id);
             var result = this.notesRepository.SaveChangesAsync();
-            using (var redis = new RedisClient())
-            {
-                redis.Remove(Redisdata + notesModel.UserId);
-            }
+            //using (var redis = new RedisClient())
+            //{
+            //    redis.Remove(Redisdata + notesModel.UserId);
+            //}
 
-            this.AccessNotes(notesModel.UserId);
+            //this.AccessNotes(notesModel.UserId);
             return result;
         }
 
@@ -94,28 +94,28 @@ namespace BussinessLayer.Services
         /// </summary>
         /// <param name="userId">The user identifier.</param>
         /// <returns>returns NotesModel</returns>
-        public IList<NotesModel> AccessNotes(string userId)
+        public (IList<NotesModel>,IList<CollaboratorModel>) AccessNotes(string userId)
         {
-            var cacheKey = Redisdata + userId.ToString();
-            using (var redis = new RedisClient())
-            {
-                if (redis.Get(cacheKey) == null)
-                {
-                    var notes = this.notesRepository.GetNotes(userId);
-                    if (notes != null)
-                    {
-                        redis.Set(cacheKey, notes);
-                    }
+            //var cacheKey = Redisdata + userId.ToString();
+            //using (var redis = new RedisClient())
+            //{
+            //    if (redis.Get(cacheKey) == null)
+            //    {
+            //        var notes = this.notesRepository.GetNotes(userId);
+            //        if (notes != null)
+            //        {
+            //            redis.Set(cacheKey, notes);
+            //        }
 
-                    return notes.ToArray();
-                }
-                else
-                {
+            //        return notes.ToArray();
+            //    }
+            //    else
+            //    {
                     var notes = this.notesRepository.GetNotes(userId);
-                    var redisNotes = redis.Get<List<NotesModel>>(cacheKey);
-                    return redisNotes;
-                }
-            }
+                    //var redisNotes = redis.Get<List<NotesModel>>(cacheKey);
+                    return notes;
+            //    }
+            //}
         }
 
         /// <summary>
