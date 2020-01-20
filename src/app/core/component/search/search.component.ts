@@ -9,7 +9,7 @@ import { NotesService } from '../../services/NotesServices/notes.service';
 })
 export class SearchComponent implements OnInit {
   userId: string;
-  SearchCard: any;
+  searchCard: any;
   searchText: string = ''
 
   constructor(public dataServices: DataService, public notesService: NotesService) { }
@@ -20,7 +20,6 @@ export class SearchComponent implements OnInit {
   ngOnInit() {
     this.userId = localStorage.getItem("userid")
     this.dataServices.currentSearchmsg.subscribe(response => {
-      console.log('message in search', typeof response);
       this.searchText = response;
       this.getallCards();
     })
@@ -30,12 +29,8 @@ export class SearchComponent implements OnInit {
    * Method to get cards
    */
   getallCards() {
-    this.notesService.getNotesById(this.userId).subscribe(data => {
-      console.log(data);
-      this.SearchCard = data;
-    }, err => {
-      console.log(err);
-
-    })
+    this.notesService.getNotesById(this.userId).subscribe(data => { this.searchCard = data; },
+      err => { console.log(err); }
+    )
   }
 }

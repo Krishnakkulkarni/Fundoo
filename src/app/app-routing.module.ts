@@ -3,7 +3,6 @@ import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './core/component/login/login.component';
 import { UserRegisterComponent } from './core/component/user-register/user-register.component';
 import { UserComponent } from './core/component/user/user.component';
-import { HomeComponent } from './core/component/home/home.component';
 import { ForgotPasswordComponent } from './core/component/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './core/component/reset-password/reset-password.component';
 import { AuthGuard } from './core/auth/auth.guard';
@@ -16,6 +15,7 @@ import { EditnoteComponent } from './core/component/editnote/editnote.component'
 import { ImagecropComponent } from './core/component/imagecrop/imagecrop.component';
 import { CollaborationComponent } from './core/component/collaboration/collaboration.component';
 import { SearchComponent } from './core/component/search/search.component';
+import { DashboardComponent } from './core/component/dashboard/dashboard.component';
 
 //This is my case 
 const routes: Routes = [
@@ -31,10 +31,10 @@ const routes: Routes = [
   { path: 'forgot-password', component: ForgotPasswordComponent },
   { path: 'reset-password', component: ResetPasswordComponent },
   {
-    path: 'home', component: HomeComponent, canActivate: [AuthGuard],
+    path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard],
     children: [
-      { path: '', redirectTo: 'MainNotes', pathMatch: 'full' },
-      { path: 'MainNotes', component: MainNotesComponent },
+      { path: '', redirectTo: 'mainNotes', pathMatch: 'full' },
+      { path: 'mainNotes', component: MainNotesComponent },
       { path: 'Reminder', component: ReminderComponent },
       { path: 'EditLables', component: EditLabelsComponent },
       { path: 'Archive', component: ArchiveComponent },

@@ -31,8 +31,9 @@
               <mat-label
                 [attr.data-error]="Password.errors!=null?(Password.errors.required?'required Field': 'minimum 3 characters required'):''">
                 Password</mat-label>
-              <input matInput type="password" name="Password" #Password="ngModel" [(ngModel)]="user.Password" required
-                minlength="4">
+              <input matInput [type]="hide? 'password' : 'text'" name="Password" #Password="ngModel"
+                [(ngModel)]="user.Password" required minlength="4">
+              <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
             </mat-form-field>
           </div>
         </div>

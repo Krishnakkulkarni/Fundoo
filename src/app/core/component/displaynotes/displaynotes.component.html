@@ -1,13 +1,21 @@
 <div fxLayoutGap="1%" fxLayout='row' fxLayout='row wrap' fxLayoutAlign="center start" class="outer-div-style">
 
-  <div class="loop" *ngFor="let note of cards |search:search">
+  <div *ngIf="pinnedNote">
+    Pinned
+  </div>
+  <div class="loop" *ngFor="let note of pinnedNote |search:search">
 
-    <mat-card fxLayout='column' [ngClass]="{'note':grid==true,'notes':grid==false }"
+    <mat-card *ngIf="note.pin == true" fxLayout='column' [ngClass]="{'note':grid==true,'notes':grid==false }"
       [style.background-color]=note.color>
 
       <div *ngIf="note" (click)="openDialog(note)" class="element">
         <div>
           <img src="{{note.image}}" class="notes-image" />
+          <div class="img Hover">
+            <button mat-icon-button (click)='unPin(note)' matTooltip="Unpin">
+              <img src="../../../../assets/images/pin.png" />
+            </button>
+          </div>
         </div>
 
         <div>
@@ -20,7 +28,80 @@
 
         <div fxLayout="row">
           <div *ngIf="note.label!==null">
-            <mat-chip-list #chipList>
+            <mat-chip-list>
+              <mat-chip [selectable]="selectable" [removable]="removable" (removed)="remove(note.id,note)">
+                {{note.label}}
+                <mat-icon matChipRemove class="Hover" *ngIf="removable">cancel</mat-icon>
+              </mat-chip>
+            </mat-chip-list>
+          </div>
+        </div>
+
+        <div *ngIf="note.reminder != '0001-01-01T00:00:00'">
+          <mat-chip-list>
+            <mat-chip [selectable]="selectable" [removable]="removable">
+              <mat-icon>access_time</mat-icon>
+              {{note.reminder|date:Time}}
+              <mat-icon matChipRemove (click)="removeReminder(note)">cancel</mat-icon>
+            </mat-chip>
+          </mat-chip-list>
+        </div>
+      </div>
+
+      <div *ngFor="let coll of Collnotes">
+        <div *ngIf='note.id == coll.noteId'>
+          <div *ngIf="users.user == coll.receiverEmail">
+            <mat-icon class="material-icons" (click)="colDialog(card)" matTooltip={{coll.senderEmail}}>account_circle
+            </mat-icon>
+          </div>
+        </div>
+      </div>
+
+      <div *ngFor="let coll of Collnotes">
+        <div *ngIf='note.id == coll.noteId'>
+          <div *ngIf="users.user == coll.senderEmail">
+            <mat-icon class="material-icons" (click)="colDialog(card)" matTooltip={{coll.receiverEmail}}>
+              account_circle
+            </mat-icon>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="Hover">
+        <app-icons [card]="note" [archivedicon]='archived' (setNote)="noteUpdate($event)" [trashed]='trash'>
+        </app-icons>
+      </div>
+    </mat-card>
+  </div>
+
+  others
+  <div class="loop" *ngFor="let note of cards |search:search">
+
+    <mat-card *ngIf="note.pin == false" fxLayout='column' [ngClass]="{'note':grid==true,'notes':grid==false }"
+      [style.background-color]=note.color>
+
+      <div *ngIf="note" (click)="openDialog(note)" class="element">
+        <div>
+          <img src="{{note.image}}" class="notes-image" />
+          <div class="img Hover">
+            <button mat-icon-button (click)='pin(note)' matTooltip="Pin">
+              <img src="../../../../assets/images/unpin.png" />
+            </button>
+          </div>
+        </div>
+
+        <div>
+          <mat-card-title class="titleinput">{{ note.title}}</mat-card-title>
+        </div>
+
+        <div>
+          <mat-card-content class="noteinput">{{ note.description}}</mat-card-content>
+        </div>
+
+        <div fxLayout="row">
+          <div *ngIf="note.label!==null">
+            <mat-chip-list>
               <mat-chip [selectable]="selectable" [removable]="removable" (removed)="remove(note.id,note)">
                 {{note.label}}
                 <mat-icon matChipRemove class="Hover" *ngIf="removable">cancel</mat-icon>
@@ -60,9 +141,11 @@
 
 
       <div class="Hover">
-        <app-icons [card]="note" [archivedicon]='archived' (setNote)="Archive($event)" [trashed]='trash'></app-icons>
+        <app-icons [card]="note" [archivedicon]='archived' (setNote)="noteUpdate($event)" [trashed]='trash'></app-icons>
       </div>
     </mat-card>
 
   </div>
+
+
 </div>

@@ -19,8 +19,6 @@ export class NotesService {
   }
 
   updateNotes(id, data) {
-    console.log(id, data, "check");
-
     return this.httpService.updateAll('Notes/' + id, data);
   }
 
@@ -28,6 +26,9 @@ export class NotesService {
     return this.httpService.updateAll('Notes/' + id, card)
   }
   ArchiveNote(id, card) {
+    return this.httpService.updateAll('Notes/' + id, card)
+  }
+  pinnedNote(id, card) {
     return this.httpService.updateAll('Notes/' + id, card)
   }
   GetArchiveNotes(UserId) {

@@ -1,3 +1,4 @@
 <app-notes (AddEvent)="getnotes($event)"></app-notes>
-<app-displaynotes [cards]="CardNotes" [Collnotes]="CollNotes" (messageEvent)="eventOccur($event)"></app-displaynotes>
+<app-displaynotes [cards]="cardNotes" [collnotes]="collNotes" [pinnedNote]='pinnedNotes'></app-displaynotes>
 <!-- <app-edit-labels (labelEvent)="Labelevent($event)"></app-edit-labels> -->
+<!-- (messageEvent)="eventOccur($event)" -->

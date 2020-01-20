@@ -14,11 +14,11 @@
 
       <div fxLayout="column">
         <div class="usernameStyle">
-          {{FirstName}} {{LastName}}
+          {{firstName}} {{lastName}}
           <span style="font-style: italic">(Owner)</span>
         </div>
         <div class="emailStyle">
-          {{UserName}}
+          {{userName}}
         </div>
       </div>
 
@@ -32,7 +32,7 @@
       </button>
     </div>
     <div>
-      <input mat-input placeholder="email to share" [formControl]="ReceiverEmail">
+      <input mat-input placeholder="email to share" [formControl]="receiver_email">
       <button mat-button (click)="removeColl()">
         <mat-icon>clear</mat-icon>
       </button>

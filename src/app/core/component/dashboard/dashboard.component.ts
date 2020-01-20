@@ -4,7 +4,6 @@ import { MatDialog, MatDialogConfig } from '@angular/material';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material';
 import { DataService } from '../../services/DataServices/data.service';
-
 import { ImagecropComponent } from '../imagecrop/imagecrop.component';
 import { UserService } from '../../services/user.service';
 import { EditLabelsComponent } from '../edit-labels/edit-labels.component';
@@ -15,32 +14,33 @@ export interface DialogData {
   data: any
 }
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  selector: 'app-dashboard',
+  templateUrl: './dashboard.component.html',
+  styleUrls: ['./dashboard.component.css']
 })
-export class HomeComponent implements OnInit {
+export class DashboardComponent implements OnInit {
 
-  flag: boolean = true;
+  public flag: boolean = true;
 
-  message: boolean;
-  profilePic: boolean;
-  imageprofile: string;
+  public message: boolean;
+  public profilePic: boolean;
+  public imageprofile: string;
 
-  payLoad: any;
-  notesLabel: any;
+  public payLoad: any;
+  public notesLabel: any;
 
-  token: string;
-  userId: string;
-  FirstName: string;
-  LastName: string;
-  userName: string;
-  UserName: string;
-  selectedFile: File;
-  value: any;
-  photo: string;
+  public token: string;
+  public userId: string;
+  public first_name: string;
+  public last_name: string;
+  public userName: string;
+  public UserName: string;
+  public selectedFile: File;
+  public value: any;
+  public photo: string;
 
-  HeaderName = "Fundoo"
+  public headerName = "Fundoo";
+  public imageFile = null;
 
   mobileQuery: MediaQueryList;
   private _mobileQueryListener: () => void;
@@ -60,24 +60,19 @@ export class HomeComponent implements OnInit {
    * Main Method
    */
   ngOnInit() {
-
     this.userId = localStorage.getItem("userid");
     this.photo = localStorage.getItem("profileUrl");
-
     this.UserName = localStorage.getItem("username");
-    this.FirstName = localStorage.getItem("firstName");
-    this.LastName = localStorage.getItem("lastName");
-
+    this.first_name = localStorage.getItem("firstName");
+    this.last_name = localStorage.getItem("lastName");
     this.dataService.currentMsg.subscribe(message => this.message = message);
-    this.userName = localStorage.getItem("UserName")
-
     this.getLabels();
   }
 
   /**
    * Method to navigate to login page
    */
-  ToHome() {
+  dashboard() {
     this.router.navigateByUrl('user/login');
   }
 
@@ -92,7 +87,7 @@ export class HomeComponent implements OnInit {
    * 
    */
   goSearch() {
-    this.router.navigate(['/home/search'])
+    this.router.navigate(['/dashboard/search'])
   }
 
   /**
@@ -122,38 +117,34 @@ export class HomeComponent implements OnInit {
   /**
    * Method to navigate to notes page
    */
-  Note() {
-    this.router.navigate(['home/MainNotes'])
+  getNotes() {
+    this.router.navigate(['dashboard/mainNotes'])
   }
 
   /**
    * Method to set the view(grid or list)
    */
-  ReverseFlag() {
+  reverseFlag() {
     this.flag = !this.flag
     this.dataService.changeView(this.flag)
   }
-
-  imageFile = null;
 
   /**
    * Method to uploade Profile
    * @param event 
    */
   fileUpload(event: { path: { files: any[]; }[]; }) {
-    console.log(event, this.userId, "......")
-    console.log(event.path[0].files[0], "uploaded file ")
     this.imageFile = event.path[0].files[0]
     const uploadImage = new FormData();
     uploadImage.append('file', this.imageFile, this.imageFile.name);
-    this.ChangePic(event)
+    this.changePic(event)
   }
 
   /**
    * Method to change the profile picture
    * @param data 
    */
-  ChangePic(data: any) {
+  changePic(data: any) {
     {
       try {
         const dialogRef = this.dialog.open(ImagecropComponent,
@@ -169,32 +160,18 @@ export class HomeComponent implements OnInit {
   /**
    * Method to navigate reminder page
    */
-  Reminder() {
-    this.router.navigate(['home/Reminder'])
+  reminder() {
+    this.router.navigate(['dashboard/Reminder'])
   }
 
   /**
    * Method to add labels
    */
-  EditLables(): void {
+  editLables(): void {
     const dialogConfig = new MatDialogConfig();
     let dialogRef = this.dialog.open(EditLabelsComponent,
       { data: this.notesLabel }
     );
-
-    // dialogRef.afterClosed().subscribe(result => {
-    //   console.log(result.result, "dash");
-    //   if (result.label != '' && result.label != null) {
-    //     this.notesService.AddNotesLabels(result).subscribe((data: any) => {
-    //       console.log(data)
-
-    //     }, err => {
-    //       console.log(err);
-
-    //     });
-    //   }
-    // }
-    // )
   }
 
 
@@ -209,6 +186,10 @@ export class HomeComponent implements OnInit {
     })
   }
 
+  labelEve($event){
+    this.getLabels();
+  }
+
   /**
    * 
    * @param $event 
@@ -220,14 +201,14 @@ export class HomeComponent implements OnInit {
   /**
    * Method to navigate archive page
    */
-  Archive() {
-    this.router.navigate(['home/Archive'])
+  archive() {
+    this.router.navigate(['dashboard/Archive'])
   }
 
   /**
    * Method to navigate trash page
    */
-  Trash() {
-    this.router.navigate(['home/Trash'])
+  trash() {
+    this.router.navigate(['dashboard/Trash'])
   }
 }

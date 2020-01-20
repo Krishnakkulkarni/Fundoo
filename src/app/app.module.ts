@@ -9,7 +9,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { UserRegisterComponent } from './core/component/user-register/user-register.component';
 import { LoginComponent } from './core/component/login/login.component';
 import { UserComponent } from './core/component/user/user.component';
-import { HomeComponent } from './core/component/home/home.component';
 import { AppMaterial } from './app.material.module';
 import { ForgotPasswordComponent } from './core/component/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './core/component/reset-password/reset-password.component';
@@ -31,6 +30,7 @@ import { SearchComponent } from './core/component/search/search.component';
 import { SearchPipe } from './core/pipe/search.pipe';
 import { SocialLoginModule, AuthServiceConfig, FacebookLoginProvider } from "angular-6-social-login";
 import { environment } from '../environments/environment';
+import { DashboardComponent } from './core/component/dashboard/dashboard.component';
 
 export function getAuthServiceConfigs() {
   let config = new AuthServiceConfig(
@@ -50,7 +50,7 @@ export function getAuthServiceConfigs() {
     UserRegisterComponent,
     LoginComponent,
     UserComponent,
-    HomeComponent,
+    DashboardComponent,
     ForgotPasswordComponent,
     ResetPasswordComponent,
     MainNotesComponent,

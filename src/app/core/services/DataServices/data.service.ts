@@ -21,10 +21,16 @@ export class DataService {
   private image = new Subject<boolean>();
   currentImage = this.image.asObservable();
 
+  private num = new Subject<Number>();
+  currentNum = this.num.asObservable();
+
   constructor() { }
 
+  changeNum(view: Number) {
+    this.num.next(view)
+  }
+  
   changeImage(message:boolean){
-    console.log(message,"in data")
     this.image.next(message)
   }
   
@@ -37,12 +43,10 @@ export class DataService {
   }
   
   changeMessage(message: boolean) {
-    console.log('message in data service',message);
     this.messageSrc.next(message)
   }
 
   changeSearchMsg(view: string){
-    console.log("in dataService search",view);
     this.searchMessage.next(view);
     
   }

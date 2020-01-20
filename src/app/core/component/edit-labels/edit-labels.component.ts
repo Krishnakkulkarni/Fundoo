@@ -12,18 +12,18 @@ import { LabelService } from '../../services/LabelServices/label.service';
 export class EditLabelsComponent implements OnInit {
   notesLabel: any;
   userId: any;
-  @Output() Labelevent = new EventEmitter();
+  @Output() labelEvent = new EventEmitter();
 
   constructor(public dataServices: DataService, public labelService: LabelService,
     public dialogRef: MatDialogRef<EditLabelsComponent>, @Inject(MAT_DIALOG_DATA) public data: any) { }
-    label = new FormControl('');
+  label = new FormControl('');
 
   /**
    * 
    */
   ngOnInit() {
     this.userId = localStorage.getItem('userid')
-    this.notesLabel = this.data
+    this.notesLabel = this.data;
   }
 
   /**
@@ -39,7 +39,10 @@ export class EditLabelsComponent implements OnInit {
         console.log(data)
       )
       this.dialogRef.close(data);
-      this.Labelevent.emit({});
+      this.labelEvent.emit(data);
+    }
+    else {
+      this.dialogRef.close(data);
     }
   }
 
@@ -57,9 +60,10 @@ export class EditLabelsComponent implements OnInit {
    * 
    * @param id 
    */
-  delete(id) {
-    console.log(id);
-    this.labelService.deletelabel(id).subscribe(result =>
-      console.log(id))
+  delete(label) {
+    let index = this.notesLabel.indexOf(label);
+    this.notesLabel.splice(index, 1);
+    this.labelService.deletelabel(label.id).subscribe(result =>
+      console.log(result))
   }
 }

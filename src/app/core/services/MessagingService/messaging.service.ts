@@ -31,7 +31,6 @@ export class MessagingService {
 
       })
       .catch((err) => {
-        console.log('Unable to get permission to notify.', err);
       });
   }
 

@@ -13,10 +13,10 @@ import { AuthService, FacebookLoginProvider } from 'angular-6-social-login';
 })
 export class LoginComponent implements OnInit {
 
-  user: UserLogin;
-  emailPattern = "^[a-z0-9.%+-]+@[a-z.-]+\.[a-z]{2,4}$";
-  userName: any;
-  UserData: any;
+  public user: UserLogin;
+  public emailPattern = "^[a-z0-9.%+-]+@[a-z.-]+\.[a-z]{2,4}$";
+  public userName: any;
+  public hide = true;
 
   constructor(private userService: UserService, private router: Router, public snackbar: MatSnackBar,
     private authService: AuthService) { }
@@ -40,14 +40,13 @@ export class LoginComponent implements OnInit {
          */
         console.log(this.userName, "check");
         this.user =
-          {
-            UserName: this.userName,
-            Password: '123abc',
-          }
+        {
+          UserName: this.userName,
+          Password: '123abc',
+        }
         this.userService.fbLogin(this.user).subscribe(
           (data: any) => {
-            console.log(data.result);
-            this.router.navigateByUrl('home')
+            this.router.navigateByUrl('dashboard')
           },
           (error: any) => { console.log(error); }
         )
@@ -60,9 +59,8 @@ export class LoginComponent implements OnInit {
    */
   ngOnInit() {
     if (localStorage.getItem('token') != null)
-      this.router.navigateByUrl('home');
+      this.router.navigateByUrl('dashboard');
     this.resetForm();
-
   }
 
   /**
@@ -73,10 +71,10 @@ export class LoginComponent implements OnInit {
     if (form != null)
       form.reset();
     this.user =
-      {
-        UserName: '',
-        Password: '',
-      }
+    {
+      UserName: '',
+      Password: '',
+    }
   }
 
   /**
@@ -90,15 +88,14 @@ export class LoginComponent implements OnInit {
     else {
       this.userService.login(form.value).subscribe
         ((data: any) => {
-          console.log(data.result);
-
+          
           this.userService.imageurl(data.result.userid).subscribe
             (result => {
-              console.log(result['result'][0].id)
+              console.log(result);
+
               localStorage.setItem('firstName', result['result'][0].firstName);
               localStorage.setItem('lastName', result['result'][0].lastName);
               localStorage.setItem('profileUrl', result['result'][0].profile);
-
             },
               err => { console.log(err); }
             )
@@ -106,9 +103,7 @@ export class LoginComponent implements OnInit {
           localStorage.setItem('userid', data.result.userid);
           localStorage.setItem('username', data.result.userName);
 
-
-
-          this.router.navigateByUrl('home');
+          this.router.navigateByUrl('dashboard');
           this.snackbar.open("login successful", "close", { duration: 2000 });
         },
           error => {

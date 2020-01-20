@@ -11,7 +11,7 @@
 
         <img id="fundoo-image" src="../../assets/images/image.png" />
 
-        <h1 class="example-app-name">{{HeaderName}}</h1>
+        <h1 class="example-app-name">{{headerName}}</h1>
 
         <div fxHide.xs='true' fxFlex fxLayout="row">
 
@@ -43,11 +43,11 @@
         <!-------------------------------Grid and List--------------------------------------->
 
         <div fxHide.xs='true'>
-          <button mat-icon-button *ngIf='flag==false' (click)='ReverseFlag()' matTooltip="Grid View">
+          <button mat-icon-button *ngIf='flag==false' (click)='reverseFlag()' matTooltip="Grid View">
             <mat-icon>grid_view</mat-icon>
           </button>
 
-          <button mat-icon-button *ngIf='flag==true' (click)='ReverseFlag()' matTooltip="List View">
+          <button mat-icon-button *ngIf='flag==true' (click)='reverseFlag()' matTooltip="List View">
             <img id="" src="../../../../assets/images/outline-view_agenda-24px.svg">
           </button>
         </div>
@@ -73,7 +73,7 @@
 
               <div>
                 <div class="profileName">
-                  {{FirstName}} {{LastName}}
+                  {{first_name}} {{last_name}}
                 </div>
                 <div class="profileEmail">
                   {{UserName}}
@@ -84,7 +84,7 @@
             <mat-divider></mat-divider>
             <div fxLayout="row">
               <div fxLayoutAlign="start end">
-                <button mat-button (click)="ToHome()">Add account</button>
+                <button mat-button (click)="dashboard()">Add account</button>
               </div>
               <div fxLayoutAlign="end end">
                 <button mat-button (click)="onLogout()">Sign out</button>
@@ -108,13 +108,13 @@
         <div class="nav-list-div" fxLayout="column" fxLayoutGap="12px">
 
           <div fxLayout="column">
-            <button mat-button (click)='Note()' (click)="HeaderName= 'Fundoo'"
-              [ngClass]="{'sidenav':HeaderName!= 'Fundoo','sidenavlist':HeaderName=='Fundoo'}">
+            <button mat-button (click)='getNotes()' (click)="headerName= 'Fundoo'"
+              [ngClass]="{'sidenav':headerName!= 'Fundoo','sidenavlist':headerName=='Fundoo'}">
               <mat-icon style="margin-right:25px">lightbulb_outline</mat-icon>
               Notes
             </button>
-            <button mat-button class="btn" (click)='Reminder()' (click)="HeaderName= 'Reminder'"
-              [ngClass]="{'sidenav':HeaderName!= 'Reminder','sidenavlist':HeaderName=='Reminder'}">
+            <button mat-button class="btn" (click)='reminder()' (click)="headerName= 'Reminder'"
+              [ngClass]="{'sidenav':headerName!= 'Reminder','sidenavlist':headerName=='Reminder'}">
               <mat-icon style="margin-right:25px">notifications_none</mat-icon>Reminders
             </button>
           </div>
@@ -123,7 +123,6 @@
             <mat-divider></mat-divider>
           </div>
 
-
           <div>
             <div style="margin-left:25px; font-size: 11px">LABELS</div>
           </div>
@@ -131,8 +130,8 @@
           <div>
             <div *ngFor="let label of notesLabel">
 
-              <button (AferAddEvent)="add($event)" (click)="HeaderName= 'label'"
-                [ngClass]="{'sidenav':HeaderName!= 'add','sidenavlist':HeaderName=='add'}" mat-button
+              <button (AferAddEvent)="add($event)" (click)="headerName= 'label'"
+                [ngClass]="{'sidenav':headerName!= 'add','sidenavlist':headerName=='add'}" mat-button
                 style="outline:none">
                 <div fxLayout="row">
                   <div class="imageopac">
@@ -146,33 +145,30 @@
           </div>
 
           <div>
-            <button mat-button (click)="EditLables()" (click)="HeaderName= 'EditLables'"
-              [ngClass]="{'sidenav':HeaderName!= 'EditLables','sidenavlist':HeaderName=='EditLables'}">
+            <button mat-button (click)="editLables()" (click)="headerName= 'EditLables'"
+              [ngClass]="{'sidenav':headerName!= 'EditLables','sidenavlist':headerName=='EditLables'}">
               <i class="material-icons">
                 <mat-icon style="margin-right:25px">edit_outline</mat-icon>
               </i> Edit Labels
             </button>
           </div>
 
-
           <div>
             <mat-divider></mat-divider>
           </div>
 
-
           <div fxLayout="column" style="padding-bottom: 25%">
-            <button mat-button class="btn" (click)='Archive()' (click)="HeaderName= 'Archive'"
-              [ngClass]="{'sidenav':HeaderName!= 'Archive','sidenavlist':HeaderName=='Archive'}">
+            <button mat-button class="btn" (click)='archive()' (click)="headerName= 'Archive'"
+              [ngClass]="{'sidenav':headerName!= 'Archive','sidenavlist':headerName=='Archive'}">
               <mat-icon style="margin-right:25px">archive_outline</mat-icon>
               Archive
             </button>
-            <button mat-button class="btn" (click)='Trash()' (click)="HeaderName= 'Trash'"
-              [ngClass]="{'sidenav':HeaderName!= 'Trash','sidenavlist':HeaderName=='Trash'}">
+            <button mat-button class="btn" (click)='trash()' (click)="headerName= 'Trash'"
+              [ngClass]="{'sidenav':headerName!= 'Trash','sidenavlist':headerName=='Trash'}">
               <mat-icon style="margin-right:25px;">delete_outline</mat-icon>
               Trash
             </button>
           </div>
-
 
         </div>
       </mat-nav-list>
@@ -184,4 +180,5 @@
     </mat-sidenav-content>
 
   </mat-sidenav-container>
+
 </div>

@@ -20,10 +20,20 @@ export class EditnoteComponent implements OnInit {
    */
   constructor(public notesService: NotesService, public dialogRef: MatDialogRef<EditnoteComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData) {
-    console.log(data);
   }
 
   ngOnInit() {
+  }
+
+  removeImage(note) {
+    console.log(note);
+    note.image = null;
+    this.notesService.updateNotes(note.id, note.image).subscribe(data => {
+    },
+      err => {
+        console.log(err);
+      }
+    )
   }
 
   /**

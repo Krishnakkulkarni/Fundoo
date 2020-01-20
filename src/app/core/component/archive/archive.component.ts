@@ -8,32 +8,40 @@ import { NotesService } from '../../services/NotesServices/notes.service';
 })
 export class ArchiveComponent implements OnInit {
 
-  notes = [];
-  CardNotes = []
-  id: string;
-  more = 'isArchive'
+  public cardNotes = []
+  public id: string;
+  public more = 'isArchive'
 
   constructor(public notesService: NotesService) { }
 
   /**
-   * 
+   * Main method
    */
   ngOnInit() {
     this.id = localStorage.getItem("userid")
+    this.getArchive();
+  }
+
+  getArchive() {
     this.notesService.GetArchiveNotes(this.id).subscribe(
       (data: any) => {
         console.log(data);
-        this.notes = data['result']
-        this.notes.forEach(element => {
+        data['result'].forEach(element => {
           if (element.isArchive == true && element.isTrash == false) {
-            this.CardNotes.push(element)
-            console.log(this.CardNotes, "notes");
+            this.cardNotes.push(element)
+            console.log(this.cardNotes, "notes");
           }
         });
       }
     ), (err: any) => {
       console.log(err);
     };
+  }
+
+  eventOccur($event){
+    this.getArchive();
+    this.cardNotes = []
+
   }
 
 }

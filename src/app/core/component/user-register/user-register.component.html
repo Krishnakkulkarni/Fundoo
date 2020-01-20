@@ -48,8 +48,9 @@
               <mat-label
                 [attr.data-error]="Password.errors!=null?(Password.errors.required?'required Field': 'minimum 3 characters required'):''">
                 Password</mat-label>
-              <input matInput style="height: 0%" type="password" class="validate" name="Password" #Password="ngModel"
+              <input matInput style="height: 0%" [type]="hide? 'password': 'text'" class="validate" name="Password" #Password="ngModel"
                 [(ngModel)]="user.Password" required minlength="4">
+              <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
             </mat-form-field>
           </div>
 
@@ -58,21 +59,22 @@
               <mat-label
                 [attr.data-error]="Password.errors!=null?(Password.errors.required?'required Field': 'minimum 3 characters required'):''">
                 Confirm password</mat-label>
-              <input matInput style="height: 0%" type="password" class="validate" name="ConfirmPassword"
+              <input matInput style="height: 0%" [type]="hide? 'password': 'text'" class="validate" name="ConfirmPassword"
                 #ConfirmPassword="ngModel" [(ngModel)]="user.ConfirmPassword" required minlength="4">
+              <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
             </mat-form-field>
           </div>
 
         </div>
 
         <div fxLayout="row" fxLayoutGap="20px" fxLayoutGap.sm="10px" fxLayoutGap.xs="5px" fxLayout.sm="column"
-        fxLayout.md="row" fxLayout.xs="column">
+          fxLayout.md="row" fxLayout.xs="column">
 
           <div fxFlex="50">
-              <a routerLink="/user/login" class="login" routerLinkActive="active">Sign in instead</a>
+            <a routerLink="/user/login" class="login" routerLinkActive="active">Sign in instead</a>
           </div>
           <div fxFlex="50">
-              <button mat-button class="registerbutton" type="submit">Register</button>
+            <button mat-button class="registerbutton" type="submit">Register</button>
           </div>
         </div>
 

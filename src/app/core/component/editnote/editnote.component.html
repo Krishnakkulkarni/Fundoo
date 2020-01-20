@@ -1,10 +1,15 @@
 <mat-card class="dailog-outer-div" fxFlex fxLayout="column" [style.background-color]='data.note.color'>
   <img src="{{data.note.image}}" class="notes-image" />
+  <div *ngIf="data.note.image" class="Hover">
+    <button style="outline: none" mat-button (click)="removeImage(data.note)" matTooltip="remove image">
+      <i class="material-icons">delete </i>
+    </button>
+  </div>
 
   <div mat-dialog-content>
     <input matInput class="text" [(ngModel)]="data.note.title" placeholder="Title">
     <textarea matInput matTextareaAutosize class="text-for-description" [(ngModel)]="data.note.description"
-    placeholder="Description"></textarea>
+      placeholder="Description"></textarea>
   </div>
 
   <div fxLayout="row">

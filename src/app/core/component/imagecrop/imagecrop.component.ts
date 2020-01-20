@@ -3,7 +3,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material'
 import { UserService } from '../../services/user.service';
 import { HttpService } from '../../services/HttpServices/http.service';
 import { DataService } from '../../services/DataServices/data.service';
-import { DialogData } from '../home/home.component';
+import { DialogData } from '../dashboard/dashboard.component';
 
 @Component({
   selector: 'app-imagecrop',

@@ -13,25 +13,26 @@ import { LabelService } from '../../services/LabelServices/label.service';
 })
 export class IconsComponent implements OnInit {
   [x: string]: any;
-  selectedFile: File = null;
-  flag: boolean = false;
-  label;
+  public selectedFile: File = null;
+  public flag: boolean = false;
+  public labels;
 
   @Input() archivedicon
-  @Input() trashed
+  @Input() trashed //to get trashed notes
 
   @Output() setNote = new EventEmitter();
+
+
   @Output() update = new EventEmitter();
 
-  trash: boolean = true;
-  archive: boolean = true;
-  unarchive: boolean = true;
-  userId: string;
+  public trash: boolean = true;
+  public archive: boolean = true;
+  public unarchive: boolean = true;
+  public userId: string;
+  public data;
 
   onFileSelected(Event: any, card: any) {
-    console.log(Event);
     this.selectedFile = <File>Event.path[0].files[0];
-    console.log(this.selectedFile);
     this.Onupload(card)
   }
 
@@ -46,9 +47,7 @@ export class IconsComponent implements OnInit {
   ngOnInit() {
     this.userId = localStorage.getItem('userid');
     this.labelService.getlabels(this.userId).subscribe(
-      data => {
-        this.label = data['result'];
-      }
+      data => { this.labels = data['result']; }
     )
   }
 
@@ -59,12 +58,10 @@ export class IconsComponent implements OnInit {
   Onupload(card) {
     if (card.id != undefined) {
       const formdata = new FormData();
-      console.log(formdata);
 
       formdata.append('file', this.selectedFile);
       this.notesService.ImageUpload(formdata, card.id).subscribe
         (data => {
-          console.log(data)
           this.service.change({ type: 'image' })
           this.SnackBar.open("Image Uploaded", "close", { duration: 2000 });
         },
@@ -85,10 +82,9 @@ export class IconsComponent implements OnInit {
       this.setNote.emit(color)
     }
     else {
-      console.log(card, "card")
       card.color = color;
       this.notesService.updateNotes(card.id, card).subscribe(
-        data => { console.log(data, "color update"); },
+        data => {  },
         err => { console.log(err); }
       )
     }
@@ -99,12 +95,11 @@ export class IconsComponent implements OnInit {
    * @param card 
    */
   Archive(card) {
+    card.pin = false
     card.isArchive = true;
-    console.log(card)
     this.notesService.ArchiveNote(card.id, card).subscribe(
       data => {
-        console.log(data);
-        this.setNote.emit(this.archive)
+        this.setNote.emit()
         this.SnackBar.open("Note Archived", "close", { duration: 2000 });
       },
       err => { console.log(err); }
@@ -119,8 +114,7 @@ export class IconsComponent implements OnInit {
     card.isArchive = false;
     this.notesService.ArchiveNote(card.id, card).subscribe(
       data => {
-        console.log(data);
-        this.setNote.emit(this.unarchive)
+        this.setNote.emit()
 
         this.SnackBar.open("note unarchive", "close", { duration: 2000 });
       },
@@ -132,13 +126,12 @@ export class IconsComponent implements OnInit {
    * Method to Trash the card
    * @param card 
    */
-  TrashNote(card) {
-    console.log(card);
+  trashNote(card) {
+    card.pin = false
     card.isTrash = true;
     this.notesService.Trash(card.id, card).subscribe(
       data => {
-        console.log(data);
-        this.setNote.emit(this.TrashNote)
+        this.setNote.emit()
         this.SnackBar.open("Note Trashed", "close", { duration: 2000 });
       },
       err => { console.log(err); }
@@ -149,13 +142,11 @@ export class IconsComponent implements OnInit {
    * Method to restore the card to dashboard
    * @param card 
    */
-  Restore(card) {
-    console.log(card);
+  restore(card) {
     card.isTrash = false;
     this.notesService.Trash(card.id, card).subscribe(
       data => {
-        console.log(data);
-        this.setNote.emit(this.Restore)
+        this.setNote.emit()
         this.SnackBar.open("Note restored", "close", { duration: 2000 });
       },
       err => { console.log(err); }
@@ -167,10 +158,8 @@ export class IconsComponent implements OnInit {
    * @param label
    */
   checkList(label) {
-    console.log(this.card);
-    this.card.label = label
+    this.card.label = label.label
     this.notesService.updateNotes(this.card.id, this.card).subscribe(data => {
-      console.log(data);
     }, err => {
       console.log(err);
     }
@@ -181,12 +170,10 @@ export class IconsComponent implements OnInit {
    * Method to delete the card
    * @param card 
    */
-  Delete(card) {
-    console.log(card);
+  delete(card) {
     this.notesService.DeleteNote(card.id, card).subscribe(
       data => {
-        console.log(data);
-        this.setNote.emit(this.Delete)
+        this.setNote.emit()
       },
       err => { console.log(err); }
     )
@@ -196,26 +183,21 @@ export class IconsComponent implements OnInit {
    * Method to add collaborator
    * @param note 
    */
-  Collaborator(card): void {
+  collaborator(card): void {
     localStorage.setItem('noteId', card.id);
     let dialogRef = this.dialog.open(CollaborationComponent,
-      { data: {card} });
+      { data: { card } });
   }
 
   /**
    * Method to set reminder for Today
    * @param card 
    */
-  Today(card) {
-    console.log(card);
-
+  today(card) {
     var date = new Date();
     date.setHours(8, 0, 0)
     card.reminder = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate() + " " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
-    console.log(card.reminder);
-
     this.notesService.updateNotes(card.id, card).subscribe(data => {
-      console.log(data);
       this.update.emit({});
     }, err => {
       console.log(err);
@@ -226,12 +208,11 @@ export class IconsComponent implements OnInit {
    * Method to set reminder for Tomorrow
    * @param card 
    */
-  Tomorrow(card) {
+  tomorrow(card) {
     var date = new Date();
     date.setHours(8, 0, 0)
     card.reminder = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + (date.getDate() + 1) + " " + date.getHours() + ":" + date.getMinutes();
     this.notesService.updateNotes(card.id, card).subscribe(data => {
-      console.log(data);
       this.update.emit({});
     }, err => {
       console.log(err);
@@ -247,7 +228,6 @@ export class IconsComponent implements OnInit {
     date.setHours(8, 0, 0)
     card.reminder = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + (date.getDate() + 7) + " " + date.getHours() + ":" + date.getMinutes();
     this.notesService.updateNotes(card.id, card).subscribe(data => {
-      console.log(data);
       this.update.emit({});
     }, err => {
       console.log(err);

@@ -17,6 +17,12 @@
 .button-div{
     padding-left:140px;
 }
+.Hover{
+    opacity:0 
+}
+.Hover:hover{
+    opacity: 1 !important
+}
 
 @media screen and (max-width: 600px) {
     .dailog-outer-div{

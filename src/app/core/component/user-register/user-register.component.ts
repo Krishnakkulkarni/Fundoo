@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { formArrayNameProvider } from '@angular/Forms/src/directives/reactive_directives/form_group_name';
 import { UserService } from '../../services/user.service';
 import { Router } from '@angular/router';
 import { User } from '../../Models/user.model';
@@ -14,6 +13,7 @@ import { MatSnackBar } from '@angular/material';
 export class UserRegisterComponent implements OnInit {
   user: User;
   emailPattern = "^[a-z0-9.%+-]+@[a-z.-]+\.[a-z]{2,4}$";
+  public hide = true;
   constructor(private userService: UserService, private router: Router, public snackbar: MatSnackBar) { }
 
   /**
